@@ -4,7 +4,7 @@
 
 <h1 class="page-header">정보 관리</h1>
 
-<div class="row placeholders">
+<!-- <div class="row placeholders">
 	<div class="col-xs-6 col-sm-3 placeholder">
 		<img alt="Generic placeholder thumbnail"
 			data-src="holder.js/200x200/auto/sky" class="img-responsive">
@@ -32,4 +32,4 @@
 		<h4>Label</h4>
 		<span class="text-muted">Something else</span>
 	</div>
-</div>
+</div> -->

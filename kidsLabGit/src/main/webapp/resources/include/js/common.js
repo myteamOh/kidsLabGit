@@ -73,3 +73,58 @@ function chkFile(item) {
 		return true;
 	}
 }
+
+/*
+ * 배열: 유효성 체크 시 필요한 정규식으로 배열을 초기화. pattern = [아이디 , 비밀번호, 핸드폰번호] 함수명 :
+ * inputVerify(배열 인덱스번호, 비교할 값, 출력영역)
+ */
+var pattern = [ "((?=.*[a-zA-z])(?=.*[0-9]).{6,10})",
+	"((?=.*[a-zA-Z])(?=.*[0-9@#$%]).{8,12})", "^01([0|1|6|7|8|9]?([0-9]{3,4})?([0-9]{4}))" ];
+
+function inputVerify(index, data, printarea) {
+	var data_regExp = new RegExp(pattern[index]);
+	var match = data_regExp.exec($(data).val());
+	if (match == null) {
+		$(printarea).html("입력값이 형식에 맞지 않습니다. 다시 입력해 주세요. ");
+		$(data).val("");
+		return false;
+	} else {
+		return true;
+	}
+}
+/***********************************사용자(문현)common.js **************************************/
+/*
+ * 함수명 : getDateFormat(날짜 데이터) 설명 : dataValue의 값을 년-월-일 형식(예시:2018-01-01)으로 반환.
+ */
+function getDateFormat(dateValue) {
+	var year = dateValue.getFullYear();
+
+	var month = (month < 10) ? "0" + month : month;
+
+	var day = dateValue.getDate();
+	day = (day < 10) ? "0" + day : day;
+
+	var result = year + "-" + month + "-" + day;
+
+	return result;
+
+}
+
+var regular = [
+	/^[가-힣]{2,5}$/,
+	/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/,
+	/^[0-9a-zA-Z]\S{7,12}$/, /^[0-9]{11}$/,
+	/^[0-9a-zA-Z가-힣]([@]*[0-9a-zA-Z가-힣\s]){5,50}$/ ];
+
+function regularExpression(index, data, printarea, msg) {
+	var select_regular = new RegExp(regular[index]); // 해당 index번호 정규식
+	var match = select_regular.exec($(data).val()); // 정규식과 맞는지 체크
+
+	if (match == null) {
+		$(printarea).css("color", "#FF0000").html(msg + "형식에 맞게 입력해 주세요.");
+		return false;
+	} else {
+		return true;
+	}
+
+}

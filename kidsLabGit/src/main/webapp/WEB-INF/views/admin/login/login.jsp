@@ -14,30 +14,33 @@
 <link rel="shortcut icon" href="/resources/image/icon.png" />
 <link rel="apple-touch-icon" href="/resources/image/icon.png">
 <!-- 모바일 웹 페이시 설정끝 -->
-
-<!--[if lt IE 9]> <script src="/resources/include/js/html5shiv.js"></script> <![endif]-->
 <script type="text/javascript"
 	src="/resources/include/js/jquery-1.12.4.min.js"></script>
-<script type="text/javascript" src="/resources/include/js/common.js"></script>
-<script type="text/javascript" src="/resources/include/js/login.js"></script>
 <script type="text/javascript">
-	function errCodeCheck() {
-		var errCode = '<c:out value="${errCode}" />';
-		if (errCode != "") {
-			// 명확한 자료형 명시를 위해 errCode의 타입을 정수형으로 변환.
-			switch (parseInt(errCode)) {
-			case 1:
-				alert("아이디 또는 비밀번호가 일치 하지 않거나 존재하지 않는 \n회원입니다. 다시 로그인 해주세요.");
-				break;
-			case 3:
-				alert("회원탈퇴에 문제가 있어 정상 처리하지 못하였습니다. \n다시 시도해 주세요.");
-				break;
-			case 6:
-				alert("5번이상 로그인 시도로 30초동안 로그인 할 수 없습니다. \n잠시 후 다시 시도해 주세요.");
-				break;
+	$(document).ready(function() {
+		$("#btnLogin").click(function() {
+			// 태크.val() : 태그에 입력된 값
+			// 태크.val("값") : 태그의 값을 변경 
+			var userId = $("#userId").val();
+			var userPw = $("#userPw").val();
+			if (userId == "") {
+				alert("아이디를 입력하세요.");
+				$("#userId").focus(); // 입력포커스 이동
+				return; // 함수 종료
 			}
-		}
-	}
+			if (userPw == "") {
+				alert("아이디를 입력하세요.");
+				$("#userPw").focus();
+				return;
+			}
+			// 폼 내부의 데이터를 전송할 주소
+			console.log(userId);
+			console.log(userPw);
+			document.form1.action = "${path}/admin/loginCheck.do"
+			// 제출
+			document.form1.submit();
+		});
+	});
 </script>
 <style type="text/css">
 #cl-dashboard {
@@ -46,36 +49,28 @@
 </style>
 </head>
 <body>
-	<div class="contentContainer">
-		<div class="well">
-			<c:if test="${login.userId == null or login.userId == '' }">
-				<form id="loginForm" class="form-horizontal">
-					<div class="form-group">
-						<label for="userId" class="col-sm-2 control-label">아 이 디</label>
-						<div class="col-sm-4">
-							<input type="text" id="userId" name="userId" class="form-control"
-								placeholder="ID">
-						</div>
-						<p class="form-control-static error"></p>
-					</div>
-					<div class="form-group">
-						<label for="userPw" class="col-sm-2 control-label"> 비밀번호 </label>
-						<div class="col-sm-4">
-							<input type="password" id="userPw" name="userPw"
-								class="form-control" placeholder="Password">
-						</div>
-						<p class="form-control-static error"></p>
-					</div>
-					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-6">
-							<input type="button" value="로그인" id="loginBtn"
-								class="btn btn-default" /> <input type="button" value="회원가입"
-								id="joinBtn" class="btn btn-default" />
-						</div>
-					</div>
-				</form>
-			</c:if>
-		</div>
-	</div>
+	<h2>로그인</h2>
+	<form name="form1" method="post">
+		<table border="1" width="400px">
+			<tr>
+				<td>아이디</td>
+				<td><input name="userId" id="userId"></td>
+			</tr>
+			<tr>
+				<td>비밀번호</td>
+				<td><input type="password" name="userPw" id="userPw"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<button type="button" id="btnLogin">로그인</button> <c:if
+						test="${msg == 'failure'}">
+						<div style="color: red">아이디 또는 비밀번호가 일치하지 않습니다.</div>
+					</c:if> <c:if test="${msg == 'logout'}">
+						<div style="color: red">로그아웃되었습니다.</div>
+					</c:if>
+				</td>
+			</tr>
+		</table>
+	</form>
 </body>
 </html>

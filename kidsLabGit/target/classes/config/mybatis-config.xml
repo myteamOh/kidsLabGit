@@ -5,10 +5,19 @@
 <configuration>
 
 	<typeAliases>
-		<!-- <typeAlias type="com.spring.client.board.vo.BoardVO" alias="board" /> -->
-		<!-- <typeAlias type="com.spring.client.reply.vo.ReplyVO" alias="reply" /> -->
-		<!-- <typeAlias type="com.spring.client.gallery.vo.GalleryVO"
-			alias="gallery" /> -->
+		<typeAlias type="com.kidslab.admin.login.vo.LoginVO" alias="login" />
+		<typeAlias type="com.kidslab.admin.jointeacher.vo.TeacherVO"
+			alias="teacher" />
+		<typeAlias type="com.kidslab.admin.jointeacher.vo.TeacherSecurity"
+			alias="security" />
+		<typeAlias type="com.kidslab.teacher.login.vo.TeacherLoginVO"
+			alias="teacherLogin" />
+		<typeAlias type="com.kidslab.teacher.registcourse.vo.RegistCourseVO"
+			alias="registCourse" />
+		<typeAlias type="com.kidslab.client.parent.vo.ParentVO"
+			alias="parent" />
+		<typeAlias type="com.kidslab.client.parent.vo.ParentSecurity"
+			alias="parentSecurity" />
 	</typeAliases>
 
 </configuration>

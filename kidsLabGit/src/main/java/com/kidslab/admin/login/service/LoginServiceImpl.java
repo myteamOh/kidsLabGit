@@ -1,5 +1,7 @@
 package com.kidslab.admin.login.service;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,33 +19,25 @@ public class LoginServiceImpl implements LoginService {
 	private LoginDao loginDao;
 
 	@Override
-	public LoginVO userIdSelect(String userId) {
+	public String loginCheck(LoginVO vo) {
 		// TODO Auto-generated method stub
-		return loginDao.userIdSelect(userId);
+		String userId = "";
+		userId = loginDao.loginCheck(vo);
+
+		return userId;
+
 	}
 
 	@Override
-	public LoginVO loginSelect(String userId, String userPw) {
+	public LoginVO viewMember(LoginVO vo) {
 		// TODO Auto-generated method stub
-		return null;
+		return loginDao.viewMember(vo);
 	}
 
 	@Override
-	public int loginHistoryInsert(LoginVO lvo) {
+	public void logout(HttpSession session) {
 		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int loginHistoryUpdate(LoginVO lvo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public LoginVO loginHistorySelect(String userId) {
-		// TODO Auto-generated method stub
-		return null;
+		session.invalidate();
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.kidslab.admin.login.controller;
 
+import javax.inject.Inject;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kidslab.admin.login.service.LoginService;
 import com.kidslab.admin.login.vo.LoginVO;
 
 @Controller
@@ -19,25 +21,38 @@ import com.kidslab.admin.login.vo.LoginVO;
 public class LoginController {
 	Logger logger = Logger.getLogger(LoginController.class);
 
+	@Inject
+	LoginService loginService;
+
 	/*****************************************
-	 * ·Î±×ÀÎ È­¸é º¸¿©ÁÖ±â À§ÇÑ ¸Ş¼Òµå
+	 * ë¡œê·¸ì¸ í™”ë©´ ë³´ì—¬ì£¼ê¸° ìœ„í•œ ë©”ì†Œë“œ
 	 ********************************************/
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login() {
-		logger.info("login.do get È£Ãâ ¼º°ø");
+		logger.info("login.do get í˜¸ì¶œ ì„±ê³µ");
 		return "admin/login/login";
 	}
 
 	/*****************************************
-	 * ·Î±×ÀÎ Ã³¸® ¸Ş¼Òµå Âü°í : ·Î±×ÀÎ ½ÇÆĞ½Ã Ã³¸® ³»¿ë Æ÷ÇÔ.
+	 * ë¡œê·¸ì¸ ì²˜ë¦¬ ë©”ì†Œë“œ ì°¸ê³  : ë¡œê·¸ì¸ ì‹¤íŒ¨ì‹œ ì²˜ë¦¬ ë‚´ìš© í¬í•¨.
 	 ********************************************/
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ModelAndView loginProc(@ModelAttribute("LoginVO") LoginVO lvo, HttpSession session,
-			HttpServletRequest request) {
-		logger.info("login.do post È£Ãâ ¼º°ø");
+	@RequestMapping(value = "/loginCheck.do", method = RequestMethod.POST)
+	public ModelAndView loginCheck(@ModelAttribute("LoginVO") LoginVO vo, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-
-		String userId = lvo.getUserId();
+		String userId = vo.getUserId();
+		System.out.println(userId);
+		if (userId.equals(loginService.loginCheck(vo))) {
+			// ë¡œê·¸ì¸ ì„±ê³µ
+			// main.jspë¡œ ì´ë™
+			mav.setViewName("admin/login/loginSuccess");
+			mav.addObject("msg", "success");
+			session.setAttribute("adminLogin", userId);
+		} else {
+			// ë¡œê·¸ì¸ ì‹¤íŒ¨
+			// login.jspë¡œ ì´ë™
+			mav.setViewName("admin/login/login");
+			mav.addObject("msg", "failure");
+		}
 		return mav;
 	}
 }

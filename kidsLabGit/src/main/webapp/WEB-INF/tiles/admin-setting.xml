@@ -17,7 +17,6 @@
 	</definition>
 
 	<definition name="admin/board/*" extends="basic">
-		<put-attribute name="sub" value=""></put-attribute>
 		<put-attribute name="main" value="/WEB-INF/views/admin/board/{1}.jsp"></put-attribute>
 	</definition>
 
@@ -27,9 +26,17 @@
 		<put-attribute name="main"
 			value="/WEB-INF/views/admin/member/{1}.jsp"></put-attribute>
 	</definition>
-	<definition name="admin/login/*" extends="basic">
+
+	<definition name="admin/teacher/*" extends="basic">
 		<put-attribute name="sub" value=""></put-attribute>
-		<put-attribute name="main" value="/WEB-INF/views/admin/login/{1}.jsp"></put-attribute>
+		<put-attribute name="main"
+			value="/WEB-INF/views/admin/teacher/{1}.jsp" />
+	</definition>
+
+	<definition name="teacher/login/*" extends="basic">
+		<put-attribute name="sub" value=""></put-attribute>
+		<put-attribute name="main"
+			value="/WEB-INF/views/teacher/login/{1}.jsp" />
 	</definition>
 
 </tiles-definitions>

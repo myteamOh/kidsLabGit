@@ -1,19 +1,17 @@
 package com.kidslab.admin.login.vo;
 
-public class LoginVO extends LoginHistory {
+public class LoginVO {
 	private String userId = "";
 	private String userPw = "";
-	private String userName = "";
 
 	public LoginVO() {
 		super();
 	}
 
-	public LoginVO(String userId, String userPw, String userName) {
+	public LoginVO(String userId, String userPw) {
 		super();
 		this.userId = userId;
 		this.userPw = userPw;
-		this.userName = userName;
 	}
 
 	public String getUserId() {
@@ -30,14 +28,6 @@ public class LoginVO extends LoginHistory {
 
 	public void setUserPw(String userPw) {
 		this.userPw = userPw;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
 	}
 
 }

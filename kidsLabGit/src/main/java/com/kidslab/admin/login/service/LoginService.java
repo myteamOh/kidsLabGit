@@ -1,16 +1,14 @@
 package com.kidslab.admin.login.service;
 
+import javax.servlet.http.HttpSession;
+
 import com.kidslab.admin.login.vo.LoginVO;
 
 public interface LoginService {
-	public LoginVO userIdSelect(String userId);
+	public String loginCheck(LoginVO vo);
 
-	public LoginVO loginSelect(String userId, String userPw);
+	public LoginVO viewMember(LoginVO vo);
 
-	public int loginHistoryInsert(LoginVO lvo);
-
-	public int loginHistoryUpdate(LoginVO lvo);
-
-	public LoginVO loginHistorySelect(String userId);
+	public void logout(HttpSession session);
 
 }
