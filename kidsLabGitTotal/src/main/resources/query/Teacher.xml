@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kidslab.admin.jointeacher.dao.TeacherDao">
+
+	<select id="securitySelect" parameterType="java.lang.String"
+		resultType="teacherSecurity">
+		select userId as teacher_id, salt from security
+		where userId
+		=
+		#{teacher_id}
+	</select>
+
+	<insert id="securityInsert" parameterType="teacherSecurity">
+		insert into
+		security(userid, salt)
+		values(#{teacher_id}, #{salt})
+	</insert>
+
+	<delete id="securityDelete" parameterType="java.lang.String">
+		delete from security
+		where userId = #{teacher_id}
+	</delete>
+
+	<select id="teacherSelect" parameterType="java.lang.String"
+		resultType="teacher">
+		select teacher_no, teacher_id, teacher_password,
+		teacher_name, teacher_phone, teacher_photo, teacher_registerdate,
+		teacher_thumb, teacher_status
+		from teacher
+		where teacher_id =
+		#{teacher_id}
+	</select>
+
+	<insert id="teacherInsert" parameterType="teacher">
+		<!-- teacher - teacherInsert -->
+		<selectKey keyProperty="teacher_no" resultType="int" order="BEFORE">
+			select
+			teacher_seq.nextval from dual
+		</selectKey>
+		insert into teacher(teacher_no, teacher_id, teacher_password,
+		teacher_name, teacher_phone, teacher_photo, teacher_thumb, admin_no)
+		values(#{teacher_no}, #{teacher_id}, #{teacher_password},
+		#{teacher_name},
+		#{teacher_phone},
+		#{teacher_photo},
+		#{teacher_thumb}, 1)
+	</insert>
+
+	<update id="teacherUpdate" parameterType="teacher">
+		update teacher set
+		<if test="teacher_photo != null and teacher_photo != ''">
+			teacher_photo = #{teacher_photo},
+			teacher_thumb =
+			#{teacher_thumb},
+		</if>
+		<if test="teacher_password != null and teacher_password != ''">
+			teacher_password = #{teacher_password},
+		</if>
+		teacher_phone = #{teacher_phone}
+		where teacher_id = #{teacher_id}
+	</update>
+
+	<delete id="teacherDelete" parameterType="java.lang.String">
+		delete from teacher
+		where teacher_id = #{teacher_id}
+	</delete>
+
+</mapper>
