@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kidslab.admin.payment.dao.PaymentDao">
+
+	<!-- 결제정보 기본 조회 -->
+	<sql id="paymentCommon">
+		select requestcourse_no, p.parent_name, s.student_name,
+		c.course_name,
+		requestcourse_paymethod,
+		requestcourse_payamount,
+		requestcourse_paymentdate,
+		requestcourse_paymentstatus,
+		requestcourse_accountholder,
+		requestcourse_accountnumber,
+		requestcourse_refundcharge,
+		requestcourse_refundbank
+		from requestcourse
+		r, parent p,
+		student s,
+		course c
+		<where>
+			r.parent_no = p.parent_no and r.student_no =
+			s.student_no and
+			r.course_no = c.course_no
+			<if test="search=='parent_name'">
+				<![CDATA[ and parent_name like '%' || #{keyword} || '%']]>
+				<if test="requestCourse_paymentStatus=='all'">
+					and 1=1
+				</if>
+				<if test="requestCourse_paymentStatus=='paymentwaiting'">
+					and requestCourse_paymentStatus like '결제대기'
+				</if>
+				<if test="requestCourse_paymentStatus=='paymentcomplete'">
+					and requestCourse_paymentStatus like '결제완료'
+				</if>
+				<if test="requestCourse_paymentStatus=='refundwaiting'">
+					and requestCourse_paymentStatus like '환불대기'
+				</if>
+				<if test="requestCourse_paymentStatus=='refundcomplete'">
+					and requestCourse_paymentStatus like '환불완료'
+				</if>
+			</if>
+			<if test="search=='student_name'">
+				<![CDATA[ and student_name like '%' || #{keyword} || '%']]>
+				<if test="requestCourse_paymentStatus=='all'">
+					and 1=1
+				</if>
+				<if test="requestCourse_paymentStatus=='paymentwaiting'">
+					and requestCourse_paymentStatus like '결제대기'
+				</if>
+				<if test="requestCourse_paymentStatus=='paymentcomplete'">
+					and requestCourse_paymentStatus like '결제완료'
+				</if>
+				<if test="requestCourse_paymentStatus=='refundwaiting'">
+					and requestCourse_paymentStatus like '환불대기'
+				</if>
+				<if test="requestCourse_paymentStatus=='refundcomplete'">
+					and requestCourse_paymentStatus like '환불완료'
+				</if>
+			</if>
+			<if test="search=='course_name'">
+				<![CDATA[ and course_name like '%' || #{keyword} || '%']]>
+				<if test="requestCourse_paymentStatus=='all'">
+					and 1=1
+				</if>
+				<if test="requestCourse_paymentStatus=='paymentwaiting'">
+					and requestCourse_paymentStatus like '결제대기'
+				</if>
+				<if test="requestCourse_paymentStatus=='paymentcomplete'">
+					and requestCourse_paymentStatus like '결제완료'
+				</if>
+				<if test="requestCourse_paymentStatus=='refundwaiting'">
+					and requestCourse_paymentStatus like '환불대기'
+				</if>
+				<if test="requestCourse_paymentStatus=='refundcomplete'">
+					and requestCourse_paymentStatus like '환불완료'
+				</if>
+			</if>
+			<if test="search=='all'">
+				<![CDATA[ and 1=1]]>
+				<if test="requestCourse_paymentStatus=='all'">
+					and 1=1
+				</if>
+				<if test="requestCourse_paymentStatus=='paymentwaiting'">
+					and requestCourse_paymentStatus like '결제대기'
+				</if>
+				<if test="requestCourse_paymentStatus=='paymentcomplete'">
+					and requestCourse_paymentStatus like '결제완료'
+				</if>
+				<if test="requestCourse_paymentStatus=='refundwaiting'">
+					and requestCourse_paymentStatus like '환불대기'
+				</if>
+				<if test="requestCourse_paymentStatus=='refundcomplete'">
+					and requestCourse_paymentStatus like '환불완료'
+				</if>
+			</if>
+		</where>
+	</sql>
+	<!-- 페이징 후 결제 리스트 전체 조회 -->
+	<select id="paymentList" resultType="adminPayment"
+		parameterType="adminPayment">
+		select requestcourse_no, parent_name, student_name,
+		course_name,
+		requestcourse_paymethod,
+		requestcourse_payamount,
+		to_char(requestcourse_paymentdate, 'yyyy-mm-dd') as
+		requestcourse_paymentdate,
+		requestcourse_paymentstatus,
+		requestcourse_accountholder,
+		requestcourse_accountnumber,
+		requestcourse_refundcharge,
+		requestcourse_refundbank
+		from(
+		select list.*,
+		rownum as rnum
+		from(
+		<include refid="paymentCommon"></include>
+		order by requestcourse_no asc
+		) list
+		)
+		<where>
+			<if test="start_row != null and start_row != ''">
+				<if test="end_row != null and end_row != ''">
+					rnum between #{start_row} and #{end_row}
+				</if>
+			</if>
+		</where>
+	</select>
+
+	<!-- 전체 갯수 카운트 -->
+	<select id="paymentListCnt" parameterType="adminPayment"
+		resultType="int">
+		select nvl(count(1), 0)
+		from(
+		select list.*, rownum as rnum
+		from(
+		<include refid="paymentCommon"></include>
+		order by requestcourse_no desc
+		) list
+		)
+	</select>
+
+	<!-- 결제상태 수정 -->
+	<update id="paymentUpdate" parameterType="adminPayment">
+		<!-- Payment - paymentUpdate -->
+		update requestcourse
+		set requestcourse_paymentstatus =
+		<if test="requestcourse_paymentstatus=='paymentwaiting'">
+			'결제대기'
+		</if>
+		<if test="requestcourse_paymentstatus=='paymentcomplete'">
+			'결제완료'
+		</if>
+		<if test="requestcourse_paymentstatus=='refundwaiting'">
+			'환불대기'
+		</if>
+		<if test="requestcourse_paymentstatus=='refundcomplete'">
+			'환불완료'
+		</if>
+		where requestcourse_no = #{requestcourse_no}
+	</update>
+
+</mapper>
