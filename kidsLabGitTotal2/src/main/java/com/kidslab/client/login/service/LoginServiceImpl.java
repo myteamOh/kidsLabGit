@@ -16,10 +16,10 @@ import com.kidslab.common.util.OpenCrypt;
 public class LoginServiceImpl implements LoginService {
 
 	@Autowired
-	ParentJoinDao pDao;
+	private ParentJoinDao pDao;
 
 	@Autowired
-	LoginDao loginDao;
+	private LoginDao loginDao;
 
 	/* 학부모 로그인 */
 	@Override

@@ -22,7 +22,7 @@ public class ClientLoginController {
 	Logger logger = Logger.getLogger(ClientLoginController.class);
 
 	@Autowired
-	LoginService loginService;
+	private LoginService loginService;
 
 	/*
 	 * 로그인 Form
