@@ -15,8 +15,8 @@
 <body>
 	<form>
 		<div>
-			<label>안녕하세요 ${parentLogin.parent_name}님. 반갑습니다. <br>
-				${parentId}
+			<label>안녕하세요 ${Login.parent_name}님. 반갑습니다. <br>
+				${Login.userId}
 			</label>
 		</div>
 		<br>

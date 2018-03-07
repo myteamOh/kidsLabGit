@@ -56,7 +56,12 @@
 						<li><a href="#">1:1 문의</a></li>
 						<li><a href="#">FAQ</a></li>
 					</ul></li>
-				<li><a href="/login/login.do">로그인</a></li>
+				<c:if test="${sessionScope.Login == null }">
+					<li><a href="/login/login.do">로그인</a></li>
+				</c:if>
+				<c:if test="${sessionScope.Login != null }">
+					<li><a href="#">로그아웃</a></li>
+				</c:if>
 			</ul>
 		</div>
 		<!-- /.nav-dollapse -->

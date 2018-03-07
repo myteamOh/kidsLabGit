@@ -50,8 +50,8 @@ public class ClientLoginController {
 
 			if (parentLogin != null) {
 
-				session.setAttribute("parentId", pvo.getUserId());
-				session.setAttribute("parentLogin", parentLogin); // parentVO에 대한 정보만 들고있음. id pw 는 없음.
+				session.setAttribute("Login", parentLogin); // parentVO에 대한 정보만 들고있음. id pw 는 없음.
+				mav.addObject("data", parentLogin);
 				mav.setViewName("client/mypage/mypageParent");
 				return mav;
 			}
@@ -61,8 +61,8 @@ public class ClientLoginController {
 
 			if (studentLogin != null) {
 
-				session.setAttribute("studentId", svo.getUserId());
-				session.setAttribute("studentLogin", studentLogin);
+				session.setAttribute("Login", studentLogin);
+				mav.addObject("data", studentLogin);
 				mav.setViewName("client/mypage/mypageStudent");
 				return mav;
 			}
@@ -70,6 +70,7 @@ public class ClientLoginController {
 
 		mav.setViewName("client/member/login");
 		mav.addObject("msg", "fail");
+		mav.addObject("data", pvo);
 		return mav;
 
 	}
