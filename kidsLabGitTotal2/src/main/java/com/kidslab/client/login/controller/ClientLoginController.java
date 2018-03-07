@@ -70,7 +70,6 @@ public class ClientLoginController {
 
 		mav.setViewName("client/member/login");
 		mav.addObject("msg", "fail");
-		mav.addObject("data", pvo);
 		return mav;
 
 	}
