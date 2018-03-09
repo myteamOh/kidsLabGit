@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kidslab.client.parentjoin.dao.ParentJoinDao">
+
+	<select id="parentSelect" parameterType="String" resultType="parent">
+		SELECT parent_no, parent_id as userId, parent_password as userPw,
+		parent_name,
+		parent_phone, parent_smsagree, parent_emailagree,
+		parent_kakaoagree,
+		parent_knowroute, parent_address, parent_termsagree,
+		parent_registerdate, parent_status
+		FROM parent
+		WHERE parent_id =
+		#{userId}
+	</select>
+
+	<insert id="parentInsert" parameterType="parent">
+
+		<selectKey keyProperty="parent_no" resultType="int" order="BEFORE">
+			SELECT parent_seq.nextval FROM DUAL
+		</selectKey>
+
+		INSERT INTO parent(parent_no, parent_id, parent_password, parent_name,
+		parent_phone, parent_smsagree, parent_emailagree, parent_kakaoagree,
+		parent_knowroute, parent_address)
+		VALUES (#{parent_no}, #{userId},
+		#{userPw}, #{parent_name}, #{parent_phone},
+		#{parent_smsagree},
+		#{parent_emailagree}, #{parent_kakaoagree},
+		#{parent_knowroute},
+		#{parent_address})
+	</insert>
+
+	<select id="securitySelect" parameterType="String" resultType="security">
+		SELECT user_id, salt FROM user_security WHERE
+		user_id=#{userId}
+	</select>
+
+	<insert id="securityInsert" parameterType="security">
+		INSERT INTO
+		user_security (user_id, salt)
+		VALUES(#{userId}, #{salt})
+	</insert>
+
+	<delete id="securityDelete" parameterType="String">
+		DELETE FROM
+		user_security
+		WHERE user_id = #{userId}
+	</delete>
+
+</mapper>
