@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kidslab.client.studentjoin.dao.StudentJoinDao">
+
+	<select id="studentSelect" parameterType="String" resultType="student">
+		SELECT student_no, student_id as userId, student_password as userPw,
+		student_name,
+		student_gender, student_school, student_birthday,
+		student_reference,
+		student_registerdate, student_evaluation,
+		student_status, parent_no
+		FROM student
+		WHERE student_id = #{userId}
+	</select>
+
+	<insert id="studentInsert" parameterType="student">
+
+		<selectKey keyProperty="student_no" resultType="int" order="BEFORE">
+			SELECT student_seq.nextval FROM DUAL
+		</selectKey>
+
+		INSERT INTO student(student_no, student_id, student_password,
+		student_name,
+		student_gender, student_school, student_birthday,
+		student_reference,
+		parent_no)
+		VALUES (#{student_no}, #{userId},
+		#{userPw}, #{student_name}, #{student_gender},
+		#{student_school},
+		#{student_birthday}, #{student_reference}, #{parent_no})
+	</insert>
+
+	<update id="studentModify" parameterType="student">
+		SELECT student SET
+		<if test="userPw != null and userPw != ''"> userPw=#{userPw}, </if>
+		student_school=#{student_school}
+		where student_id=#{userId}
+	</update>
+
+</mapper>

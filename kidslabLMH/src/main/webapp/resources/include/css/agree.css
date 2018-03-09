@@ -1,0 +1,50 @@
+@charset "UTF-8";
+
+#main_div {
+	width: 330px;
+	margin: auto;
+	padding: 10px;
+	background-color: #F6F6F6;
+}
+
+h3 {
+	text-align: center;
+}
+
+.terms_box {
+	overflow: scroll;
+	font-size: 13px;
+	background-color: white;
+	width: 300px;
+	height: 150px;
+	padding: 5px;
+}
+
+.btn {
+	width: 250px;
+	margin: auto;
+}
+
+#cancelBtn {
+	width: 120px;
+	height: 40px;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	font-size: 20px;
+	font-weight: bold;
+	background-color: #FBFBFB;
+}
+
+#okBtn {
+	width: 120px;
+	height: 40px;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	font-size: 20px;
+	font-weight: bold;
+	background-color: #AAD34A;
+}

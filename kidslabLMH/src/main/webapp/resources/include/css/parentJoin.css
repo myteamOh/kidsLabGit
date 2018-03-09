@@ -1,0 +1,75 @@
+@charset "UTF-8";
+
+#mainContainer {
+	width: 70%;
+	margin: auto;
+	background-color: #F9F9F9;
+	margin: auto;
+}
+
+h2, h4, h5 {
+	text-align: center;
+}
+
+.necessary {
+	color: red;
+}
+
+table {
+	border: 0;
+	margin: 0 auto;
+}
+
+table td {
+	padding: 10px;
+}
+
+table td label {
+	padding-right: 3px;
+}
+
+table td input {
+	height: 20px;
+}
+
+#userId {
+	width: 230px;
+}
+
+#certification {
+	width: 100px;
+}
+
+table td input[type="checkbox"] {
+	margin-bottom: 15px;
+}
+
+table td input[type="text"]#parent_address {
+	width: 400px;
+}
+
+table td input[type="button"] {
+	height: 28px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	background-color: #AAD34A;
+}
+
+div>input[type="button"] {
+	width: 120px;
+	height: 40px;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	font-size: 20px;
+	font-weight: bold;
+	background-color: #AAD34A;
+}
+
+div>input[type="button"]#cancelBtn {
+	background-color: #FBFBFB;
+}
