@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN" 
+"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+
+	<definition name="intro"
+		template="/WEB-INF/views/template/client/mainLayout.jsp">
+		<put-attribute name="title" value="000 사이트" />
+		<put-attribute name="header"
+			value="/WEB-INF/views/template/client/header.jsp" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/template/client/footer.jsp" />
+	</definition>
+
+	<definition name="content"
+		template="/WEB-INF/views/template/client/contentLayout.jsp">
+		<put-attribute name="title" value="000 사이트" />
+		<put-attribute name="header"
+			value="/WEB-INF/views/template/client/header.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/template/client/footer.jsp" />
+	</definition>
+
+	<definition name="client/member/*" extends="content">
+		<put-attribute name="title" value="로그인" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/client/member/{1}.jsp" />
+	</definition>
+
+	<definition name="inquiry/*" extends="content">
+		<put-attribute name="title" value="1:1문의" />
+		<put-attribute name="body" value="/WEB-INF/views/inquiry/{1}.jsp" />
+	</definition>
+
+</tiles-definitions> 
