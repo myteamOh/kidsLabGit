@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kidslab.admin.faq.dao.FaqDao">
+
+	<sql id="faqCommon">
+		select faq_no, faq_title, faq_type,
+		faq_content
+		from board_faq
+		<where>
+			<if test="search=='faq_title'">
+				<![CDATA[ faq_title like '%' || #{keyword} || '%']]>
+			</if>
+			<if test="search=='faq_content'">
+				<![CDATA[ faq_content like '%' || #{keyword} || '%']]>
+			</if>
+			<if test="search=='faq_type'">
+				<![CDATA[ faq_type like '%' || #{keyword} || '%']]>
+			</if>
+		</where>
+	</sql>
+
+
+	<!-- 게시물 전체 조회 -->
+	<select id="faqList" parameterType="faq" resultType="faq">
+		<!-- notice - noticeList -->
+		select faq_no, faq_title, faq_type,
+		faq_content
+		from(
+		select list.*,
+		rownum as rnum
+		from (
+		<include refid="faqCommon"></include>
+		order by faq_no
+		) list
+		)
+		<where>
+			<if test="start_row != null and start_row != ''">
+				<if test="end_row != null and end_row != ''">
+					rnum between #{start_row} and #{end_row}
+				</if>
+			</if>
+		</where>
+	</select>
+
+	<select id="faqListCnt" parameterType="faq" resultType="int">
+		<!-- Notice - noticeListCnt -->
+		select nvl(count(1), 0)
+		from (
+		select list.*, rownum as rnum
+		from(
+		<include refid="faqCommon"></include>
+		order by faq_no desc
+		) list
+		)
+	</select>
+
+	<select id="faqDetail" parameterType="int" resultType="faq">
+		<!-- Notice - noticeDetail -->
+		select faq_no, faq_title, faq_content,
+		faq_type
+		from
+		board_faq
+		where
+		faq_no = #{faq_no}
+	</select>
+
+	<insert id="faqInsert" parameterType="faq">
+		<!-- Notice - noticeInsert -->
+		<selectKey keyProperty="faq_no" resultType="int" order="BEFORE">
+			select BOARD_FAQ_SEQ.nextval from dual
+		</selectKey>
+		insert into
+		board_faq(faq_no, faq_title, faq_type, faq_content
+		admin_no)
+		values(#{faq_no}, #{faq_title}, #{faq_type}, #{faq_content},
+		#{admin_no})
+	</insert>
+
+	<update id="faqUpdate" parameterType="faq">
+		<!-- Notice - noticeUpdate -->
+		update board_faq
+		set
+		faq_title = #{faq_title}, faq_content =
+		#{faq_content},
+		faq_type = #{faq_type}
+		where faq_no =
+		#{faq_no}
+	</update>
+	<delete id="faqDelete" parameterType="faq">
+		<!-- Notice - noticeDelete -->
+		delete from
+		board_faq
+		where faq_no = #{faq_no}
+	</delete>
+
+
+</mapper>

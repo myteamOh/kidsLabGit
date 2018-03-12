@@ -13,11 +13,14 @@
 		<typeAlias type="com.kidslab.admin.jointeacher.vo.TeacherSecurity"
 			alias="teacherSecurity" />
 		<typeAlias type="com.kidslab.admin.course.vo.CourseVO"
-			alias="adminCourse" />
+			alias="course" />
 		<typeAlias type="com.kidslab.admin.payment.vo.PaymentVO"
 			alias="adminPayment" />
 		<typeAlias type="com.kidslab.admin.notice.vo.NoticeVO"
 			alias="adminNotice" />
+		<typeAlias type="com.kidslab.admin.faq.vo.FaqVO" alias="faq" />
+
+		<!-- Teacher 부분 -->
 		<typeAlias type="com.kidslab.teacher.login.vo.TeacherLoginVO"
 			alias="teacherLogin" />
 		<typeAlias type="com.kidslab.teacher.registcourse.vo.RegistCourseVO"

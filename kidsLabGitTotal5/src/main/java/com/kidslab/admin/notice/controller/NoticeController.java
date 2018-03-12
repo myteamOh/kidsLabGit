@@ -134,6 +134,7 @@ public class NoticeController {
 	@RequestMapping(value = "/notice/noticeUpdate", method = RequestMethod.POST)
 	public String noticeUpdate(@ModelAttribute NoticeVO nvo, HttpServletRequest request) throws IllegalStateException {
 		logger.info("noticeUpdate POST 호출 성공~~~~");
+		logger.info("notice_title : " + nvo.getNotice_title());
 
 		int result = 0;
 		String url = "";
@@ -156,14 +157,14 @@ public class NoticeController {
 	public String noticeDelete(@ModelAttribute NoticeVO nvo, HttpServletRequest request) {
 
 		logger.info("noticeDelete 호출 성공");
-
+		logger.info("notice_no : " + nvo.getNotice_no());
 		int result = 0;
 		String url = "";
 
 		result = noticeService.noticeDelete(nvo.getNotice_no());
 
 		if (result == 1) {
-			url = "/admin/notice/noticeList.do?page=" + nvo.getPage() + "&pageSize=" + nvo.getPageSize();
+			url = "/admin/notice/noticeList";
 		} else {
 			url = "/admin/notice/noticeDetail.do?notice_no=" + nvo.getNotice_no() + "&page=" + nvo.getPage()
 					+ "&pageSize=" + nvo.getPageSize();

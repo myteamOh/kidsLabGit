@@ -9,4 +9,5 @@
 	<li><a href="/admin/course/courseList">강의 관리</a></li>
 	<li><a href="/admin/payment/paymentList">결제 관리</a></li>
 	<li><a href="/admin/notice/noticeList">공지사항</a></li>
+	<li><a href="/admin/faq/faqList">FAQ</a></li>
 </ul>

@@ -16,43 +16,35 @@
 <script type="text/javascript" src="/resources/include/js/common.js"></script>
 <script type="text/javascript">
 	var butChk = 0; // 수정버튼과 삭제버튼을 구별하기 위한 변수
+	$(function() {
+		/* 수정 버튼 클릭 시 처리 이벤트 */
+		$("#updateBtn").click(function() {
+			$("#f_data").attr({
+				"method" : "get",
+				"action" : "/admin/notice/updateForm"
+			});
+			$("#f_data").submit();
+		});
 
-	/* 수정 버튼 클릭 시 처리 이벤트 */
-	$("#updateFormBtn").click(function() {
-		butChk = 1;
-	});
-
-	// 제거
-	/* 삭제 버튼 클릭 시 처리 이벤트 */
-	$("#boardDeleteBtn").click(function() {
-		butChk = 2;
-	});
-
-	/* 목록 버튼 클릭 시 처리 이벤트 */
-	$("#boardListBtn").click(function() {
-		location.href = "/admin/notice/noticeList";
-	});
-	function checkBtn() {
-		$.ajax({
-			url : "/admin/notice/updateForm",
-			type : "get",
-			data : $("#f_data").serialize(), // 폼전체 데이터전송
-			dataType : "text",
-			error : function() {
-				// 오류 발생 시
-				alert("시스템 오류");
-			},
-			success : function() {
-				if (butChk == 1) {
-					goUrl = "/admin/notice/updateForm";
-				} else if (butChk == 2) {
-					goUrl = "/admin/notice/noticeDelete";
-				}
-				$("#f_data").attr("action", goUrl);
+		// 제거
+		/* 삭제 버튼 클릭 시 처리 이벤트 */
+		$("#deleteBtn").click(function() {
+			if (confirm("정말로 삭제 하시겠습니까?") == true) {
+				$("#f_data").attr({
+					"method" : "post",
+					"action" : "/admin/notice/noticeDelete"
+				});
 				$("#f_data").submit();
+			} else {
+				return;
 			}
 		});
-	}
+
+		/* 목록 버튼 클릭 시 처리 이벤트 */
+		$("#noticeListBtn").click(function() {
+			location.href = "/admin/notice/noticeList";
+		});
+	});
 </script>
 </head>
 <body>
@@ -91,6 +83,11 @@
 					</tr>
 				</tbody>
 			</table>
+		</div>
+		<div class="contentBtn">
+			<input type="button" value="수정" id="updateBtn"> <input
+				type="button" value="삭제" id="deleteBtn"> <input
+				type="button" value="글목록" id="noticeListBtn">
 		</div>
 	</div>
 </body>
