@@ -6,6 +6,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -21,6 +22,8 @@ import com.kidslab.common.util.Util;
 @Service
 @Transactional
 public class ParentJoinServiceImpl implements ParentJoinService {
+	
+	Logger logger = Logger.getLogger(ParentJoinServiceImpl.class);
 
 	@Autowired
 	private ParentJoinDao parentJoinDao;
@@ -163,6 +166,35 @@ public class ParentJoinServiceImpl implements ParentJoinService {
 			return 2;
 		}
 
+	}
+
+	/* 회원 수정 처리 */
+	@Override
+	public boolean parentUpdate(ParentVO pvo) {
+		
+		logger.info("parentinfo update serviceImpl");
+
+		if (pvo.getParent_smsagree() == null) {
+			pvo.setParent_smsagree("N");
+		}
+		if (pvo.getParent_emailagree() == null) {
+			pvo.setParent_emailagree("N");
+		}
+		if (pvo.getParent_kakaoagree() == null) {
+			pvo.setParent_kakaoagree("N");
+		}
+
+		try {
+			if (!pvo.getUserPw().isEmpty()) {
+				UserSecurity security = parentJoinDao.securitySelect(pvo.getUserId());
+				pvo.setUserPw(new String(OpenCrypt.getSHA256(pvo.getUserPw(), security.getSalt())));
+			}
+			parentJoinDao.parentUpdate(pvo);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 }

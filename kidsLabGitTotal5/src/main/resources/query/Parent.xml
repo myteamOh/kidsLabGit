@@ -32,6 +32,17 @@
 		#{parent_knowroute},
 		#{parent_address})
 	</insert>
+	
+	<update id="parentUpdate" parameterType="parent">
+		UPDATE parent SET
+		<if test="userPw != null and userPw != ''"> parent_password=#{userPw}, </if>
+		parent_phone = #{parent_phone}, parent_smsagree = #{parent_smsagree},
+		parent_emailagree = #{parent_emailagree},
+		parent_kakaoagree =
+		#{parent_kakaoagree}, parent_address = #{parent_address}
+		WHERE
+		parent_id=#{userId}
+	</update>
 
 	<select id="securitySelect" parameterType="String" resultType="security">
 		SELECT user_id, salt FROM user_security WHERE

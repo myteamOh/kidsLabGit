@@ -22,4 +22,9 @@ public class StudentJoinDaoImpl implements StudentJoinDao {
 		return session.insert("studentInsert");
 	}
 
+	@Override
+	public int studentUpdate(StudentVO svo) {
+		return session.update("studentUpdate", svo);
+	}
+
 }

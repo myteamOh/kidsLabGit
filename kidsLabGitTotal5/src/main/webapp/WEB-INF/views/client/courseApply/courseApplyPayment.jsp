@@ -15,17 +15,56 @@
 	<section>
 		<div>
 			<form>
-				<div>강의명</div>
-				<div>대상학년</div>
-				<div>강의기간</div>
-				<div>강의요일 및 시간</div>
 				<div>
-					<label for="courseApply">수강신청 하러가기▼</label>
+					<table>
+						<caption>수강정보</caption>
+						<tr>
+							<td>강의명</td>
+							<td>강의명표시</td>
+						</tr>
+						<tr>
+							<td>강의 기간</td>
+							<td>기간 ~ 기간</td>
+						</tr>
+						<tr>
+							<td>강의 요일 및 시간</td>
+							<td>요일 / 시간</td>
+						</tr>
+						<tr>
+							<td>수강학생</td>
+							<td><select>
+									<c:forEach var="" items="">
+										<option></option>
+									</c:forEach>
+							</select></td>
+						</tr>
+					</table>
 				</div>
-				<div>과정 상세소개</div>
+
 				<div>
-					<input type="button" id="courseApply" value="수강신청"> <input
-						type="button" value="목록으로">
+					<label>환불규정 안내</label>
+					<div>환불규정</div>
+				</div>
+
+				<div>
+					<table>
+						<caption>결제하기</caption>
+						<tr>
+							<td>결제금액</td>
+							<td>금액표시</td>
+						</tr>
+						<tr>
+							<td>결제방법</td>
+							<td><input type="radio" id="bankbookDeposit" value="bankbookDeposit"><label for="bankbookDeposit">무통장입금</label></td>
+						</tr>
+					</table>
+				</div>
+
+				<h5>현재는 무통장입금만 가능합니다.</h5>
+				
+				<div>
+				<input type="button" id="" value="결제">
+				<input type="button" id="" value="취소">
 				</div>
 			</form>
 		</div>

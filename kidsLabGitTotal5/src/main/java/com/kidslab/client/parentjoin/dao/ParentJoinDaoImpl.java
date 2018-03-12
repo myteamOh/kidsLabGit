@@ -22,6 +22,11 @@ public class ParentJoinDaoImpl implements ParentJoinDao {
 	public int parentInsert(ParentVO pvo) {
 		return session.insert("parentInsert");
 	}
+	
+	@Override
+	public int parentUpdate(ParentVO pvo) {
+		return session.update("parentUpdate", pvo);
+	}
 
 	@Override
 	public UserSecurity securitySelect(String userId) {

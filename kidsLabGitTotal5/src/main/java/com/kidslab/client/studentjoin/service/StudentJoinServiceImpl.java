@@ -71,4 +71,22 @@ public class StudentJoinServiceImpl implements StudentJoinService {
 
 	}
 
+	/*학생 정보 수정*/
+	@Override
+	public boolean studentUpdate(StudentVO svo) {
+		
+		try {
+			if(!svo.getUserPw().isEmpty()) {
+				UserSecurity security = parentJoinDao.securitySelect(svo.getUserId());
+				svo.setUserPw(new String(OpenCrypt.getSHA256(svo.getUserPw(), security.getSalt())));
+			}
+			studentJoinDao.studentUpdate(svo);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		return true;
+	}
+
 }

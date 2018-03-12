@@ -1,38 +1,49 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>회원 정보 수정 (학생)</title>
+
+<script type="text/javascript"
+	src="/resources/include/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="/resources/include/js/common.js"></script>
+<script type="text/javascript"
+	src="/resources/include/js/modifyStudentInfo.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("#modifyCancelBtn").click(function() {
+			location.href = "/mypage/studentMypage.do";
+		});
+	});
+</script>
+
 </head>
 <body>
 
 	<section>
 
 		<div>
-			<form>
+			<form id="studentModifying">
 				<table>
 					<tr>
 						<td><label>이름</label></td>
-						<td><input type="text" value="${student.student_name}"
-							readonly="readonly"></td>
+						<td><input type="text" name="student_name"
+							value="${student.student_name}" readonly="readonly"></td>
 					</tr>
 
 					<tr>
 						<td><label>아이디</label></td>
-						<td><input type="text" value="${student.userId}"
-							readonly="readonly"></td>
-					</tr>
-
-					<tr>
-						<td><label>현재 비밀번호</label></td>
-						<td><input type="password"><label>여부 라벨</label></td>
+						<td><input type="text" name="userId"
+							value="${student.userId}" readonly="readonly"></td>
 					</tr>
 
 					<tr>
 						<td><label>새 비밀번호</label></td>
-						<td><input type="password"><label>여부 라벨</label></td>
+						<td><input type="password" id="userPw" name="userPw"
+							maxlength="13"><label class="check">여부 라벨</label></td>
 					</tr>
 
 					<tr>
@@ -44,19 +55,21 @@
 
 					<tr>
 						<td><label>새 비밀번호 확인</label></td>
-						<td><input type="password"> <label>여부 라벨</label></td>
+						<td><input type="password" id="userPwCheck" maxlength="13">
+							<label class="check">여부 라벨</label></td>
 					</tr>
 
 					<tr>
 						<td><label>*</label> <label>학교</label></td>
-						<td><input type="text" name="student_school"
-							value="${student.student_school}"><label>여부 라벨</label></td>
+						<td><input type="text" id="student_school"
+							name="student_school" value="${student.student_school}"><label
+							class="check">여부 라벨</label></td>
 					</tr>
 				</table>
 
 				<div>
-					<input type="button" id="okBtn" value="수정 완료"> <input
-						type="button" id="cancelBtn" value="취소">
+					<input type="button" id="studentModifyBtn" value="수정 완료"> <input
+						type="button" id="modifyCancelBtn" value="취소">
 				</div>
 			</form>
 		</div>

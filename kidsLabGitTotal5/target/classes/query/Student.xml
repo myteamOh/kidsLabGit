@@ -31,5 +31,12 @@
 		#{student_school},
 		#{student_birthday}, #{student_reference}, #{parent_no})
 	</insert>
+	
+	<update id="studentUpdate" parameterType="student">
+		UPDATE student SET
+		<if test="userPw != null and userPw != ''"> student_password=#{userPw}, </if>
+		student_school=#{student_school}
+		WHERE student_id=#{userId}
+	</update>
 
 </mapper>

@@ -8,4 +8,6 @@ public interface StudentJoinDao {
 
 	public int studentInsert(StudentVO svo);
 
+	public int studentUpdate(StudentVO svo);
+
 }

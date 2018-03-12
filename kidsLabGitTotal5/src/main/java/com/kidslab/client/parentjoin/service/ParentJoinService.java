@@ -16,4 +16,6 @@ public interface ParentJoinService {
 
 	public int parentInsert(ParentVO pvo);
 
+	public boolean parentUpdate(ParentVO pvo);
+
 }

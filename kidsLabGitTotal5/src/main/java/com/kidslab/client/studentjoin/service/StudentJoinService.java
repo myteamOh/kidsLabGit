@@ -10,5 +10,6 @@ public interface StudentJoinService {
 
 	public int studentInsert(StudentVO svo);
 
+	public boolean studentUpdate(StudentVO svo);
 
 }
