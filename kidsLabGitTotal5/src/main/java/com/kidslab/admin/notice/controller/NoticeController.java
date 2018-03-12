@@ -131,7 +131,7 @@ public class NoticeController {
 	/**********************************
 	 * 글 수정 POST
 	 **********************************/
-
+	@RequestMapping(value = "/notice/noticeUpdate", method = RequestMethod.POST)
 	public String noticeUpdate(@ModelAttribute NoticeVO nvo, HttpServletRequest request) throws IllegalStateException {
 		logger.info("noticeUpdate POST 호출 성공~~~~");
 
@@ -152,6 +152,7 @@ public class NoticeController {
 	/*****************************************
 	 * 글 삭제
 	 *****************************************/
+	@RequestMapping(value = "/notice/noticeDelete", method = RequestMethod.POST)
 	public String noticeDelete(@ModelAttribute NoticeVO nvo, HttpServletRequest request) {
 
 		logger.info("noticeDelete 호출 성공");
