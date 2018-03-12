@@ -17,7 +17,8 @@
 <script type="text/javascript"
 	src="/resources/include/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="/resources/include/js/common.js"></script>
-<script type="text/javascript" src="/resources/include/js/teacherLogin.js"></script>
+<script type="text/javascript"
+	src="/resources/include/js/teacherLogin.js"></script>
 <script type="text/javascript">
 	function errCodeCheck() {
 		var errCode = '<c:out value="${errCode}" />';
@@ -68,8 +69,7 @@
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-6">
 							<input type="button" value="로그인" id="loginBtn"
-								class="btn btn-default" /> <input type="button" value="회원가입"
-								id="joinBtn" class="btn btn-default" />
+								class="btn btn-default" />
 						</div>
 					</div>
 				</form>

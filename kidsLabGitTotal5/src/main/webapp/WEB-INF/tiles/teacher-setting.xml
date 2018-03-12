@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN" 
+"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+
+	<definition name="teacherIntro"
+		template="/WEB-INF/views/template/teacher/mainLayout.jsp">
+		<put-attribute name="teacherTitle" value="000 사이트" />
+		<put-attribute name="teacherHeader"
+			value="/WEB-INF/views/template/teacher/header.jsp" />
+		<put-attribute name="teacherFooter"
+			value="/WEB-INF/views/template/teacher/footer.jsp" />
+	</definition>
+
+	<definition name="teacherContent"
+		template="/WEB-INF/views/template/teacher/contentLayout.jsp">
+		<put-attribute name="teacherTitle" value="000 사이트" />
+		<put-attribute name="teacherHeader"
+			value="/WEB-INF/views/template/teacher/header.jsp" />
+		<put-attribute name="teacherBody" value="" />
+		<put-attribute name="teacherFooter"
+			value="/WEB-INF/views/template/teacher/footer.jsp" />
+	</definition>
+
+	
+
+	<definition name="teacher/course/*" extends="teacherContent">
+		<put-attribute name="teacherTitle" value="강의등록" />
+		<put-attribute name="teacherBody"
+			value="/WEB-INF/views/teacher/course/{1}.jsp" />
+	</definition>
+
+
+
+</tiles-definitions> 

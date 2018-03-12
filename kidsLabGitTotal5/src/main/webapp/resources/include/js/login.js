@@ -2,29 +2,29 @@ $(function() {
 
 	/* 로그인 버튼 클릭시 이벤트 */
 	$("#loginBtn").click(
-			function() {
-				console.log("로그인 시도!");
+		function() {
+			console.log("로그인 시도!");
 
-				if ($("#userId").val() == null || $("#userId").val() == ""
-						|| $("#userPw").val() == null
-						|| $("#userPw").val() == "") {
-					$("#loginAlert")
-							.html("ID 또는 PW가 입력되지 않았습니다. 다시한번 확인해 주세요.");
-					return;
-				}
+			if ($("#userId").val() == null || $("#userId").val() == ""
+				|| $("#userPw").val() == null
+				|| $("#userPw").val() == "") {
+				$("#loginAlert")
+					.html("ID 또는 PW가 입력되지 않았습니다. 다시한번 확인해 주세요.");
+				return;
+			}
 
-				$("#loginAlert").html("");
+			$("#loginAlert").html("");
 
-				$("#loginForm").attr({
-					"method" : "POST",
-					"action" : "/login/login.do"
-				});
-
-				$("#loginForm").submit();
-
-				alert("로그인 시도!");
-
+			$("#loginForm").attr({
+				"method" : "POST",
+				"action" : "/login/login.do"
 			});
+
+			$("#loginForm").submit();
+
+			alert("로그인 시도!");
+
+		});
 
 	/* 회원가입 버튼 클릭시 이벤트 */
 	$("#parentJoinBtn").click(function() {
@@ -44,7 +44,7 @@ $(function() {
 	$("#teacherLoginBtn").click(function() {
 		console.log("강사로그인 출력!");
 
-		location.href = "";
+		location.href = "/teacher/login";
 	});
 
 });
