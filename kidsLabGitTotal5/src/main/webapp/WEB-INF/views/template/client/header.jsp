@@ -67,7 +67,7 @@
 										<a href="/mypage/studentMypage.do">마이페이지</a>
 									</c:otherwise>
 								</c:choose></li>
-							<li><a href="/inquiry//inquiryList.do">1:1 문의</a></li>
+							<li><a href="/inquiry/inquiryList.do">1:1 문의</a></li>
 						</ul></li>
 				</c:if>
 			</ul>

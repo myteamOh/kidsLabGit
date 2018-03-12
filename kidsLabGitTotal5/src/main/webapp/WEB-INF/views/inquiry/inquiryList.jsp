@@ -37,7 +37,7 @@
 	$(function() {
 		/* 글쓰기 버튼 클릭 시 처리 이벤트 */
 		$("#insertFormBtn").click(function() {
-			location.href = "/inquiry/inquiryInsert.do";
+			location.href = "/inquiry/inquiryWriteForm.do";
 		});
 
 		/* 제목 클릭시 상세 페이지 이동을 위한 처리 이벤트 */

@@ -65,25 +65,29 @@ public class InquiryController {
 		logger.info("inquiryList 호출 성공");
 
 		// 페이지 세팅
-/*		Paging.setPage(inquiryVO);
-		logger.info("start : " + inquiryVO.getStart_row());
-		logger.info("end : " + inquiryVO.getEnd_row());*/
+		/*
+		 * Paging.setPage(inquiryVO); logger.info("start : " +
+		 * inquiryVO.getStart_row()); logger.info("end : " + inquiryVO.getEnd_row());
+		 */
 
 		// 전체 레코드 수 구현
-/*		int total = inquiryService.inquiryListCnt(inquiryVO);*/
+		/* int total = inquiryService.inquiryListCnt(inquiryVO); */
 
-/*		logger.info("total = " + total);*/
+		/* logger.info("total = " + total); */
 
 		// 글번호 재설정
-/*		int count = total - (Util.nvl(inquiryVO.getPage()) - 1) * Util.nvl(inquiryVO.getPageSize());
-		logger.info("count = " + count);
-		logger.info("page : " + inquiryVO.getPage());
-		logger.info("search : " + inquiryVO.getSearch());*/
+		/*
+		 * int count = total - (Util.nvl(inquiryVO.getPage()) - 1) *
+		 * Util.nvl(inquiryVO.getPageSize()); logger.info("count = " + count);
+		 * logger.info("page : " + inquiryVO.getPage()); logger.info("search : " +
+		 * inquiryVO.getSearch());
+		 */
 
 		List<InquiryVO> inquiryList = inquiryService.inquiryList(inquiryVO);
 		model.addAttribute("inquiryList", inquiryList);
-/*		model.addAttribute("count", count);
-		model.addAttribute("total", total);*/
+		/*
+		 * model.addAttribute("count", count); model.addAttribute("total", total);
+		 */
 
 		model.addAttribute("data", inquiryVO);
 
@@ -91,7 +95,7 @@ public class InquiryController {
 	}
 
 	/**************************************************************
-	 * 1:1 문의 상세보기 
+	 * 1:1 문의 상세보기
 	 **************************************************************/
 	@RequestMapping(value = "/inquiryDetail.do", method = RequestMethod.GET)
 	public String inquiryDetail(@ModelAttribute InquiryVO inquiryVO, Model model) {
@@ -105,7 +109,7 @@ public class InquiryController {
 			detail.setInquiry_content(detail.getInquiry_content().toString().replaceAll("\n", "<br>"));
 		}
 		model.addAttribute("detail", detail);
-		return "inquiey/inquiryDetail";
+		return "inquiry/inquiryDetail";
 	}
 
 	/**************************************************************
@@ -116,13 +120,14 @@ public class InquiryController {
 	 * 
 	 **************************************************************/
 	@RequestMapping(value = "/inquiryUpdate.do", method = RequestMethod.POST)
-	public String inquiryUpdate(@ModelAttribute InquiryVO inquiryVO, HttpServletRequest request) throws IllegalStateException, IOException, SQLException {
-		
+	public String inquiryUpdate(@ModelAttribute InquiryVO inquiryVO, HttpServletRequest request)
+			throws IllegalStateException, IOException, SQLException {
+
 		logger.info("inquiryUpdate 호출 성공");
-		
+
 		int result = 0;
 		String url = "";
-		
+
 		result = inquiryService.inquiryUpdate(inquiryVO);
 		if (result == 1) {
 
@@ -143,12 +148,11 @@ public class InquiryController {
 	public String inquiryDelete(@ModelAttribute InquiryVO inquiryVO) {
 		logger.info("inquiryDelete 호출");
 
-		
 		int result = 0;
 		String url = "";
-		
+
 		result = inquiryService.inquiryDelete(inquiryVO.getInquiry_no());
-		
+
 		if (result == 1) {
 			url = "/inquiry/inquiryList.do";
 		} else {
