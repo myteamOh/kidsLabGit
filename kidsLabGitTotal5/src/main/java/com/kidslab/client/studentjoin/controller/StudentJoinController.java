@@ -58,7 +58,7 @@ public class StudentJoinController {
 
 		if (result == 1) {
 			mav.addObject("resultCode", 1);
-			mav.setViewName("client/mypage/mypageParent"); // 회원가입 성공시 학부모 마이 페이지로
+			mav.setViewName("redirect:/mypage/parentMypage.do"); // 회원가입 성공시 학부모 마이 페이지로
 		} else if (result == 2) {
 			mav.addObject("resultCode", 2);
 			mav.setViewName("client/member/studentJoin"); // 실패시

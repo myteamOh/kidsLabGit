@@ -38,5 +38,16 @@
 		student_school=#{student_school}
 		WHERE student_id=#{userId}
 	</update>
+	
+	<select id="studentList" parameterType="int" resultType="student">
+		SELECT student_no, student_id as userId,
+		student_name,
+		student_gender, student_school, student_birthday,
+		student_reference,
+		student_registerdate, student_evaluation,
+		student_status, parent_no
+		FROM student
+		WHERE parent_no = #{parent_no}
+	</select>
 
 </mapper>

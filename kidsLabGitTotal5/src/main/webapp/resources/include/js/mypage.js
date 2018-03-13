@@ -6,7 +6,7 @@ $(function() {
 		alert("정보 수정하기 전 비번확인");
 
 		$("#pwCheckForm").attr({
-			"method" : "get",
+			"method" : "POST",
 			"action" : "/mypage/modifyCheckPw.do"
 		});
 

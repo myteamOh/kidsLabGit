@@ -36,8 +36,8 @@
 		</where>
 	</sql>
 
-	<select id="requestCourseList" parameterType="course"
-		resultType="course">
+	<select id="requestCourseList" parameterType="adminCourse"
+		resultType="adminCourse">
 		select course_no,
 		course_summary, course_name, course_subject,
 		course_level,
@@ -67,13 +67,17 @@
 		</where>
 	</select>
 
-	<select id="requestCourseDetail">
+	<select id="requestCourseDetail" parameterType="adminCourse"
+		resultType="adminCourse">
 		SELECT course_no,
-		course_summary, course_name, course_subject,
+		course_summary, course_name,
+		course_subject,
 		course_level,
-		course_time, course_totalperson, course_room,
+		course_time, course_totalperson,
+		course_room,
 		course_plan, course_pay,
-		to_char(course_registerdate, 'yyyy-mm-dd') as
+		to_char(course_registerdate,
+		'yyyy-mm-dd') as
 		course_registerdate,
 		course_status,
 		to_char(course_startdate,'yyyy-mm-dd') as course_startdate,
@@ -85,6 +89,48 @@
 		b.teacher_no
 		WHERE
 		course_no = #{course_no}
+	</select>
+
+	<select id="requestCourseCount" parameterType="adminCourse"
+		resultType="requestCourse">
+		SELECT requestcourse_no, requestcourse_paymethod,
+		requestcourse_payamount, requestcourse_paymentdate,
+		requestcourse_paymentstatus, requestcourse_accountholder,
+		requestcourse_accountnumber, requestcourse_refundcharge,
+		requestcourse_refundbank, parent_no, student_no, course_no
+		FROM
+		requestcourse
+		WHERE course_no = #{course_no}
+	</select>
+
+	<insert id="requestCourseInsert" parameterType="requestCourse">
+
+		<selectKey keyProperty="requestcourse_no" resultType="int"
+			order="BEFORE">
+			SELECT requestcourse_seq.nextval FROM DUAL
+		</selectKey>
+
+		INSERT INTO requestcourse(requestcourse_no, requestcourse_paymethod,
+		requestcourse_payamount, parent_no, student_no, course_no)
+		VALUES(#{requestcourse_no}, #{requestcourse_paymethod},
+		#{requestcourse_payamount}, #{parent_no}, #{student_no},
+		#{course_no})
+	</insert>
+
+	<select id="reCourseSelectByNo" parameterType="requestCourse"
+		resultType="requestCourse">
+		SELECT *
+		FROM parent p
+		INNER JOIN student s ON p.parent_no =
+		s.parent_no
+		INNER JOIN requestcourse rc ON s.student_no = rc.student_no
+		INNER JOIN course c ON rc.course_no = c.course_no
+		INNER JOIN teacher t
+		ON c.teacher_no = t.teacher_no
+		WHERE rc.parent_no =
+		#{parent_no} and
+		rc.student_no = #{student_no} and rc.course_no =
+		#{course_no}
 	</select>
 
 </mapper>

@@ -33,25 +33,19 @@
 					<input type="button" class="modifyInfo" value="회원 정보 수정">
 				</div>
 				<br>
-	
+
 				<!-- 여기서부터 시작 -->
 				<c:choose>
-					<c:when test="">
-						자녀 없을떄
-						<div>
-							<input type="button" id="studentJoin" value="자녀 추가"
-								src="/resources/include/img/plus.png">
-						</div>
-					</c:when>
-					<c:otherwise>
+					<c:when test="${not empty stuList}">
 						자녀있을때
 						<div>
 							<input type="button" id="studentJoin" value="자녀 추가"
 								src="/resources/include/img/plus.png">
 						</div>
-						<c:forEach items="">
+						
+						<c:forEach var="child" items="${stuList}">
 							자녀리스트
-							<div>자녀이름(아이디)</div>
+							<div>${child.student_name}(${child.userId})</div>
 
 							<c:choose>
 								<c:when test="">
@@ -69,8 +63,15 @@
 									</div>
 								</c:otherwise>
 							</c:choose>
-
 						</c:forEach>
+					</c:when>
+
+					<c:otherwise>
+						자녀 없을떄
+						<div>
+							<input type="button" id="studentJoin" value="자녀 추가"
+								src="/resources/include/img/plus.png">
+						</div>
 					</c:otherwise>
 				</c:choose>
 			</form>

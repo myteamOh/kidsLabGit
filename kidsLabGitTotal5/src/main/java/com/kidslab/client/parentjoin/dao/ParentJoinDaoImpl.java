@@ -20,7 +20,7 @@ public class ParentJoinDaoImpl implements ParentJoinDao {
 
 	@Override
 	public int parentInsert(ParentVO pvo) {
-		return session.insert("parentInsert");
+		return session.insert("parentInsert", pvo);
 	}
 	
 	@Override
