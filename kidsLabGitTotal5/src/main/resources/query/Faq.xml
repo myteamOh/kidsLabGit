@@ -72,7 +72,7 @@
 			select BOARD_FAQ_SEQ.nextval from dual
 		</selectKey>
 		insert into
-		board_faq(faq_no, faq_title, faq_type, faq_content
+		board_faq(faq_no, faq_title, faq_type, faq_content,
 		admin_no)
 		values(#{faq_no}, #{faq_title}, #{faq_type}, #{faq_content},
 		#{admin_no})
