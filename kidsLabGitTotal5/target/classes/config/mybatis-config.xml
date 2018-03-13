@@ -35,6 +35,8 @@
 			alias="userLogin" />
 		<typeAlias type="com.kidslab.client.student.vo.StudentVO"
 			alias="student" />
+		<typeAlias type="com.kidslab.client.requestcourse.vo.RequestCourseVO"
+			alias="requestCourse" />
 		<typeAlias type="com.kidslab.client.inquiry.vo.InquiryVO"
 			alias="inquiry" />
 

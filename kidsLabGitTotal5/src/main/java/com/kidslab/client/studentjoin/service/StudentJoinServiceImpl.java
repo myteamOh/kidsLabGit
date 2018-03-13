@@ -1,5 +1,8 @@
 package com.kidslab.client.studentjoin.service;
 
+import java.util.List;
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +17,8 @@ import com.kidslab.common.util.Util;
 @Service
 @Transactional
 public class StudentJoinServiceImpl implements StudentJoinService {
+	
+	Logger logger = Logger.getLogger(StudentJoinServiceImpl.class);
 
 	@Autowired
 	private StudentJoinDao studentJoinDao;
@@ -87,6 +92,19 @@ public class StudentJoinServiceImpl implements StudentJoinService {
 		}
 		
 		return true;
+	}
+	
+	/*학부모 마이페이지 학생리스트 뽑기*/
+	@Override
+	public List<StudentVO> studentList(int parentNum) {
+		
+		logger.info("학생 리스트 뽑기");
+		
+		List<StudentVO> studentList = null;
+		
+		studentList = studentJoinDao.studentList(parentNum);
+		
+		return studentList;
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.kidslab.client.mypage.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -35,9 +37,19 @@ public class MypageController {
 
 	/* 학부모 mypage */
 	@RequestMapping(value = "/parentMypage.do", method = RequestMethod.GET)
-	public String parentMypage(Model model) {
+	public String parentMypage(@ModelAttribute ParentVO pvo, Model model, HttpSession session) {
 
 		logger.info("학부모 mypage 호출");
+
+		System.out.println(pvo.getParent_no());
+
+		pvo = (ParentVO) session.getAttribute("Login");
+
+		System.out.println("no" + pvo.getParent_no());
+
+		List<StudentVO> studentList = studentJoinService.studentList(pvo.getParent_no());
+
+		model.addAttribute("stuList", studentList);
 
 		return "client/mypage/mypageParent";
 	}
@@ -58,12 +70,16 @@ public class MypageController {
 	 */
 
 	/* 정보수정 버튼 클릭시 비밀번호 체크 페이지 */
-	@RequestMapping(value = "/modifyCheckPw.do", method = RequestMethod.GET)
-	public String modifyCheckPw(Model model) {
+	@RequestMapping(value = "/modifyCheckPw.do", method = RequestMethod.POST)
+	public ModelAndView modifyCheckPw(Model model) {
 
 		logger.info("비밀번호 확인창 호출!");
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("client/mypage/modifyCheckPw");
 
-		return "client/mypage/modifyCheckPw";
+		return mav;
 	}
 
 	/* 비밀번호 확인 버튼 클릭시 처리 */
@@ -128,7 +144,7 @@ public class MypageController {
 		ModelAndView mav = new ModelAndView();
 
 		UserLoginVO login = (UserLoginVO) session.getAttribute("Login");
-		
+
 		System.out.println(pvo.getUserPw());
 
 		if (login == null) {

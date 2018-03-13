@@ -1,8 +1,8 @@
 package com.kidslab.client.student.vo;
 
-import com.kidslab.client.login.vo.UserLoginVO;
+import com.kidslab.client.parent.vo.ParentVO;
 
-public class StudentVO extends UserLoginVO {
+public class StudentVO extends ParentVO {
 
 	private int student_no; // 학생 번호
 	private String student_name; // 학생 이름

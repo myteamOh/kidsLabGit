@@ -61,16 +61,16 @@
 													width="100" height="100">
 											</div>
 											<div id="courseName">
-												<span>${requestCourse.course_name}</span>
+												<span>강의명 : ${requestCourse.course_name}</span>
 											</div>
 											<div id="courseLevel">
-												<span>${requestCourse.course_level}</span>
+												<span>강의 대상학년 : ${requestCourse.course_level}</span>
 											</div>
 											<div id="courseSummary">
-												<span>${requestCourse.course_summary}</span>
+												<span>강의 개요 : ${requestCourse.course_summary}</span>
 											</div>
 											<div id="courseDate">
-												<span>${requestCourse.course_startdate}</span> ~ <span>${requestCourse.course_enddate}</span>
+												<span>강의 기간 : ${requestCourse.course_startdate}</span> ~ <span>${requestCourse.course_enddate}</span>
 											</div>
 											<input type="button" class="detailBtn" value="상세보기 및 수강신청">
 										</div>

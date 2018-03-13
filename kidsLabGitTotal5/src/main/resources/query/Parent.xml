@@ -29,10 +29,15 @@
 		#{userPw}, #{parent_name}, #{parent_phone},
 		#{parent_smsagree},
 		#{parent_emailagree}, #{parent_kakaoagree},
-		#{parent_knowroute},
+		<if test="parent_knowroute=='internetSearch'">'인터넷 검색'</if>
+		<if test="parent_knowroute=='acquaintanceIntroduction'">'지인소개'</if>
+		<if test="parent_knowroute=='banner'">'현수막'</if>
+		<if test="parent_knowroute=='leaflet'">'전단지'</if>
+		<if test="parent_knowroute=='etcetera'">'기타'</if>
+		,
 		#{parent_address})
 	</insert>
-	
+
 	<update id="parentUpdate" parameterType="parent">
 		UPDATE parent SET
 		<if test="userPw != null and userPw != ''"> parent_password=#{userPw}, </if>
