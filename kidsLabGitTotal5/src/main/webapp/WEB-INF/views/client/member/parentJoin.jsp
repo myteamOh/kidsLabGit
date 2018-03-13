@@ -15,12 +15,12 @@
 <script type="text/javascript" src="/resources/include/js/common.js"></script>
 <script type="text/javascript" src="/resources/include/js/parentJoin.js"></script>
 <script type="text/javascript">
-	function errCodeCheck() {
-		
-		var resultCode = '<c:out value = "${resultCode}" />';
-		
-		if (resultCode != '') {
-			
+	$(function() {
+
+		var resultCode = "<c:out value='${resultCode}' />";
+
+		if (resultCode != null) {
+
 			switch (parseInt(resultCode)) {
 			case 1:
 				alert("회원가입 성공!");
@@ -33,13 +33,13 @@
 				break;
 			}
 		}
-	}
+	});
 </script>
 </head>
 <body>
 	<div id="mainContainer">
 		<form id="parentForm">
-			
+
 			<h2>학부모 회원가입</h2>
 
 			<br>
@@ -113,12 +113,13 @@
 				<tr>
 					<td></td>
 					<td><input type="checkbox" id="parent_smsagree"
-						name="parent_smsagree"> <label for="parent_smsagree">SMS
-							수신 동의(선택)</label> <br> <input type="checkbox" id="parent_emailagree"
-						name="parent_emailagree"> <label for="parent_emailagree">E-mail
+						name="parent_smsagree" value="Y"> <label
+						for="parent_smsagree">SMS 수신 동의(선택)</label> <br> <input
+						type="checkbox" id="parent_emailagree" name="parent_emailagree"
+						value="Y"> <label for="parent_emailagree">E-mail
 							수신 동의(선택)</label> <br> <input type="checkbox" id="parent_kakaoagree"
-						name="parent_kakaoagree"> <label for="parent_kakaoagree">KakaoTalk
-							수신 동의(선택)</label></td>
+						name="parent_kakaoagree" value="Y"> <label
+						for="parent_kakaoagree">KakaoTalk 수신 동의(선택)</label></td>
 				</tr>
 
 				<tr>
