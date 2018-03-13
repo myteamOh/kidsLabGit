@@ -36,8 +36,8 @@
 		</where>
 	</sql>
 
-	<select id="requestCourseList" parameterType="adminCourse"
-		resultType="adminCourse">
+	<select id="requestCourseList" parameterType="course"
+		resultType="course">
 		select course_no,
 		course_summary, course_name, course_subject,
 		course_level,
@@ -67,8 +67,8 @@
 		</where>
 	</select>
 
-	<select id="requestCourseDetail" parameterType="adminCourse"
-		resultType="adminCourse">
+	<select id="requestCourseDetail" parameterType="course"
+		resultType="course">
 		SELECT course_no,
 		course_summary, course_name,
 		course_subject,
@@ -91,7 +91,7 @@
 		course_no = #{course_no}
 	</select>
 
-	<select id="requestCourseCount" parameterType="adminCourse"
+	<select id="requestCourseCount" parameterType="course"
 		resultType="requestCourse">
 		SELECT requestcourse_no, requestcourse_paymethod,
 		requestcourse_payamount, requestcourse_paymentdate,
