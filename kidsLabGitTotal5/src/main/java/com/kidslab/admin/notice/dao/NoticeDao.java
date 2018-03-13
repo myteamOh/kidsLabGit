@@ -22,4 +22,6 @@ public interface NoticeDao {
 
 	// 공지사항 삭제
 	public int noticeDelete(int notice_no);
+
+	public List<NoticeVO> mainNoticeList();
 }

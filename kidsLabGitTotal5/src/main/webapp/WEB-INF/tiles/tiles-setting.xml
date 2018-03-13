@@ -46,4 +46,10 @@
 			value="/WEB-INF/views/client/mypage/{1}.jsp" />
 	</definition>
 
+	<definition name="client/courseApply/*" extends="content">
+		<put-attribute name="title" value="수강신청" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/client/courseApply/{1}.jsp" />
+	</definition>
+
 </tiles-definitions> 

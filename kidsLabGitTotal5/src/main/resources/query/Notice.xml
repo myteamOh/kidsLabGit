@@ -23,6 +23,24 @@
 	</sql>
 
 
+	<select id="mainNoticeList" resultType="adminNotice">
+		select notice_no,
+		notice_title,
+		to_char(notice_registerdate, 'yyyy-mm-dd') as
+		notice_registerdate
+		from(
+		select list.*, rownum as rnum
+		from(
+		select *
+		from board_notice
+		order by notice_no desc
+		) list
+		)
+		where
+		rnum between 1 and
+		5
+	</select>
+
 	<!-- 게시물 전체 조회 -->
 	<select id="noticeList" parameterType="adminNotice" resultType="adminNotice">
 		<!-- notice - noticeList -->

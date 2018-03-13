@@ -55,4 +55,10 @@ public class NoticeDaoImpl implements NoticeDao {
 		return session.delete("noticeDelete", notice_no);
 	}
 
+	@Override
+	public List<NoticeVO> mainNoticeList() {
+		// TODO Auto-generated method stub
+		return session.selectList("mainNoticeList");
+	}
+
 }

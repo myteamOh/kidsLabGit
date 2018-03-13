@@ -93,4 +93,14 @@ public class NoticeServiceImpl implements NoticeService {
 		return result;
 	}
 
+	@Override
+	public List<NoticeVO> mainNoticeList() {
+		// TODO Auto-generated method stub
+		List<NoticeVO> noticeList = null;
+
+		noticeList = noticeDao.mainNoticeList();
+		
+		return noticeList;
+	}
+
 }

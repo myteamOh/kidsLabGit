@@ -8,6 +8,9 @@ public interface NoticeService {
 	// 전체 공지사항 목록 구현
 	public List<NoticeVO> noticeList(NoticeVO nvo);
 
+	// 메인 공지사항 목록 구현
+	public List<NoticeVO> mainNoticeList();
+
 	// 페이징 추가
 	public int noticeListCnt(NoticeVO nvo);
 

@@ -103,32 +103,34 @@
 			<div class="col-xs-6 col-lg-4">
 
 				<h1 align="center">공지사항</h1>
-				<table width=100% cellpadding=0 cellspacing=0 class="recent_notice">
-					<tr>
-						<td width="50px">30</td>
-						<td><a href='#'>2018년 3월 4일자 공지사항</a></td>
-						<td width="100px">2018-03-04</td>
-					</tr>
-					<tr>
-						<td>29</td>
-						<td><a href='#'>2018년 3월 3일자 공지사항</a></td>
-						<td>2018-03-03</td>
-					</tr>
-					<tr>
-						<td>28</td>
-						<td><a href='#'>2018년 3월 2일자 공지사항</a></td>
-						<td>2018-03-02</td>
-					</tr>
-					<tr>
-						<td>27</td>
-						<td><a href='#'>2018년 2월 28일자 공지사항</a></td>
-						<td>2018-02-28</td>
-					</tr>
-					<tr>
-						<td>26</td>
-						<td><a href='#'>2018년 2월 26일자 공지사항</a></td>
-						<td>2018-02-26</td>
-					</tr>
+				<table width=100% cellpadding=0 cellspacing=0 class="recent_notice table table-hover">
+					<thead>
+						<tr>
+							<th class="order" data-value="notice_no">글번호</th>
+							<th>글제목</th>
+							<th data-value="notice_registerdate">작성일</th>
+						</tr>
+					</thead>
+					<tbody id="list">
+						<!-- 데이터 출력 -->
+						<c:choose>
+							<c:when test="${not empty mainNoticeList}">
+								<c:forEach var="notice" items="${mainNoticeList}"
+									varStatus="status">
+									<tr class="tac" data-num="${notice.notice_no}">
+										<td>${notice.notice_no }</td>
+										<td class="goDetail tal">${notice.notice_title}</td>
+										<td>${notice.notice_registerdate}</td>
+									</tr>
+								</c:forEach>
+							</c:when>
+							<c:otherwise>
+								<tr>
+									<td colspan="4" class="tac">등록된 게시 물이 존재하지 않습니다.</td>
+								</tr>
+							</c:otherwise>
+						</c:choose>
+					</tbody>
 				</table>
 
 
