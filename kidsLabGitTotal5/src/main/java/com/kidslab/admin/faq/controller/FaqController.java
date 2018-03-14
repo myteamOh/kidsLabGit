@@ -85,11 +85,11 @@ public class FaqController {
 	}
 
 	// Faq 상세보기
-	@RequestMapping(value = "/faq/faqDetail", method = RequestMethod.POST)
+	@RequestMapping(value = "/faq/faqDetail", method = RequestMethod.GET)
 	public String faqDetail(@ModelAttribute FaqVO fvo, Model model) {
 
 		logger.info("faqDetail 호출~");
-		logger.info("faq_no = " + fvo.getAdmin_no());
+		logger.info("faq_no = " + fvo.getFaq_no());
 
 		FaqVO detail = new FaqVO();
 		detail = faqService.faqDetail(fvo);
@@ -121,11 +121,15 @@ public class FaqController {
 
 		int result = 0;
 		String url = "";
-
+		logger.info("faq_title : " + fvo.getFaq_title());
+		logger.info("faq_type : " + fvo.getFaq_type());
+		logger.info("faq_content : " + fvo.getFaq_content());
+		logger.info("page : " + fvo.getPage());
 		result = faqService.faqUpdate(fvo);
 		logger.info("result : " + result);
+		
 		if (result == 1) {
-			url = "/admin/faq/faqDetail.do?faq_no=" + fvo.getFaq_no() + "&page=" + fvo.getPage() + "&pageSize="
+			url = "/admin/faq/faqDetail?faq_no=" + fvo.getFaq_no() + "&page=" + fvo.getPage() + "&pageSize="
 					+ fvo.getPageSize();
 		}
 

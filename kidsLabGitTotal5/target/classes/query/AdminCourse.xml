@@ -179,4 +179,12 @@
 		course_no =
 		#{course_no}
 	</update>
+
+	<!-- 삭제 -->
+	<delete id="courseDelete" parameterType="course">
+		<!-- Course - courseDelete -->
+		delete from
+		course
+		where course_no = #{course_no}
+	</delete>
 </mapper>

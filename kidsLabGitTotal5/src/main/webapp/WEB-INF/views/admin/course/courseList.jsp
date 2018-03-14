@@ -111,31 +111,23 @@
 			});
 			$("#courseUpdateForm").submit();
 		});
-		/* 등록 버튼 클릭 시 페이지 이동 */
-		/* $(".updateBtn").click(function() {
+		// 삭제 버튼 클릭 시
+		$(".deleteBtn").click(function() {
 			var course_no = $(this).parents("tr").attr("data-num");
 			$("#course_no").val(course_no);
 			console.log("글번호 : " + course_no);
-			$("#courseUpdateForm").attr({
-				"method" : "get",
-				"action" : "/admin/course/courseUpdate"
-			});
-			$("#courseUpdateForm").submit();
-		}); */
+			if (confirm("정말 삭제하시겠습니까?") == true) {
+				$("#courseUpdateForm").attr({
+					"method" : "get",
+					"action" : "/admin/course/courseDelete"
+				});
+				$("#courseUpdateForm").submit();
+			} else {
+				return;
+			}
+		});
 
 	});
-	/* 검색과 한 페이지에 보여줄 레코드 수 처리 및 페이징을 위한 실질적인 처리 함수 */
-	/* function goPage(page) {
-		if ($("#search").val() == "all") {
-			$("#keyword").val("");
-		}
-		$("#page").val(page);
-		$("#c_search").attr({
-			"method" : "get",
-			"action" : "/admin/course/courseList.do"
-		});
-		$("#c_search").submit();
-	} */
 	function goPage(page) {
 		if ($("#search").val() == "all") {
 			$("#keyword").val("");
@@ -254,19 +246,19 @@
 										<c:choose>
 											<c:when test="${course.course_status == '등록대기'}">
 												<td>${course.course_status}<br> <input
-													type="button" id="registBtn" name="registBtn"
-													class="registBtn" value="등록"> <input type="button"
-													id="registdeleteBtn" name="deleteBtn" class="deleteBtn"
-													value="삭제">
+													type="button" class="registBtn" value="등록"> <input
+													type="button" class="deleteBtn" value="삭제">
 												</td>
 											</c:when>
 											<c:when test="${ course.course_status == '승인대기'}">
 												<td>${course.course_status}<br> <input
-													type="button" id="updateBtn" name="updateBtn"
-													class="registBtn" value="수정"> <input type="button"
-													class="deleteBtn" id="agreedeleteBtn" name="agreedeleteBtn"
-													value="삭제">
+													type="button" class="registBtn" value="수정"> <input
+													type="button" class="deleteBtn" value="삭제">
 												</td>
+											</c:when>
+											<c:when test="${course.course_status == '모집중' }">
+												<td>${course.course_status }<br> <input
+													type="button" class="registBtn" value="수정">
 											</c:when>
 											<c:otherwise>
 												<td>${course.course_status }</td>

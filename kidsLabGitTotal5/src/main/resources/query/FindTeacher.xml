@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kidslab.teacher.finduser.dao.FindTeacherDao">
+
+	<select id="findTeacherId" parameterType="teacher" resultType="teacher">
+		SELECT
+		teacher_id
+		FROM teacher
+		WHERE teacher_name = #{teacher_name} and
+		teacher_phone = #{teacher_phone}
+	</select>
+
+	<select id="matchTeacherId" resultType="teacher">
+		select teacher_id,
+		teacher_password
+		from teacher
+		where
+		teacher_id = #{teacher_id} and
+		teacher_name = #{teacher_name}
+	</select>
+
+	<select id="temporaryTeacherSecuritySelect" parameterType="String"
+		resultType="teacherSecurity">
+		select userid as teacher_id, salt
+		from security
+		where
+		userid
+		=
+		#{teacher_id}
+	</select>
+
+	<update id="temporaryTeacherPwUpdate" parameterType="teacher">
+		update
+		teacher
+		set teacher_password = #{teacher_password}
+		where
+		teacher_id =
+		#{teacher_id} and teacher_name = #{teacher_name}
+	</update>
+
+
+
+</mapper>

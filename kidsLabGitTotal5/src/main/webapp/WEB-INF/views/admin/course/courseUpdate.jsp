@@ -30,51 +30,43 @@
 <script type="text/javascript">
 	$(function() {
 		var course_status = $('<c:out value = "${updateData.course_status}" />');
-
 		if (course_status == "등록대기") {
 			$("#registwaitng").attr({
 				"selected" : "selected"
 			});
 		} else if (course_status = "승인대기") {
-			console.log("확인");
 			$("#agreewaiting").attr({
 				"selected" : "selected"
 			});
+		} else if (course_status = "모집중") {
+			$("#recruiting").attr({
+				"selected" : "selected"
+			});
+		} else if (course_status = "진행중") {
+			$("#progressing").attr({
+				"selected" : "selected"
+			});
 		}
+		// 강의실
+		for (var i = 0; i < 8; i++) {
+			if ($("#room").val() == $("#course_room option:eq(" + i + ")").val()) {
+				$("#course_room option:eq(" + i + ")").attr("selected", "selected");
+			}
+		}
+		// 날짜
+		for (var i = 0; i < 5; i++) {
+			if ($("#day").val() == $("#course_day option:eq(" + i + ")").val()) {
+				$("#course_day option:eq(" + i + ")").attr("selected", "selected");
+			}
+		}
+		// 시간
+		for (var i = 0; i < 4; i++) {
+			if ($("#hour").val() == $("#course_hour option:eq(" + i + ")").val()) {
+				$("#course_hour option:eq(" + i + ")").attr("selected", "selected");
+			}
+		}
+		var course_time = $('<c:out value = "${updateData.course_time}" />');
 
-		if ($("#room").val() == "1") {
-			$("#1").attr({
-				"selected" : "selected"
-			});
-		} else if ($("#room").val() == "2") {
-			$("#2").attr({
-				"selected" : "selected"
-			});
-		} else if ($("#room").val() == "3") {
-			$("#3").attr({
-				"selected" : "selected"
-			});
-		} else if ($("#room").val() == "4") {
-			$("#4").attr({
-				"selected" : "selected"
-			});
-		} else if ($("#room").val() == "5") {
-			$("#5").attr({
-				"selected" : "selected"
-			});
-		} else if ($("#room").val() == "6") {
-			$("#6").attr({
-				"selected" : "selected"
-			});
-		} else if ($("#room").val() == "7") {
-			$("#7").attr({
-				"selected" : "selected"
-			});
-		} else if ($("#room").val() == "8") {
-			$("#8").attr({
-				"selected" : "selected"
-			});
-		}
 		//저장 버튼 클릭시 처리 이벤트
 		$("#requestInsert").click(function() {
 			// 입력값 체크
@@ -222,7 +214,8 @@
 							<option value="15:00 ~ 16:45">15:00 ~ 16:45</option>
 							<option value="17:00 ~ 18:45">17:00 ~ 18:45</option>
 							<option value="19:00 ~ 20:45">19:00 ~ 20:45</option>
-						</select>
+						</select> <input type="hidden" id="day" name="day" value="${day }">
+						<input type="hidden" id="hour" name="hour" value="${hour }">
 					</div>
 					<div class="col-sm-5">
 						<p class="form-control-static error"></p>
@@ -232,14 +225,14 @@
 					<label for="course_room" class="col-sm-2 control-label">강의실</label>
 					<div class="col-sm-3">
 						<select id="course_room" name="course_room">
-							<option value="1" id="1">1 강의실</option>
-							<option value="2" id="2">2 강의실</option>
-							<option value="3" id="3">3 강의실</option>
-							<option value="4" id="4">4 강의실</option>
-							<option value="5" id="5">5 강의실</option>
-							<option value="6" id="6">6 강의실</option>
-							<option value="7" id="7">7 강의실</option>
-							<option value="8" id="8">8 강의실</option>
+							<option value="1">1 강의실</option>
+							<option value="2">2 강의실</option>
+							<option value="3">3 강의실</option>
+							<option value="4">4 강의실</option>
+							<option value="5">5 강의실</option>
+							<option value="6">6 강의실</option>
+							<option value="7">7 강의실</option>
+							<option value="8">8 강의실</option>
 						</select><input type="hidden" id="room" value="${updateData.course_room }">
 					</div>
 					<div class="col-sm-5">
@@ -281,7 +274,7 @@
 									<option value="cancel">폐강</option>
 								</c:when>
 								<c:when test="${ updateData.course_status == '진행중'}">
-									<option value="progressing" id="recruiting">진행중</option>
+									<option value="progressing" id="progressing">진행중</option>
 									<option value="end">강의종료</option>
 								</c:when>
 							</c:choose>

@@ -87,7 +87,7 @@
 			console.log("글번호 : " + notice_no);
 			// 상세 페이지로 이동하기 위해 form 추가(id : detailForm)
 			$("#detailForm").attr({
-				"method" : "get",
+				"method" : "GET",
 				"action" : "/admin/faq/faqDetail"
 			});
 			$("#detailForm").submit();
@@ -159,7 +159,7 @@
 				<colgroup>
 					<col width="10%" />
 					<col width="62%" />
-					<col width="28%" />
+					<col width="38%" />
 				</colgroup>
 				<thead>
 					<tr>
@@ -177,7 +177,6 @@
 									<td>${faq.faq_no }</td>
 									<td class="goDetail tal">${faq.faq_title}</td>
 									<td>${faq.faq_type}</td>
-									<td class="name">관리자</td>
 								</tr>
 							</c:forEach>
 						</c:when>

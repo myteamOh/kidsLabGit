@@ -32,7 +32,7 @@
 		rownum as rnum
 		from (
 		<include refid="faqCommon"></include>
-		order by faq_no
+		order by faq_no desc
 		) list
 		)
 		<where>

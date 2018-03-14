@@ -76,8 +76,18 @@ public class CourseController {
 
 		CourseVO updateData = new CourseVO();
 		updateData = courseService.courseDetail(cvo);
+		logger.info("time = " + updateData.getCourse_time());
+		String day;
+		String hour;
+
+		day = updateData.getCourse_time().substring(0, 3);
+		hour = updateData.getCourse_time().substring(4, 17);
+		logger.info("날짜 : " + day);
+		logger.info("시간 : " + hour);
 
 		model.addAttribute("updateData", updateData);
+		model.addAttribute("day", day);
+		model.addAttribute("hour", hour);
 
 		return "admin/course/courseUpdate";
 	}
@@ -123,18 +133,21 @@ public class CourseController {
 	@RequestMapping(value = "/course/courseDelete")
 	public String courseDelete(@ModelAttribute CourseVO cvo, HttpServletRequest request) throws IOException {
 		logger.info("courseDelete 호출!!!");
-
+		logger.info("번호 : " + cvo.getCourse_no());
+		CourseVO deleteData = new CourseVO();
+		deleteData = courseService.courseDetail(cvo);
+		logger.info("파일 : " + deleteData.getCourse_plan());
 		int result = 0;
 		String url = "";
 
-		if (!cvo.getCourse_plan().isEmpty()) {
-			FileUploadUtil.fileDelete(cvo.getCourse_plan(), request);
+		if (!deleteData.getCourse_plan().isEmpty()) {
+			FileUploadUtil.fileDelete(deleteData.getCourse_plan(), request);
 		}
 
 		result = courseService.courseDelete(cvo.getCourse_no());
 
 		if (result == 1) {
-			url = "admin/course/courseList?page=" + cvo.getPage() + "&pageSize=" + cvo.getPageSize();
+			url = "courseList?page=" + cvo.getPage() + "&pageSize=" + cvo.getPageSize();
 		} else {
 			logger.info("삭제 불가능");
 		}

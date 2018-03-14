@@ -50,7 +50,7 @@
 		select list.*, rownum as rnum
 		from (
 		<include refid="noticeCommon"></include>
-		order by notice_no
+		order by notice_no desc
 		) list
 		)
 		<where>

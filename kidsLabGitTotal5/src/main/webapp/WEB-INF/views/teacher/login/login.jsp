@@ -34,6 +34,11 @@
 			}
 		}
 	}
+	$(function() {
+		$("#idPwFindBtn").click(function() {
+			location.href = "/teacher/login/findTeacher";
+		});
+	})
 </script>
 <style type="text/css">
 #cl-dashboard {
@@ -69,7 +74,8 @@
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-6">
 							<input type="button" value="로그인" id="loginBtn"
-								class="btn btn-default" />
+								class="btn btn-default" /> <input type="button"
+								value="아이디/비밀번호 찾기" id="idPwFindBtn" class="btn btn-default">
 						</div>
 					</div>
 				</form>
