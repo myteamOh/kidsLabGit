@@ -30,8 +30,12 @@ public class TeacherLoginController {
 	 * 로그인 화면 보여주기 위한 메소드
 	 ***********************************/
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login() {
+	public String login(HttpSession session) {
 		logger.info("teacher/login.do get 호출 성공");
+		TeacherLoginVO tvo = (TeacherLoginVO) session.getAttribute("teacherLogin");
+		if(tvo != null) {
+			return "teacher/mypage/teacherMypage";
+		}
 		return "teacher/login/login";
 	}
 

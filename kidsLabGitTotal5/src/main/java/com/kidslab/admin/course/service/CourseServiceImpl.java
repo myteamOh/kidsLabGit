@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kidslab.admin.course.dao.CourseDao;
 import com.kidslab.admin.course.vo.CourseVO;
+import com.kidslab.teacher.login.vo.TeacherLoginVO;
 
 @Service
 @Transactional
@@ -76,6 +77,16 @@ public class CourseServiceImpl implements CourseService {
 			result = 0;
 		}
 		return result;
+	}
+
+	@Override
+	public List<CourseVO> teacherCourseList(TeacherLoginVO tvo) {
+
+		List<CourseVO> teacherCourseList = null;
+
+		teacherCourseList = courseDao.teacherCourseList(tvo);
+
+		return teacherCourseList;
 	}
 
 }

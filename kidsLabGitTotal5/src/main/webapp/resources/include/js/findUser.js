@@ -144,11 +144,9 @@ $(function() {
 			});
 
 		});
-
 	/* Teacher 아이디 찾기 처리 */
 	$("#findIdBtn").click(
 		function() {
-
 			if ($('#teacher_name').val() == ""
 				|| $("#teacher_name").val() == null) {
 				alert("이름을 입력해 주세요.");
@@ -158,24 +156,27 @@ $(function() {
 				alert("연락처를 입력해 주세요.");
 				return;
 			}
-
 			$.ajax({
 				url : "/teacher/login/findTeacher",
 				type : "POST",
 				data : $("#teacherIdSearch").serialize(),
+				dataType : "json",
 				error : function() {
 					alert("오류");
 				},
-				success : function() {
-					alert("실행");
-					var goUrl = "";
-
-					$("#teacherIdSearch").attr({
-						"method" : "post",
-						"action" : "/teacher/login/findTeacher"
-					});
-
-					$("#teacherIdSearch").submit();
+				success : function(findIdCheck) {
+					console.log(findIdCheck);
+					list = findIdCheck;
+					$(".remover").empty();
+					console.log(list);
+					if (list.length != 0) {
+						$("#msg").before("<tr class='remover'><td colspan='2'><font color='blue'>아이디</font></td></tr>")
+						for (var i = 0; i < list.length; i++) {
+							$("#msg").before("<tr class='remover'><td colspan='2'><font color='red'>" + list[i].teacher_id + "</font></td></tr>");
+						}
+					} else {
+						$("#msg").before("<tr class='remover'><td colspan='2'><font color='red'>정보에 해당하는 아이디가 없습니다.</font></td></tr>")
+					}
 				}
 			});
 

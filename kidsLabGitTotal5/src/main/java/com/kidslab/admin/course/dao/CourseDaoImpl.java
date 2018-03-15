@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kidslab.admin.course.vo.CourseVO;
+import com.kidslab.teacher.login.vo.TeacherLoginVO;
 
 @Repository
 public class CourseDaoImpl implements CourseDao {
@@ -47,6 +48,12 @@ public class CourseDaoImpl implements CourseDao {
 	public int courseDelete(int course_no) {
 		// TODO Auto-generated method stub
 		return (Integer) session.delete("courseDelete", course_no);
+	}
+
+	@Override
+	public List<CourseVO> teacherCourseList(TeacherLoginVO tvo) {
+		// TODO Auto-generated method stub
+		return session.selectList("teacherCourseList", tvo);
 	}
 
 }

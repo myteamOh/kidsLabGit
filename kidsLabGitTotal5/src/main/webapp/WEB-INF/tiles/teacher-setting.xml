@@ -23,12 +23,18 @@
 			value="/WEB-INF/views/template/teacher/footer.jsp" />
 	</definition>
 
-	
+
 
 	<definition name="teacher/course/*" extends="teacherContent">
 		<put-attribute name="teacherTitle" value="강의등록" />
 		<put-attribute name="teacherBody"
 			value="/WEB-INF/views/teacher/course/{1}.jsp" />
+	</definition>
+
+	<definition name="teacher/mypage/*" extends="teacherContent">
+		<put-attribute name="teacherTitle" value="마이페이지" />
+		<put-attribute name="teacherBody"
+			value="/WEB-INF/views/teacher/mypage/{1}.jsp" />
 	</definition>
 
 

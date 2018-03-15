@@ -44,23 +44,12 @@ public class FindTeacherController {
 	/* teacher 아이디 찾기 POST */
 	@ResponseBody
 	@RequestMapping(value = "/login/findTeacher", method = RequestMethod.POST)
-	public ModelAndView findTeacherId(@ModelAttribute("TeacherVO") TeacherVO tvo, Model model) {
+	public List<TeacherVO> findTeacherId(@ModelAttribute("TeacherVO") TeacherVO tvo, Model model) {
 		logger.info("teacher 아이디 찾기 처리~");
-
-		ModelAndView mav = new ModelAndView();
 
 		List<TeacherVO> findIdCheck = findTeacherService.findTeacherId(tvo.getTeacher_name(), tvo.getTeacher_phone());
 
-		if (findIdCheck.size() > 0) {
-
-			model.addAttribute("teacherIdList", findIdCheck);
-			mav.addObject("msg", "success");
-			mav.setViewName("teacher/login/findTeacher");
-		} else {
-			mav.addObject("msg", "fail");
-			mav.setViewName("teacher/login/findTeacher");
-		}
-		return mav;
+		return findIdCheck;
 	}
 
 	/* teacher 비밀번호 재발급 POST */

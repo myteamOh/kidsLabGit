@@ -71,6 +71,16 @@
 		as course_startdate, to_char(course_enddate, 'yyyy-mm-dd') as course_enddate, 
 		a.teacher_no, b.teacher_name FROM course a, teacher b where a.teacher_no 
 		= b.teacher_no order by course_no asc </select> -->
+	<select id="teacherCourseList" resultType="course"
+		parameterType="int">
+		select course_no, course_name, course_subject,
+		to_char(course_startdate,'yyyy-mm-dd') as
+		course_startdate,
+		to_char(course_enddate, 'yyyy-mm-dd') as
+		course_enddate, teacher_no
+		from course
+		where teacher_no = ${teacher_no} and course_status = '모집중'
+	</select>
 	<!-- 페이징 후 게시물 전체 조회 -->
 	<select id="courseList" resultType="course" parameterType="course">
 		select course_no,

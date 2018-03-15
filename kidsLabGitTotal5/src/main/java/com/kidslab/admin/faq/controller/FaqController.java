@@ -127,7 +127,7 @@ public class FaqController {
 		logger.info("page : " + fvo.getPage());
 		result = faqService.faqUpdate(fvo);
 		logger.info("result : " + result);
-		
+
 		if (result == 1) {
 			url = "/admin/faq/faqDetail?faq_no=" + fvo.getFaq_no() + "&page=" + fvo.getPage() + "&pageSize="
 					+ fvo.getPageSize();

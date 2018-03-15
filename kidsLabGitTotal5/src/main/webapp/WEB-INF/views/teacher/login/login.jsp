@@ -80,19 +80,6 @@
 					</div>
 				</form>
 			</c:if>
-			<c:if
-				test="${teacherLogin.teacher_id != null and teacherLogin.teacher_id != '' }">
-				<fieldset id="loginAfter">
-					<legend>
-						<strong>[${teacherLogin.teacher_name }] 님 반갑습니다.</strong>
-					</legend>
-					<span id="memberMenu" class="tac"> <a
-						href="/member/logout.do">로그아웃</a> &nbsp;&nbsp;&nbsp; <a
-						href="/member/modify.do">정보수정(비밀번호 변경)</a>&nbsp;&nbsp;&nbsp; <a
-						href="/member/delete.do">회원탈퇴</a>
-					</span>
-				</fieldset>
-			</c:if>
 		</div>
 	</div>
 </body>

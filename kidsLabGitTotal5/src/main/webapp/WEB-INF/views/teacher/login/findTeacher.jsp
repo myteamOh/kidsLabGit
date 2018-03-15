@@ -35,30 +35,12 @@
 					<td><input type="text" id="teacher_phone" name="teacher_phone"
 						maxlength="11"></td>
 				</tr>
+				<tr id="msg">
+				</tr>
 				<tr>
 					<td colspan="2"><input type="button" id="findIdBtn"
 						value="아이디 찾기"></td>
 				</tr>
-				<tr>
-					<td colspan="2"><span id="msg"></span></td>
-				</tr>
-				<c:choose>
-					<c:when test="${msg == 'success' }">
-						<tr>
-							<td colspan="2" align="center">아이디</td>
-						</tr>
-						<c:forEach var="teacher" items="${teacherIdList }">
-							<tr>
-								<td>${teacher.teacher_id }</td>
-							</tr>
-						</c:forEach>
-					</c:when>
-					<c:when test="${msg == 'fail'}">
-						<tr>
-							<td colspan="2" style="color: red;">입력한 정보와 일치하는 아이디가 없습니다.</td>
-						</tr>
-					</c:when>
-				</c:choose>
 			</table>
 		</form>
 	</div>
