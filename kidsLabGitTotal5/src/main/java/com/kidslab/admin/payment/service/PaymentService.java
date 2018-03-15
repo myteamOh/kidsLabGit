@@ -15,4 +15,7 @@ public interface PaymentService {
 	// 결제상태 수정
 	public int paymentUpdate(PaymentVO pvo);
 
+	// 결제정보 상세보기
+	public PaymentVO paymentDetail(PaymentVO pvo);
+
 }

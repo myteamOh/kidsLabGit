@@ -33,4 +33,10 @@ public class PaymentDaoImpl implements PaymentDao {
 		return (Integer) session.update("paymentUpdate", pvo);
 	}
 
+	@Override
+	public PaymentVO paymentDetail(PaymentVO pvo) {
+		// TODO Auto-generated method stub
+		return (PaymentVO) session.selectOne("paymentDetail", pvo);
+	}
+
 }

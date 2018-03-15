@@ -144,136 +144,136 @@
 </head>
 <body>
 	<div class="contentContainer container-fluid" id="payment">
-	<c:if test="${adminLogin.userId != null and adminLogin.userId != '' }">
-		<div class="contentTit">
-			<h3>결제 리스트</h3>
-		</div>
-		<%-- ===============수정 을 위한 FORM ============ --%>
-		<form name="paymentUpdateForm" id="paymentUpdateForm">
-			<input type="hidden" name="requestCourse_no" id="requestCourse_no">
-			<input type="hidden" name="page" value="${paymentData.page }">
-			<input type="hidden" name="pageSize" value="${paymentData.pageSize }">
-		</form>
-		<%-- ==============검색 기능 시작 ====================== --%>
-		<div id="paymentSearch">
-			<form id="p_search" name="p_search">
-				<input type="hidden" id="page" name="page"
-					value="${paymentData.page }">
-				<table summary="검색">
-					<tr>
-						<td id="btd1"><label>검색조건</label> <select id="search"
-							name="search">
-								<option value="all">전체</option>
-								<option value="parent_name">학부모명</option>
-								<option value="student_name" class="student">학생명</option>
-								<option value="course_name">강의명</option>
-						</select> <input type="text" name="keyword" id="keyword"
-							value="전체 데이터 조회합니다."> <input type="button" value="검색"
-							id="searchData"></td>
-						<td id="btd3">결제상태<select id="requestCourse_paymentStatus"
-							name="requestCourse_paymentStatus">
-								<option value="all" class="paymentClass">전체</option>
-								<option value="paymentwaiting">결제대기</option>
-								<option value="paymentcomplete">결제완료</option>
-								<option value="refundwaiting">환불대기</option>
-								<option value="refundcomplete">환불완료</option>
-						</select></td>
-						<td id="btd2">한페이지에 <select id="pageSize" name="pageSize">
-								<option value="1">1줄</option>
-								<option value="3">3줄</option>
-								<option value="7">7줄</option>
-								<option value="10">10줄</option>
-						</select>
-						</td>
-					</tr>
-				</table>
+		<c:if test="${adminLogin.userId != null and adminLogin.userId != '' }">
+			<div class="contentTit">
+				<h3>결제 리스트</h3>
+			</div>
+			<%-- ===============수정 을 위한 FORM ============ --%>
+			<form name="paymentUpdateForm" id="paymentUpdateForm">
+				<input type="hidden" name="requestCourse_no" id="requestCourse_no">
+				<input type="hidden" name="page" value="${paymentData.page }">
+				<input type="hidden" name="pageSize"
+					value="${paymentData.pageSize }">
 			</form>
-		</div>
+			<%-- ==============검색 기능 시작 ====================== --%>
+			<div id="paymentSearch">
+				<form id="p_search" name="p_search">
+					<input type="hidden" id="page" name="page"
+						value="${paymentData.page }">
+					<table summary="검색">
+						<tr>
+							<td id="btd1"><label>검색조건</label> <select id="search"
+								name="search">
+									<option value="all">전체</option>
+									<option value="parent_name">학부모명</option>
+									<option value="student_name" class="student">학생명</option>
+									<option value="course_name">강의명</option>
+							</select> <input type="text" name="keyword" id="keyword"
+								value="전체 데이터 조회합니다."> <input type="button" value="검색"
+								id="searchData"></td>
+							<td id="btd3">결제상태<select id="requestCourse_paymentStatus"
+								name="requestCourse_paymentStatus">
+									<option value="all" class="paymentClass">전체</option>
+									<option value="paymentwaiting">결제대기</option>
+									<option value="paymentcomplete">결제완료</option>
+									<option value="refundwaiting">환불대기</option>
+									<option value="refundcomplete">환불완료</option>
+							</select></td>
+							<td id="btd2">한페이지에 <select id="pageSize" name="pageSize">
+									<option value="1">1줄</option>
+									<option value="3">3줄</option>
+									<option value="7">7줄</option>
+									<option value="10">10줄</option>
+							</select>
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
 		</c:if>
 		<%-- =====================검색 기능 종료 ================== --%>
 
 		<%-- =============== 리스트 시작 ================= --%>
 		<c:if test="${adminLogin.userId != null and adminLogin.userId != '' }">
-		<div id="paymentList" class="container-fluid">
-			<table summary="결제 리스트" class="table-striped table-hover">
-				<colgroup>
-					<%-- <col width="10%" />
+			<div id="paymentList" class="container-fluid">
+				<table summary="결제 리스트" class="table-striped table-hover">
+					<colgroup>
+						<%-- <col width="10%" />
 					<col width="62%" />
 					<col width="15%" />
 					<col width="13%" /> --%>
-				</colgroup>
-				<thead>
-					<tr>
-						<th>수강신청 번호</th>
-						<th>학부모명</th>
-						<th>학생명</th>
-						<th>강의명</th>
-						<th>예금주</th>
-						<th>결제금액</th>
-						<th>환불금액</th>
-						<th>결제날짜</th>
-						<th>결제상태</th>
-					</tr>
-				</thead>
-				<tbody id="list">
-					<!-- 데이터 출력 -->
-					<c:choose>
-						<c:when test="${not empty paymentList}">
-							<c:forEach var="payment" items="${paymentList}"
-								varStatus="status">
-								<tr class="tac" data-num="${payment.requestCourse_no}">
-									<td>${payment.requestCourse_no }</td>
-									<td>${payment.parent_name}</td>
-									<td class="student">${payment.student_name}</td>
-									<td class="course">${payment.course_name}</td>
-									<td>${payment.requestCourse_accountHolder }</td>
-									<td>${payment.requestCourse_payAmount}</td>
-									<td>${payment.requestCourse_refundCharge }</td>
-									<td>${payment.requestCourse_paymentDate}</td>
-									<td>${payment.requestCourse_paymentStatus}</td>
-									<c:choose>
-										<c:when
-											test="${payment.requestCourse_paymentStatus == '결제대기'}">
-											<td>${payment.requestCourse_paymentStatus}<br> <input
-												type="button" id="registBtn" name="registBtn"
-												class="registBtn" value="수정"> <input type="button"
-												id="registdeleteBtn" name="deleteBtn" class="deleteBtn"
-												value="삭제">
-											</td>
-										</c:when>
-										<c:when
-											test="${payment.requestCourse_paymentStatus == '환불대기'}">
-											<td>${payment.requestCourse_paymentStatus}<br> <input
-												type="button" id="registBtn" name="registBtn"
-												class="registBtn" value="수정"> <input type="button"
-												id="registdeleteBtn" name="deleteBtn" class="deleteBtn"
-												value="삭제">
-											</td>
-										</c:when>
-										<c:otherwise>
-											<td>${payment.requestCourse_paymentStatus }</td>
-										</c:otherwise>
-									</c:choose>
+					</colgroup>
+					<thead>
+						<tr>
+							<th>수강신청 번호</th>
+							<th>학부모명</th>
+							<th>학생명</th>
+							<th>강의명</th>
+							<th>예금주</th>
+							<th>결제금액</th>
+							<th>환불금액</th>
+							<th>결제날짜</th>
+							<th>결제상태</th>
+						</tr>
+					</thead>
+					<tbody id="list">
+						<!-- 데이터 출력 -->
+						<c:choose>
+							<c:when test="${not empty paymentList}">
+								<c:forEach var="payment" items="${paymentList}"
+									varStatus="status">
+									<tr class="tac" data-num="${payment.requestCourse_no}">
+										<td>${payment.requestCourse_no }</td>
+										<td>${payment.parent_name}</td>
+										<td class="student">${payment.student_name}</td>
+										<td class="course">${payment.course_name}</td>
+										<td>${payment.requestCourse_accountHolder }</td>
+										<td>${payment.requestCourse_payAmount}</td>
+										<td>${payment.requestCourse_refundCharge }</td>
+										<td>${payment.requestCourse_paymentDate}</td>
+										<c:choose>
+											<c:when
+												test="${payment.requestCourse_paymentStatus == '결제대기'}">
+												<td>${payment.requestCourse_paymentStatus}<br> <input
+													type="button" id="registBtn" name="registBtn"
+													class="registBtn" value="수정"> <input type="button"
+													id="registdeleteBtn" name="deleteBtn" class="deleteBtn"
+													value="삭제">
+												</td>
+											</c:when>
+											<c:when
+												test="${payment.requestCourse_paymentStatus == '환불대기'}">
+												<td>${payment.requestCourse_paymentStatus}<br> <input
+													type="button" id="registBtn" name="registBtn"
+													class="registBtn" value="수정"> <input type="button"
+													id="registdeleteBtn" name="deleteBtn" class="deleteBtn"
+													value="삭제">
+												</td>
+											</c:when>
+											<c:otherwise>
+												<td>${payment.requestCourse_paymentStatus }</td>
+											</c:otherwise>
+										</c:choose>
+									</tr>
+								</c:forEach>
+							</c:when>
+							<c:otherwise>
+								<tr>
+									<td colspan="9" class="tac">등록된 게시 물이 존재하지 않습니다.</td>
 								</tr>
-							</c:forEach>
-						</c:when>
-						<c:otherwise>
-							<tr>
-								<td colspan="9" class="tac">등록된 게시 물이 존재하지 않습니다.</td>
-							</tr>
-						</c:otherwise>
-					</c:choose>
-				</tbody>
-			</table>
-		</div>
+							</c:otherwise>
+						</c:choose>
+					</tbody>
+				</table>
+			</div>
 		</c:if>
 		<%-- =============== 리스트 종료 ===============--%>
 		<%-- =============== 페이지 네비게이션 시작 ============== --%>
 		<c:if test="${adminLogin.userId != null and adminLogin.userId != '' }">
-		<div id="paymentPage">
-			<tag:paging page="${param.page }" total="${total }"
-				list_size="${paymentData.pageSize }"></tag:paging>
-		</div>
+			<div id="paymentPage">
+				<tag:paging page="${param.page }" total="${total }"
+					list_size="${paymentData.pageSize }"></tag:paging>
+			</div>
 		</c:if>
 		<!-- ================ 페이지 네비게이션 종료 ============== -->
 	</div>

@@ -73,18 +73,10 @@
 			<form id="updateForm" class="form-horizontal" name="updateForm"
 				enctype="multipart/form-data">
 				<input type="hidden" id="requestCourse_no" name="requestCourse_no"
-					value="${paymentData.requestCourse_no }"><input
+					value="${updateData.requestCourse_no }"><input
 					type="hidden" id="page" name="page" value="${param.page }"><input
 					type="hidden" id="pageSize" name="pageSize"
 					value="${param.pageSize }">
-				<div class="form-group form-group-sm">
-					<label for="course_name" class="col-sm-2 control-label"></label>
-					<div class="col-sm-3">
-						<input type="text" id="requestCourse_no" name="course_name"
-							maxlength="30" class="form-control"
-							value="${updateData.course_name }" />
-					</div>
-				</div>
 				<div class="form-group form-group-sm">
 					<label for="parent_name" class="col-sm-2 control-label">학부모명</label>
 					<div class="col-sm-3">
@@ -113,7 +105,7 @@
 					<label for="requestCourse_paymentDate"
 						class="col-sm-2 control-label">결제날짜</label>
 					<div class="col-sm-3">
-						<input type="text" id="requestCourse_paymentDate"
+						<input type="date" id="requestCourse_paymentDate"
 							name="requestCourse_paymentDate" maxlength="15"
 							class="form-control"
 							value="${updateData.requestCourse_paymentDate }"
@@ -154,6 +146,8 @@
 							value="${updateData.requestCourse_refundBank }"
 							readonly="readonly">
 					</div>
+				</div>
+				<div class="form-group form-group-sm">
 					<label for="requestCourse_accountNumber"
 						class="col-sm-2 control-label">환불계좌번호</label>
 					<div class="col-sm-3">
@@ -162,24 +156,27 @@
 							value="${updateData.requestCourse_accountNumber }"
 							readonly="readonly">
 					</div>
+					<label for="requestCourse_paymentStatus"
+						class="col-sm-2 control-label">결제상태</label>
+					<div class="col-sm-3">
+						<select id="requestCourse_paymentStatus"
+							name="requestCourse_paymentStatus">
+							<c:choose>
+								<c:when
+									test="${updateData.requestCourse_paymentStatus == '결제대기' }">
+									<option value="paymentwaiting" id="paymentwaiting">결제대기</option>
+									<option value="paymentcomplete">결제완료</option>
+								</c:when>
+								<c:when
+									test="${updateData.requestCourse_paymentStatus == '환불대기' }">
+									<option value="refundwaiting" id="refundwaiting">환불대기</option>
+									<option value="refundcomplete">환불완료</option>
+								</c:when>
+							</c:choose>
+						</select>
+					</div>
 				</div>
-				<label for="requestCourse_paymentStatus"
-					class="col-sm-2 control-label">결제상태</label>
-				<div class="col-sm-3">
-					<select id="requestCourse_paymentStatus"
-						name="requestCourse_paymentStatus">
-						<c:when
-							test="${updateData.requestCourse_paymentStatus == '결제대기' }">
-							<option value="결제대기" id="paymentwaiting">결제대기</option>
-							<option value="결제완료">결제완료</option>
-						</c:when>
-						<c:when
-							test="${updateData.requestCourse_paymentStatus == '환불대기' }">
-							<option value="환불대기" id="refundwaiting">환불대기</option>
-							<option value="환불완료">환불완료</option>
-						</c:when>
-					</select>
-				</div>
+
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-6">
 						<input type="button" value="등록" id="requestInsert"

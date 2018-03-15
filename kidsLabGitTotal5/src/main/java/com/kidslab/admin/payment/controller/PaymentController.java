@@ -63,8 +63,26 @@ public class PaymentController {
 
 	}
 
+	/**************************************
+	 * 결제 확인 및 수정 폼
+	 *************************************/
+	@RequestMapping(value = "/payment/paymentUpdate", method = RequestMethod.GET)
+	public String updateForm(@ModelAttribute PaymentVO pvo, Model model) {
+
+		logger.info("updateForm 호출");
+		logger.info("pvo.getDate : " + pvo.getRequestCourse_paymentDate());
+
+		PaymentVO updateData = new PaymentVO();
+
+		updateData = paymentService.paymentDetail(pvo);
+
+		model.addAttribute("updateData", updateData);
+
+		return "admin/payment/paymentUpdate";
+	}
+
 	/***************************************
-	 * 글 수정 및 등록
+	 * 결제 수정 및 등록
 	 ***************************************/
 	@RequestMapping(value = "/payment/paymentUpdate", method = RequestMethod.POST)
 	public String paymentUpdate(@ModelAttribute PaymentVO pvo, HttpServletRequest request)

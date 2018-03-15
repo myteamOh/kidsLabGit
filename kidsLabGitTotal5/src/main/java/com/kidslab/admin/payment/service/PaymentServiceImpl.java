@@ -55,4 +55,12 @@ public class PaymentServiceImpl implements PaymentService {
 		return result;
 	}
 
+	@Override
+	public PaymentVO paymentDetail(PaymentVO pvo) {
+		// TODO Auto-generated method stub
+		PaymentVO detail = null;
+		detail = paymentDao.paymentDetail(pvo);
+		return detail;
+	}
+
 }
