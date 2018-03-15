@@ -45,7 +45,7 @@
 						<span class="caret"></span>
 				</a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="#">공지사항</a></li>
+						<li><a href="/notice/noticeList">공지사항</a></li>
 						<li><a href="#">강의 평가</a></li>
 					</ul></li>
 				<li><a href="#">FAQ</a></li>

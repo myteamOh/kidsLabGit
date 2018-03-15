@@ -9,7 +9,7 @@
 <meta name="viewport"
 	content="width=device-width,  initial-scale=1.0,  maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>1:1문의 글쓰기 폼</title>
+<title>1:1문의 글 상세 보기</title>
 <!-- Bootstrap core CSS -->
 <link href="/resources/include/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -30,38 +30,41 @@
 <script type="text/javascript"
 	src="/resources/include/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
-	$(function() {
-		//저장 버튼 클릭시 처리 이벤트
-		$("#inquiryInsertBtn").click(
-				function() {
-					// 입력값 체크
-					$("#inquiry_content").val(
-							CKEDITOR.instances.inquiry_content.getData());
-					if (!chkSubmit($('#inquiry_content'), "작성할 내용을")) {
-						return;
-					} else if (!chkSubmit($('#inquiry_title'), "제목을")) {
-						return;
-					} else {
-						$("#i_writeForm").attr({
-							"method" : "POST",
-							"action" : "/inquiry/inquiryInsert"
-						});
-						$("#i_writeForm").submit();
-					}
-
-				});
-
-		/* 리셋 버튼 클릭시 처리 이벤트 */
-
-		$("#requestReset").click(function() {
-			$("#i_writeForm").each(function() {
-				this.reset();
-			});
+	$(document).ready(function() {
+		$("#inquiryDeleteBtn").click(function() {
+			if (confirm("삭제하시겠습니까?")) {
+				document.i_detail.action = "/inquiry/inquiryDelete";
+				document.i_detail.submit();
+			}
 		});
+		$("#inquiryUpdateBtn").click(function() {
+			// 입력값 체크
 
+			if (!chkSubmit($('#inquiry_content'), "작성할 내용을")) {
+				return;
+			} else if (!chkSubmit($('#inquiry_title'), "제목을")) {
+				return;
+			} else {
+				$("#i_detail").attr({
+					"action" : "/inquiry/inquiryUpdate"
+				});
+				$("#i_detail").submit();
+			}
+
+		});
+		
+		
 		//목록 버튼클릭시 처리 이벤트
 		$("#inquiryListBtn").click(function() {
 			location.href = "/inquiry/inquiryList";
+		});
+		
+		/* 리셋 버튼 클릭시 처리 이벤트 */
+
+		$("#requestReset").click(function() {
+			$("#i_detail").each(function() {
+				this.reset();
+			});
 		});
 
 	});
@@ -81,14 +84,15 @@
 <body>
 	<div class="contentContainer">
 		<div class="well">
-			<form id="i_writeForm" class="form-horizontal" name="i_writeForm"
-				enctype="multipart/form-data">
-				<input type="hidden" name="parent_no" id="parent_no"
-					value="${Login.parent_no}">
+			<form id="i_detail" class="form-horizontal" name="i_detail"
+				enctype="multipart/form-data" method="post">
+				<input type="hidden" name="inquiry_no" id="inquiry_no"
+					value="${idto.inquiry_no}"> <input type="hidden"
+					name="parent_no" id="parent_no" value="${Login.parent_no}">
 				<div class="form-group form-group-sm">
 
 					<div class="col-1g-12">
-						<table id="inquiryWrite">
+						<table id="inquiryDetail">
 							<colgroup>
 								<col width="17%" />
 								<col width="83%" />
@@ -96,13 +100,14 @@
 							<tr>
 
 								<td><input type="text" name="inquiry_title"
-									id="inquiry_title" placeholder="제목을 입력하여 주십시오."></td>
+									id="inquiry_title" value="${idto.inquiry_title}"
+									placeholder="제목을 입력하여 주십시오." size="50"></td>
 							</tr>
 							<tr>
 
 								<td><textarea name="inquiry_content" id="inquiry_content"
 										class="ckeditor" rows="20" cols="50"
-										placeholder="문의사항을 입력하여 주십시오."></textarea></td>
+										placeholder="문의사항을 입력하여 주십시오.">${idto.inquiry_content}</textarea></td>
 							</tr>
 
 
@@ -113,15 +118,21 @@
 					</div>
 				</div>
 			</form>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-6">
-				<input type="button" value="등록" id="inquiryInsertBtn"
-					class="btn btn-default" /> <input type="button" value="재작성"
-					id="requestReset" class="btn btn-default" /> <input type="button"
-					value="목록보기" id="inquiryListBtn" class="btn btn-default" />
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-6">
+					<input type="button" value="수정" id="inquiryUpdateBtn"
+						class="btn btn-default" /><input type="button" value="삭제"
+						id="inquiryDeleteBtn" class="btn btn-default" /> <input
+						type="button" value="재작성" id="requestReset"
+						class="btn btn-default" /> <input type="button" value="목록보기"
+						id="inquiryListBtn" class="btn btn-default" />
+				</div>
 			</div>
+			<jsp:include page="../inquiryComment/inquiryReply.jsp"></jsp:include>
+			
+			
 		</div>
+	
 
 	</div>
 

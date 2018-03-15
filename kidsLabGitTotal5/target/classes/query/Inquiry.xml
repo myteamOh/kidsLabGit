@@ -4,53 +4,62 @@
 
 <mapper namespace="com.kidslab.client.inquiry.dao.InquiryDAO">
 
+
+
+
 	<!-- 1:1 문의 조회 -->
-	<select id="inquiryList" parameterType="String" resultType="inquiry">
+	<select id="inquiryList" parameterType="inquiry" resultType="inquiry">
 
 		Select
-		INQUIRY_NO,
-		PARENT_NO,
-		INQUIRY_TITLE,
-		INQUIRY_CONTENT,
-		to_char(INQUIRY_REGISTERDATE, 'YYYY-MM-DD')as INQUIRY_REGISTERDATE
+		inquiry_no,
+		parent_no,
+		inquiry_title,
+		inquiry_content,
+		to_char(inquiry_registerdate, 'yyyy-mm-dd')as inquiry_registerdate
 		from
-		BOARD_INQUIRY
+		board_inquiry
+		<where>
+			parent_no = #{parent_no}
+		</where>
+
 
 	</select>
+
+
 
 	<!-- 상세 페이지를 위한 게시물 조회 -->
 	<select id="inquiryDetail" parameterType="int" resultType="inquiry">
 
 		Select
-		INQUIRY_NO,
-		PARENT_NO,
-		INQUIRY_TITLE,
-		INQUIRY_CONTENT,
-		to_char(INQUIRY_REGISTERDATE, 'YYYY-MM-DD')as INQUIRY_REGISTERDATE
+		inquiry_no,
+		parent_no,
+		inquiry_title,
+		inquiry_content,
+		to_char(inquiry_registerdate, 'yyyy-mm-dd')as inquiry_registerdate
 		from
-		BOARD_INQUIRY
+		board_inquiry
 		where
-		INQUIRY_NO = #{INQUIRY_NO}
+		inquiry_no =
+		#{inquiry_no}
 	</select>
 
 
 	<!-- 게시물 등록 -->
 	<insert id="inquiryInsert" parameterType="inquiry">
-		<selectKey keyProperty="INQUIRY_NO" resultType="int" order="BEFORE">
-			select BOARD_INQUIRY_SEQ.nextval from dual
+		<selectKey keyProperty="inquiry_no" resultType="int" order="BEFORE">
+			select board_inquiry_seq.nextval from dual
 		</selectKey>
-		Insert into BOARD_INQUIRY (
-		INQUIRY_NO,
-		PARENT_NO,
-		INQUIRY_TITLE,
-		INQUIRY_CONTENT,
-		INQUIRY_REGISTERDATE
+		Insert into board_inquiry (
+		inquiry_no,
+		parent_no,
+		inquiry_title,
+		inquiry_content
+
 		) values(
-		#{INQUIRY_NO},
-		#{PARENT_NO},
-		#{INQUIRY_TITLE},
-		#{INQUIRY_CONTENT},
-		SYSDATE
+		#{inquiry_no},
+		#{parent_no},
+		#{inquiry_title},
+		#{inquiry_content}
 
 		)
 
@@ -58,20 +67,23 @@
 
 	<!-- 게시물 수정 -->
 	<update id="inquiryUpdate" parameterType="inquiry">
-		<selectKey keyProperty="INQUIRY_NO" resultType="int" order="BEFORE">
-			select BOARD_INQUIRY_SEQ.nextval from dual
-		</selectKey>
-		Update BOARD_INQUIRY
-		SET INQUIRY_TITLE = #{INQUIRY_TITLE},
-		INQUIRY_CONTENT = #{INQUIRY_CONTENT},
-		INQUIRY_REGISTERDATE = SYSDATE
+		Update board_inquiry
+		SET inquiry_title = #{inquiry_title},
+		inquiry_content =
+		#{inquiry_content}
+		where inquiry_no = #{inquiry_no}
 
-		where INQUIRY_NO = #{INQUIRY_NO}
-		)
 
 	</update>
 
 	<!-- 게시물 삭제 -->
+	<delete id="inquiryDelete" parameterType="inquiry">
+		DELETE FROM
+		board_inquiry
+		WHERE inquiry_no =
+		#{inquiry_no}
+	</delete>
+
 
 
 

@@ -2,9 +2,12 @@ package com.kidslab.client.inquiry.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +16,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kidslab.client.inquiry.service.InquiryService;
 import com.kidslab.client.inquiry.vo.InquiryVO;
+import com.kidslab.client.parent.vo.ParentVO;
 import com.kidslab.common.page.Paging;
 import com.kidslab.common.util.Util;
 
@@ -28,22 +34,58 @@ public class InquiryController {
 	private InquiryService inquiryService;
 
 	/**************************************************************
+	 * 1:1 문의 목록 구현하기
+	 **************************************************************/
+	@RequestMapping(value = "/inquiryList")
+	/*
+	 * public ModelAndView inquiryList(@ModelAttribute InquiryVO inquiryVO) throws
+	 * Exception { logger.info("inquiryList 호출 성공");
+	 * 
+	 * List<InquiryVO> inquiryList = inquiryService.inquiryList(inquiryVO);
+	 * 
+	 * ModelAndView mav = new ModelAndView();
+	 * mav.setViewName("inquiry/inquiryList"); // 뷰를 inquiryList.jsp로 설정
+	 * mav.addObject("inquiryList", inquiryList);
+	 * 
+	 * return mav; }
+	 */
+	public ModelAndView inquiryList(@ModelAttribute InquiryVO inquiryVO, Model model, HttpSession session)
+			throws Exception {
+		logger.info("inquiryList 호출 성공");
+		ParentVO pvo = (ParentVO) session.getAttribute("Login");
+		logger.info("parent_no : " + pvo.getParent_no());
+
+		inquiryVO.setParent_no(pvo.getParent_no());
+		List<InquiryVO> inquiryList = inquiryService.inquiryList(inquiryVO);
+
+		// ModelAndView - 모델과 뷰
+		ModelAndView mav = new ModelAndView();
+
+		mav.addObject("inquiryList", inquiryList); // 저장된 데이터를 mav에 저장
+		mav.setViewName("inquiry/inquiryList"); // 뷰를 inquiryList.jsp로 설정
+
+		return mav;
+	}
+
+	/**************************************************************
 	 * 1:1 문의 등록 폼 출력
 	 **************************************************************/
-	@RequestMapping(value = "/inquiryWriteForm.do")
+	@RequestMapping(value = "/inquiryWriteForm")
 	public String inquiryWriteForm() {
 		logger.info("/inquiry/inquiryWriteForm 호출 성공");
-		return "inquiry/inquiryWriteForm";
+		return "inquiry/inquiryWriteForm"; // inquiryWriteForm.jsp로 이동
 	}
 
 	/**************************************************************
 	 * 1:1 문의 등록 구현하기
 	 **************************************************************/
-	@RequestMapping(value = "/inquiryInsert.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/inquiryInsert", method = RequestMethod.POST)
 	public String inquiryInsert(@ModelAttribute InquiryVO inquiryVO, Model model, HttpServletRequest request)
-			throws IllegalStateException, IOException {
+			throws IllegalStateException, IOException, Exception {
 		logger.info("inquiryInsert 호출 성공");
-
+		logger.info("Parent_no : " + inquiryVO.getParent_no());
+		logger.info("inquiry_title : " + inquiryVO.getInquiry_title());
+		logger.info("inquiry_content : " + inquiryVO.getInquiry_content());
 		int result = 0;
 		String url = "";
 
@@ -52,91 +94,76 @@ public class InquiryController {
 			url = "/inquiry/inquiryList";
 		} else {
 			model.addAttribute("code", 1);
-			url = "/inquiry/inquiryInsert";
+
+			// session에 저장된 parent_id를 writer에 저장
+
+			url = "/inquiry/inquiryWriteForm";
 		}
 		return "redirect:" + url;
 	}
 
-	/**************************************************************
-	 * 1:1 문의 목록 구현하기
-	 **************************************************************/
-	@RequestMapping(value = "/inquiryList.do", method = RequestMethod.GET)
-	public String inquiryList(@ModelAttribute InquiryVO inquiryVO, Model model) {
-		logger.info("inquiryList 호출 성공");
-
-		// 페이지 세팅
-		/*
-		 * Paging.setPage(inquiryVO); logger.info("start : " +
-		 * inquiryVO.getStart_row()); logger.info("end : " + inquiryVO.getEnd_row());
-		 */
-
-		// 전체 레코드 수 구현
-		/* int total = inquiryService.inquiryListCnt(inquiryVO); */
-
-		/* logger.info("total = " + total); */
-
-		// 글번호 재설정
-		/*
-		 * int count = total - (Util.nvl(inquiryVO.getPage()) - 1) *
-		 * Util.nvl(inquiryVO.getPageSize()); logger.info("count = " + count);
-		 * logger.info("page : " + inquiryVO.getPage()); logger.info("search : " +
-		 * inquiryVO.getSearch());
-		 */
-
-		List<InquiryVO> inquiryList = inquiryService.inquiryList(inquiryVO);
-		model.addAttribute("inquiryList", inquiryList);
-		/*
-		 * model.addAttribute("count", count); model.addAttribute("total", total);
-		 */
-
-		model.addAttribute("data", inquiryVO);
-
-		return "inquiry/inquiryList";
-	}
+	/*
+	 * public String inquiryInsert(@ModelAttribute InquiryVO inquiryVO) throws
+	 * Exception { inquiryService.inquiryInsert(inquiryVO); return
+	 * "redirect:/inquiryList.do"; }
+	 */
 
 	/**************************************************************
 	 * 1:1 문의 상세보기
+	 * 
+	 * @RequestParam : get/post 방식으로 전달된 변수 1개 HttpSession 세션 객체
 	 **************************************************************/
-	@RequestMapping(value = "/inquiryDetail.do", method = RequestMethod.GET)
-	public String inquiryDetail(@ModelAttribute InquiryVO inquiryVO, Model model) {
+	@RequestMapping(value = "/inquiryDetail", method = RequestMethod.GET)
+	public ModelAndView inquiryDetail(@RequestParam int inquiry_no, HttpSession session) throws Exception {
 		logger.info("inquiryDetail 호출");
-		logger.info("inquiry_no = " + inquiryVO.getInquiry_no());
+		logger.info("inquiry_no" + inquiry_no);
+		/*
+		 * logger.info("inquiry_no = " + inquiryVO.getInquiry_no());
+		 * 
+		 * InquiryVO detail = new InquiryVO(); detail =
+		 * inquiryService.inquiryDetail(inquiryVO);
+		 * 
+		 * if (detail != null && (!detail.equals(""))) {
+		 * detail.setInquiry_content(detail.getInquiry_content().toString().replaceAll(
+		 * "\n", "<br>")); } model.addAttribute("detail", detail); return
+		 * "inquiey/inquiryDetail";
+		 */
 
-		InquiryVO detail = new InquiryVO();
-		detail = inquiryService.inquiryDetail(inquiryVO);
+		// 모델(데이터) + 뷰(화면) 같이 전달하는 객체
+		ModelAndView mav = new ModelAndView();
+		// 뷰의 이름
+		mav.setViewName("inquiry/inquiryDetail");
+		// 뷰에 전달할 데이터
+		mav.addObject("idto", inquiryService.inquiryDetail(inquiry_no));
 
-		if (detail != null && (!detail.equals(""))) {
-			detail.setInquiry_content(detail.getInquiry_content().toString().replaceAll("\n", "<br>"));
-		}
-		model.addAttribute("detail", detail);
-		return "inquiry/inquiryDetail";
+		return mav;
 	}
 
 	/**************************************************************
-	 * 
 	 * 
 	 * @param :
 	 *            InquiryVO
 	 * 
 	 **************************************************************/
-	@RequestMapping(value = "/inquiryUpdate.do", method = RequestMethod.POST)
-	public String inquiryUpdate(@ModelAttribute InquiryVO inquiryVO, HttpServletRequest request)
-			throws IllegalStateException, IOException, SQLException {
+	@RequestMapping(value = "/inquiryUpdate", method = RequestMethod.POST)
+	public String inquiryUpdate(@ModelAttribute InquiryVO inquiryVO) throws Exception {
 
 		logger.info("inquiryUpdate 호출 성공");
 
-		int result = 0;
-		String url = "";
+		/*
+		 * int result = 0; String url = "";
+		 * 
+		 * result = inquiryService.inquiryUpdate(inquiryVO); if (result == 1) {
+		 * 
+		 * url = "/inquiry/inquiryDetail.do?inquiry_no=" + inquiryVO.getInquiry_no(); }
+		 * else { url = "/inquiry/inquiryUpdateForm.do??inquiry_no=" +
+		 * inquiryVO.getInquiry_no(); }
+		 * 
+		 * return "redirect:" + url;
+		 */
+		inquiryService.inquiryUpdate(inquiryVO);
+		return "redirect:/inquiry/inquiryList";
 
-		result = inquiryService.inquiryUpdate(inquiryVO);
-		if (result == 1) {
-
-			url = "/inquiry/inquiryDetail.do?inquiry_no=" + inquiryVO.getInquiry_no();
-		} else {
-			url = "/inquiry/inquiryUpdateForm.do??inquiry_no=" + inquiryVO.getInquiry_no();
-		}
-
-		return "redirect:" + url;
 	}
 
 	/**************************************************************
@@ -144,21 +171,25 @@ public class InquiryController {
 	 * 
 	 * @throws IOException
 	 **************************************************************/
-	@RequestMapping(value = "/inquiryDelete.do")
-	public String inquiryDelete(@ModelAttribute InquiryVO inquiryVO) {
-		logger.info("inquiryDelete 호출");
+	@RequestMapping(value = "/inquiryDelete")
+	/*
+	 * public String inquiryDelete(@ModelAttribute InquiryVO inquiryVO) {
+	 * logger.info("inquiryDelete 호출");
+	 * 
+	 * int result = 0; String url = "";
+	 * 
+	 * result = inquiryService.inquiryDelete(inquiryVO.getInquiry_no());
+	 * 
+	 * if (result == 1) { url = "/inquiry/inquiryList.do"; } else { url =
+	 * "/inquiry/inquiryDetail.do?inquiry_no=" + inquiryVO.getInquiry_no(); } return
+	 * "redirect:" + url; }
+	 */
+	public String inquiryDelete(@RequestParam int inquiry_no) throws Exception {
 
-		int result = 0;
-		String url = "";
+		logger.info("inquiryDelete 호출 성공");
 
-		result = inquiryService.inquiryDelete(inquiryVO.getInquiry_no());
+		inquiryService.inquiryDelete(inquiry_no);
+		return "redirect:/inquiry/inquiryList";
 
-		if (result == 1) {
-			url = "/inquiry/inquiryList.do";
-		} else {
-			url = "/inquiry/inquiryDetail.do?inquiry_no=" + inquiryVO.getInquiry_no();
-		}
-		return "redirect:" + url;
 	}
-
 }
