@@ -41,17 +41,13 @@
 							<c:forEach var="readyCourse" items="${rcList}">
 								<!-- 결제상태는 어떻게 할까요? -->
 								<c:choose>
-									<c:when test="${readyCourse.course_status eq '모집중' && readyCourse.requestcourse_paymentstatus eq '결제완료'}">
+									<c:when
+										test="${readyCourse.course_status eq '모집중' && readyCourse.requestcourse_paymentstatus eq '결제완료'}">
 										<tr data-num="${readyCourse.requestcourse_no}">
 											<td>${readyCourse.course_name}</td>
 											<td><input type="button" value="강의계획서"></td>
 										</tr>
 									</c:when>
-									<c:otherwise>
-										<tr>
-											<td>수강대기중인 강의가 없습니다.</td>
-										</tr>
-									</c:otherwise>
 								</c:choose>
 							</c:forEach>
 						</table>
@@ -64,23 +60,19 @@
 							<caption>수강중인 강의</caption>
 							<c:forEach var="studing" items="${rcList}">
 								<c:choose>
-									<c:when test="${studing.course_status eq '진행중' && studing.requestcourse_paymentstatus eq '결제완료'}">
+									<c:when
+										test="${studing.course_status eq '진행중' && studing.requestcourse_paymentstatus eq '결제완료'}">
 										<tr data-num="${studing.requestcourse_no}">
 											<td>${studing.course_name}</td>
 											<td><input type="button" value="강의페이지"></td>
 										</tr>
 									</c:when>
-									<c:otherwise>
-										<tr>
-											<td>수강진행중인 강의가 없습니다.</td>
-										</tr>
-									</c:otherwise>
 								</c:choose>
 							</c:forEach>
 						</table>
 					</div>
 				</c:when>
-				
+
 				<c:otherwise>
 					<div>
 						<div>수강중인 강의가 없습니다.</div>
