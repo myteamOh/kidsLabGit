@@ -17,4 +17,10 @@ public interface RequestCourseService {
 
 	public List<RequestCourseVO> reCourseSelectByNo(RequestCourseVO rcvo);
 
+	public int requestCourseDelete(int requestcourse_no);
+
+	public RequestCourseVO reCourseSelectOne(RequestCourseVO rcvo);
+
+	public int refundApply(RequestCourseVO rcvo);
+
 }

@@ -1,6 +1,14 @@
 package com.kidslab.client.mypage.controller;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -17,6 +25,8 @@ import com.kidslab.client.login.service.LoginService;
 import com.kidslab.client.login.vo.UserLoginVO;
 import com.kidslab.client.parent.vo.ParentVO;
 import com.kidslab.client.parentjoin.service.ParentJoinService;
+import com.kidslab.client.requestcourse.service.RequestCourseService;
+import com.kidslab.client.requestcourse.vo.RequestCourseVO;
 import com.kidslab.client.student.vo.StudentVO;
 import com.kidslab.client.studentjoin.service.StudentJoinService;
 
@@ -35,30 +45,104 @@ public class MypageController {
 	@Autowired
 	private LoginService loginService;
 
+	@Autowired
+	private RequestCourseService rcService;
+
 	/* 학부모 mypage */
 	@RequestMapping(value = "/parentMypage.do", method = RequestMethod.GET)
 	public String parentMypage(@ModelAttribute ParentVO pvo, Model model, HttpSession session) {
 
 		logger.info("학부모 mypage 호출");
 
-		System.out.println(pvo.getParent_no());
-
 		pvo = (ParentVO) session.getAttribute("Login");
 
-		System.out.println("no" + pvo.getParent_no());
+		RequestCourseVO rcvo = new RequestCourseVO();
 
 		List<StudentVO> studentList = studentJoinService.studentList(pvo.getParent_no());
 
-		model.addAttribute("stuList", studentList);
+		/*--------------------------------------기본---------------------------------------------*/
+
+		List<RequestCourseVO> requestCourseList = new ArrayList<>();
+
+		Map<StudentVO, List<RequestCourseVO>> rcListMap = new LinkedHashMap<>();
+
+		for (int i = 0; i < studentList.size(); i++) {
+			rcvo.setStudent_no(studentList.get(i).getStudent_no());
+			requestCourseList = rcService.reCourseSelectByNo(rcvo);
+			rcListMap.put(studentList.get(i), requestCourseList);
+		}
+
+		model.addAttribute("rcListMap", rcListMap);
+
+		/*--------------------------------------이하 실험-----------------------------------------*/
+
+		/*
+		 * RequestCourseVO testrcvo = new RequestCourseVO();
+		 * 
+		 * String[] cstatus = { "모집중", "진행중" }; String[] rcstatus = { "결제대기", "결제완료" };
+		 * List<RequestCourseVO> testlistvo = new ArrayList<>(); Map<RequestCourseVO,
+		 * List<RequestCourseVO>> testbottommap = new LinkedHashMap<>();
+		 * Map<RequestCourseVO, Map<RequestCourseVO, List<RequestCourseVO>>>
+		 * testmiddelmap = new LinkedHashMap<>(); Map<StudentVO, Map<RequestCourseVO,
+		 * Map<RequestCourseVO, List<RequestCourseVO>>>> testtopmap = new
+		 * LinkedHashMap<>();
+		 * 
+		 * List<RequestCourseVO> cstatuslist = new ArrayList<>(); List<RequestCourseVO>
+		 * rcstatuslist = new ArrayList<>();
+		 * 
+		 * try { for (int m = 0; m < studentList.size(); m++) {
+		 * testrcvo.setStudent_no(studentList.get(m).getStudent_no());
+		 * System.out.println(studentList.get(m).getStudent_no());
+		 * 
+		 * testlistvo = rcService.reCourseSelectByNo(testrcvo); if (testlistvo != null)
+		 * {
+		 * 
+		 * for (int j = 0; j < cstatus.length; j++) {
+		 * testrcvo.setCourse_status(cstatus[j]); System.out.println(cstatus[j]);
+		 * 
+		 * testlistvo = rcService.reCourseSelectByNo(testrcvo); if (testlistvo != null)
+		 * {
+		 * 
+		 * for (int k = 0; k < rcstatus.length; k++) {
+		 * testrcvo.setRequestcourse_paymentstatus(rcstatus[k]);
+		 * System.out.println(rcstatus[k]);
+		 * 
+		 * testlistvo = rcService.reCourseSelectByNo(testrcvo);
+		 * 
+		 * testbottommap.put(rcstatuslist.get(k), testlistvo); }
+		 * 
+		 * }
+		 * 
+		 * testmiddelmap.put(cstatuslist.get(j), testbottommap); }
+		 * 
+		 * } testtopmap.put(studentList.get(m), testmiddelmap); }
+		 * 
+		 * model.addAttribute("testtopmap", testtopmap); } catch (Exception e) {
+		 * e.printStackTrace(); }
+		 */
 
 		return "client/mypage/mypageParent";
 	}
 
 	/* 학생 mypage */
 	@RequestMapping(value = "/studentMypage.do", method = RequestMethod.GET)
-	public String studentMypage(Model model) {
+	public String studentMypage(@ModelAttribute("RequestCourseVO") RequestCourseVO rcvo, Model model,
+			HttpSession session) {
 
 		logger.info("학생 mypage 호출");
+
+		StudentVO svo = (StudentVO) session.getAttribute("Login");
+
+		System.out.println(svo.getStudent_no());
+
+		rcvo.setStudent_no(svo.getStudent_no());
+
+		List<RequestCourseVO> requestCourseList = rcService.reCourseSelectByNo(rcvo);
+
+		logger.info(requestCourseList.size());
+		logger.info(requestCourseList.get(0).getCourse_status());
+
+		model.addAttribute("rcList", requestCourseList);
 
 		return "client/mypage/mypageStudent";
 
@@ -74,9 +158,9 @@ public class MypageController {
 	public ModelAndView modifyCheckPw(Model model) {
 
 		logger.info("비밀번호 확인창 호출!");
-		
+
 		ModelAndView mav = new ModelAndView();
-		
+
 		mav.setViewName("client/mypage/modifyCheckPw");
 
 		return mav;
@@ -100,7 +184,7 @@ public class MypageController {
 
 		if (uLogin.getUserId().contains("@")) {
 
-			logger.info("각 수정창으로!");
+			logger.info("학부모 수정창으로 시도!");
 
 			ParentVO parentLogin = loginService.loginSelect(pvo.getUserId(), pvo.getUserPw());
 
@@ -114,7 +198,7 @@ public class MypageController {
 			}
 		} else {
 
-			logger.info("각 수정창으로!");
+			logger.info("학생 수정창으로 시도!");
 
 			StudentVO studentLogin = loginService.loginSelectS(svo.getUserId(), svo.getUserPw());
 
@@ -192,6 +276,121 @@ public class MypageController {
 			return mav;
 		}
 
+	}
+
+	/* 학부모 mypage 수강 신청 취소 버튼 클릭시 처리 */
+	@RequestMapping(value = "/applyCancel.do", method = RequestMethod.POST)
+	public String applyCancel(@ModelAttribute RequestCourseVO rcvo) {
+
+		logger.info("수강 신청 취소!");
+
+		int result = 0;
+
+		result = rcService.requestCourseDelete(rcvo.getRequestcourse_no());
+
+		return "redirect:/mypage/parentMypage.do";
+
+	}
+
+	/* 학부모 mypage 수강취소, 수강포기 버튼 클릭시 처리 */
+	@RequestMapping(value = "/courseCancel.do", method = RequestMethod.POST)
+	public ModelAndView courseCancel(@ModelAttribute RequestCourseVO rcvo) {
+
+		logger.info("환불페이지로!");
+
+		ModelAndView mav = new ModelAndView();
+		RequestCourseVO vo = new RequestCourseVO();
+
+		vo = rcService.reCourseSelectOne(rcvo);
+
+		System.out.println("결제한 금액 : " + vo.getRequestcourse_payamount());
+		System.out.println("시작날짜 : " + vo.getCourse_startdate());
+		System.out.println("끝나는 날짜 : " + vo.getCourse_enddate());
+
+		/*
+		 * 시작전 전액, 1/3전: 2/3반환, 1/2전: 1/2반환, 1/2후: 반환x
+		 */
+
+		try {
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+			/* 오늘날짜 구하기 */
+			String today = formatter.format(new Date()); // 오늘날짜
+
+			Date todayDate = formatter.parse(today); // 오늘날짜 변환
+
+			/* 날짜차이 구하기 */
+			Date beginDate = formatter.parse(vo.getCourse_startdate()); // 강의 시작 날짜 변환
+			Date endDate = formatter.parse(vo.getCourse_enddate()); // 강의 종료 날짜 변환
+
+			long coursePeriod = endDate.getTime() - beginDate.getTime(); // 교습기간
+			long beginToToday = todayDate.getTime() - beginDate.getTime(); // 경과기간
+			long coursePeriodDays = coursePeriod / (24 * 60 * 60 * 1000); // 시간, 분, 초, 밀리초-(1/1000)초
+
+			long day1per3 = (long) Math.floor(coursePeriodDays / 3);
+			long half = (long) Math.floor(coursePeriodDays / 2);
+
+			System.out.println("가격확인 all : " + vo.getRequestcourse_payamount());
+			System.out.println("가격확인 2/3 : " + Math.round(vo.getRequestcourse_payamount() * 2 / 3 / 1000) * 1000);
+			System.out.println("가격확인 1/2 : " + Math.round(vo.getRequestcourse_payamount() / 2 / 1000) * 1000);
+
+			if (beginToToday <= 0) {
+				System.out.println("교습 시작 전 또는 당일 : 전액 환불");
+				vo.setRequestcourse_refundcharge(vo.getRequestcourse_payamount());
+				beginToToday = 0;
+			} else if (beginToToday < day1per3) {
+				System.out.println("1/3선 전 : 2/3환불");
+				vo.setRequestcourse_refundcharge(Math.round(vo.getRequestcourse_payamount() * 2 / 3 / 1000) * 1000);
+			} else if (beginToToday < half) {
+				System.out.println("1/2선 전 : 1/2환불");
+				vo.setRequestcourse_refundcharge(Math.round(vo.getRequestcourse_payamount() / 2 / 1000) * 1000);
+			} else {
+				System.out.println("1/2선 후 : 환불x");
+				vo.setRequestcourse_refundcharge(0);
+			}
+			beginToToday = beginToToday + 1;
+			vo.setPass_day(beginToToday + "");
+
+			System.out.println("환불금액 : " + vo.getRequestcourse_refundcharge());
+			System.out.println("경과기간 : " + beginToToday);
+			System.out.println("1/3선 : " + day1per3);
+			System.out.println("1/2선 : " + half);
+			System.out.println("현재날짜 : " + todayDate);
+			System.out.println("현재날짜getTime : " + todayDate.getTime());
+			System.out.println("시작날짜 : " + beginDate);
+			System.out.println("시작날짜getTime : " + beginDate.getTime());
+			System.out.println("종료날짜 : " + endDate);
+			System.out.println("종료날짜getTime : " + endDate.getTime());
+			System.out.println("교습기간 : " + coursePeriodDays);
+
+			/* 계산하기 위해 long값으로 변환한 데이터를 다시 날짜 객체로 변환하기 위한 방법 */
+			/*
+			 * Date curret = new Date(); long ttl = curret.getTime();
+			 * System.out.println(ttl);
+			 * 
+			 * Date today2 = new Date(ttl); String str = formatter.format(today2);
+			 * System.out.println("쨔잔 : " + str);
+			 */
+
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		mav.addObject("refundData", vo);
+		mav.setViewName("client/courseApply/courseRefund");
+
+		return mav;
+	}
+
+	/* 환불신청버튼 클릭시 처리 */
+	@RequestMapping(value = "/refundApply.do", method = RequestMethod.POST)
+	public String refundApply(@ModelAttribute RequestCourseVO rcvo) {
+		
+		logger.info("환불신청!");
+		
+		rcService.refundApply(rcvo);
+
+		return "redirect:/mypage/parentMypage.do";
 	}
 
 }

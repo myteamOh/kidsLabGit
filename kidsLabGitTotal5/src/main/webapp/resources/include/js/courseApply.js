@@ -47,6 +47,12 @@ $(function() {
 		if ($("#limitCount").val() == 0) {
 			alert("정원이 초과되어 신청할 수 없습니다.");
 			return;
+		} else if($("#idCheck").val() == ""){
+			alert("로그인후 이용해 주세요.");
+			return;
+		} else if($("#idCheck").val().indexOf("@") < 0) {
+			alert("학부모 회원만 수강신청이 가능합니다.");
+			return;
 		}
 
 		$(".applyForm").attr({

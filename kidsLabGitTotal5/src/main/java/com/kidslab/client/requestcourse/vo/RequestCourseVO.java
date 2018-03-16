@@ -7,7 +7,7 @@ public class RequestCourseVO extends CourseVO {
 	private int requestcourse_no; // 강의신청 번호
 	private String requestcourse_paymethod; // 결제방법
 	private int requestcourse_payamount; // 결제금액
-	private String requestcourse_paymentdate; // 결제일
+	private String requestcourse_paymentdate; // 수강신청일
 	private String requestcourse_paymentstatus; // 결제상태
 	private String requestcourse_accountholder; // 예금주
 	private String requestcourse_accountnumber; // 계좌번호
@@ -20,6 +20,8 @@ public class RequestCourseVO extends CourseVO {
 	private String student_name; // 학생 이름
 
 	private String bank_and_account; // 선택은행 및 계좌번호
+
+	private String pass_day; // 경과일
 
 	public RequestCourseVO() {
 		super();
@@ -156,6 +158,14 @@ public class RequestCourseVO extends CourseVO {
 
 	public void setBank_and_account(String bank_and_account) {
 		this.bank_and_account = bank_and_account;
+	}
+
+	public String getPass_day() {
+		return pass_day;
+	}
+
+	public void setPass_day(String pass_day) {
+		this.pass_day = pass_day;
 	}
 
 	@Override

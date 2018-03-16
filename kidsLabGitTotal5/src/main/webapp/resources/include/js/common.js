@@ -37,7 +37,7 @@ function checkForm(item, msg) {
 
 function formCheck(main, item, msg) {
 	if (main.val().replace(/\s/g, "") == "") {
-		item.css("color", "#000099").html(msg + " 입력해 주세요");
+		item.css("color", "#FF0000").html(msg + " 입력해 주세요");
 		main.val("");
 		return false;
 	} else {
@@ -154,13 +154,14 @@ function spaceDelete(obj) { // 공백사용못하게
 	}
 // onkeyup="spaceDelete(this);" onchange="spaceDelete(this);"
 }
-/* index (0:한글이름, 1:email(학부모 아이디), 2:비밀번호, 3:연락처, 4:주소, 5:학생 아이디, 6:학교이름 */
+/* index (0:한글이름, 1:email(학부모 아이디), 2:비밀번호, 3:연락처, 4:주소, 5:학생 아이디, 6:학교이름, 7:계좌번호 */
 var regular = [
 	/^[가-힣]{2,5}$/,
 	/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/,
 	/^[0-9a-zA-Z]\S{7,12}$/, /^\d{11}$/,
 	/^[0-9a-zA-Z가-힣]([@]*[0-9a-zA-Z가-힣\s]){5,50}$/, /^[0-9a-zA-Z]{6,15}$/,
-	/^[가-힣]{5,20}$/ ];
+	/^[가-힣]{5,20}$/,
+	/^\d{10,14}$/];
 
 function regularExpression(index, data, printarea, msg) {
 	var select_regular = new RegExp(regular[index]); // 해당 index번호 정규식

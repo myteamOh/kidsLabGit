@@ -4,6 +4,43 @@
 
 <mapper namespace="com.kidslab.client.requestcourse.dao.RequestCourseDao">
 
+	<!-- 통합조회 -->
+	<sql id="totalSearch">
+		SELECT rc.parent_no, parent_id, parent_name, parent_phone,
+		parent_termsagree, parent_kakaoagree, parent_smsagree,
+		parent_emailagree, parent_status, to_char(parent_registerdate,
+		'yyyy-mm-dd') AS parent_registerdate,
+		parent_knowroute, parent_address,
+		rc.student_no, student_id, student_name, student_gender,
+		student_school, to_char(student_birthday, 'yyyy-mm-dd') AS
+		student_birthday, student_reference,
+		to_char(student_registerdate,
+		'yyyy-mm-dd') AS student_registerdate, student_evaluation,
+		student_status,
+		requestcourse_no, requestcourse_paymethod,
+		requestcourse_payamount,
+		to_char(requestcourse_paymentdate,
+		'yyyy-mm-dd') AS requestcourse_paymentdate,
+		requestcourse_paymentstatus, requestcourse_accountholder,
+		requestcourse_accountnumber, requestcourse_refundcharge,
+		requestcourse_refundbank, rc.course_no, course_summary, course_name,
+		course_subject, course_level, course_time, course_totalperson,
+		course_room, course_plan, course_pay,
+		to_char(course_registerdate,
+		'yyyy-mm-dd') AS course_registerdate, course_status,
+		to_char(course_startdate,'yyyy-mm-dd') AS course_startdate,
+		to_char(course_enddate,'yyyy-mm-dd') AS course_enddate, c.teacher_no,
+		teacher_id, teacher_name, teacher_phone, teacher_photo,
+		to_char(teacher_registerdate, 'yyyy-mm-dd') AS
+		teacher_registerdate,
+		teacher_thumb, teacher_status
+		FROM parent p INNER JOIN student s ON
+		p.parent_no = s.parent_no INNER JOIN requestcourse rc ON s.student_no
+		= rc.student_no INNER JOIN course c ON rc.course_no =
+		c.course_no INNER
+		JOIN teacher t ON c.teacher_no = t.teacher_no
+	</sql>
+
 	<!-- 강의정보 기본 조회 -->
 	<sql id="courseSearch">
 		select course_no,
@@ -119,18 +156,68 @@
 
 	<select id="reCourseSelectByNo" parameterType="requestCourse"
 		resultType="requestCourse">
-		SELECT *
-		FROM parent p
-		INNER JOIN student s ON p.parent_no =
-		s.parent_no
-		INNER JOIN requestcourse rc ON s.student_no = rc.student_no
-		INNER JOIN course c ON rc.course_no = c.course_no
-		INNER JOIN teacher t
-		ON c.teacher_no = t.teacher_no
-		WHERE rc.parent_no =
-		#{parent_no} and
-		rc.student_no = #{student_no} and rc.course_no =
-		#{course_no}
+		<include refid="totalSearch"></include>
+		<where>
+			<choose>
+				<when test="parent_no != null and parent_no != ''">
+					rc.parent_no = #{parent_no}
+					<if test="student_no != null and student_no != ''">
+						and rc.student_no = #{student_no}
+						<if test="course_no != null and course_no != ''">
+							and rc.course_no = #{course_no}
+						</if>
+					</if>
+				</when>
+
+				<when test="student_no != null and student_no != ''">
+					rc.student_no = #{student_no}
+					<if test="course_status != null and course_status != ''">
+						and c.course_status = #{course_status}
+						<if
+							test="requestcourse_paymentstatus != null and requestcourse_paymentstatus != ''">
+							and requestcourse_paymentstatus =
+							#{requestcourse_paymentstatus}
+						</if>
+					</if>
+				</when>
+
+				<when test="requestcourse_no != null and requestcourse_no != ''">
+					requestcourse_no = #{requestcourse_no}
+				</when>
+
+				<otherwise>
+					rc.student_no = #{student_no}
+				</otherwise>
+			</choose>
+		</where>
+		ORDER BY requestcourse_no ASC
 	</select>
+
+	<delete id="requestCourseDelete" parameterType="int">
+		DELETE FROM
+		requestcourse
+		WHERE requestcourse_no = #{requestcourse_no}
+	</delete>
+
+	<select id="reCourseSelectOne" parameterType="requestCourse"
+		resultType="requestCourse">
+		<include refid="totalSearch"></include>
+		WHERE requestcourse_no =
+		#{requestcourse_no}
+		ORDER BY requestcourse_no
+		ASC
+	</select>
+
+	<update id="refundApply" parameterType="requestCourse">
+		UPDATE requestcourse
+		SET
+		requestcourse_refundbank = #{requestcourse_refundbank},
+		requestcourse_accountnumber = #{requestcourse_accountnumber},
+		requestcourse_accountholder = #{requestcourse_accountholder},
+		requestcourse_refundcharge = #{requestcourse_refundcharge},
+		requestcourse_paymentstatus = '환불신청'
+		WHERE
+		requestcourse_no = #{requestcourse_no}
+	</update>
 
 </mapper>

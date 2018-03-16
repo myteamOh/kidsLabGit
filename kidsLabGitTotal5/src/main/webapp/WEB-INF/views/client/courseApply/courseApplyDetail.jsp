@@ -21,6 +21,7 @@
 				value="${courseDetail.course_no}">
 		</form>
 		<input type="hidden" id="limitCount" value="${courseCount}">
+		<input type="hidden" id="idCheck" value="${Login.userId}">
 
 		<div>
 			<h4>${courseDetail.course_name}</h4>
@@ -50,7 +51,7 @@
 		<form>
 			<div>
 				<input type="button" class="applyBtn"
-					value="수강신청(${courseDetail.course_totalperson} / ${courseCount})">
+					value="수강신청(정원 : ${courseDetail.course_totalperson} / 신청가능 인원 : ${courseCount})">
 				<input type="button" class="toListBtn" value="목록으로">
 			</div>
 		</form>

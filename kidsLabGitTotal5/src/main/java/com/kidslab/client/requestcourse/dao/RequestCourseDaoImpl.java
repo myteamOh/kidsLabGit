@@ -39,10 +39,27 @@ public class RequestCourseDaoImpl implements RequestCourseDao {
 		return session.insert("requestCourseInsert", rcvo);
 	}
 
-	/*번호로 신청정보 가져오기*/
+	/* 번호로 신청정보 가져오기 */
 	@Override
 	public List<RequestCourseVO> reCourseSelectByNo(RequestCourseVO rcvo) {
 		return session.selectList("reCourseSelectByNo", rcvo);
+	}
+
+	/* 강의신청 취소 처리 */
+	@Override
+	public int requestCourseDelete(int requestcourse_no) {
+		return session.delete("requestCourseDelete", requestcourse_no);
+	}
+
+	@Override
+	public RequestCourseVO reCourseSelectOne(RequestCourseVO rcvo) {
+		return session.selectOne("reCourseSelectOne", rcvo);
+	}
+
+	/*환불신청 처리*/
+	@Override
+	public int refundApply(RequestCourseVO rcvo) {
+		return session.update("refundApply", rcvo);
 	}
 
 }
