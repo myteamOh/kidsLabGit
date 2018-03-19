@@ -48,6 +48,7 @@
 		student_status, parent_no
 		FROM student
 		WHERE parent_no = #{parent_no}
+		ORDER BY student_no ASC
 	</select>
 
 </mapper>
