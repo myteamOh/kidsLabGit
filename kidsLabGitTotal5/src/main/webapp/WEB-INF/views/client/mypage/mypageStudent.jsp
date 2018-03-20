@@ -16,12 +16,12 @@
 
 	<section>
 		<div>
-		<!-- pw 체크를 위한 form -->
+			<!-- pw 체크를 위한 form -->
 			<form id="pwCheckForm">
 				<input type="hidden" id="studentNum" name="student_no"
 					value="${Login.student_no}">
 			</form>
-			
+
 			<!-- 강의페이지를 위한 폼 -->
 			<form id="coursePageForm">
 				<input type="hidden" id="courseNum" name="course_no">
@@ -51,7 +51,8 @@
 										test="${readyCourse.course_status eq '모집중' && readyCourse.requestcourse_paymentstatus eq '결제완료'}">
 										<tr data-num="${readyCourse.requestcourse_no}">
 											<td>${readyCourse.course_name}</td>
-											<td><input type="button" class="coursePlan" value="강의계획서"></td>
+											<td><input type="button" class="coursePlan"
+												value="강의계획서"></td>
 										</tr>
 									</c:when>
 								</c:choose>
@@ -64,12 +65,12 @@
 					<div>
 						<table>
 							<caption>수강중인 강의</caption>
-							<c:forEach var="studing" items="${rcList}">
+							<c:forEach var="studying" items="${rcList}">
 								<c:choose>
 									<c:when
-										test="${studing.course_status eq '진행중' && studing.requestcourse_paymentstatus eq '결제완료'}">
-										<tr data-num="${studing.requestcourse_no}">
-											<td>${studing.course_name}</td>
+										test="${studying.course_status eq '진행중' && studying.requestcourse_paymentstatus eq '결제완료'}">
+										<tr data-num="${studying.course_no}">
+											<td>${studying.course_name}</td>
 											<td><input type="button" class="coursePage" value="강의페이지"></td>
 										</tr>
 									</c:when>
