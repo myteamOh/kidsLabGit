@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kidslab.admin.course.vo.CourseVO;
+import com.kidslab.client.parent.vo.ParentVO;
 import com.kidslab.client.requestcourse.dao.RequestCourseDao;
 import com.kidslab.client.requestcourse.vo.RequestCourseVO;
 
@@ -126,6 +127,27 @@ public class RequestCourseServiceImpl implements RequestCourseService {
 		logger.info("환불신청 처리!");
 		
 		int result = requestCourseDao.refundApply(rcvo);
+		
+		return result;
+	}
+	
+	/*학부모 탈퇴가능여부 확인*/
+	@Override
+	public int withdrawCheck(ParentVO pvo) {
+		
+		int result = 0;
+		
+		List<RequestCourseVO> checkList = requestCourseDao.withdrawCheck(pvo);
+		
+		System.out.println("size : " + checkList.size());
+		
+		if(checkList.isEmpty()) {
+			result = 1;
+		} else if (!requestCourseDao.withdrawCheck(pvo).isEmpty()) {
+			result = 2;
+		}
+		
+		System.out.println("result : " + result);
 		
 		return result;
 	}

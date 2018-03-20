@@ -191,11 +191,9 @@ table {
 															<c:when
 																test="${studying.course_status eq '진행중' && studying.requestcourse_paymentstatus eq '결제완료'}">
 
-																<tr data-num="${readyCourse.requestcourse_no}">
+																<tr data-num="${studying.requestcourse_no}">
 																	<td>${studying.course_name}</td>
-																	<td><input type="button" class="stuEvaluation"
-																		value="학생 평가"></td>
-																	<td><input type="button" class="courseCancel"
+																	<td colspan="2"><input type="button" class="courseCancel"
 																		value="수강 포기"></td>
 																</tr>
 															</c:when>

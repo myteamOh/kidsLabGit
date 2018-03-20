@@ -50,5 +50,11 @@
 		WHERE parent_no = #{parent_no}
 		ORDER BY student_no ASC
 	</select>
+	
+	<update id="studentWithdraw" parameterType="parent">
+		UPDATE student SET
+		student_status = '탈퇴'
+		WHERE parent_no = #{parent_no}
+	</update>
 
 </mapper>

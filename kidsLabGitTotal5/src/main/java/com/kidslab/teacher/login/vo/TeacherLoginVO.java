@@ -1,6 +1,8 @@
 package com.kidslab.teacher.login.vo;
 
-public class TeacherLoginVO extends LoginHistory {
+import com.kidslab.common.vo.CommonVO;
+
+public class TeacherLoginVO extends CommonVO {
 	private String teacher_id = "";
 	private String teacher_password = "";
 	private String teacher_name = "";

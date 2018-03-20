@@ -1,6 +1,8 @@
 package com.kidslab.client.login.vo;
 
-public class UserLoginVO {
+import com.kidslab.common.vo.CommonVO;
+
+public class UserLoginVO extends CommonVO {
 
 	private String userId; // 사용자 ID
 	private String userPw; // 사용자 PW

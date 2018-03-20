@@ -3,6 +3,7 @@ package com.kidslab.client.requestcourse.service;
 import java.util.List;
 
 import com.kidslab.admin.course.vo.CourseVO;
+import com.kidslab.client.parent.vo.ParentVO;
 import com.kidslab.client.requestcourse.vo.RequestCourseVO;
 
 public interface RequestCourseService {
@@ -22,5 +23,7 @@ public interface RequestCourseService {
 	public RequestCourseVO reCourseSelectOne(RequestCourseVO rcvo);
 
 	public int refundApply(RequestCourseVO rcvo);
+	
+	public int withdrawCheck(ParentVO pvo);
 
 }

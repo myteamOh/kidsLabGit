@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+body {
+	width: 1010px;
+	height: auto;
+	margin: auto;
+	margin-top: 100px;
+}
+
+aside {
+	width: 200px;
+	float: left;
+	background-color: #CEFBC9;
+}
+
+aside>ul {
+	list-style: none;
+}
+
+li:active {
+	color: green;
+}
+
+section {
+	width: 800px;
+	float: left;
+	background-color: #DAD9FF;
+}

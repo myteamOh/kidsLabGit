@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kidslab.client.common.vo.UserSecurity;
+import com.kidslab.client.parent.vo.ParentVO;
 import com.kidslab.client.parentjoin.dao.ParentJoinDao;
 import com.kidslab.client.student.vo.StudentVO;
 import com.kidslab.client.studentjoin.dao.StudentJoinDao;
@@ -105,6 +106,17 @@ public class StudentJoinServiceImpl implements StudentJoinService {
 		studentList = studentJoinDao.studentList(parentNum);
 		
 		return studentList;
+	}
+	
+	/*학생 탈퇴 처리*/
+	@Override
+	public int studentWithdraw(ParentVO pvo) {
+		
+		logger.info("학생 탈퇴 처리");
+		
+		int result = studentJoinDao.studentWithdraw(pvo);
+		
+		return result;
 	}
 
 }

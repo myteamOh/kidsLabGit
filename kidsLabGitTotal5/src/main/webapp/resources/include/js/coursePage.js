@@ -1,0 +1,7 @@
+/*$(function(){
+	
+	$(".home").click(function() {
+		
+	});
+	
+});*/

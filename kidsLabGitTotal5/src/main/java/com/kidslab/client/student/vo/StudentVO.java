@@ -12,6 +12,7 @@ public class StudentVO extends ParentVO {
 	private String student_reference; // 학생 참고사항
 	private String student_evaluation; // 학생 평가
 	private String student_registerdate;// 학생 가입일
+	private String student_status; // 학생 상태
 	private int parent_no; // 학부모 번호
 
 	public StudentVO() {
@@ -20,7 +21,7 @@ public class StudentVO extends ParentVO {
 
 	public StudentVO(int student_no, String student_name, String student_gender, String student_school,
 			String student_birthday, String student_reference, String student_evaluation, String student_registerdate,
-			int parent_no) {
+			String student_status, int parent_no) {
 		super();
 		this.student_no = student_no;
 		this.student_name = student_name;
@@ -30,6 +31,7 @@ public class StudentVO extends ParentVO {
 		this.student_reference = student_reference;
 		this.student_evaluation = student_evaluation;
 		this.student_registerdate = student_registerdate;
+		this.student_status = student_status;
 		this.parent_no = parent_no;
 	}
 
@@ -97,6 +99,14 @@ public class StudentVO extends ParentVO {
 		this.student_registerdate = student_registerdate;
 	}
 
+	public String getStudent_status() {
+		return student_status;
+	}
+
+	public void setStudent_status(String student_status) {
+		this.student_status = student_status;
+	}
+
 	public int getParent_no() {
 		return parent_no;
 	}
@@ -110,7 +120,8 @@ public class StudentVO extends ParentVO {
 		return "StudentVO [student_no=" + student_no + ", student_name=" + student_name + ", student_gender="
 				+ student_gender + ", student_school=" + student_school + ", student_birthday=" + student_birthday
 				+ ", student_reference=" + student_reference + ", student_evaluation=" + student_evaluation
-				+ ", student_registerdate=" + student_registerdate + ", parent_no=" + parent_no + "]";
+				+ ", student_registerdate=" + student_registerdate + ", student_status=" + student_status
+				+ ", parent_no=" + parent_no + "]";
 	}
 
 }

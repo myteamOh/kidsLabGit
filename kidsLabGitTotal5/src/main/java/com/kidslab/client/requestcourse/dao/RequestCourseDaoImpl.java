@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kidslab.admin.course.vo.CourseVO;
+import com.kidslab.client.parent.vo.ParentVO;
 import com.kidslab.client.requestcourse.vo.RequestCourseVO;
 
 @Repository
@@ -60,6 +61,12 @@ public class RequestCourseDaoImpl implements RequestCourseDao {
 	@Override
 	public int refundApply(RequestCourseVO rcvo) {
 		return session.update("refundApply", rcvo);
+	}
+	
+	/*탈퇴가능여부 체크*/
+	@Override
+	public List<RequestCourseVO> withdrawCheck(ParentVO pvo) {
+		return session.selectList("withdrawCheck", pvo);
 	}
 
 }

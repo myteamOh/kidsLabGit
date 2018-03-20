@@ -196,5 +196,17 @@ public class ParentJoinServiceImpl implements ParentJoinService {
 		}
 		return true;
 	}
+	
+	/*학부모 탈퇴 처리*/
+	@Override
+	public int parentWithdraw(ParentVO pvo) {
+		
+		logger.info("학부모 탈퇴처리!");
+		
+		int result = parentJoinDao.parentWithdraw(pvo);
+		
+		return result;
+		
+	}
 
 }

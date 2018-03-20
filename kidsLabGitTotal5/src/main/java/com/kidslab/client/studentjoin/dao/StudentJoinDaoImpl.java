@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kidslab.client.parent.vo.ParentVO;
 import com.kidslab.client.student.vo.StudentVO;
 
 @Repository
@@ -32,6 +33,11 @@ public class StudentJoinDaoImpl implements StudentJoinDao {
 	@Override
 	public List<StudentVO> studentList(int parentNum) {
 		return session.selectList("studentList", parentNum);
+	}
+	
+	@Override
+	public int studentWithdraw(ParentVO pvo) {
+		return session.update("studentWithdraw", pvo);
 	}
 
 }

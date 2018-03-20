@@ -16,5 +16,7 @@ public interface ParentJoinDao {
 	public int securityDelete(String userId);
 
 	public int parentUpdate(ParentVO pvo);
+	
+	public int parentWithdraw(ParentVO pvo);
 
 }

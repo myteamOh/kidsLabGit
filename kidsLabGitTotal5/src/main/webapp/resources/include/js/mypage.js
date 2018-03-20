@@ -153,5 +153,19 @@ $(function() {
 	$(".refundCancel").click(function() {
 		location.href = "/mypage/parentMypage.do";
 	});
+	
+	/*강의 페이지 클릭시 이벤트*/
+	$(".coursePage").click(function() {
+		var coursePage = $(this).parents("tr").attr("data-num");
+		
+		$("#courseNum").val(coursePage);
+		
+		$("#coursePageForm").attr({
+			"method" : "POST",
+			"action" : "/coursepage/coursemain"
+		});
+		
+		$("#coursePageForm").submit();
+	});
 
 });

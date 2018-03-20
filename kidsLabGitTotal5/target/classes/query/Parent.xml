@@ -48,6 +48,12 @@
 		WHERE
 		parent_id=#{userId}
 	</update>
+	
+	<update id="parentWithdraw" parameterType="parent">
+		UPDATE parent SET
+		parent_status = '탈퇴'
+		WHERE parent_no = #{parent_no}
+	</update>
 
 	<select id="securitySelect" parameterType="String" resultType="security">
 		SELECT user_id, salt FROM user_security WHERE

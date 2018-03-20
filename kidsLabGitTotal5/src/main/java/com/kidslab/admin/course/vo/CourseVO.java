@@ -2,9 +2,9 @@ package com.kidslab.admin.course.vo;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.kidslab.common.vo.CommonVO;
+import com.kidslab.admin.jointeacher.vo.TeacherVO;
 
-public class CourseVO extends CommonVO {
+public class CourseVO extends TeacherVO {
 	private int course_no = 0; // 강의번호
 	private int teacher_no;
 	private String course_summary;

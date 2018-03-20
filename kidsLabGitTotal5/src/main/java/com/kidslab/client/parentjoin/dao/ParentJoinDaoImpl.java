@@ -43,5 +43,10 @@ public class ParentJoinDaoImpl implements ParentJoinDao {
 	public int securityDelete(String userId) {
 		return session.delete("com.kidslab.client.parentjoin.dao.ParentJoinDao.securityDelete", userId);
 	}
+	
+	@Override
+	public int parentWithdraw(ParentVO pvo) {
+		return session.update("parentWithdraw", pvo);	
+	}
 
 }

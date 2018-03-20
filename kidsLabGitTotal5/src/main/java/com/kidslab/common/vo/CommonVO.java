@@ -1,6 +1,8 @@
 package com.kidslab.common.vo;
 
-public class CommonVO {
+import com.kidslab.teacher.login.vo.LoginHistory;
+
+public class CommonVO extends LoginHistory {
 	private String page; // 페이지 번호
 	private String pageSize; // 페이지에 보여주는 줄수
 	private String start_row; // 시작 레코드 번호

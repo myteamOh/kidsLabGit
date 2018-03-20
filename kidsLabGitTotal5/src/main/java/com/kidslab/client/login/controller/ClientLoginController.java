@@ -48,7 +48,7 @@ public class ClientLoginController {
 
 			ParentVO parentLogin = loginService.loginSelect(pvo.getUserId(), pvo.getUserPw());
 
-			if (parentLogin != null) {
+			if (parentLogin != null && parentLogin.getParent_status().equals("가입")) {
 
 				session.setAttribute("Login", parentLogin); // parentVO에 대한 정보만 들고있음. id pw 는 없음.
 				mav.addObject("data", parentLogin);
@@ -59,7 +59,7 @@ public class ClientLoginController {
 
 			StudentVO studentLogin = loginService.loginSelectS(svo.getUserId(), svo.getUserPw());
 
-			if (studentLogin != null) {
+			if (studentLogin != null && studentLogin.getStudent_status().equals("가입")) {
 
 				session.setAttribute("Login", studentLogin);
 				mav.addObject("data", studentLogin);

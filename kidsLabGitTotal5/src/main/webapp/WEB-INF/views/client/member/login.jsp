@@ -42,7 +42,7 @@
 					class="form-control" id="userPw" required="required" name="userPw">
 			</div>
 			<div>
-				<label id="loginAlert"> <c:if test="${msg == 'fail'}">아이디 또는 비밀번호가 일치하지 않거나 존재하지 않는 회원입니다.</c:if>
+				<label id="loginAlert"> <c:if test="${msg == 'fail'}">아이디 또는 비밀번호가 일치하지 않거나 탈퇴한 계정 또는 존재하지 않는 회원입니다.</c:if>
 				</label>
 			</div>
 			<br />

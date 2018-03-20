@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kidslab.client.coursepage.dao.CoursePageDao">
+
+	<select id="selectCourse" parameterType="course" resultType="course">
+		SELECT c.course_no, course_summary, course_name, course_subject, 
+		course_level, course_time, course_totalperson, course_room, 
+		course_plan, course_pay, to_char(course_registerdate, 'yyyy-mm-dd') 
+		as course_registerdate, course_status, to_char(course_startdate,'yyyy-mm-dd') 
+		as course_startdate, to_char(course_enddate,'yyyy-mm-dd') as course_enddate,
+		c.teacher_no, teacher_id, teacher_name, teacher_phone, teacher_photo, 
+		to_char(teacher_registerdate, 'yyyy-mm-dd') as teacher_registerdate, 
+		teacher_thumb, teacher_status
+		FROM course c INNER JOIN teacher t ON c.teacher_no = t.teacher_no
+		WHERE course_no = #{course_no}
+	</select>
+
+	<select id="homeCourseDataList" parameterType="courseData" resultType="courseData">
+		SELECT coursedata_no, coursedata_title, coursedata_writer, coursedata_content, 
+		to_char(coursedata_registerdate, 'yyyy-mm-dd') as coursedata_registerdate, 
+		coursedata_file, coursedata_status, course_no
+		FROM( 
+			SELECT list.*, rownum as rnum
+			FROM(
+				SELECT *
+				FROM board_coursedata
+				ORDER BY coursedata_registerdate DESC
+			) list
+		)
+		WHERE rnum BETWEEN 1 and 5
+		<choose>
+			<when test="coursedata_status == '공지사항'">
+				and coursedata_status = '공지사항'
+			</when>
+			<when test="coursedata_status == '자료실'">
+				and coursedata_status = '자료실'
+			</when>
+		</choose>
+	</select>
+
+
+</mapper>

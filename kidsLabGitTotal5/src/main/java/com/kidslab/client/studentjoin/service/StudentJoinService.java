@@ -2,6 +2,7 @@ package com.kidslab.client.studentjoin.service;
 
 import java.util.List;
 
+import com.kidslab.client.parent.vo.ParentVO;
 import com.kidslab.client.student.vo.StudentVO;
 
 public interface StudentJoinService {
@@ -15,5 +16,7 @@ public interface StudentJoinService {
 	public boolean studentUpdate(StudentVO svo);
 	
 	public List<StudentVO> studentList(int parentNum);
+	
+	public int studentWithdraw(ParentVO pvo);
 
 }
