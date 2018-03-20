@@ -81,13 +81,11 @@ public class CourseController {
 		String hour;
 		logger.info(updateData.getCourse_time());
 		if (updateData.getCourse_time().equals("미정")) {
-			logger.info("일루");
 			day = "월요일";
 			hour = "15:00 ~ 16:45";
 			logger.info("날짜 : " + day);
 			logger.info("시간 : " + hour);
 		} else {
-			logger.info("여기");
 			day = updateData.getCourse_time().substring(0, 3);
 			hour = updateData.getCourse_time().substring(4, 17);
 			logger.info("날짜 : " + day);

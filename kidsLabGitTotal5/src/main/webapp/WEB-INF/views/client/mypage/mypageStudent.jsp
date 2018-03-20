@@ -64,7 +64,8 @@
 										test="${studing.course_status eq '진행중' && studing.requestcourse_paymentstatus eq '결제완료'}">
 										<tr data-num="${studing.requestcourse_no}">
 											<td>${studing.course_name}</td>
-											<td><input type="button" value="강의페이지"></td>
+											<td><input type="button" value="강의페이지"
+												id="coursePageBtn"></td>
 										</tr>
 									</c:when>
 								</c:choose>

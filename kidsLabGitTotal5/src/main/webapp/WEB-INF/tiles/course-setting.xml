@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN" 
+"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+
+	<definition name="courseBasic"
+		template="/WEB-INF/views/template/course/contentLayout.jsp">
+		<put-attribute name="courseTitle" value="강의 페이지"></put-attribute>
+		<put-attribute name="courseHeader"
+			value="/WEB-INF/views/template/course/header.jsp"></put-attribute>
+		<put-attribute name="courseSub"
+			value="/WEB-INF/views/template/course/sub.jsp"></put-attribute>
+		<put-attribute name="courseLeft"
+			value="/WEB-INF/views/template/course/left.jsp"></put-attribute>
+		<put-attribute name="courseMain" value=""></put-attribute>
+	</definition>
+
+	<definition name="client/coursePage/*" extends="courseBasic">
+		<put-attribute name="courseSub"
+			value="/WEB-INF/views/template/course/sub.jsp"></put-attribute>
+		<put-attribute name="courseMain"
+			value="/WEB-INF/views/client/coursePageHome/{1}.jsp"></put-attribute>
+	</definition>
+
+
+
+</tiles-definitions>
