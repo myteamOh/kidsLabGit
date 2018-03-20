@@ -39,6 +39,8 @@
 			alias="requestCourse" />
 		<typeAlias type="com.kidslab.client.inquiry.vo.InquiryVO"
 			alias="inquiry" />
+		<typeAlias type="com.kidslab.client.coursedata.vo.CourseDataVO"
+			alias="courseData" />
 
 	</typeAliases>
 
