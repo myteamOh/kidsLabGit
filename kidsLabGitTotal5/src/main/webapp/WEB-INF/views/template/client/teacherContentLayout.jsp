@@ -10,7 +10,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="/resources/images/common/icon.png">
-<title><tiles:getAsString name="teacherTitle"></tiles:getAsString></title>
+<title><tiles:getAsString name="title"></tiles:getAsString></title>
 <style type="text/css">
 #cl-dashboard {
 	display: none;
@@ -46,13 +46,13 @@
 	<div class="container">
 		<div class="page-header">
 			<h1>
-				<tiles:getAsString name="teacherTitle" />
+				<tiles:getAsString name="title" />
 			</h1>
 		</div>
-		<tiles:insertAttribute name="teacherBody" />
+		<tiles:insertAttribute name="body" />
 	</div>
 	<footer class="footer">
-		<tiles:insertAttribute name="teacherFooter" />
+		<tiles:insertAttribute name="footer" />
 	</footer>
 
 	<!-- Bootstrap core JavaScript ================================================== -->

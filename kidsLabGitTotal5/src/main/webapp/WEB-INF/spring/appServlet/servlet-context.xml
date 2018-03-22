@@ -43,7 +43,7 @@
 				<!-- 관리자 페이지 추가 시 추석 해제 -->
 				<beans:value>/WEB-INF/tiles/admin-setting.xml</beans:value>
 				<!-- teacher page -->
-				<beans:value>/WEB-INF/tiles/teacher-setting.xml</beans:value>
+				<!-- <beans:value>/WEB-INF/tiles/teacher-setting.xml</beans:value> -->
 			</beans:list>
 		</beans:property>
 	</beans:bean>

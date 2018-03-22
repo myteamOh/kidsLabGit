@@ -73,43 +73,7 @@ public class MypageController {
 
 		model.addAttribute("rcListMap", rcListMap);
 
-		/*--------------------------------------이하 실험-----------------------------------------*/
-
-		/*
-		 * RequestCourseVO testrcvo = new RequestCourseVO();
-		 * 
-		 * String[] cstatus = { "모집중", "진행중" }; String[] rcstatus = { "결제대기", "결제완료" };
-		 * String[][] totalstatus = {{"모집&대기", "모집&완료"},{"진행&대기", "진행&완료"}};
-		 * List<RequestCourseVO> testlistvo = new ArrayList<>(); Map<String,
-		 * List<RequestCourseVO>> testbottommap = new LinkedHashMap<>(); Map<StudentVO,
-		 * Map<String, List<RequestCourseVO>>> testtopmap = new LinkedHashMap<>();
-		 * 
-		 * // List<RequestCourseVO> rcstatuslist = new ArrayList<>();
-		 * 
-		 * try { for (int m = 0; m < studentList.size(); m++) {
-		 * testrcvo.setStudent_no(studentList.get(m).getStudent_no());
-		 * System.out.println(studentList.get(m).getStudent_no());
-		 * 
-		 * testlistvo = rcService.reCourseSelectByNo(testrcvo);
-		 * 
-		 * if (!testlistvo.isEmpty()) { for (int j = 0; j < cstatus.length; j++) { for
-		 * (int k = 0; k < rcstatus.length; k++) {
-		 * testrcvo.setCourse_status(cstatus[j]); System.out.println(cstatus[j]);
-		 * 
-		 * testrcvo.setRequestcourse_paymentstatus(rcstatus[k]);
-		 * System.out.println(rcstatus[k]);
-		 * 
-		 * String status = totalstatus[j][k];
-		 * 
-		 * testlistvo = rcService.reCourseSelectByNo(testrcvo);
-		 * 
-		 * testbottommap.put(status, testlistvo); } } }
-		 * 
-		 * testtopmap.put(studentList.get(m), testbottommap); }
-		 * 
-		 * model.addAttribute("testtopmap", testtopmap); } catch (Exception e) {
-		 * e.printStackTrace(); }
-		 */
+		
 
 		return "client/mypage/mypageParent";
 	}

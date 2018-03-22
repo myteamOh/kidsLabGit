@@ -23,6 +23,16 @@
 			value="/WEB-INF/views/template/client/footer.jsp" />
 	</definition>
 
+	<definition name="teacherContent"
+		template="/WEB-INF/views/template/client/teacherContentLayout.jsp">
+		<put-attribute name="title" value="000 사이트" />
+		<put-attribute name="teacherHeader"
+			value="/WEB-INF/views/template/client/teacherHeader.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/template/client/footer.jsp" />
+	</definition>
+
 	<definition name="client/member/*" extends="content">
 		<put-attribute name="title" value="로그인" />
 		<put-attribute name="body"
@@ -56,6 +66,19 @@
 		<put-attribute name="title" value="공지사항" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/client/notice/{1}.jsp" />
+	</definition>
+
+	<!-- 강사 페이지 -->
+	<definition name="teacher/course/*" extends="teacherContent">
+		<put-attribute name="title" value="강의등록" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/teacher/course/{1}.jsp" />
+	</definition>
+
+	<definition name="teacher/mypage/*" extends="teacherContent">
+		<put-attribute name="title" value="마이페이지" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/teacher/mypage/{1}.jsp" />
 	</definition>
 
 </tiles-definitions> 

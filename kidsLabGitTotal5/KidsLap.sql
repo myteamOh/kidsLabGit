@@ -33,6 +33,9 @@ modify parent_emailagree varchar2(2) default 'N';
 select *
 from parent;
 
+select *
+from student;
+
 CREATE TABLE STUDENT(
 	STUDENT_NO NUMBER NOT NULL,
 	STUDENT_ID VARCHAR2(30) NOT NULL,
