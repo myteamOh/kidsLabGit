@@ -134,7 +134,8 @@
 			</if>
 		</where>
 	</select>
-
+	
+	<!-- 강의 총 카운트 -->
 	<select id="courseListCnt" parameterType="course" resultType="int">
 		<!-- Course - courseListCnt -->
 		select nvl(count(1), 0)

@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>강사 리스트</title>
+<title>학생 리스트</title>
 <!-- Bootstrap core CSS -->
 <link href="/resources/include/dist/css/bootstrap.min.css"
 	rel="stylesheet">

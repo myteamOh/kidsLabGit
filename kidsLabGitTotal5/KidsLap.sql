@@ -727,27 +727,41 @@ select requestcourse_no, parent_name, student_name,
 		where rnum between 1 and 3;
 
 select nvl(count(1), 0)
-		from(
-			select list.*, rownum as rnum
-			from(
-			select requestcourse_no, p.parent_name, s.student_name,
-		c.course_name,
-		requestcourse_paymethod,
-		requestcourse_payamount,
-		requestcourse_paymentdate,
-		requestcourse_paymentstatus,
-		requestcourse_accountholder,
-		requestcourse_accountnumber,
-		requestcourse_refundcharge,
-		requestcourse_refundbank
-		from requestcourse
-		r, parent p,
-		student s,
-		course c
-		where r.parent_no = p.parent_no and r.student_no =
-			s.student_no and
-			r.course_no = c.course_no
-				order by requestcourse_no desc
-			) list
-		)
-		
+from(
+select list.*, rownum as rnum
+from(
+select requestcourse_no, p.parent_name, s.student_name,
+c.course_name,
+requestcourse_paymethod,
+requestcourse_payamount,
+requestcourse_paymentdate,
+requestcourse_paymentstatus,
+requestcourse_accountholder,
+requestcourse_accountnumber,
+requestcourse_refundcharge,
+requestcourse_refundbank
+from requestcourse
+r, parent p,
+student s,
+course c
+where r.parent_no = p.parent_no and r.student_no =
+	s.student_no and
+	r.course_no = c.course_no
+	order by requestcourse_no desc
+) list
+)
+
+select *
+from requestcourse;
+
+select *
+from course;
+
+select course_plan
+from course c inner join requestcourse r on c.course_no = r.course_no
+where r.requestcourse_no =  24
+
+
+
+
+

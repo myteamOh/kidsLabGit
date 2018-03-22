@@ -1,5 +1,12 @@
 package com.kidslab.client.mypage.controller;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -8,15 +15,26 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.activation.MimetypesFileTypeMap;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.codec.CharEncoding;
+import org.apache.commons.io.IOUtils;
+import org.apache.ibatis.reflection.ExceptionUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -28,10 +46,18 @@ import com.kidslab.client.requestcourse.service.RequestCourseService;
 import com.kidslab.client.requestcourse.vo.RequestCourseVO;
 import com.kidslab.client.student.vo.StudentVO;
 import com.kidslab.client.studentjoin.service.StudentJoinService;
+import com.kidslab.common.file.FileViewAction;
+import com.sun.xml.internal.ws.api.model.ExceptionType;
 
 @Controller
 @RequestMapping(value = "/mypage")
 public class MypageController {
+
+	private FileViewAction fileViewAction;
+
+	public void setFileViewAction(FileViewAction fileViewAction) {
+		this.fileViewAction = fileViewAction;
+	}
 
 	Logger logger = Logger.getLogger(MypageController.class);
 
@@ -72,8 +98,6 @@ public class MypageController {
 		}
 
 		model.addAttribute("rcListMap", rcListMap);
-
-		
 
 		return "client/mypage/mypageParent";
 	}
@@ -208,11 +232,11 @@ public class MypageController {
 	public String parentWithdrawCheck(@ModelAttribute("ParentVO") ParentVO pvo) {
 
 		logger.info("탈퇴 체크!");
-		
+
 		String result = null;
-		
-		result = rcService.withdrawCheck(pvo)+"";
-		
+
+		result = rcService.withdrawCheck(pvo) + "";
+
 		System.out.println("controller result : " + result);
 
 		return result;
@@ -228,7 +252,7 @@ public class MypageController {
 		ParentVO vo = (ParentVO) session.getAttribute("Login");
 
 		pvo.setParent_no(vo.getParent_no());
-		
+
 		parentJoinService.parentWithdraw(pvo);
 		studentJoinService.studentWithdraw(pvo);
 
@@ -310,7 +334,7 @@ public class MypageController {
 
 			long coursePeriod = endDate.getTime() - beginDate.getTime(); // 교습기간
 			long beginToToday = todayDate.getTime() - beginDate.getTime(); // 경과기간
-			
+
 			long coursePeriodDays = coursePeriod / (24 * 60 * 60 * 1000); // 시간, 분, 초, 밀리초-(1/1000)초
 			long beginToTodayDays = beginToToday / (24 * 60 * 60 * 1000); // 일수
 
@@ -372,12 +396,44 @@ public class MypageController {
 	/* 환불신청버튼 클릭시 처리 */
 	@RequestMapping(value = "/refundApply.do", method = RequestMethod.POST)
 	public String refundApply(@ModelAttribute RequestCourseVO rcvo) {
-		
+
 		logger.info("환불신청!");
-		
+
 		rcService.refundApply(rcvo);
 
 		return "redirect:/mypage/parentMypage.do";
+	}
+
+	/** 파일 명 얻어오기 **/
+
+	@RequestMapping(value = "/download")
+	public ModelAndView download(String course_plan, HttpSession session) {
+		// 파일 객체 생성
+		File download = new File("C:\\downLoad\\registCourse\\" + course_plan);
+		// 출력 할 뷰 이름과 데이터의 이름을 설정하고
+		// 데이터를 설정
+		ModelAndView mav = new ModelAndView();
+		UserLoginVO uLogin = (UserLoginVO) session.getAttribute("Login");
+		if (uLogin == null) {
+			mav.setViewName("client/member/login");
+			return mav;
+		}
+		if (uLogin.getUserId().contains("@")) {
+			if (download.isFile()) {
+				return new ModelAndView("download", "downloadFile", download);
+			} else {
+				mav.setViewName("redirect:/mypage/parentMypage.do");
+				return mav;
+			}
+		} else {
+			if (download.isFile()) {
+				return new ModelAndView("download", "downloadFile", download);
+			} else {
+				mav.setViewName("redirect:/mypage/studentMypage.do");
+				return mav;
+			}
+		}
+
 	}
 
 }

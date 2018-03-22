@@ -10,7 +10,6 @@
 <script type="text/javascript"
 	src="/resources/include/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="/resources/include/js/mypage.js"></script>
-
 </head>
 <body>
 
@@ -24,7 +23,9 @@
 
 			<!-- 강의페이지를 위한 폼 -->
 			<form id="coursePageForm">
-				<input type="hidden" id="courseNum" name="course_no">
+				<input type="hidden" id="courseNum" name="course_no"> <input
+					type="hidden" id="requestcourse_no" name="requestcourse_no">
+				<input type="hidden" id="course_plan" name="course_plan">
 			</form>
 
 			<form>
@@ -51,8 +52,9 @@
 										test="${readyCourse.course_status eq '모집중' && readyCourse.requestcourse_paymentstatus eq '결제완료'}">
 										<tr data-num="${readyCourse.requestcourse_no}">
 											<td>${readyCourse.course_name}</td>
-											<td><input type="button" class="coursePlan"
-												value="강의계획서"></td>
+											<td><a
+												href="/mypage/download?course_plan=${readyCourse.course_plan }"><input
+													type="button" class="coursePlan" value="강의계획서"></a></td>
 										</tr>
 									</c:when>
 								</c:choose>
@@ -71,7 +73,8 @@
 										test="${studying.course_status eq '진행중' && studying.requestcourse_paymentstatus eq '결제완료'}">
 										<tr data-num="${studying.course_no}">
 											<td>${studying.course_name}</td>
-											<td><input type="button" class="coursePage" value="강의페이지"></td>
+											<td><a class="courseBtn"><input type="button"
+													class="coursePage" value="강의페이지"></a></td>
 										</tr>
 									</c:when>
 								</c:choose>

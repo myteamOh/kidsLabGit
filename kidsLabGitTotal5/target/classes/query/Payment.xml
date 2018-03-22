@@ -153,7 +153,8 @@
 		requestcourse_accountholder,
 		requestcourse_accountnumber,
 		requestcourse_refundcharge,
-		requestcourse_refundbank
+		requestcourse_refundbank,
+		requestcourse_paycompletedate
 		from requestcourse
 		r, parent p,
 		student s,
@@ -175,17 +176,18 @@
 		update requestcourse
 		set requestcourse_paymentstatus =
 		<if test="requestCourse_paymentStatus=='paymentwaiting'">
-			'결제대기'
+			'결제대기',
 		</if>
 		<if test="requestCourse_paymentStatus=='paymentcomplete'">
-			'결제완료'
+			'결제완료',
 		</if>
 		<if test="requestCourse_paymentStatus=='refundwaiting'">
-			'환불대기'
+			'환불대기',
 		</if>
 		<if test="requestCourse_paymentStatus=='refundcomplete'">
-			'환불완료'
+			'환불완료',
 		</if>
+		requestcourse_paycompletedate = sysdate
 		where requestcourse_no = #{requestCourse_no}
 	</update>
 

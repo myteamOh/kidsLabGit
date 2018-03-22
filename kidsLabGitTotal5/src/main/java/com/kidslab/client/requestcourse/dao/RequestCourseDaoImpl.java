@@ -57,13 +57,13 @@ public class RequestCourseDaoImpl implements RequestCourseDao {
 		return session.selectOne("reCourseSelectOne", rcvo);
 	}
 
-	/*환불신청 처리*/
+	/* 환불신청 처리 */
 	@Override
 	public int refundApply(RequestCourseVO rcvo) {
 		return session.update("refundApply", rcvo);
 	}
-	
-	/*탈퇴가능여부 체크*/
+
+	/* 탈퇴가능여부 체크 */
 	@Override
 	public List<RequestCourseVO> withdrawCheck(ParentVO pvo) {
 		return session.selectList("withdrawCheck", pvo);

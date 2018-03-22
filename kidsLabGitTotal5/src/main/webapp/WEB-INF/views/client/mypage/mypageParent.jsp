@@ -129,7 +129,8 @@ table {
 				<!-- 기본 -->
 				<c:choose>
 					<c:when test="${not empty rcListMap}">
-						<input type="button" class="" value="환불신청 및 환불내역 조회"><br>
+						<input type="button" class="" value="환불신청 및 환불내역 조회">
+						<br>
 						자녀있을때
 						<div>
 							<input type="button" id="studentJoin" value="자녀 추가"
@@ -169,11 +170,11 @@ table {
 														<c:choose>
 															<c:when
 																test="${readyCourse.course_status eq '모집중' && readyCourse.requestcourse_paymentstatus eq '결제완료'}">
-
 																<tr data-num="${readyCourse.requestcourse_no}">
 																	<td>${readyCourse.course_name}</td>
-																	<td><input type="button" class="coursePlan"
-																		value="강의계획서"></td>
+																	<td><a
+																		href="/mypage/download?course_plan=${readyCourse.course_plan }"><input
+																			type="button" class="coursePlan" value="강의계획서"></a></td>
 																	<td><input type="button" class="courseCancel"
 																		value="수강 취소"></td>
 																</tr>
@@ -193,8 +194,8 @@ table {
 
 																<tr data-num="${studying.requestcourse_no}">
 																	<td>${studying.course_name}</td>
-																	<td colspan="2"><input type="button" class="courseCancel"
-																		value="수강 포기"></td>
+																	<td colspan="2"><input type="button"
+																		class="courseCancel" value="수강 포기"></td>
 																</tr>
 															</c:when>
 														</c:choose>

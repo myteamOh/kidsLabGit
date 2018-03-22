@@ -215,14 +215,16 @@
 		requestcourse_accountnumber = #{requestcourse_accountnumber},
 		requestcourse_accountholder = #{requestcourse_accountholder},
 		requestcourse_refundcharge = #{requestcourse_refundcharge},
-		requestcourse_paymentstatus = '환불신청'
+		requestcourse_paymentstatus = '환불대기'
 		WHERE
-		requestcourse_no = #{requestcourse_no}
+		requestcourse_no =
+		#{requestcourse_no}
 	</update>
-	
+
 	<select id="withdrawCheck" parameterType="parent" resultType="requestCourse">
 		<include refid="totalSearch"></include>
-		WHERE rc.parent_no = #{parent_no} AND requestcourse_paymentstatus != '환불완료' OR rc.parent_no = #{parent_no} AND c.course_status != '강의종료'
+		WHERE rc.parent_no = #{parent_no} AND requestcourse_paymentstatus !=
+		'환불완료' OR rc.parent_no = #{parent_no} AND c.course_status != '강의종료'
 	</select>
 
 </mapper>

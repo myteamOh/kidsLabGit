@@ -23,7 +23,7 @@ public interface RequestCourseDao {
 	public RequestCourseVO reCourseSelectOne(RequestCourseVO rcvo);
 
 	public int refundApply(RequestCourseVO rcvo);
-	
+
 	public List<RequestCourseVO> withdrawCheck(ParentVO pvo);
 
 }

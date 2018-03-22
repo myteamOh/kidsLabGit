@@ -56,8 +56,9 @@ public class RequestCourseServiceImpl implements RequestCourseService {
 		List<RequestCourseVO> courseList = requestCourseDao.requestCourseCount(cvo);
 
 		for (int i = 0; i < courseList.size(); i++) {
-			if(courseList.get(i).getRequestcourse_paymentstatus().equals("결제대기") || courseList.get(i).getRequestcourse_paymentstatus().equals("결제완료")) {
-			count--;
+			if (courseList.get(i).getRequestcourse_paymentstatus().equals("결제대기")
+					|| courseList.get(i).getRequestcourse_paymentstatus().equals("결제완료")) {
+				count--;
 			} else {
 				break;
 			}
@@ -73,82 +74,82 @@ public class RequestCourseServiceImpl implements RequestCourseService {
 	public int requestCourseInsert(RequestCourseVO rcvo) {
 
 		logger.info("강의신청!");
-		
-		if(rcvo.getRequestcourse_paymethod().equals("bankbookDeposit")) {
+
+		if (rcvo.getRequestcourse_paymethod().equals("bankbookDeposit")) {
 			rcvo.setRequestcourse_paymethod("무통장입금");
 		}
 
 		requestCourseDao.requestCourseInsert(rcvo);
-		
+
 		return 1;
 	}
 
-	/*학부모번호, 학생번호, 강의번호로 가져오기*/
+	/* 학부모번호, 학생번호, 강의번호로 가져오기 */
 	@Override
 	public List<RequestCourseVO> reCourseSelectByNo(RequestCourseVO rcvo) {
-		
+
 		logger.info("번호로 강의신청 리스트정보 가져오기!");
-		
+
 		List<RequestCourseVO> list = requestCourseDao.reCourseSelectByNo(rcvo);
-		
+
 		return list;
 	}
 
-	/*수강 신청 취소시 이벤트*/
+	/* 수강 신청 취소시 이벤트 */
 	@Override
 	public int requestCourseDelete(int requestcourse_no) {
-		
+
 		int result = 0;
-		
+
 		try {
 			result = requestCourseDao.requestCourseDelete(requestcourse_no);
 		} catch (Exception e) {
 			e.printStackTrace();
 			result = 0;
 		}
-		
+
 		return result;
 	}
 
 	@Override
 	public RequestCourseVO reCourseSelectOne(RequestCourseVO rcvo) {
-		
+
 		logger.info("하나만 가져오기!");
-		
+
 		RequestCourseVO vo = requestCourseDao.reCourseSelectOne(rcvo);
-		
+
 		return vo;
 	}
 
-	/*환불신청 처리*/
+	/* 환불신청 처리 */
 	@Override
 	public int refundApply(RequestCourseVO rcvo) {
 
 		logger.info("환불신청 처리!");
-		
+
 		int result = requestCourseDao.refundApply(rcvo);
-		
+
 		return result;
 	}
-	
-	/*학부모 탈퇴가능여부 확인*/
+
+	/* 학부모 탈퇴가능여부 확인 */
 	@Override
 	public int withdrawCheck(ParentVO pvo) {
-		
+
 		int result = 0;
-		
+
 		List<RequestCourseVO> checkList = requestCourseDao.withdrawCheck(pvo);
-		
+
 		System.out.println("size : " + checkList.size());
-		
-		if(checkList.isEmpty()) {
+
+		if (checkList.isEmpty()) {
 			result = 1;
 		} else if (!requestCourseDao.withdrawCheck(pvo).isEmpty()) {
 			result = 2;
 		}
-		
+
 		System.out.println("result : " + result);
-		
+
 		return result;
 	}
 
