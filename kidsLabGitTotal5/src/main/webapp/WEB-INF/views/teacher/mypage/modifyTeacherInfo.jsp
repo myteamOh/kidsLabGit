@@ -129,8 +129,7 @@
 
 				<div>
 					<input type="button" id="teacherModifyBtn" value="수정 완료"> <input
-						type="button" id="modifyCancelBtn" value="취소"> <input
-						type="button" id="secessionBtn" value="탈퇴">
+						type="button" id="modifyCancelBtn" value="취소">
 				</div>
 
 			</form>

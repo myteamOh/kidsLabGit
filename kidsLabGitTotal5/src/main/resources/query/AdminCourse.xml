@@ -71,6 +71,7 @@
 		as course_startdate, to_char(course_enddate, 'yyyy-mm-dd') as course_enddate, 
 		a.teacher_no, b.teacher_name FROM course a, teacher b where a.teacher_no 
 		= b.teacher_no order by course_no asc </select> -->
+	<!-- 특정 강사에 대한 강의 리스트 -->
 	<select id="teacherCourseList" resultType="course"
 		parameterType="int">
 		select course_no, course_name, course_subject,
@@ -79,8 +80,30 @@
 		to_char(course_enddate, 'yyyy-mm-dd') as
 		course_enddate, teacher_no
 		from course
-		where teacher_no = ${teacher_no} and course_status = '모집중'
+		where teacher_no = ${teacher_no} and course_status = '진행중'
 	</select>
+	<!-- 특정 강의에 대한 학생 리스트 -->
+	<select id="courseStudentList" resultType="student"
+		parameterType="int">
+		select r.student_no, student_id as userId, student_name,
+		student_gender,
+		student_school,
+		to_char(student_birthday,
+		'yyyy-mm-dd')
+		as
+		student_birthday, student_reference,
+		to_char(student_registerdate,'yyyy-mm-dd') as
+		student_registerdate,
+		student_status, p.parent_name, p.parent_phone, s.parent_no,
+		c.course_name
+		from student
+		s,parent p, requestcourse r, course c
+		<where>
+			r.student_no = s.student_no and p.parent_no = r.parent_no and
+			c.course_no = r.course_no and r.course_no = #{course_no}
+		</where>
+	</select>
+
 	<!-- 페이징 후 게시물 전체 조회 -->
 	<select id="courseList" resultType="course" parameterType="course">
 		select course_no,

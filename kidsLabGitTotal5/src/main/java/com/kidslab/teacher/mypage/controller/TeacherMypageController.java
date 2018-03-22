@@ -18,6 +18,8 @@ import com.kidslab.admin.course.service.CourseService;
 import com.kidslab.admin.course.vo.CourseVO;
 import com.kidslab.admin.jointeacher.service.TeacherService;
 import com.kidslab.admin.jointeacher.vo.TeacherVO;
+import com.kidslab.client.student.vo.StudentVO;
+import com.kidslab.common.excel.ListExcelView;
 import com.kidslab.common.file.FileUploadUtil;
 import com.kidslab.teacher.login.service.TeacherLoginService;
 import com.kidslab.teacher.login.vo.TeacherLoginVO;
@@ -138,6 +140,48 @@ public class TeacherMypageController {
 		mav.addObject("teacherLogin", vo);
 		mav.setViewName("teacher/mypage/modifyTeacherInfo");
 		return mav;
+	}
+
+	// 학생정보 리스트
+	@RequestMapping(value = "/student/courseStudentList.do", method = RequestMethod.GET)
+	public String courseStudentList(@ModelAttribute TeacherLoginVO tvo, @ModelAttribute CourseVO cvo, Model model,
+			HttpSession session) {
+
+		logger.info("courseStudentList 호출");
+
+		logger.info("course_no : " + cvo.getCourse_no());
+
+		tvo = (TeacherLoginVO) session.getAttribute("teacherLogin");
+
+		if (tvo != null) {
+			logger.info("teacher_no : " + tvo.getTeacher_no());
+
+			List<StudentVO> courseStudentList = courseService.courseStudentList(cvo);
+
+			model.addAttribute("courseStudentList", courseStudentList);
+			model.addAttribute("course_no", cvo.getCourse_no());
+			return "teacher/student/courseStudentList";
+		} else {
+			return "teacher/login/login";
+		}
+
+	}
+
+	/**
+	 * 엑셀 다운로드 구현하기 참고 : ListExcelView 클래스에서 맵타입으로 Model에 접근하게 된다.
+	 */
+	@RequestMapping(value = "/student/studentExcel", method = RequestMethod.GET)
+	public ModelAndView boardExcel(@ModelAttribute StudentVO svo, @ModelAttribute CourseVO cvo) {
+		logger.info("boardExcel 호출 성공");
+
+		List<StudentVO> courseStudentList = courseService.courseStudentList(cvo);
+
+		ModelAndView mv = new ModelAndView(new ListExcelView());
+		mv.addObject("list", courseStudentList);
+		mv.addObject("template", "student.xlsx");
+		mv.addObject("file_name", "student");
+
+		return mv;
 	}
 
 }

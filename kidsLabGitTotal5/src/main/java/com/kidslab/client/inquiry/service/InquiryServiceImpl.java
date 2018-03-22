@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kidslab.admin.reply.vo.ReplyVO;
 import com.kidslab.client.inquiry.dao.InquiryDAO;
 import com.kidslab.client.inquiry.vo.InquiryVO;
 
@@ -84,6 +85,29 @@ public class InquiryServiceImpl implements InquiryService {
 	 */
 	public void inquiryDelete(int inquiry_no) throws Exception {
 		inquiryDAO.inquiryDelete(inquiry_no);
+	}
+
+	@Override
+	public List<InquiryVO> adminInquiryList(InquiryVO inquiryVO) {
+		// TODO Auto-generated method stub
+
+		List<InquiryVO> list = null;
+		list = inquiryDAO.adminInquiryList(inquiryVO);
+		return list;
+	}
+
+	@Override
+	public int replySuccessUpdate(InquiryVO ivo) {
+		// TODO Auto-generated method stub
+		int result = 0;
+		try {
+			result = inquiryDAO.replySuccessUpdate(ivo);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			result = 0;
+		}
+		return result;
 	}
 
 }

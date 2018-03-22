@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kidslab.admin.reply.vo.ReplyVO;
 import com.kidslab.client.inquiry.vo.InquiryVO;
 
 @Repository("inquiry")
@@ -49,6 +50,18 @@ public class InquiryDAOImpl implements InquiryDAO {
 	@Override
 	public void inquiryDelete(int inquiry_no) throws Exception {
 		session.delete("inquiry.inquiryDelete", inquiry_no);
+	}
+
+	@Override
+	public List<InquiryVO> adminInquiryList(InquiryVO inquiryVO) {
+		// TODO Auto-generated method stub
+		return session.selectList("noticeInquiryList", inquiryVO);
+	}
+
+	@Override
+	public int replySuccessUpdate(InquiryVO ivo) {
+		// TODO Auto-generated method stub
+		return session.update("replySuccessUpdate", ivo);
 	}
 
 }

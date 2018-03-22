@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kidslab.admin.memberlist.dao.MemberListDao">
+	<resultMap type="java.util.HashMap" id="graph"></resultMap>
+	<sql id="studentCommon">
+		select student_no, student_id, student_name,
+		student_gender,
+		student_school,
+		to_char(student_birthday,
+		'yyyy-mm-dd') as
+		student_birthday, student_reference,
+		to_char(student_registerdate,'yyyy-mm-dd') as
+		student_registerdate,
+		student_status, p.parent_name, p.parent_phone, s.parent_no
+		from student
+		s,parent p
+		where s.parent_no =
+		p.parent_no
+		<if test="search=='all'">
+				<![CDATA[ and student_name like '%' || #{keyword} || '%']]>
+			<if test="student_status=='all'">
+				and 1=1
+			</if>
+			<if test="student_status=='join'">
+				and parent_status like '가입'
+			</if>
+			<if test="student_status=='break'">
+				and parent_status like '탈퇴'
+			</if>
+		</if>
+		<if test="search=='student_name'">
+				<![CDATA[ and student_name like '%' || #{keyword} || '%']]>
+			<if test="student_status=='all'">
+				and 1=1
+			</if>
+			<if test="student_status=='join'">
+				and parent_status like '가입'
+			</if>
+			<if test="student_status=='break'">
+				and parent_status like '탈퇴'
+			</if>
+		</if>
+
+		<if test="search=='parent_name'">
+				<![CDATA[and parent_name like '%' || #{keyword} || '%']]>
+			<if test="student_status=='all'">
+				and 1=1
+			</if>
+			<if test="student_status=='join'">
+				and parent_status like '가입'
+			</if>
+			<if test="student_status=='break'">
+				and parent_status like '탈퇴'
+			</if>
+		</if>
+		<if test="search=='student_registerdate'">
+				<![CDATA[and to_char(student_registerdate, 'YYYY-MM-DD')
+				 between #{start_date} and #{end_date}]]>
+			<if test="student_status=='all'">
+				and 1=1
+			</if>
+			<if test="student_status=='join'">
+				and parent_status like '가입'
+			</if>
+			<if test="student_status=='break'">
+				and parent_status like '탈퇴'
+			</if>
+		</if>
+	</sql>
+	<sql id="parentCommon">
+		select parent_no, parent_id, parent_name, parent_phone,
+		parent_status,
+		to_char(parent_registerdate, 'yyyy-mm-dd') as parent_registerdate,
+		parent_address
+		from parent
+		<where>
+			<if test="search=='all'">
+				<![CDATA[ parent_name like '%' || #{keyword} || '%']]>
+				<if test="parent_status=='all'">
+					and 1=1
+				</if>
+				<if test="parent_status=='join'">
+					and parent_status like '가입'
+				</if>
+				<if test="parent_status=='break'">
+					and parent_status like '탈퇴'
+				</if>
+			</if>
+			<if test="search=='parent_name'">
+				<![CDATA[ parent_name like '%' || #{keyword} || '%']]>
+				<if test="parent_status=='all'">
+					and 1=1
+				</if>
+				<if test="parent_status=='join'">
+					and parent_status like '가입'
+				</if>
+				<if test="parent_status=='break'">
+					and parent_status like '탈퇴'
+				</if>
+			</if>
+			<if test="search=='parent_registerdate'">
+				<![CDATA[ to_char(parent_registerdate, 'YYYY-MM-DD')
+				 between #{start_date} and #{end_date}]]>
+				<if test="parent_status=='all'">
+					and 1=1
+				</if>
+				<if test="parent_status=='join'">
+					and parent_status like '가입'
+				</if>
+				<if test="parent_status=='break'">
+					and parent_status like '탈퇴'
+				</if>
+			</if>
+		</where>
+	</sql>
+	<sql id="teacherCommon">
+		select
+		teacher_no, teacher_id, teacher_name,
+		teacher_phone,
+		to_char(teacher_registerdate, 'yyyy-mm-dd') as teacher_registerdate,
+		teacher_status
+		from teacher
+		<where>
+			<if test="search=='all'">
+				<if test="teacher_status=='all'">
+					1=1
+				</if>
+				<if test="teacher_status=='join'">
+					teacher_status like '가입'
+				</if>
+				<if test="teacher_status=='break'">
+					teacher_status like '탈퇴'
+				</if>
+			</if>
+			<if test="search=='teacher_name'">
+			<![CDATA[ teacher_name like '%' || #{keyword} || '%']]>
+				<if test="teacher_status=='all'">
+					and 1=1
+				</if>
+				<if test="teacher_status=='join'">
+					and teacher_status like '가입'
+				</if>
+				<if test="teacher_status=='break'">
+					and teacher_status like '탈퇴'
+				</if>
+			</if>
+			<if test="search=='teacher_registerDate'">
+			<![CDATA[ to_char(teacher_registerdate, 'YYYY-MM-DD')
+				 between #{start_date} and #{end_date}]]>
+				<if test="teacher_status=='all'">
+					and 1=1
+				</if>
+				<if test="teacher_status=='join'">
+					and teacher_status like '가입'
+				</if>
+				<if test="teacher_status=='break'">
+					and teacher_status like '탈퇴'
+				</if>
+			</if>
+		</where>
+	</sql>
+
+	<!-- 페이징 후 학생 리스트 전체 조회 -->
+	<select id="studentList" parameterType="student" resultType="student">
+		select student_no, student_id as userId, student_name,
+		student_gender,
+		student_school,
+		student_birthday,
+		student_reference,
+		student_registerdate,
+		student_status, parent_name, parent_phone
+		from(
+		select list.*,
+		rownum as rnum
+		from(
+		<include refid="studentCommon"></include>
+		order by student_no asc
+		) list
+		)
+		<where>
+			<if test="start_row != null and start_row != ''">
+				<if test="end_row != null and end_row != ''">
+					rnum between #{start_row} and #{end_row}
+				</if>
+			</if>
+		</where>
+	</select>
+
+	<select id="parentList" parameterType="parent" resultType="parent">
+		select parent_no, parent_id as userId, parent_name,
+		parent_phone,
+		parent_status,
+		parent_registerdate,
+		parent_address
+		from(
+		select list.*,
+		rownum as rnum
+		from(
+		<include refid="parentCommon"></include>
+		order by parent_no asc
+		) list
+		)
+		<where>
+			<if test="start_row != null and start_row != ''">
+				<if test="end_row != null and end_row != ''">
+					rnum between #{start_row} and #{end_row}
+				</if>
+			</if>
+		</where>
+	</select>
+	<select id="teacherList" parameterType="teacher" resultType="teacher">
+		select
+		teacher_no, teacher_id, teacher_name,
+		teacher_phone,
+		teacher_registerdate,
+		teacher_status
+		from(
+		select list.*, rownum as rnum
+		from(
+		<include refid="teacherCommon"></include>
+		order by teacher_no asc
+		) list
+		)
+		<where>
+			<if test="start_row != null and start_row != ''">
+				<if test="end_row != null and end_row != ''">
+					rnum between #{start_row} and #{end_row}
+				</if>
+			</if>
+		</where>
+	</select>
+
+	<select id="studentListCnt" parameterType="student" resultType="int">
+		select nvl(count(1), 0)
+		from (
+		select list.*, rownum as rnum
+		from(
+		<include refid="studentCommon"></include>
+		order by student_no desc
+		) list
+		)
+	</select>
+
+	<select id="parentListCnt" parameterType="parent" resultType="int">
+		select nvl(count(1), 0)
+		from (
+		select list.*, rownum as rnum
+		from(
+		<include refid="parentCommon"></include>
+		order by parent_no desc
+		) list
+		)
+	</select>
+
+	<select id="teacherListCnt" parameterType="teacher" resultType="int">
+		select nvl(count(1), 0)
+		from (
+		select list.*, rownum as rnum
+		from(
+		<include refid="teacherCommon"></include>
+		order by teacher_no desc
+		) list
+		)
+	</select>
+
+	<select id="joinRootList" resultMap="graph">
+		select count(case when
+		parent_knowroute like '지인소개' then 1 end) "지인소개",
+		count(case when
+		parent_knowroute like '인터넷 검색' then 1 end) "인터넷검색",
+		count(case when
+		parent_knowroute like '현수막' then 1 end) "현수막",
+		count(case when
+		parent_knowroute like '전단지' then 1 end) "전단지",
+		count(case when
+		parent_knowroute like '기타' then 1 end) "기타"
+		from parent
+	</select>
+
+	<select id="studentAgeList" resultMap="graph">
+		select count(case when age
+		between 8 and 9 then 1 end) "1~2학년",
+		count(case when age between 10 and
+		11 then 1 end) "3~4학년",
+		count(case when age between 12 and 13 then 1
+		end) "5~6학년"
+		from(
+		select to_char(sysdate, 'yyyy') -
+		to_char(student_birthday, 'yyyy') + 1 as
+		age
+		from student
+		)
+	</select>
+
+	<select id="paymentStatsList" resultType="requestCourse">
+		select
+		requestcourse_paycompletedate, requestcourse_payamount,
+		requestcourse_refundcharge,(requestcourse_payamount-requestcourse_refundcharge)
+		as margin ,rnum
+		from(
+		select list.*, rownum as rnum
+		from(
+		select
+		to_char(requestcourse_paycompletedate, 'yy-mm') as
+		requestcourse_paycompletedate,
+		sum(requestcourse_payamount) as
+		requestcourse_payamount, sum(requestcourse_refundcharge) as
+		requestcourse_refundcharge
+		from requestcourse
+		where
+		to_char(requestcourse_paycompletedate, 'yy-mm') <![CDATA[<=]]>
+		to_char(sysdate,
+		'yy-mm')
+		and requestcourse_paymentstatus = '결제완료' or
+		to_char(requestcourse_paycompletedate, 'yy-mm') <![CDATA[<=]]>
+		to_char(sysdate,
+		'yy-mm') and requestcourse_paymentstatus = '환불완료'
+		group by
+		to_char(requestcourse_paycompletedate, 'yy-mm')
+		order by
+		requestcourse_paycompletedate desc
+		) list
+		)
+		where rnum between 1 and 6
+		order by requestcourse_paycompletedate asc
+	</select>
+
+
+</mapper>

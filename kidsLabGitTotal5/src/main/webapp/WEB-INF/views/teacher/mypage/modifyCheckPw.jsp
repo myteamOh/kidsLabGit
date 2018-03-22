@@ -26,7 +26,8 @@
 				</tr>
 				<tr>
 					<td><label>비밀번호 확인</label></td>
-					<td><input type="password" class="teacher_password" name="teacher_password"></td>
+					<td><input type="password" class="teacher_password"
+						name="teacher_password"></td>
 				</tr>
 			</table>
 			<div>

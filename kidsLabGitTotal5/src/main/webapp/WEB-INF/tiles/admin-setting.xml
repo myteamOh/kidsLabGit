@@ -55,4 +55,21 @@
 		<put-attribute name="main" value="/WEB-INF/views/admin/faq/{1}.jsp"></put-attribute>
 	</definition>
 
+	<definition name="admin/inquiry/*" extends="basic">
+		<put-attribute name="sub" value=""></put-attribute>
+		<put-attribute name="main"
+			value="/WEB-INF/views/admin/inquiry/{1}.jsp"></put-attribute>
+	</definition>
+
+	<definition name="admin/member/*" extends="basic">
+		<put-attribute name="sub" value=""></put-attribute>
+		<put-attribute name="main"
+			value="/WEB-INF/views/admin/member/{1}.jsp"></put-attribute>
+	</definition>
+
+	<definition name="admin/chart/*" extends="basic">
+		<put-attribute name="sub" value=""></put-attribute>
+		<put-attribute name="main" value="/WEB-INF/views/admin/chart/{1}.jsp"></put-attribute>
+	</definition>
+
 </tiles-definitions>

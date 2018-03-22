@@ -29,21 +29,31 @@
 	src="/resources/include/js/registCourse.js"></script>
 <script type="text/javascript">
 	$(function() {
-		var course_status = $('<c:out value = "${updateData.course_status}" />');
+		var course_status = '<c:out value = "${updateData.course_status}" />';
 		if (course_status == "등록대기") {
 			$("#registwaitng").attr({
 				"selected" : "selected"
 			});
-		} else if (course_status = "승인대기") {
+		} else if (course_status == "승인대기") {
 			$("#agreewaiting").attr({
 				"selected" : "selected"
 			});
-		} else if (course_status = "모집중") {
+		} else if (course_status == "모집중") {
+			$("#course_name").attr("readonly", true);
+			$("#course_subject").attr("readonly", true);
+			$("#course_pay").attr("readonly", true);
+			$("#course_summary").attr("readonly", true);
+			$("#course_startdate").attr("disabled", true);
+			$("#course_enddate").attr("disabled", true);
 			$("#recruiting").attr({
 				"selected" : "selected"
 			});
-		} else if (course_status = "진행중") {
+		} else if (course_status == "진행중") {
 			$("#progressing").attr({
+				"selected" : "selected"
+			});
+		} else if (course_status == "폐강") {
+			$("#cancel").attr({
 				"selected" : "selected"
 			});
 		}
@@ -90,6 +100,8 @@
 						return;
 					}
 				}
+				$("#course_startdate").removeAttr("disabled");
+				$("#course_enddate").removeAttr("disabled");
 				$("#course_time").val(
 					$("#course_day").val() + " " + $("#course_hour").val());
 				$("#updateForm").attr({
@@ -203,38 +215,65 @@
 				<div class="form-group form-group-sm">
 					<label for="course_summary" class="col-sm-2 control-label">강의
 						시간</label>
-					<div class="col-sm-3">
-						<select id="course_day" name="course_day" onchange="chgTime()">
-							<option value="월요일">월요일</option>
-							<option value="화요일">화요일</option>
-							<option value="목요일">목요일</option>
-							<option value="금요일">금요일</option>
-							<option value="토요일">토요일</option>
-						</select> <select id="course_hour" name="course_hour">
-							<option value="15:00 ~ 16:45">15:00 ~ 16:45</option>
-							<option value="17:00 ~ 18:45">17:00 ~ 18:45</option>
-							<option value="19:00 ~ 20:45">19:00 ~ 20:45</option>
-						</select> <input type="hidden" id="day" name="day" value="${day }">
-						<input type="hidden" id="hour" name="hour" value="${hour }">
-					</div>
+					<c:choose>
+						<c:when test="${updateData.course_status == '모집중' }">
+							<div class="col-sm-3">
+								<select id="course_day" name="course_day">
+									<option value="${day}">${day}</option>
+								</select> <select id="course_hour" name="course_hour">
+									<option value="${hour }">${hour }</option>
+								</select> <input type="hidden" id="day" name="day" value="${day }">
+								<input type="hidden" id="hour" name="hour" value="${hour }">
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div class="col-sm-3">
+								<select id="course_day" name="course_day" onchange="chgTime()">
+									<option value="월요일">월요일</option>
+									<option value="화요일">화요일</option>
+									<option value="목요일">목요일</option>
+									<option value="금요일">금요일</option>
+									<option value="토요일">토요일</option>
+								</select> <select id="course_hour" name="course_hour">
+									<option value="15:00 ~ 16:45">15:00 ~ 16:45</option>
+									<option value="17:00 ~ 18:45">17:00 ~ 18:45</option>
+									<option value="19:00 ~ 20:45">19:00 ~ 20:45</option>
+								</select> <input type="hidden" id="day" name="day" value="${day }">
+								<input type="hidden" id="hour" name="hour" value="${hour }">
+							</div>
+						</c:otherwise>
+					</c:choose>
 					<div class="col-sm-5">
 						<p class="form-control-static error"></p>
 					</div>
 				</div>
 				<div class="form-group form-group-sm">
 					<label for="course_room" class="col-sm-2 control-label">강의실</label>
-					<div class="col-sm-3">
-						<select id="course_room" name="course_room">
-							<option value="1">1 강의실</option>
-							<option value="2">2 강의실</option>
-							<option value="3">3 강의실</option>
-							<option value="4">4 강의실</option>
-							<option value="5">5 강의실</option>
-							<option value="6">6 강의실</option>
-							<option value="7">7 강의실</option>
-							<option value="8">8 강의실</option>
-						</select><input type="hidden" id="room" value="${updateData.course_room }">
-					</div>
+					<c:choose>
+						<c:when test="${updateData.course_status == '모집중' }">
+							<div class="col-sm-3">
+								<select id="course_room" name="course_room">
+									<option value="${updateData.course_room }">${updateData.course_room }
+										강의실</option>
+								</select>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div class="col-sm-3">
+								<select id="course_room" name="course_room">
+									<option value="1">1 강의실</option>
+									<option value="2">2 강의실</option>
+									<option value="3">3 강의실</option>
+									<option value="4">4 강의실</option>
+									<option value="5">5 강의실</option>
+									<option value="6">6 강의실</option>
+									<option value="7">7 강의실</option>
+									<option value="8">8 강의실</option>
+								</select><input type="hidden" id="room"
+									value="${updateData.course_room }">
+							</div>
+						</c:otherwise>
+					</c:choose>
 					<div class="col-sm-5">
 						<p class="form-control-static error"></p>
 					</div>
@@ -260,13 +299,11 @@
 									<option value="agreewaiting">승인대기</option>
 									<option value="recruiting">모집중</option>
 									<option value="progressing">진행중</option>
-									<option value="cancel">폐강</option>
 								</c:when>
 								<c:when test="${ updateData.course_status == '승인대기'}">
 									<option value="agreewaiting" id="agreewaiting">승인대기</option>
 									<option value="recruiting">모집중</option>
 									<option value="progressing">진행중</option>
-									<option value="cancel">폐강</option>
 								</c:when>
 								<c:when test="${ updateData.course_status == '모집중'}">
 									<option value="recruiting" id="recruiting">모집중</option>
@@ -276,6 +313,11 @@
 								<c:when test="${ updateData.course_status == '진행중'}">
 									<option value="progressing" id="progressing">진행중</option>
 									<option value="end">강의종료</option>
+								</c:when>
+								<c:when test="${ updateData.course_status == '폐강'}">
+									<option value="cancel" id="cancel">폐강</option>
+									<option value="agreewaiting">승인대기</option>
+									<option value="recruiting">모집중</option>
 								</c:when>
 							</c:choose>
 						</select>

@@ -260,6 +260,10 @@
 												<td>${course.course_status }<br> <input
 													type="button" class="registBtn" value="수정">
 											</c:when>
+											<c:when test="${course.course_status == '폐강' }">
+												<td>${course.course_status }<br> <input
+													type="button" class="registBtn" value="수정">
+											</c:when>
 											<c:otherwise>
 												<td>${course.course_status }</td>
 											</c:otherwise>

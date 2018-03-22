@@ -117,7 +117,7 @@ public class CourseController {
 			if (!cvo.getCourse_plan().isEmpty()) {
 				FileUploadUtil.fileDelete(cvo.getCourse_plan(), request);
 			}
-			course_plan = FileUploadUtil.fileUpload(cvo.getFile(), request, "course");
+			course_plan = FileUploadUtil.fileUpload(cvo.getFile(), request, "registCourse");
 			cvo.setCourse_plan(course_plan);
 		} else {
 			logger.info("첨부파일 업음");

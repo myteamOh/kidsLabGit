@@ -7,6 +7,26 @@
 
 
 
+	<!-- 관리자 1:1 문의 조회 -->
+	<select id="adminInquiryList" parameterType="inquiry"
+		resultType="inquiry">
+		Select
+		inquiry_no,
+		a.parent_no as parent_no,
+		b.parent_id as
+		parent_id,
+		inquiry_title,
+		inquiry_content,
+		to_char(inquiry_registerdate,
+		'yyyy-mm-dd')as
+		inquiry_registerdate
+		from
+		board_inquiry a, parent b
+		where
+		a.parent_no =
+		b.parent_no
+	</select>
+
 	<!-- 1:1 문의 조회 -->
 	<select id="inquiryList" parameterType="inquiry" resultType="inquiry">
 
@@ -32,13 +52,17 @@
 
 		Select
 		inquiry_no,
-		parent_no,
+		a.parent_no,
+		b.parent_id,
 		inquiry_title,
 		inquiry_content,
-		to_char(inquiry_registerdate, 'yyyy-mm-dd')as inquiry_registerdate
+		to_char(inquiry_registerdate, 'yyyy-mm-dd')as
+		inquiry_registerdate
 		from
-		board_inquiry
+		board_inquiry a, parent b
 		where
+		a.parent_no =
+		b.parent_no and
 		inquiry_no =
 		#{inquiry_no}
 	</select>
@@ -64,6 +88,14 @@
 		)
 
 	</insert>
+
+	<!-- 댓글 달았을 시 게시물에 [답변완료] 생성 -->
+	<update id="replySuccessUpdate">
+		update board_inquiry
+		set inquiry_title =
+		#{inquiry_title} || ' [답변완료]'
+		where inquiry_no = #{inquiry_no}
+	</update>
 
 	<!-- 게시물 수정 -->
 	<update id="inquiryUpdate" parameterType="inquiry">

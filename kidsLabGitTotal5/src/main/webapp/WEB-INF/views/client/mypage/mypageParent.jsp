@@ -138,7 +138,7 @@ table {
 						자녀리스트
 						
 						<ul>
-							<c:forEach var="child" items="${rcListMap}">
+							<c:forEach var="child" items="${rcListMap}">na
 								<li>${child.key.student_name}(${child.key.userId})
 									<div>
 										<c:choose>

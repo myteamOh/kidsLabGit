@@ -25,27 +25,27 @@ $(function() {
 
 	// 비번 확인 버튼 클릭시 이벤트
 	$(".okBtnPwCheck").click(
-			function() {
+		function() {
 
-				if ($(".userId").val() == null || $(".userId").val() == ""
-						|| $(".userPw").val() == null
-						|| $(".userPw").val() == "") {
-					$("#loginAlert").css("color", "#FF0000").html(
-							"PW가 입력되지 않았습니다. 다시한번 확인해 주세요.");
-					return;
-				}
+			if ($(".userId").val() == null || $(".userId").val() == ""
+				|| $(".userPw").val() == null
+				|| $(".userPw").val() == "") {
+				$("#loginAlert").css("color", "#FF0000").html(
+					"PW가 입력되지 않았습니다. 다시한번 확인해 주세요.");
+				return;
+			}
 
-				$("#loginAlert").html("");
+			$("#loginAlert").html("");
 
-				$("#modifyForm").attr({
-					"method" : "post",
-					"action" : "/mypage/modifyinfo.do"
-				});
-
-				$("#modifyForm").submit();
-
-				alert("수정page 진입 시도!");
+			$("#modifyForm").attr({
+				"method" : "post",
+				"action" : "/mypage/modifyinfo.do"
 			});
+
+			$("#modifyForm").submit();
+
+			alert("수정page 진입 시도!");
+		});
 
 	// 비번 확인 취소 버튼 클릭시 이벤트
 	$(".cancelBtn").click(function() {
@@ -99,7 +99,7 @@ $(function() {
 		$("#courseForm").submit();
 
 	});
-	
+
 	$(".refund_account").focusout(function() {
 		if (!formCheck($(".refund_account"), $('.check:eq(0)'), "계좌번호를")) {
 			return;
@@ -109,9 +109,9 @@ $(function() {
 			$(".check:eq(0)").html("");
 		}
 	});
-	
+
 	$(".refund_name").focusout(function() {
-		if(!formCheck($(".refund_name"), $('.check:eq(1)'), "이름을")) {
+		if (!formCheck($(".refund_name"), $('.check:eq(1)'), "이름을")) {
 			return;
 		} else if (!regularExpression(0, '.refund_name', '.check:eq(1)', "이름을")) {
 			return;
@@ -126,12 +126,12 @@ $(function() {
 		var refundResult = confirm('환불신청은 취소하실수 없습니다. 정말로 환불신청을 하시겠습니까?');
 
 		if (refundResult) {
-			
+
 			if (!formCheck($(".refund_account"), $('.check:eq(0)'), "계좌번호를")) {
 				return;
 			} else if (!regularExpression(7, '.refund_account', '.check:eq(0)', "계좌번호를")) {
 				return;
-			} else if(!formCheck($(".refund_name"), $('.check:eq(1)'), "이름을")) {
+			} else if (!formCheck($(".refund_name"), $('.check:eq(1)'), "이름을")) {
 				return;
 			} else if (!regularExpression(0, '.refund_name', '.check:eq(1)', "이름을")) {
 				return;
@@ -148,24 +148,65 @@ $(function() {
 			return;
 		}
 	});
-	
+
 	/* 환불취소버튼 클릭시 이벤트 */
 	$(".refundCancel").click(function() {
 		location.href = "/mypage/parentMypage.do";
 	});
-	
+
 	/*강의 페이지 클릭시 이벤트*/
 	$(".coursePage").click(function() {
 		var coursePage = $(this).parents("tr").attr("data-num");
-		
+
 		$("#courseNum").val(coursePage);
-		
+
 		$("#coursePageForm").attr({
 			"method" : "POST",
 			"action" : "/coursepage/coursemain"
 		});
-		
+
 		$("#coursePageForm").submit();
 	});
+
+	/**************************
+	 * 강사 회원 수정 버튼 클릭 시
+	 **************************/
+	/* 회원 정보 수정 button click event */
+	$("#modifyTeacherBtn").click(function() {
+
+		alert("정보 수정하기 전 비번확인");
+
+		$("#teacherPwCheckForm").attr({
+			"method" : "POST",
+			"action" : "/teacher/modifyCheckPw"
+		});
+
+		$("#teacherPwCheckForm").submit();
+
+	});
+
+	// 비번 확인 버튼 클릭시 이벤트
+	$(".teacherOkBtnPwCheck").click(
+		function() {
+
+			if ($(".teacher_id").val() == null || $(".teacher_id").val() == ""
+				|| $(".teacher_password").val() == null
+				|| $(".teacher_password").val() == "") {
+				$("#loginAlert").css("color", "#FF0000").html(
+					"PW가 입력되지 않았습니다. 다시한번 확인해 주세요.");
+				return;
+			}
+
+			$("#loginAlert").html("");
+
+			$("#teacherModifyForm").attr({
+				"method" : "post",
+				"action" : "/teacher/modifyinfo"
+			});
+
+			$("#teacherModifyForm").submit();
+
+			alert("수정page 진입 시도!");
+		});
 
 });

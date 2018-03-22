@@ -19,6 +19,7 @@
 		<typeAlias type="com.kidslab.admin.notice.vo.NoticeVO"
 			alias="adminNotice" />
 		<typeAlias type="com.kidslab.admin.faq.vo.FaqVO" alias="faq" />
+		<typeAlias type="com.kidslab.admin.reply.vo.ReplyVO" alias="reply" />
 
 		<!-- Teacher 부분 -->
 		<typeAlias type="com.kidslab.teacher.login.vo.TeacherLoginVO"

@@ -15,6 +15,15 @@
 	display: none;
 }
 </style>
+<script type="text/javascript">
+	$(function() {
+		$(".studentListBtn").click(function() {
+			var course_no = $("#course_no").val();
+			alert(course_no);
+			window.open("/teacher/student/courseStudentList.do?course_no=" + course_no, "list", "width=1000, height=700");
+		});
+	})
+</script>
 </head>
 <body>
 	<div>
@@ -32,35 +41,37 @@
 					value="회원 정보 수정">
 			</div>
 		</form>
-		<table id="list">
-			<c:choose>
-				<c:when test="${not empty teacherCourseList }">
-					<tr>
-						<th>내 강의</th>
-					</tr>
-					<tr>
-						<td><select><c:forEach var="course"
-									items="${teacherCourseList }" varStatus="status">
-									<option value="${course.course_no }">${course.course_name }</option>
-								</c:forEach></select></td>
-						<td><input type="button" value="강의페이지" id="coursePageBtn"
-							class="coursePageBtn"> <input type="button" value="학생리스트"
-							id="studentListBtn" class="studentListBtn"></td>
-					</tr>
-				</c:when>
-				<c:otherwise>
-					<tr>
-						<th>내 강의</th>
-					</tr>
-					<tr>
-						<td colspan="2">강의가 없습니다.</td>
-					</tr>
-					<tr>
-						<td colspan="2" align="center"><a href="#">강의 등록하러 가기</a></td>
-					</tr>
-				</c:otherwise>
-			</c:choose>
-		</table>
+		<form id="t_form">
+			<table id="list">
+				<c:choose>
+					<c:when test="${not empty teacherCourseList }">
+						<tr>
+							<th>내 강의</th>
+						</tr>
+						<tr>
+							<td><select id="course_no" name="course_no"><c:forEach
+										var="course" items="${teacherCourseList }" varStatus="status">
+										<option value="${course.course_no }">${course.course_name }</option>
+									</c:forEach></select></td>
+							<td><input type="button" value="강의페이지" id="coursePageBtn"
+								class="coursePageBtn"> <input type="button"
+								value="학생리스트" id="studentListBtn" class="studentListBtn"></td>
+						</tr>
+					</c:when>
+					<c:otherwise>
+						<tr>
+							<th>내 강의</th>
+						</tr>
+						<tr>
+							<td colspan="2">강의가 없습니다.</td>
+						</tr>
+						<tr>
+							<td colspan="2" align="center"><a href="#">강의 등록하러 가기</a></td>
+						</tr>
+					</c:otherwise>
+				</c:choose>
+			</table>
+		</form>
 	</div>
 </body>
 </html>

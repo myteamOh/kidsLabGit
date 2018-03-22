@@ -9,6 +9,7 @@ public class InquiryVO extends CommonVO {
 	private String inquiry_content; // 1:1 문의 내용
 	private String inquiry_registerdate; // 1:1 문의 등록날짜
 	private int parent_no; // 학부모 번호
+	private String parent_id; // 학부모 id
 
 	public int getInquiry_no() {
 		return inquiry_no;
@@ -48,6 +49,14 @@ public class InquiryVO extends CommonVO {
 
 	public void setParent_no(int parent_no) {
 		this.parent_no = parent_no;
+	}
+
+	public String getParent_id() {
+		return parent_id;
+	}
+
+	public void setParent_id(String parent_id) {
+		this.parent_id = parent_id;
 	}
 
 }

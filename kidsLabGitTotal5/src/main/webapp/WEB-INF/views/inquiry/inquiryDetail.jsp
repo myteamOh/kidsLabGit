@@ -30,6 +30,34 @@
 <script type="text/javascript"
 	src="/resources/include/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
+	var text = "<c:out value='${idto.inquiry_title}' />";
+	var findStr = "[답변완료]";
+	$(function() {
+		if (text.indexOf(findStr) != -1) {
+			$("#inquiryUpdateBtn").addClass("hide");
+			$("#inquiryDeleteBtn").addClass("hide");
+			$("#requestReset").addClass("hide");
+			$("#inquiry_content").attr({
+				"readonly" : true
+			});
+			$("#inquiry_title").attr({
+				"readonly" : true
+			});
+		}
+		$("#replySuccessBtn").click(function() {
+
+			if (text.indexOf(findStr) != -1) {
+				alert("이미 답변이 완료되었습니다.");
+				return;
+			} else {
+				$("#i_data").attr({
+					"method" : "POST",
+					"action" : "/admin/inquiry/inquiryList"
+				});
+				$("#i_data").submit();
+			}
+		});
+	});
 	$(document).ready(function() {
 		$("#inquiryDeleteBtn").click(function() {
 			if (confirm("삭제하시겠습니까?")) {
@@ -52,13 +80,13 @@
 			}
 
 		});
-		
-		
+
+
 		//목록 버튼클릭시 처리 이벤트
 		$("#inquiryListBtn").click(function() {
 			location.href = "/inquiry/inquiryList";
 		});
-		
+
 		/* 리셋 버튼 클릭시 처리 이벤트 */
 
 		$("#requestReset").click(function() {
@@ -98,19 +126,15 @@
 								<col width="83%" />
 							</colgroup>
 							<tr>
-
 								<td><input type="text" name="inquiry_title"
 									id="inquiry_title" value="${idto.inquiry_title}"
 									placeholder="제목을 입력하여 주십시오." size="50"></td>
 							</tr>
 							<tr>
-
 								<td><textarea name="inquiry_content" id="inquiry_content"
 										class="ckeditor" rows="20" cols="50"
 										placeholder="문의사항을 입력하여 주십시오.">${idto.inquiry_content}</textarea></td>
 							</tr>
-
-
 						</table>
 					</div>
 					<div class="col-sm-5">
@@ -128,12 +152,10 @@
 						id="inquiryListBtn" class="btn btn-default" />
 				</div>
 			</div>
-			<jsp:include page="../inquiryComment/inquiryReply.jsp"></jsp:include>
-			
-			
 		</div>
-	
-
+	</div>
+	<div>
+		<jsp:include page="../inquiryComment/inquiryReply.jsp"></jsp:include>
 	</div>
 
 </body>
