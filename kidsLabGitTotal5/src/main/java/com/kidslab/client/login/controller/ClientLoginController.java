@@ -52,7 +52,7 @@ public class ClientLoginController {
 
 				session.setAttribute("Login", parentLogin); // parentVO에 대한 정보만 들고있음. id pw 는 없음.
 				mav.addObject("data", parentLogin);
-				mav.setViewName("index");
+				mav.setViewName("redirect:/");
 				return mav;
 			}
 		} else {
@@ -63,7 +63,7 @@ public class ClientLoginController {
 
 				session.setAttribute("Login", studentLogin);
 				mav.addObject("data", studentLogin);
-				mav.setViewName("index");
+				mav.setViewName("redirect:/");
 				return mav;
 			}
 		}
@@ -81,7 +81,7 @@ public class ClientLoginController {
 		session.invalidate();
 		session = request.getSession(true);
 
-		return "index"; // 메인페이지로 경로 바꿔주세요.
+		return "redirect:/"; // 메인페이지로 경로 바꿔주세요.
 	}
 
 }

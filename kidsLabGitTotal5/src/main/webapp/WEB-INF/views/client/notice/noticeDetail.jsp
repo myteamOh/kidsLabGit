@@ -17,32 +17,10 @@
 <script type="text/javascript">
 	var butChk = 0; // 수정버튼과 삭제버튼을 구별하기 위한 변수
 	$(function() {
-		/* 수정 버튼 클릭 시 처리 이벤트 */
-		$("#updateBtn").click(function() {
-			$("#f_data").attr({
-				"method" : "get",
-				"action" : "/admin/notice/updateForm"
-			});
-			$("#f_data").submit();
-		});
-
-		// 제거
-		/* 삭제 버튼 클릭 시 처리 이벤트 */
-		$("#deleteBtn").click(function() {
-			if (confirm("정말로 삭제 하시겠습니까?") == true) {
-				$("#f_data").attr({
-					"method" : "post",
-					"action" : "/admin/notice/noticeDelete"
-				});
-				$("#f_data").submit();
-			} else {
-				return;
-			}
-		});
 
 		/* 목록 버튼 클릭 시 처리 이벤트 */
 		$("#noticeListBtn").click(function() {
-			location.href = "/admin/notice/noticeList";
+			location.href = "/notice/noticeList";
 		});
 	});
 </script>

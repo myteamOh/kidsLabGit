@@ -19,7 +19,6 @@
 	$(function() {
 		$(".studentListBtn").click(function() {
 			var course_no = $("#course_no").val();
-			alert(course_no);
 			window.open("/teacher/student/courseStudentList.do?course_no=" + course_no, "list", "width=1000, height=700");
 		});
 	})

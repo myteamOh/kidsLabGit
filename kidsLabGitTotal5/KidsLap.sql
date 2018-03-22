@@ -761,6 +761,12 @@ select course_plan
 from course c inner join requestcourse r on c.course_no = r.course_no
 where r.requestcourse_no =  24
 
+select *
+from requestcourse;
+
+update requestcourse
+set requestcourse_paycompletedate = sysdate, requestcourse_paymentstatus = '환불대기' 
+where requestcourse_no = 25;
 
 
 

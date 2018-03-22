@@ -63,7 +63,6 @@
 <script type="text/javascript"
 	src="/resources/include/js/jquery.bxslider.js"></script>
 <script type="text/javascript">
-	//<![CDATA[
 	var jQ182 = $.noConflict();
 	jQ182(document).ready(function() {
 		jQ182('.bxslider').bxSlider({
@@ -75,7 +74,6 @@
 			pager : true,
 		});
 	});
-	//]]>
 </script>
 
 </head>
@@ -102,8 +100,15 @@
 		<div class="row">
 			<div class="col-xs-6 col-lg-4">
 
+				<%--===================상세 페이지 이동을 위한 FORM =============== --%>
+				<div class="hide">
+					<form id="noticeDetailForm" name="noticeDetailForm">
+						<input type="hidden" name="notice_no" id="notice_no">
+					</form>
+				</div>
 				<h1 align="center">공지사항</h1>
-				<table width=100% cellpadding=0 cellspacing=0 class="recent_notice table table-hover">
+				<table width=100% cellpadding=0 cellspacing=0
+					class="recent_notice table table-hover">
 					<thead>
 						<tr>
 							<th class="order" data-value="notice_no">글번호</th>

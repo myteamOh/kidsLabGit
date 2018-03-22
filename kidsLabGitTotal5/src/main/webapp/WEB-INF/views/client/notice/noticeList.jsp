@@ -97,10 +97,6 @@
 			goPage(1);
 		});
 
-		/* 글쓰기 버튼 클릭 시 처리 이벤트 */
-		$("#insertFormBtn").click(function() {
-			location.href = "/admin/notice/writeForm";
-		});
 
 		/* 제목 클릭시 상세 페이지 이동을 위한 처리 이벤트 */
 		$(".goDetail").click(function() {
@@ -123,7 +119,7 @@
 		$("#page").val(page);
 		$("#n_search").attr({
 			"method" : "get",
-			"action" : "/admin/notice/noticeList"
+			"action" : "/notice/noticeList"
 		});
 		$("#n_search").submit();
 	}
