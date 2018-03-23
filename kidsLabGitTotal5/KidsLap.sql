@@ -164,6 +164,9 @@ CREATE TABLE BOARD_COURSEDATA(
 ALTER TABLE board_coursedata
 ADD(student_no number);
 
+select *
+from board_coursedata;
+
 alter table board_coursedata drop column student_no;
 
 select *
@@ -828,3 +831,23 @@ select
 		)
 		where rnum between 1 and 6
 		order by requestcourse_paycompletedate asc
+
+		
+		
+select s.student_no,s.student_name
+from student s left join requestcourse r on r.student_no = s.student_no;
+
+
+select p.parent_no, s.student_no
+from parent p left outer join student s on p.parent_no = s.parent_no;
+
+
+
+		
+		
+		
+		
+		
+		
+		
+		

@@ -16,7 +16,8 @@
 
 	<!-- 수정또는 삭제를 위한 폼 -->
 	<form id="updateForm">
-		<input type="hidden" name="coursedata_no" value="${detail.coursedata_no}">
+		<input type="hidden" name="coursedata_no"
+			value="${detail.coursedata_no}">
 	</form>
 
 	<section>
@@ -50,7 +51,8 @@
 					<c:if test="${not empty detail.coursedata_file}">
 						<tr>
 							<td>파일첨부</td>
-							<td colspan="3" class="downloadFile">${detail.coursedata_file}</td>
+							<td colspan="3" class="downloadFile"><a
+								href="/coursepage/download?coursedata_file=${detail.coursedata_file }">${detail.coursedata_file}</a></td>
 						</tr>
 					</c:if>
 

@@ -159,7 +159,7 @@ $(function() {
 		var coursePage = $(this).parents("tr").attr("data-num");
 
 		$("#courseNum").val(coursePage);
-
+		
 		$("#coursePageForm").attr({
 			"method" : "POST",
 			"action" : "/coursepage/coursemain"

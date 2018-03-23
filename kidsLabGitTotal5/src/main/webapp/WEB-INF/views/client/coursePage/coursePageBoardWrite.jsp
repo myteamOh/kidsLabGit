@@ -14,7 +14,7 @@
 </head>
 <body>
 	<form id="writeForm" enctype="multipart/form-data">
-		<input type="hidden" name="course_no" value="${cNum}"> <input
+		<input type="hidden" name="course_no" value="${cNum}" id="course_no"> <input
 			type="hidden" name="student_no" value="${Login.student_no}">
 
 		<section>
@@ -46,7 +46,7 @@
 							<td><c:choose>
 									<c:when test="${not empty teacherLogin}">
 										<input type="text" id="writer" name="coursedata_writer"
-											value="${teacherLogin.teacher_name}(${teacher_id})"
+											value="${teacherLogin.teacher_name}(${teacherLogin.teacher_id})"
 											readonly="readonly">
 									</c:when>
 									<c:otherwise>

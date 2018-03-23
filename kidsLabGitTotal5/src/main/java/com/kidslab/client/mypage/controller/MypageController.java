@@ -404,8 +404,7 @@ public class MypageController {
 		return "redirect:/mypage/parentMypage.do";
 	}
 
-	/** 파일 명 얻어오기 **/
-
+	/** 파일 다운로드**/
 	@RequestMapping(value = "/download")
 	public ModelAndView download(String course_plan, HttpSession session) {
 		// 파일 객체 생성

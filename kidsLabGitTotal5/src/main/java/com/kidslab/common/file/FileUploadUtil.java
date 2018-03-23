@@ -20,7 +20,6 @@ import org.springframework.web.servlet.view.AbstractView;
 public class FileUploadUtil {
 	static Logger logger = Logger.getLogger(FileUploadUtil.class);
 
-
 	/* 파일 업로드 할 폴더 생성 */
 	public static void makeDir(String docRoot) {
 		File fileDir = new File(docRoot);
@@ -69,12 +68,18 @@ public class FileUploadUtil {
 		boolean result = false;
 		String dirName = fileName.substring(0, fileName.indexOf("_"));
 		String docRoot = request.getSession().getServletContext().getRealPath("/uploadStorage/" + dirName);
+		String path = "C:/downLoad/" + dirName;
 
 		// 파일 생성 후
 		File fileDelete = new File(docRoot + "/" + fileName);
+		File fileDeleteC = new File(path + "/" + fileName);
 		logger.info("삭제할 파일(fileDelete) : " + fileDelete);
+		logger.info("삭제할 파일(fileDelete) : " + fileDeleteC);
 		if (fileDelete.exists() && fileDelete.isFile()) {
 			result = fileDelete.delete();
+		}
+		if (fileDeleteC.exists() && fileDeleteC.isFile()) {
+			result = fileDeleteC.delete();
 		}
 		logger.info("파일 삭제 여부(true/false) : " + result);
 	}
@@ -85,24 +90,34 @@ public class FileUploadUtil {
 		String dirName = fileName.substring(0, fileName.indexOf("_"));
 		// 추출된 폴더의 실제 경로(물리적 위치 : C:\...)
 		String imgPath = request.getSession().getServletContext().getRealPath("uploadStorage/" + dirName);
+		String path = "C:/downLoad/" + fileName;
 		File fileAdd = new File(imgPath, fileName);
+		File fileAddC = new File(path, fileName);
 		logger.info("원본 이미지 파일(fileAdd) : " + fileAdd);
+		logger.info("원본 이미지 파일(fileAdd) : " + fileAddC);
 
 		BufferedImage sourceImg = ImageIO.read(fileAdd);
+		BufferedImage sourceImgC = ImageIO.read(fileAddC);
 		// resize(대상[BufferedImage 타입], 원본비율, 높이 또는 너비, 크기)
 		BufferedImage destImg = Scalr.resize(sourceImg, Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_TO_HEIGHT, 133);
+		BufferedImage destImgC = Scalr.resize(sourceImgC, Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_TO_HEIGHT, 133);
 
 		String thumbnailName = "thumbnail_" + fileName;
 		String docRoot = imgPath + "/thumbnail";
+		String docRootC = path + "/thumbnail";
 		makeDir(docRoot);
+		makeDir(docRootC);
 
 		File newFile = new File(docRoot, thumbnailName);
+		File newFileC = new File(docRootC, thumbnailName);
 		logger.info("업로드할 파일(newFile) : " + newFile);
+		logger.info("업로드할 파일(newFile) : " + newFileC);
 
 		String formatName = fileName.substring(fileName.lastIndexOf(".") + 1);
 		logger.info("확장자(formatName) : " + formatName);
 
 		ImageIO.write(destImg, formatName, newFile);
+		ImageIO.write(destImgC, formatName, newFileC);
 		return thumbnailName;
 
 	}

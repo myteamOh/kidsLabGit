@@ -1,5 +1,8 @@
 package com.kidslab.client.coursepage.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -19,9 +22,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kidslab.admin.course.vo.CourseVO;
 import com.kidslab.client.coursedata.vo.CourseDataVO;
 import com.kidslab.client.coursepage.service.CoursePageService;
+import com.kidslab.client.login.vo.UserLoginVO;
 import com.kidslab.client.student.vo.StudentVO;
 import com.kidslab.common.file.FileUploadUtil;
 import com.kidslab.common.page.Paging;
+import com.kidslab.teacher.login.vo.TeacherLoginVO;
 
 @Controller
 @RequestMapping(value = "/coursepage")
@@ -153,14 +158,27 @@ public class CoursePageController {
 		vo = coursePageService.coursePageDetail(cdvo);
 
 		StudentVO svo = new StudentVO();
+		TeacherLoginVO tvo = new TeacherLoginVO();
 		svo = (StudentVO) session.getAttribute("Login");
+		tvo = (TeacherLoginVO) session.getAttribute("teacherLogin");
 
-		String nameNid = svo.getUserName() + "(" + svo.getUserId() + ")";
+		if (svo != null) {
+			String nameNid = svo.getUserName() + "(" + svo.getUserId() + ")";
 
-		System.out.println(nameNid);
-		System.out.println(vo.getCoursedata_writer());
+			System.out.println(nameNid);
+			System.out.println(vo.getCoursedata_writer());
 
-		model.addAttribute("loginInfo", nameNid);
+			model.addAttribute("loginInfo", nameNid);
+		}
+		if (tvo != null) {
+			String nameNid = tvo.getTeacher_name() + "(" + tvo.getTeacher_id() + ")";
+
+			System.out.println(nameNid);
+			System.out.println(vo.getCoursedata_writer());
+
+			model.addAttribute("loginInfo", nameNid);
+		}
+
 		model.addAttribute("detail", vo);
 
 		return "client/coursePage/coursePageBoardDetail";
@@ -220,12 +238,18 @@ public class CoursePageController {
 	// 글삭제
 	@ResponseBody
 	@RequestMapping(value = "/courseboardDelete", method = RequestMethod.POST)
-	public int coursePageDelete(@ModelAttribute("CourseDataVO") CourseDataVO cdvo) {
+	public int coursePageDelete(@ModelAttribute("CourseDataVO") CourseDataVO cdvo, HttpServletRequest request)
+			throws IOException {
 
 		logger.info("글삭제다해");
-
+		CourseDataVO deleteData = new CourseDataVO();
+		deleteData = coursePageService.coursePageDetail(cdvo);
+		logger.info("파일 : " + deleteData.getCoursedata_file());
 		int result = 0;
 
+		if (!deleteData.getCoursedata_file().isEmpty()) {
+			FileUploadUtil.fileDelete(deleteData.getCoursedata_file(), request);
+		}
 		result = coursePageService.coursePageDelete(cdvo.getCoursedata_no());
 
 		System.out.println(result);
@@ -233,4 +257,25 @@ public class CoursePageController {
 		return result;
 	}
 
+	/** 파일 다운로드 **/
+	@RequestMapping(value = "/download")
+	public ModelAndView download(String coursedata_file, HttpSession session) {
+		// 파일 객체 생성
+		File download = new File("C:\\downLoad\\courseBoard\\" + coursedata_file);
+		// 출력 할 뷰 이름과 데이터의 이름을 설정하고
+		// 데이터를 설정
+		ModelAndView mav = new ModelAndView();
+		UserLoginVO uLogin = (UserLoginVO) session.getAttribute("Login");
+		TeacherLoginVO tLogin = (TeacherLoginVO) session.getAttribute("teacherLogin");
+		if (uLogin == null && tLogin == null) {
+			mav.setViewName("client/member/login");
+			return mav;
+		}
+		if (download.isFile()) {
+			return new ModelAndView("download", "downloadFile", download);
+		} else {
+			mav.setViewName("redirect:/coursePage/courseboardList");
+			return mav;
+		}
+	}
 }

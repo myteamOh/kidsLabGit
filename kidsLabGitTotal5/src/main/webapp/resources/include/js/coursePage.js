@@ -36,13 +36,29 @@ $(function() {
 			alert("내용을 입력해 주세요.");
 			return;
 		}
+		alert($("#content").val());
+		alert($("#title").val());
+		alert($("#writer").val());
+		alert($("#statusSelector").val());
+		alert($("#course_no").val());
+		$.ajax({
+			url : "/coursepage/courseboardInsert",
+			type : "post",
+			data : $("#writeForm").serialize(),
+			error : function() {
+				alert("걍오류");
+			},
+			success : function() {
+				alert("성공!!!");
+				$("#writeForm").attr({
+					"method" : "POST",
+					"action" : "/coursepage/courseboardInsert"
+				});
 
-		$("#writeForm").attr({
-			"method" : "POST",
-			"action" : "/coursepage/courseboardInsert"
-		});
+				$("#writeForm").submit();
+			}
+		})
 
-		$("#writeForm").submit();
 
 	});
 
@@ -75,7 +91,7 @@ $(function() {
 
 	/* 상세보기에서 삭제버튼 클릭시 이벤트 */
 	$(".deleteBtn").click(function() {
-		
+
 		$.ajax({
 			url : "/coursepage/courseboardDelete",
 			type : "POST",
@@ -85,40 +101,40 @@ $(function() {
 				return;
 			},
 			success : function(result) {
-				
-				if(result === 1) {
+
+				if (result === 1) {
 					alert("삭제성공");
 					location.href = "/coursepage/courseboardList";
 				} else if (result === 0) {
 					alert("삭제실패");
 					return;
 				}
-				
+
 			}
 		});
-		
+
 	});
 
 	/* 수정폼에서 수정완료버튼 클릭시 이벤트 */
 	$(".updateCompleteBtn").click(function() {
-		
+
 		$("#updateDataForm").attr({
 			"method" : "POST",
 			"action" : "/coursepage/courseboardUpdate"
 		});
-		
+
 		$("#updateDataForm").submit();
 
 	});
 
 	/* 수정폼에서 취소버튼 클릭시 이벤트 */
 	$(".updateCancelBtn").click(function() {
-		
+
 		$("#updateDataForm").attr({
 			"method" : "POST",
 			"action" : "/coursepage/courseboardUpdateCancel"
 		});
-		
+
 		$("#updateDataForm").submit();
 
 	});
