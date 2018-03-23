@@ -18,6 +18,7 @@
 		<put-attribute name="title" value="000 사이트" />
 		<put-attribute name="header"
 			value="/WEB-INF/views/template/client/header.jsp" />
+		<put-attribute name="side" value="" />
 		<put-attribute name="body" value="" />
 		<put-attribute name="footer"
 			value="/WEB-INF/views/template/client/footer.jsp" />
@@ -28,6 +29,19 @@
 		<put-attribute name="title" value="000 사이트" />
 		<put-attribute name="teacherHeader"
 			value="/WEB-INF/views/template/client/teacherHeader.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/template/client/footer.jsp" />
+	</definition>
+	
+	<!-- 강의게시판 타일즈 -->
+	<definition name="courseBoardContent"
+		template="/WEB-INF/views/template/client/contentLayout.jsp">
+		<put-attribute name="title" value="000 사이트" />
+		<put-attribute name="header"
+			value="/WEB-INF/views/template/client/header.jsp" />
+		<put-attribute name="side"
+			value="/WEB-INF/views/template/client/courseSide.jsp" />
 		<put-attribute name="body" value="" />
 		<put-attribute name="footer"
 			value="/WEB-INF/views/template/client/footer.jsp" />
@@ -66,6 +80,12 @@
 		<put-attribute name="title" value="공지사항" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/client/notice/{1}.jsp" />
+	</definition>
+	
+	<definition name="client/coursePage/*" extends="courseBoardContent">
+		<put-attribute name="title" value="강의페이지" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/client/coursePage/{1}.jsp" />
 	</definition>
 
 	<!-- 강사 페이지 -->

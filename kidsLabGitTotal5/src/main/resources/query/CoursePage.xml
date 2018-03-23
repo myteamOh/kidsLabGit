@@ -4,6 +4,23 @@
 
 <mapper namespace="com.kidslab.client.coursepage.dao.CoursePageDao">
 
+	<sql id="coursePageCommon">
+		SELECT coursedata_no, coursedata_title, coursedata_writer, coursedata_content, to_char(coursedata_registerdate, 'yyyy-mm-dd') as coursedata_registerdate,
+		coursedata_file, coursedata_status, course_no
+		FROM board_coursedata
+		<where>
+			<if test="search=='coursedata_title'">
+				<![CDATA[ coursedata_title like '%' || #{keyword} || '%']]>
+			</if>
+			<if test="search=='coursedata_content'">
+				<![CDATA[ coursedata_content like '%' || #{keyword} || '%']]>
+			</if>
+			<if test="search=='coursedata_writer'">
+				<![CDATA[ coursedata_writer like '%' || #{keyword} || '%']]>
+			</if>
+		</where>
+	</sql>
+
 	<select id="selectCourse" parameterType="course" resultType="course">
 		SELECT c.course_no, course_summary, course_name, course_subject, 
 		course_level, course_time, course_totalperson, course_room, 
@@ -13,7 +30,7 @@
 		c.teacher_no, teacher_id, teacher_name, teacher_phone, teacher_photo, 
 		to_char(teacher_registerdate, 'yyyy-mm-dd') as teacher_registerdate, 
 		teacher_thumb, teacher_status
-		FROM course c INNER JOIN teacher t ON c.teacher_no = t.teacher_no
+		FROM teacher t INNER JOIN course c ON c.teacher_no = t.teacher_no
 		WHERE course_no = #{course_no}
 	</select>
 
@@ -26,6 +43,7 @@
 			FROM(
 				SELECT *
 				FROM board_coursedata
+				WHERE course_no = #{course_no}
 				ORDER BY coursedata_registerdate DESC
 			) list
 		)
@@ -39,6 +57,80 @@
 			</when>
 		</choose>
 	</select>
+	
+	<select id="courseDataList" parameterType="courseData" resultType="courseData">
+		SELECT coursedata_no, coursedata_title, coursedata_writer, coursedata_content, 
+		coursedata_registerdate,
+		coursedata_file, coursedata_status
+		FROM(
+			SELECT list.*, rownum as rnum
+			FROM (
+				<include refid="coursePageCommon"></include>
+				WHERE course_no = #{course_no}
+				ORDER BY coursedata_no
+				) list
+			)
+		<where>
+			<if test="start_row != null and start_row != ''">
+				<if test="end_row != null and end_row != ''">
+					rnum between #{start_row} and #{end_row}
+				</if>
+			</if>
+		</where>
+	</select>
+	
+	<select id="coursePageListCnt" parameterType="courseData" resultType="int">
+		SELECT nvl(count(1), 0)
+		FROM (
+			SELECT list.*, rownum as rnum
+			FROM(
+				<include refid="coursePageCommon"></include>
+				ORDER BY coursedata_no DESC
+				) list
+			)
+	</select>
 
+	<insert id="coursePageInsert" parameterType="courseData">
+		<selectKey keyProperty="coursedata_no" resultType="int" order="BEFORE">
+			SELECT board_coursedata_seq.nextval FROM dual
+		</selectKey>
+		
+		INSERT INTO board_coursedata(coursedata_no, coursedata_title, 
+		coursedata_writer, coursedata_content, 
+		<if test="coursedata_file != null and coursedata_file != ''">
+			coursedata_file,
+		</if>
+		coursedata_status, course_no )
+		VALUES (#{coursedata_no}, #{coursedata_title}, #{coursedata_writer}, 
+		#{coursedata_content}, 
+		<if test="coursedata_file != null and coursedata_file != ''"> 
+			#{coursedata_file},
+		</if> #{coursedata_status}, 
+		#{course_no})
+	</insert>
+	
+	<select id="coursePageDetail" parameterType="courseData" resultType="courseData">
+		SELECT coursedata_no, coursedata_title, coursedata_writer, coursedata_content, 
+		to_char(coursedata_registerdate, 'yyyy-mm-dd') as coursedata_registerdate, 
+		coursedata_file, coursedata_status
+		FROM board_coursedata
+		WHERE coursedata_no = #{coursedata_no}
+	</select>
+	
+	<update id="coursePageUpdate" parameterType="courseData">
+		UPDATE board_coursedata
+		SET coursedata_title = #{coursedata_title},
+		<if test="coursedata_file != null and coursedata_file != ''">
+			coursedata_file = #{coursedata_file},
+		</if>
+		 coursedata_content = #{coursedata_content}, 
+		coursedata_registerdate = sysdate
+		WHERE coursedata_no = #{coursedata_no}
+	</update>
+	
+	<delete id="coursePageDelete" parameterType="courseData">
+	 	DELETE FROM board_coursedata
+	 	WHERE coursedata_no = #{coursedata_no}
+	</delete>
 
 </mapper>

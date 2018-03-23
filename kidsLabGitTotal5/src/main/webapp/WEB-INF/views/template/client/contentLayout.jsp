@@ -37,6 +37,13 @@
 <script type="text/javascript"
 	src="/resources/include/js/jquery-1.12.4.min.js"></script>
 </head>
+
+<aside>
+	<div>
+		<tiles:insertAttribute name="side" />
+	</div>
+</aside>
+
 <body>
 	<!-- Fixed navbar -->
 	<nav class="navbar navbar-default navbar-fixed-top">

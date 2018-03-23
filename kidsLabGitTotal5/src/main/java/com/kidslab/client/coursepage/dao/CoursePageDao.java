@@ -11,4 +11,14 @@ public interface CoursePageDao {
 
 	public List<CourseDataVO> homeCourseDataList(CourseDataVO cdvo);
 
+	public int coursePageListCnt(CourseDataVO cdvo);
+
+	public int coursePageInsert(CourseDataVO cdvo);
+
+	public CourseDataVO coursePageDetail(CourseDataVO cdvo);
+
+	public int coursePageUpdate(CourseDataVO cdvo);
+
+	public int coursePageDelete(int coursedata_no);
+
 }

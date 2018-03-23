@@ -11,15 +11,6 @@
 	src="/resources/include/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript"
 	src="/resources/include/js/courseApply.js"></script>
-<script type="text/javascript">
-	$(function() {
-		var result = "<c:out value='${result}'/>";
-		if (result === "0") {
-			alert("해당학생은 해당강의를 신청하였습니다.");
-			history.back();
-		}
-	});
-</script>
 
 </head>
 <body>

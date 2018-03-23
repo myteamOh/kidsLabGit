@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kidslab.admin.course.vo.CourseVO;
@@ -96,6 +97,28 @@ public class RequestCourseController {
 
 	}
 
+	/* 강의신청 가능여부 체크 */
+	@ResponseBody
+	@RequestMapping(value = "/applyConfirmCheck", method = RequestMethod.POST)
+	public int requestCourseConfirmCheck(@ModelAttribute("RequestCourseVO") RequestCourseVO rcvo) {
+
+		logger.info("쳌!");
+
+		int result = 0;
+
+		/* insert의 result값은 성공시 1 */
+		/* 1은 결제성공 0은 실패 */
+
+		if (requestCourseService.reCourseSelectByNo(rcvo).isEmpty()) {
+			result = 1;
+		} else {
+			result = 0;
+		}
+
+		return result;
+
+	}
+
 	/* 강의신청 후 결제 확인 페이지 */
 	@RequestMapping(value = "/applyConfirm.do", method = RequestMethod.POST)
 	public ModelAndView requestCourseConfirm(@ModelAttribute("RequestCourseVO") RequestCourseVO rcvo) {
@@ -112,7 +135,6 @@ public class RequestCourseController {
 
 		ModelAndView mav = new ModelAndView();
 
-		int result;
 		RequestCourseVO vo = null;
 
 		/* 데이터 변환 */
@@ -120,38 +142,24 @@ public class RequestCourseController {
 			rcvo.setRequestcourse_paymethod("무통장입금");
 		}
 
-		/* insert의 result값은 성공시 1 */
-
-		/* 1은 결제성공 0은 실패 */
-		if (requestCourseService.reCourseSelectByNo(rcvo).isEmpty()) {
-			requestCourseService.requestCourseInsert(rcvo);
-			vo = requestCourseService.reCourseSelectByNo(rcvo).get(0);
-			vo.setBank_and_account(rcvo.getBank_and_account());
-			result = 1;
-		} else {
-			result = 0;
-		}
+		requestCourseService.requestCourseInsert(rcvo);
+		vo = requestCourseService.reCourseSelectByNo(rcvo).get(0);
+		vo.setBank_and_account(rcvo.getBank_and_account());
 
 		mav.addObject("requestcoursedata", vo);
-		mav.addObject("result", result);
 
-		if (result == 1) {
-			mav.setViewName("client/courseApply/courseApplyConfirm");
-		} else {
-			mav.setViewName("client/courseApply/courseApplyPayment");
-		}
+		mav.setViewName("client/courseApply/courseApplyConfirm");
 
 		return mav;
 	}
-	
-	/*강의신청 완료후 메인페이지로*/
-	@RequestMapping(value="/applyComplete.do")
+
+	/* 강의신청 완료후 메인페이지로 */
+	@RequestMapping(value = "/applyComplete.do")
 	public String applyComplete(Model model) {
-		
+
 		logger.info("강의신청 완료!");
-		
+
 		return "index";
 	}
-	
 
 }

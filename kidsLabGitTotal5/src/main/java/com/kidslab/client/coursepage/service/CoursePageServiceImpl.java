@@ -20,22 +20,82 @@ public class CoursePageServiceImpl implements CoursePageService {
 	@Autowired
 	private CoursePageDao coursePageDao;
 
-	/*강의정보 가져오기*/
+	/* 강의정보 가져오기 */
 	@Override
 	public CourseVO selectCourse(CourseVO cvo) {
-		
+
 		CourseVO vo = coursePageDao.selectCourse(cvo);
 
 		return vo;
 	}
 
-	/*게시판 글목록 공지사항 자료실 5개씩*/
+	/* 게시판 글목록 공지사항 자료실 5개씩 */
 	@Override
 	public List<CourseDataVO> courseDataList(CourseDataVO cdvo) {
 
 		List<CourseDataVO> courseDataList = coursePageDao.homeCourseDataList(cdvo);
 
 		return courseDataList;
+	}
+
+	/* 전체글수 */
+	@Override
+	public int coursePageListCnt(CourseDataVO cdvo) {
+		return coursePageDao.coursePageListCnt(cdvo);
+	}
+
+	// 글 입력 처리
+	@Override
+	public int coursePageInsert(CourseDataVO cdvo) {
+
+		int result = 0;
+
+		try {
+			result = coursePageDao.coursePageInsert(cdvo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
+	// 글상세보기
+	@Override
+	public CourseDataVO coursePageDetail(CourseDataVO cdvo) {
+
+		CourseDataVO vo = null;
+
+		vo = coursePageDao.coursePageDetail(cdvo);
+
+		return vo;
+	}
+
+	// 글수정 처리
+	@Override
+	public int coursePageUpdate(CourseDataVO cdvo) {
+
+		logger.info("글수정 처리 서비스!");
+
+		int result = 0;
+
+		try {
+			result = coursePageDao.coursePageUpdate(cdvo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
+	// 글삭제
+	@Override
+	public int coursePageDelete(int coursedata_no) {
+
+		int result = 0;
+
+		result = coursePageDao.coursePageDelete(coursedata_no);
+
+		return result;
 	}
 
 }

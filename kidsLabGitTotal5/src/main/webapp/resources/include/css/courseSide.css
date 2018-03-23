@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+body {
+	width: auto;
+	min-width: 820px;
+	height: auto;
+	margin: auto;
+	margin-top: 100px;
+}
+
+aside {
+	width: 200px;
+	min-width: 200px;
+	height: 650px;
+	margin-left: 100px;
+	float: left;
+	background-color: #CEFBC9;
+	margin-top: 80px;
+}
+
+aside div {
+	margin-top: 20px;
+}
+
+#sidebar {
+	list-style: none;
+}
+
+#sidebar>li {
+	font-size: 18px;
+	margin-bottom: 10px;
+}
+
+li:active {
+	color: green;
+}

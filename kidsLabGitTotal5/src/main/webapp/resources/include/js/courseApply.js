@@ -71,12 +71,32 @@ $(function() {
 			alert("자녀를 추가해 주세요");
 			return;
 		} else {
-			$(".confirmForm").attr({
-				"method" : "POST",
-				"action" : "/requestcourse/applyConfirm.do"
+			
+			$.ajax({
+				url : "/requestcourse/applyConfirmCheck",
+				type : "POST",
+				data : $(".confirmForm").serialize(),
+				error : function() {
+					alert("그냥오류");
+				},
+				success : function(result) {
+
+					if (result == 1) {
+						alert("성공!");
+						$(".confirmForm").attr({
+							"method" : "POST",
+							"action" : "/requestcourse/applyConfirm.do"
+						});
+
+						$(".confirmForm").submit();
+					} else {
+						alert("해당학생은 해당강의를 신청하였습니다.");
+						return;
+					}
+					
+				}
 			});
 			
-			$(".confirmForm").submit();
 		}
 		
 	});

@@ -1,5 +1,7 @@
 package com.kidslab.client.coursedata.vo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.kidslab.admin.course.vo.CourseVO;
 
 public class CourseDataVO extends CourseVO {
@@ -10,15 +12,18 @@ public class CourseDataVO extends CourseVO {
 	private String coursedata_content; // 내용
 	private String coursedata_registerdate; // 작성일
 	private String coursedata_file; // 파일명
+	private MultipartFile file; // 첨부파일
 	private String coursedata_status; // 작성타입
 	private int course_no; // 강의번호
+	private int student_no; // 학생번호
 
 	public CourseDataVO() {
 		super();
 	}
 
 	public CourseDataVO(int coursedata_no, String coursedata_title, String coursedata_writer, String coursedata_content,
-			String coursedata_registerdate, String coursedata_file, String coursedata_status, int course_no) {
+			String coursedata_registerdate, String coursedata_file, MultipartFile file, String coursedata_status,
+			int course_no, int student_no) {
 		super();
 		this.coursedata_no = coursedata_no;
 		this.coursedata_title = coursedata_title;
@@ -26,8 +31,10 @@ public class CourseDataVO extends CourseVO {
 		this.coursedata_content = coursedata_content;
 		this.coursedata_registerdate = coursedata_registerdate;
 		this.coursedata_file = coursedata_file;
+		this.file = file;
 		this.coursedata_status = coursedata_status;
 		this.course_no = course_no;
+		this.student_no = student_no;
 	}
 
 	public int getCoursedata_no() {
@@ -78,6 +85,14 @@ public class CourseDataVO extends CourseVO {
 		this.coursedata_file = coursedata_file;
 	}
 
+	public MultipartFile getFile() {
+		return file;
+	}
+
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
+
 	public String getCoursedata_status() {
 		return coursedata_status;
 	}
@@ -94,12 +109,21 @@ public class CourseDataVO extends CourseVO {
 		this.course_no = course_no;
 	}
 
+	public int getStudent_no() {
+		return student_no;
+	}
+
+	public void setStudent_no(int student_no) {
+		this.student_no = student_no;
+	}
+
 	@Override
 	public String toString() {
 		return "CourseDataVO [coursedata_no=" + coursedata_no + ", coursedata_title=" + coursedata_title
 				+ ", coursedata_writer=" + coursedata_writer + ", coursedata_content=" + coursedata_content
 				+ ", coursedata_registerdate=" + coursedata_registerdate + ", coursedata_file=" + coursedata_file
-				+ ", coursedata_status=" + coursedata_status + ", course_no=" + course_no + "]";
+				+ ", file=" + file + ", coursedata_status=" + coursedata_status + ", course_no=" + course_no
+				+ ", student_no=" + student_no + "]";
 	}
 
 }
