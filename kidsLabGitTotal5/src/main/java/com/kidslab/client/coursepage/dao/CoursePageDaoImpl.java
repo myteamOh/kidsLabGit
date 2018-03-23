@@ -11,7 +11,7 @@ import com.kidslab.client.coursedata.vo.CourseDataVO;
 
 @Repository
 public class CoursePageDaoImpl implements CoursePageDao {
-	
+
 	@Autowired
 	private SqlSession session;
 
@@ -25,6 +25,12 @@ public class CoursePageDaoImpl implements CoursePageDao {
 	@Override
 	public List<CourseDataVO> homeCourseDataList(CourseDataVO cdvo) {
 		return session.selectList("homeCourseDataList", cdvo);
+	}
+
+	// 전체리스트
+	@Override
+	public List<CourseDataVO> courseDataList(CourseDataVO cdvo) {
+		return session.selectList("courseDataList", cdvo);
 	}
 
 	// 리스트 카운트

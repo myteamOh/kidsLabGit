@@ -31,10 +31,17 @@ public class CoursePageServiceImpl implements CoursePageService {
 
 	/* 게시판 글목록 공지사항 자료실 5개씩 */
 	@Override
-	public List<CourseDataVO> courseDataList(CourseDataVO cdvo) {
+	public List<CourseDataVO> homeCourseDataList(CourseDataVO cdvo) {
 
 		List<CourseDataVO> courseDataList = coursePageDao.homeCourseDataList(cdvo);
 
+		return courseDataList;
+	}
+
+	/* 전체 글목록 */
+	@Override
+	public List<CourseDataVO> courseDataList(CourseDataVO cdvo) {
+		List<CourseDataVO> courseDataList = coursePageDao.courseDataList(cdvo);
 		return courseDataList;
 	}
 

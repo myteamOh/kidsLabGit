@@ -10,6 +10,8 @@ public interface CoursePageDao {
 	public CourseVO selectCourse(CourseVO cvo);
 
 	public List<CourseDataVO> homeCourseDataList(CourseDataVO cdvo);
+	
+	public List<CourseDataVO> courseDataList(CourseDataVO cdvo);
 
 	public int coursePageListCnt(CourseDataVO cdvo);
 

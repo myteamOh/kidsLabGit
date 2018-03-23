@@ -1,7 +1,6 @@
 package com.kidslab.client.coursepage.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -47,10 +46,10 @@ public class CoursePageController {
 		cdvo.setCourse_no(cvo.getCourse_no());
 
 		cdvo.setCoursedata_status("공지사항");
-		List<CourseDataVO> courseDataNoticeList = coursePageService.courseDataList(cdvo);
+		List<CourseDataVO> courseDataNoticeList = coursePageService.homeCourseDataList(cdvo);
 
 		cdvo.setCoursedata_status("자료실");
-		List<CourseDataVO> courseDataDataList = coursePageService.courseDataList(cdvo);
+		List<CourseDataVO> courseDataDataList = coursePageService.homeCourseDataList(cdvo);
 
 		session.setAttribute("cNum", cvo.getCourse_no());
 		mav.addObject("course", vo);
@@ -93,8 +92,7 @@ public class CoursePageController {
 		int total = coursePageService.coursePageListCnt(cdvo);
 		logger.info("total = " + total);
 
-		List<CourseDataVO> cdvoList = new ArrayList<CourseDataVO>();
-		cdvoList = coursePageService.courseDataList(cdvo);
+		List<CourseDataVO> cdvoList = coursePageService.courseDataList(cdvo);
 
 		mav.addObject("total", total);
 		mav.addObject("courseboardList", cdvoList);

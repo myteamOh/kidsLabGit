@@ -6,8 +6,10 @@ import com.kidslab.admin.course.vo.CourseVO;
 import com.kidslab.client.coursedata.vo.CourseDataVO;
 
 public interface CoursePageService {
-	
+
 	public CourseVO selectCourse(CourseVO cvo);
+
+	public List<CourseDataVO> homeCourseDataList(CourseDataVO cdvo);
 
 	public List<CourseDataVO> courseDataList(CourseDataVO cdvo);
 
