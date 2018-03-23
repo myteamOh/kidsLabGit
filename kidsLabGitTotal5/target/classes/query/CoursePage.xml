@@ -67,7 +67,7 @@
 			FROM (
 				<include refid="coursePageCommon"></include>
 				WHERE course_no = #{course_no}
-				ORDER BY coursedata_no
+				ORDER BY coursedata_no DESC
 				) list
 			)
 		<where>
