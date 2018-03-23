@@ -36,28 +36,12 @@ $(function() {
 			alert("내용을 입력해 주세요.");
 			return;
 		}
-		alert($("#content").val());
-		alert($("#title").val());
-		alert($("#writer").val());
-		alert($("#statusSelector").val());
-		alert($("#course_no").val());
-		$.ajax({
-			url : "/coursepage/courseboardInsert",
-			type : "post",
-			data : $("#writeForm").serialize(),
-			error : function() {
-				alert("걍오류");
-			},
-			success : function() {
-				alert("성공!!!");
-				$("#writeForm").attr({
-					"method" : "POST",
-					"action" : "/coursepage/courseboardInsert"
-				});
+		$("#writeForm").attr({
+			"method" : "POST",
+			"action" : "/coursepage/courseboardInsert"
+		});
 
-				$("#writeForm").submit();
-			}
-		})
+		$("#writeForm").submit();
 
 
 	});

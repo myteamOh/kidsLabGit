@@ -38,7 +38,14 @@
 						<li><a href="#">오시는 길</a></li>
 						<li><a href="#">교육 과정</a></li>
 					</ul></li>
-				<li><a href="/requestcourse/apply.do">강의신청</a></li>
+				<c:choose>
+					<c:when test="${sessionScope.teacherLogin != null }">
+						<li><a href="/teacher/course/registForm">강의등록</a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="/requestcourse/apply.do">강의신청</a></li>
+					</c:otherwise>
+				</c:choose>
 				<li><a href="#">갤러리</a></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-expanded="false">게시판
@@ -49,7 +56,8 @@
 						<li><a href="#">강의 평가</a></li>
 					</ul></li>
 				<li><a href="#">FAQ</a></li>
-				<c:if test="${sessionScope.Login == null }">
+				<c:if
+					test="${sessionScope.Login == null and sessionScope.teacherLogin == null}">
 					<li><a href="/login/login.do">로그인</a></li>
 				</c:if>
 				<c:if test="${sessionScope.Login != null }">
@@ -70,6 +78,16 @@
 							<c:if test="${Login.userId.contains('@')}">
 								<li><a href="/inquiry/inquiryList.do">1:1 문의</a></li>
 							</c:if>
+						</ul></li>
+				</c:if>
+				<c:if test="${sessionScope.teacherLogin != null }">
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-expanded="false">${teacherLogin.teacher_id }
+							님<span class="caret"></span>
+					</a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="/teacher/logout.do">로그아웃</a></li>
+							<li><a href="/teacher/mypage">마이페이지</a></li>
 						</ul></li>
 				</c:if>
 			</ul>

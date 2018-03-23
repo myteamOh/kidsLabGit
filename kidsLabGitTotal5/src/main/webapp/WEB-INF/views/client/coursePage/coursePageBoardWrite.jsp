@@ -14,8 +14,10 @@
 </head>
 <body>
 	<form id="writeForm" enctype="multipart/form-data">
-		<input type="hidden" name="course_no" value="${cNum}" id="course_no"> <input
-			type="hidden" name="student_no" value="${Login.student_no}">
+		<input type="hidden" name="course_no" value="${cNum}" id="course_no">
+		<c:if test="${sessionScope.Login != null }">
+			<input type="hidden" name="student_no" value="${Login.student_no}">
+		</c:if>
 
 		<section>
 			<div>
@@ -32,7 +34,7 @@
 							<td>글 종류</td>
 							<td><select id="statusSelector" name="coursedata_status">
 									<c:choose>
-										<c:when test="${not empty teacherLogin}">
+										<c:when test="${sessionScope.teacherLogin != null }">
 											<option value="공지사항" selected="selected">공지사항</option>
 											<option value="자료실">자료실</option>
 										</c:when>
@@ -44,7 +46,7 @@
 
 							<td>작성자</td>
 							<td><c:choose>
-									<c:when test="${not empty teacherLogin}">
+									<c:when test="${sessionScope.teacherLogin != null}">
 										<input type="text" id="writer" name="coursedata_writer"
 											value="${teacherLogin.teacher_name}(${teacherLogin.teacher_id})"
 											readonly="readonly">

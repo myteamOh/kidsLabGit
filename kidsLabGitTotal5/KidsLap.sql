@@ -161,6 +161,9 @@ CREATE TABLE BOARD_COURSEDATA(
 	CONSTRAINT BOARD_COURSEDATA_FK FOREIGN KEY(COURSE_NO)
 	REFERENCES COURSE(COURSE_NO)
 );
+
+alter table board_coursedata
+modify coursedata_writer varchar2(40);
 ALTER TABLE board_coursedata
 ADD(student_no number);
 
