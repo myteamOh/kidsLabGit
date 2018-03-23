@@ -208,5 +208,27 @@ $(function() {
 
 			alert("수정page 진입 시도!");
 		});
+	$(".refundListBtn").click(function() {
+
+		$.ajax({
+			url : "/mypage/refundCheck",
+			type : "get",
+			error : function() {
+				alert("기냥에러");
+				return;
+			},
+			success : function(result) {
+				if (result) {
+					var parent_no = $("#parentNum").val();
+					window.open("/mypage/refund.do?parent_no=" + parent_no, "list", "width=1000, height=700");
+					return;
+				} else {
+					alert("로그 아웃 되었습니다.");
+					location.href = "/login/login.do";
+					return;
+				}
+			}
+		});
+	});
 
 });

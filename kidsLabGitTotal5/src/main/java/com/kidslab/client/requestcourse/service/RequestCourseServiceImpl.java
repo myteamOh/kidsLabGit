@@ -153,4 +153,12 @@ public class RequestCourseServiceImpl implements RequestCourseService {
 		return result;
 	}
 
+	@Override
+	public List<RequestCourseVO> refundList(ParentVO pvo) {
+		// TODO Auto-generated method stub
+		List<RequestCourseVO> refundList = requestCourseDao.refundList(pvo);
+		
+		return refundList;
+	}
+
 }

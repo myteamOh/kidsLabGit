@@ -215,7 +215,9 @@
 		requestcourse_accountnumber = #{requestcourse_accountnumber},
 		requestcourse_accountholder = #{requestcourse_accountholder},
 		requestcourse_refundcharge = #{requestcourse_refundcharge},
-		requestcourse_paymentstatus = '환불대기'
+		requestcourse_paymentstatus = '환불대기',
+		requestcourse_refunddate =
+		sysdate
 		WHERE
 		requestcourse_no =
 		#{requestcourse_no}
@@ -225,6 +227,37 @@
 		<include refid="totalSearch"></include>
 		WHERE rc.parent_no = #{parent_no} AND requestcourse_paymentstatus !=
 		'환불완료' OR rc.parent_no = #{parent_no} AND c.course_status != '강의종료'
+	</select>
+
+	<select id="refundList" parameterType="parent" resultType="requestCourse">
+		select requestcourse_paymentstatus, s.student_name, c.course_name,
+		p.parent_no,
+		requestcourse_payamount,
+		requestcourse_accountholder,
+		requestcourse_accountnumber,
+		requestcourse_refundcharge,
+		requestcourse_refundbank,
+		to_char(requestcourse_paymentdate,
+		'yyyy-mm-dd') as requestcourse_paymentdate,
+		to_char(requestcourse_paycompletedate, 'yyyy-mm-dd') as
+		requestcourse_paycompletedate,
+		to_char(requestcourse_refunddate,
+		'yyyy-mm-dd') as
+		requestcourse_refunddate,
+		to_char(requestcourse_refundcomplete, 'yyyy-mm-dd') as
+		requestcourse_refundcomplete
+		from requestcourse
+		r inner join student s
+		on r.student_no=s.student_no
+		inner join course c
+		on r.course_no =
+		c.course_no
+		inner join parent p on r.parent_no =
+		p.parent_no
+		where
+		(r.requestcourse_paymentstatus = '환불완료' or
+		r.requestcourse_paymentstatus = '환불대기') and
+		r.parent_no = #{parent_no}
 	</select>
 
 </mapper>

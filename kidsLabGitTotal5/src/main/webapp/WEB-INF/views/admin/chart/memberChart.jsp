@@ -155,7 +155,16 @@
     	  google.charts.load('current', {'packages':['line','controls']});
     	  chartDrowFun.chartDrow(); //chartDrow() 실행
     	});
-
+    
+    $("#chartToPdf").on("click", function() {
+    	
+    	var doc = new jsPDF();
+    	doc.addImage(chart.getImageURI(), 0, 0);
+    	doc.save('chart.pdf');
+    	
+    }, false);
+    
+	
 
 </script>
 <style type="text/css">
@@ -173,6 +182,10 @@
 		<div id="lineChartArea" style="padding: 0px 20px 0px 0px;"></div>
 		<!-- 컨트롤바를 생성할 영역 -->
 		<div id="controlsArea" style="padding: 0px 20px 0px 0px;"></div>
+	</div>
+
+	<div>
+		<input type="button" id="chartToPdf" value="PDF저장하기">
 	</div>
 
 </body>

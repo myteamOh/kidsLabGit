@@ -69,4 +69,10 @@ public class RequestCourseDaoImpl implements RequestCourseDao {
 		return session.selectList("withdrawCheck", pvo);
 	}
 
+	@Override
+	public List<RequestCourseVO> refundList(ParentVO pvo) {
+		// TODO Auto-generated method stub
+		return session.selectList("refundList", pvo);
+	}
+
 }

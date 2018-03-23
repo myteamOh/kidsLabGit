@@ -129,7 +129,7 @@ table {
 				<!-- 기본 -->
 				<c:choose>
 					<c:when test="${not empty rcListMap}">
-						<input type="button" class="" value="환불신청 및 환불내역 조회">
+						<input type="button" class="refundListBtn" value="환불신청 및 환불내역 조회">
 						<br>
 						자녀있을때
 						<div>

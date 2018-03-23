@@ -9,6 +9,10 @@ public class RequestCourseVO extends CourseVO {
 	private int requestcourse_payamount; // 결제금액
 	private String requestcourse_paymentdate; // 수강신청일
 	private String requestcourse_paycompletedate; // 결제완료확인일
+	// 추가
+	private String requestcourse_refunddate; // 환불 신청일
+	private String requestcourse_refundcomplete; // 환불 완료일
+	// 추가완료
 	private String requestcourse_paymentstatus; // 결제상태
 	private String requestcourse_accountholder; // 예금주
 	private String requestcourse_accountnumber; // 계좌번호
@@ -31,16 +35,19 @@ public class RequestCourseVO extends CourseVO {
 	}
 
 	public RequestCourseVO(int requestcourse_no, String requestcourse_paymethod, int requestcourse_payamount,
-			String requestcourse_paymentdate, String requestcourse_paycompletedate, String requestcourse_paymentstatus,
-			String requestcourse_accountholder, String requestcourse_accountnumber, int requestcourse_refundcharge,
-			String requestcourse_refundbank, int parent_no, int student_no, int course_no, String student_name,
-			String bank_and_account, String pass_day, int margin) {
+			String requestcourse_paymentdate, String requestcourse_paycompletedate, String requestcourse_refunddate,
+			String requestcourse_refundcomplete, String requestcourse_paymentstatus, String requestcourse_accountholder,
+			String requestcourse_accountnumber, int requestcourse_refundcharge, String requestcourse_refundbank,
+			int parent_no, int student_no, int course_no, String student_name, String bank_and_account, String pass_day,
+			int margin) {
 		super();
 		this.requestcourse_no = requestcourse_no;
 		this.requestcourse_paymethod = requestcourse_paymethod;
 		this.requestcourse_payamount = requestcourse_payamount;
 		this.requestcourse_paymentdate = requestcourse_paymentdate;
 		this.requestcourse_paycompletedate = requestcourse_paycompletedate;
+		this.requestcourse_refunddate = requestcourse_refunddate;
+		this.requestcourse_refundcomplete = requestcourse_refundcomplete;
 		this.requestcourse_paymentstatus = requestcourse_paymentstatus;
 		this.requestcourse_accountholder = requestcourse_accountholder;
 		this.requestcourse_accountnumber = requestcourse_accountnumber;
@@ -93,6 +100,22 @@ public class RequestCourseVO extends CourseVO {
 
 	public void setRequestcourse_paycompletedate(String requestcourse_paycompletedate) {
 		this.requestcourse_paycompletedate = requestcourse_paycompletedate;
+	}
+
+	public String getRequestcourse_refunddate() {
+		return requestcourse_refunddate;
+	}
+
+	public void setRequestcourse_refunddate(String requestcourse_refunddate) {
+		this.requestcourse_refunddate = requestcourse_refunddate;
+	}
+
+	public String getRequestcourse_refundcomplete() {
+		return requestcourse_refundcomplete;
+	}
+
+	public void setRequestcourse_refundcomplete(String requestcourse_refundcomplete) {
+		this.requestcourse_refundcomplete = requestcourse_refundcomplete;
 	}
 
 	public String getRequestcourse_paymentstatus() {

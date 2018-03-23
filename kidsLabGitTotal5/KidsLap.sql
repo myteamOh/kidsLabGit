@@ -161,6 +161,13 @@ CREATE TABLE BOARD_COURSEDATA(
 	CONSTRAINT BOARD_COURSEDATA_FK FOREIGN KEY(COURSE_NO)
 	REFERENCES COURSE(COURSE_NO)
 );
+ALTER TABLE board_coursedata
+ADD(student_no number);
+
+alter table board_coursedata drop column student_no;
+
+select *
+from board_coursedata;
 -- 강의 과제게시판
 CREATE TABLE BOARD_HOMEWORK(
 	HOMEWORK_NO NUMBER NOT NULL,
@@ -345,6 +352,8 @@ values(1, 'admin', 'test1234');
 
 ALTER TABLE TEACHER
 ADD(TEACHER_THUMB VARCHAR2(100));
+
+alter table
 
 SELECT *
 FROM TEACHER;
@@ -768,6 +777,54 @@ update requestcourse
 set requestcourse_paycompletedate = sysdate, requestcourse_paymentstatus = '환불대기' 
 where requestcourse_no = 25;
 
+select requestcourse_paymentstatus, s.student_name, c.course_name, p.parent_no
+from requestcourse r inner join student s on r.student_no=s.student_no inner join course c on r.course_no = c.course_no
+inner join parent p on r.parent_no = p.parent_no
+where (r.parent_no = 41 and r.requestcourse_paymentstatus = '환불완료') or (r.parent_no = 41 and r.requestcourse_paymentstatus = '환불대기')
 
+select requestcourse_paymentstatus, s.student_name, c.course_name, p.parent_no,
+requestcourse_payamount, requestcourse_paymentdate, requestcourse_accountholder,
+requestcourse_accountnumber, requestcourse_refundcharge, requestcourse_refundbank, requestcourse_paycompletedate
+from requestcourse r inner join student s on r.student_no=s.student_no inner join course c on r.course_no = c.course_no
+inner join parent p on r.parent_no = p.parent_no
+where (r.requestcourse_paymentstatus = '환불완료' or r.requestcourse_paymentstatus = '환불대기') and
+r.parent_no = 41
 
+select *
+from requestcourse;
 
+alter table requestcourse
+add(requestcourse_refunddate date);
+alter table requestcourse
+add(requestcourse_refundcomplete date);
+
+select
+		requestcourse_paycompletedate, requestcourse_payamount,
+		requestcourse_refundcharge,(requestcourse_payamount-requestcourse_refundcharge)
+		as margin ,rnum
+		from(
+		select list.*, rownum as rnum
+		from(
+		select
+		to_char(requestcourse_paycompletedate, 'yy-mm') as
+		requestcourse_paycompletedate,
+		sum(requestcourse_payamount) as
+		requestcourse_payamount, sum(requestcourse_refundcharge) as
+		requestcourse_refundcharge
+		from requestcourse
+		where
+		to_char(requestcourse_paycompletedate, 'yy-mm') <=
+		to_char(sysdate,
+		'yy-mm')
+		and requestcourse_paymentstatus = '결제완료' or
+		to_char(requestcourse_refundcomplete, 'yy-mm') <=
+		to_char(sysdate,
+		'yy-mm') and requestcourse_paymentstatus = '환불완료'
+		group by
+		to_char(requestcourse_paycompletedate, 'yy-mm')
+		order by
+		requestcourse_paycompletedate desc
+		) list
+		)
+		where rnum between 1 and 6
+		order by requestcourse_paycompletedate asc

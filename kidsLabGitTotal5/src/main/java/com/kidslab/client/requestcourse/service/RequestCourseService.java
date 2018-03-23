@@ -23,7 +23,9 @@ public interface RequestCourseService {
 	public RequestCourseVO reCourseSelectOne(RequestCourseVO rcvo);
 
 	public int refundApply(RequestCourseVO rcvo);
-	
+
 	public int withdrawCheck(ParentVO pvo);
-	
+
+	// 환불 리스트
+	public List<RequestCourseVO> refundList(ParentVO pvo);
 }

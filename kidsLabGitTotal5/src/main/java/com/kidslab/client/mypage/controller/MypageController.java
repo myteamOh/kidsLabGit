@@ -436,4 +436,42 @@ public class MypageController {
 
 	}
 
+	// 환불 리스트 체크
+	@ResponseBody
+	@RequestMapping(value = "/refundCheck", method = RequestMethod.GET)
+	public int check(HttpSession session) {
+		int result = 0;
+		logger.info("체크");
+		ParentVO uvo = new ParentVO();
+		uvo = (ParentVO) session.getAttribute("Login");
+		if (uvo != null) {
+			result = 1;
+			return result;
+		} else {
+			return result;
+		}
+	}
+
+	// 환불 리스트
+	@RequestMapping(value = "/refund.do", method = RequestMethod.GET)
+	public String refundList(@ModelAttribute RequestCourseVO rvo, HttpSession session, Model model) {
+		logger.info("환불리스트");
+
+		ParentVO uvo = new ParentVO();
+
+		uvo = (ParentVO) session.getAttribute("Login");
+
+		if (uvo != null) {
+			logger.info("parent_no : " + uvo.getParent_no());
+
+			List<RequestCourseVO> refundList = rcService.refundList(uvo);
+
+			model.addAttribute("refundList", refundList);
+			return "client/refundList/refundList";
+		} else {
+			return "redirect:/login/login.do";
+		}
+
+	}
+
 }

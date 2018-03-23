@@ -154,17 +154,25 @@
 		requestcourse_accountnumber,
 		requestcourse_refundcharge,
 		requestcourse_refundbank,
-		requestcourse_paycompletedate
-		from requestcourse
+		to_char(requestcourse_paycompletedate, 'yyyy-mm-dd') as
+		requestcourse_paycompletedate,
+		to_char(requestcourse_refunddate,'yyyy-mm-dd') as
+		requestcourse_refunddate,
+		to_char(requestcourse_refundcomplete,'yyyy-mm-dd') as
+		requestcourse_refundcomplete
+		from
+		requestcourse
 		r, parent p,
 		student s,
 		course c
 		where
-		r.parent_no = p.parent_no and
+		r.parent_no =
+		p.parent_no and
 		r.student_no =
 		s.student_no
 		and
-		r.course_no = c.course_no and
+		r.course_no = c.course_no
+		and
 		requestcourse_no =
 		#{requestCourse_no}
 
@@ -179,16 +187,16 @@
 			'결제대기',
 		</if>
 		<if test="requestCourse_paymentStatus=='paymentcomplete'">
-			'결제완료',
+			'결제완료', requestcourse_paycompletedate = sysdate
 		</if>
 		<if test="requestCourse_paymentStatus=='refundwaiting'">
 			'환불대기',
 		</if>
 		<if test="requestCourse_paymentStatus=='refundcomplete'">
-			'환불완료',
+			'환불완료', requestcourse_refundcomplete = sysdate
 		</if>
-		requestcourse_paycompletedate = sysdate
-		where requestcourse_no = #{requestCourse_no}
+		where requestcourse_no =
+		#{requestCourse_no}
 	</update>
 
 </mapper>
