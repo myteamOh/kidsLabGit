@@ -1,6 +1,7 @@
 package com.kidslab.client.coursepage.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -92,7 +93,8 @@ public class CoursePageController {
 		int total = coursePageService.coursePageListCnt(cdvo);
 		logger.info("total = " + total);
 
-		List<CourseDataVO> cdvoList = coursePageService.courseDataList(cdvo);
+		List<CourseDataVO> cdvoList = new ArrayList<CourseDataVO>();
+		cdvoList = coursePageService.courseDataList(cdvo);
 
 		mav.addObject("total", total);
 		mav.addObject("courseboardList", cdvoList);

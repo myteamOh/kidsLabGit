@@ -67,7 +67,6 @@
 			FROM (
 				<include refid="coursePageCommon"></include>
 				WHERE course_no = #{course_no}
-				ORDER BY coursedata_no DESC
 				) list
 			)
 		<where>
@@ -77,6 +76,7 @@
 				</if>
 			</if>
 		</where>
+			ORDER BY coursedata_no DESC
 	</select>
 	
 	<select id="coursePageListCnt" parameterType="courseData" resultType="int">
