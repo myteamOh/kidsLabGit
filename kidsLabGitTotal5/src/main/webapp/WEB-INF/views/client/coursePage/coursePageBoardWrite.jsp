@@ -18,7 +18,7 @@
 		<c:if test="${sessionScope.Login != null }">
 			<input type="hidden" name="student_no" value="${Login.student_no}">
 		</c:if>
-
+		
 		<section>
 			<div>
 				<table>
