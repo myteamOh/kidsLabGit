@@ -26,6 +26,8 @@
 			alias="teacherLogin" />
 		<typeAlias type="com.kidslab.teacher.registcourse.vo.RegistCourseVO"
 			alias="registCourse" />
+		<typeAlias type="com.kidslab.teacher.gallery.vo.TeacherGalleryVO"
+			alias="gallery" />
 
 		<!-- 사용자 추가된 부분 -->
 		<typeAlias type="com.kidslab.client.parent.vo.ParentVO"

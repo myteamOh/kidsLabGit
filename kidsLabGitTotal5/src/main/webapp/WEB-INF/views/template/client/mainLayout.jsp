@@ -60,21 +60,9 @@
     <![endif]-->
 <script type="text/javascript"
 	src="/resources/include/js/jquery-1.12.4.min.js"></script>
-<script type="text/javascript"
-	src="/resources/include/js/jquery.bxslider.js"></script>
-<script type="text/javascript">
-	var jQ182 = $.noConflict();
-	jQ182(document).ready(function() {
-		jQ182('.bxslider').bxSlider({
-			auto : true,
-			speed : 500,
-			pause : 4000,
-			mode : 'horizontal',
-			autoControls : false,
-			pager : true,
-		});
-	});
-</script>
+<!-- Custom styles for this template -->
+<link href="/resources/include/css/carousel.css" rel="stylesheet">
+</head>
 
 </head>
 <body>
@@ -86,26 +74,78 @@
 	<!-- Begin page content -->
 	<div class="container">
 		<div class="page-header">
-			<div class="jumbotron">
-				<div class="bxslider_con">
-					<ul class="bxslider">
-						<li><img src="/resources/images/image/kidslabmain1.jpg" /></li>
-						<li><img src="/resources/images/image/kidslabmain2.jpg" /></li>
-						<li><img src="/resources/images/image/kidslabmain3.jpg" /></li>
-					</ul>
+
+			<!-- Carousel
+   				 ================================================== -->
+			<div id="myCarousel" class="carousel slide" data-ride="carousel">
+				<!-- Indicators -->
+				<ol class="carousel-indicators">
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				</ol>
+				<div class="carousel-inner" role="listbox">
+					<div class="item active">
+						<img class="first-slide"
+							src="/resources/images/image/kidslabmain1.jpg" alt="First slide">
+						<div class="container">
+							<div class="carousel-caption">
+								<h1>KidsLab 강의신청</h1>
+								<p>소프트웨어 교육을 통한 논리 향상, 지금 시작하세요.</p>
+								<p>
+									<a class="btn btn-lg btn-primary"
+										href="/requestcourse/apply.do" role="button">강의신청</a>
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="item">
+						<img class="second-slide"
+							src="/resources/images/image/kidslabmain2.jpg" alt="Second slide">
+						<div class="container">
+							<div class="carousel-caption">
+								<h1></h1>
+								<p>회원 가입을 통하여 더 많은 기능을 활용하실 수 있습니다.</p>
+								<p>
+									<a class="btn btn-lg btn-primary" href="/login/logout.do"
+										role="button">회원가입</a>
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="item">
+						<img class="third-slide"
+							src="/resources/images/image/kidslabmain3.jpg" alt="Third slide">
+						<div class="container">
+							<div class="carousel-caption">
+								<h1>프로젝트 갤러리</h1>
+								<p>학생들이 어떤 결과물들을 만들었을까요? 갤러리를 통해 확인하세요.</p>
+								<p>
+									<a class="btn btn-lg btn-primary"
+										href="/client/gallery/galleryList" role="button">Browse
+										gallery</a>
+								</p>
+							</div>
+						</div>
+					</div>
 				</div>
+				<a class="left carousel-control" href="#myCarousel" role="button"
+					data-slide="prev"> <span
+					class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+					<span class="sr-only">Previous</span>
+				</a> <a class="right carousel-control" href="#myCarousel" role="button"
+					data-slide="next"> <span
+					class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+					<span class="sr-only">Next</span>
+				</a>
 			</div>
+			<!-- /.carousel -->
 		</div>
 
+		<!-- /.row -->
 		<div class="row">
 			<div class="col-xs-6 col-lg-4">
 
-				<%--===================상세 페이지 이동을 위한 FORM =============== --%>
-				<div class="hide">
-					<form id="noticeDetailForm" name="noticeDetailForm">
-						<input type="hidden" name="notice_no" id="notice_no">
-					</form>
-				</div>
 				<h1 align="center">공지사항</h1>
 				<table width=100% cellpadding=0 cellspacing=0
 					class="recent_notice table table-hover">
@@ -155,7 +195,44 @@
 			<!-- /.col-xs-6.col-lg-4 -->
 		</div>
 		<!-- /row -->
+		<hr>
 
+		<!-- Three columns of text below the carousel -->
+		<div class="row">
+			<div class="col-lg-4">
+				<img class="img-circle" src="/resources/images/image/row1.gif"
+					alt="Generic placeholder image" width="140" height="140">
+				<h2>회사소개</h2>
+				<p>KidsLab에 대하여 궁금하신 분께 알려드립니다.</p>
+				<p>
+					<a class="btn btn-default" href="/client/introduce/lab"
+						role="button">View details &raquo;</a>
+				</p>
+			</div>
+			<!-- /.col-lg-4 -->
+			<div class="col-lg-4">
+				<img class="img-circle" src="/resources/images/image/row2.gif"
+					alt="Generic placeholder image" width="140" height="140">
+				<h2>강의소개</h2>
+				<p>KidsLab에서 진행되고 있는 강의들.</p>
+				<p>
+					<a class="btn btn-default" href="/client/introduce/" role="button">View
+						details &raquo;</a>
+				</p>
+			</div>
+			<!-- /.col-lg-4 -->
+			<div class="col-lg-4">
+				<img class="img-circle" src="/resources/images/image/row3.gif"
+					alt="Generic placeholder image" width="140" height="140">
+				<h2>오시는 길</h2>
+				<p>KidsLab에 오시는 길</p>
+				<p>
+					<a class="btn btn-default" href="#" role="button">View details
+						&raquo;</a>
+				</p>
+			</div>
+			<!-- /.col-lg-4 -->
+		</div>
 
 	</div>
 	<!-- /.container -->

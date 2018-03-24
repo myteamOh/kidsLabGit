@@ -33,10 +33,10 @@
 						class="caret"></span>
 				</a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="#">학원 소개</a></li>
-						<li><a href="#">강사 소개</a></li>
-						<li><a href="#">오시는 길</a></li>
-						<li><a href="#">교육 과정</a></li>
+						<li><a href="/client/introduce/lab">학원 소개</a></li>
+						<li><a href="/client/introduce/teacher">강사 소개</a></li>
+						<li><a href="/client/introduce/waytocome">오시는 길</a></li>
+						<li><a href="/client/introduce/cource">교육 과정</a></li>
 					</ul></li>
 				<c:choose>
 					<c:when test="${sessionScope.teacherLogin != null }">
@@ -46,7 +46,15 @@
 						<li><a href="/requestcourse/apply.do">강의신청</a></li>
 					</c:otherwise>
 				</c:choose>
-				<li><a href="#">갤러리</a></li>
+				<c:choose>
+					<c:when test="${sessionScope.teacherLogin != null }">
+						<li><a href="/teacher/gallery/galleryList">갤러리</a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="/client/gallery/galleryList">갤러리</a></li>
+					</c:otherwise>
+				</c:choose>
+
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-expanded="false">게시판
 						<span class="caret"></span>
@@ -55,7 +63,7 @@
 						<li><a href="/notice/noticeList">공지사항</a></li>
 						<li><a href="#">강의 평가</a></li>
 					</ul></li>
-				<li><a href="#">FAQ</a></li>
+				<li><a href="/client/faq/faqList">FAQ</a></li>
 				<c:if
 					test="${sessionScope.Login == null and sessionScope.teacherLogin == null}">
 					<li><a href="/login/login.do">로그인</a></li>

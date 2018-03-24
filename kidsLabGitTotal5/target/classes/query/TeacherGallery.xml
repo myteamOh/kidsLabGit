@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kidslab.teacher.gallery.dao.TeacherGalleryDAO">
+
+
+	<sql id="galleryCommon">
+		select gallery_no,
+		g.teacher_no,
+		t.teacher_name,
+		gallery_title,
+		gallery_content,
+		gallery_thumb,
+		gallery_registerdate
+		from gallery g inner join teacher t on g.teacher_no = t.teacher_no
+		<where>
+			<if test="search=='gallery_title'">
+				<![CDATA[ gallery_title like '%' || #{keyword} || '%']]>
+			</if>
+			<if test="search=='gallery_content'">
+				<![CDATA[ gallery_content like '%' || #{keyword} || '%']]>
+			</if>
+			<if test="search=='gallery_registerdate'">
+				<![CDATA[ to_char(gallery_registerdate, 'YYYY-MM-DD')
+				 between #{start_date} and #{end_date}]]>
+			</if>
+		</where>
+	</sql>
+
+
+	<select id="mainGalleryList" resultType="gallery">
+		select gallery_no,
+		gallery_title,
+		to_char(gallery_registerdate, 'yyyy-mm-dd') as
+		gallery_registerdate
+		from (
+		select list.*, rownum as rnum
+		from (
+		select *
+		from board_notice
+		order by notice_no desc
+		) list
+		)
+		where rnum between 1
+		and 5
+
+	</select>
+
+	<!-- 게시물 전체 조회 -->
+	<select id="galleryList" parameterType="gallery" resultType="gallery">
+		<!-- notice - noticeList -->
+		select gallery_no, teacher_no, gallery_title, gallery_content,
+		gallery_thumb,
+		to_char(gallery_registerdate,
+		'yyyy-mm-dd') as gallery_registerdate
+		from(
+		select list.*, rownum as
+		rnum
+		from (
+		<include refid="galleryCommon"></include>
+		order by gallery_no desc
+		) list
+		)
+		<where>
+			<if test="start_row != null and start_row != ''">
+				<if test="end_row != null and end_row != ''">
+					rnum between #{start_row} and #{end_row}
+				</if>
+			</if>
+		</where>
+	</select>
+
+	<!-- 게시물 전체 개수 -->
+	<select id="galleryListCnt" parameterType="gallery" resultType="int">
+		select nvl(count(1), 0) from
+		( select list.*, rownum as rnum
+		from(
+		<include refid="galleryCommon"></include>
+		order by gallery_no desc
+		) list
+		)
+	</select>
+
+	<!-- 갤러리 상세보기 -->
+	<select id="galleryDetail" parameterType="int" resultType="gallery">
+		select gallery_no, teacher_no, gallery_title, gallery_content,
+		gallery_file,
+		to_char(gallery_registerdate, 'yyyy-mm-dd') as
+		gallery_registerdate
+		from
+		gallery
+		where gallery_no = #{gallery_no}
+	</select>
+
+	<insert id="galleryInsert" parameterType="gallery">
+		<!-- Notice - noticeInsert -->
+		<selectKey keyProperty="gallery_no" resultType="int" order="BEFORE">
+			select GALLERY_SEQ.nextval from dual
+		</selectKey>
+		insert into gallery(
+		gallery_no, teacher_no, gallery_title,
+		gallery_content
+		<if test="gallery_file != null and gallery_file != ''">
+			, gallery_file, gallery_thumb
+		</if>
+
+		)
+		values(
+		#{gallery_no}, #{teacher_no}, #{gallery_title},
+		#{gallery_content}
+		<if test="gallery_file != null and gallery_file != ''">
+			, #{gallery_file}, #{gallery_thumb}
+		</if>
+		)
+	</insert>
+
+	<update id="galleryUpdate" parameterType="gallery">
+		<!-- Notice - noticeUpdate -->
+		update gallery
+		set gallery_title = #{gallery_title},
+		gallery_content =
+		#{gallery_content},
+		gallery_registerdate = sysdate
+		<if test="gallery_file != null and gallery_file != ''">
+			, gallery_file = #{gallery_file}
+			, gallery_thumb = #{gallery_thumb}
+		</if>
+		where gallery_no = #{gallery_no}
+	</update>
+	<delete id="galleryDelete" parameterType="gallery">
+		<!-- Notice - noticeDelete -->
+		delete from
+		gallery
+		where gallery_no = #{gallery_no}
+	</delete>
+
+
+
+
+
+</mapper>
+  
+
+  

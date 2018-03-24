@@ -1,21 +1,17 @@
 package com.kidslab.common.file;
 
 import java.awt.image.BufferedImage;
+import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.imgscalr.Scalr;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.view.AbstractView;
 
 public class FileUploadUtil {
 	static Logger logger = Logger.getLogger(FileUploadUtil.class);
@@ -33,7 +29,6 @@ public class FileUploadUtil {
 	public static String fileUpload(MultipartFile file, HttpServletRequest request, String fileName)
 			throws IOException {
 		logger.info("fileUpload 호출 성공");
-
 		String real_name = null;
 		// MultipartFile 클래스의 getFile() 메소드로 클라이언트가 업로드한 파일
 		String org_name = file.getOriginalFilename();
@@ -48,15 +43,17 @@ public class FileUploadUtil {
 			String path = "C:/downLoad/" + fileName;
 			makeDir(docRoot);
 			makeDir(path);
-
+			byte[] bytes = file.getBytes();
 			// 파일 생성 후
 			File fileAdd = new File(docRoot + "/" + real_name);
 			File fileAddC = new File(path + "/" + real_name);
 			logger.info("업로드 할 파일(fileAdd) : " + fileAdd);
-			logger.info("업로드 할 파일(fileAdd) : " + fileAddC);
-
+			logger.info("업로드 할 파일(fileAddC) : " + fileAddC);
+			BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(path + "/" + real_name));
+			bos.write(bytes);
+			bos.flush();
+			bos.close();
 			file.transferTo(fileAdd);
-			file.transferTo(fileAddC);
 
 		}
 		return real_name;
@@ -90,7 +87,7 @@ public class FileUploadUtil {
 		String dirName = fileName.substring(0, fileName.indexOf("_"));
 		// 추출된 폴더의 실제 경로(물리적 위치 : C:\...)
 		String imgPath = request.getSession().getServletContext().getRealPath("uploadStorage/" + dirName);
-		String path = "C:/downLoad/" + fileName;
+		String path = "C:/downLoad/" + dirName;
 		File fileAdd = new File(imgPath, fileName);
 		File fileAddC = new File(path, fileName);
 		logger.info("원본 이미지 파일(fileAdd) : " + fileAdd);

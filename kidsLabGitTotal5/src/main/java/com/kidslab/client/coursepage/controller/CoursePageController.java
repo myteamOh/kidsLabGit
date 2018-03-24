@@ -1,7 +1,5 @@
 package com.kidslab.client.coursepage.controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.List;

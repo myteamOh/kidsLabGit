@@ -79,6 +79,24 @@
 			value="/WEB-INF/views/client/coursePage/{1}.jsp" />
 	</definition>
 
+	<definition name="client/gallery/*" extends="content">
+		<put-attribute name="title" value="프로젝트 갤러리" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/client/gallery/{1}.jsp" />
+	</definition>
+
+	<definition name="client/faq/*" extends="content">
+		<put-attribute name="title" value="FAQ" />
+		<put-attribute name="body" value="/WEB-INF/views/client/faq/{1}.jsp" />
+	</definition>
+
+	<definition name="client/introduce/*" extends="content">
+		<put-attribute name="title" value="ABOUT" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/client/introduce/{1}.jsp" />
+	</definition>
+
+
 	<!-- 강사 페이지 -->
 	<definition name="teacher/course/*" extends="content">
 		<put-attribute name="title" value="강의등록" />
@@ -90,6 +108,12 @@
 		<put-attribute name="title" value="마이페이지" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/teacher/mypage/{1}.jsp" />
+	</definition>
+
+	<definition name="teacher/gallery/*" extends="content">
+		<put-attribute name="title" value="갤러리" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/teacher/gallery/{1}.jsp" />
 	</definition>
 
 </tiles-definitions> 
