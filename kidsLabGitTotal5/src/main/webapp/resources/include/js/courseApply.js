@@ -4,7 +4,7 @@ $(function() {
 	$(".courseLevel").change(function() {
 
 		$.ajax({
-			url : "/requestcourse/apply.do",
+			url : "/requestcourse/apply",
 			type : "GET",
 			data : "course_level=" + $(".courseLevel").val(),
 			error : function() {
@@ -13,7 +13,7 @@ $(function() {
 			success : function(data) {
 				alert("성공");
 				$(".search").attr({
-					"action" : "/requestcourse/apply.do",
+					"action" : "/requestcourse/apply",
 					"method" : "GET"
 				});
 
@@ -34,7 +34,7 @@ $(function() {
 
 		$(".detailForm").attr({
 			"method" : "GET",
-			"action" : "/requestcourse/applyDetail.do"
+			"action" : "/requestcourse/applyDetail"
 		});
 
 		$(".detailForm").submit();
@@ -57,7 +57,7 @@ $(function() {
 
 		$(".applyForm").attr({
 			"method" : "POST",
-			"action" : "/requestcourse/applyNPayment.do"
+			"action" : "/requestcourse/applyNPayment"
 		});
 
 		$(".applyForm").submit();
@@ -85,7 +85,7 @@ $(function() {
 						alert("성공!");
 						$(".confirmForm").attr({
 							"method" : "POST",
-							"action" : "/requestcourse/applyConfirm.do"
+							"action" : "/requestcourse/applyConfirm"
 						});
 
 						$(".confirmForm").submit();
@@ -103,11 +103,11 @@ $(function() {
 
 	/* 목록으로 돌아가는 버튼 이벤트 */
 	$(".toListBtn").click(function() {
-		location.href = "/requestcourse/apply.do";
+		location.href = "/requestcourse/apply";
 	});
 	
 	$(".toMainBtn").click(function() {
-		location.href = "/requestcourse/applyComplete.do";
+		location.href = "/requestcourse/applyComplete";
 	});
 
 });

@@ -74,7 +74,7 @@ public class MypageController {
 	private RequestCourseService rcService;
 
 	/* 학부모 mypage */
-	@RequestMapping(value = "/parentMypage.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/parentMypage", method = RequestMethod.GET)
 	public String parentMypage(@ModelAttribute ParentVO pvo, Model model, HttpSession session) {
 
 		logger.info("학부모 mypage 호출");
@@ -103,7 +103,7 @@ public class MypageController {
 	}
 
 	/* 학생 mypage */
-	@RequestMapping(value = "/studentMypage.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/studentMypage", method = RequestMethod.GET)
 	public String studentMypage(@ModelAttribute("RequestCourseVO") RequestCourseVO rcvo, Model model,
 			HttpSession session) {
 
@@ -132,7 +132,7 @@ public class MypageController {
 	 */
 
 	/* 정보수정 버튼 클릭시 비밀번호 체크 페이지 */
-	@RequestMapping(value = "/modifyCheckPw.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/modifyCheckPw", method = RequestMethod.POST)
 	public ModelAndView modifyCheckPw(Model model) {
 
 		logger.info("비밀번호 확인창 호출!");
@@ -145,7 +145,7 @@ public class MypageController {
 	}
 
 	/* 비밀번호 확인 버튼 클릭시 처리 */
-	@RequestMapping(value = "/modifyinfo.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/modifyinfo", method = RequestMethod.POST)
 	public ModelAndView userModify(@ModelAttribute("ParentVO") ParentVO pvo, @ModelAttribute("StudentVO") StudentVO svo,
 			HttpSession session) {
 
@@ -198,7 +198,7 @@ public class MypageController {
 	}
 
 	/* 학부모 수정완료 버튼 클릭시 처리 */
-	@RequestMapping(value = "/parentModifyInfo.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/parentModifyInfo", method = RequestMethod.POST)
 	public ModelAndView parentModifyInfo(@ModelAttribute("ParentVO") ParentVO pvo, HttpSession session) {
 
 		logger.info("학부모 정보 수정");
@@ -217,7 +217,7 @@ public class MypageController {
 		pvo.setUserId(login.getUserId());
 		ParentVO vo = parentJoinService.parentSelect(pvo.getUserId());
 		if (parentJoinService.parentUpdate(pvo)) {
-			mav.setViewName("redirect:/login/logout.do");
+			mav.setViewName("redirect:/login/logout");
 			return mav;
 		} else {
 			mav.addObject("Login", vo);
@@ -256,11 +256,11 @@ public class MypageController {
 		parentJoinService.parentWithdraw(pvo);
 		studentJoinService.studentWithdraw(pvo);
 
-		return "redirect:/login/logout.do";
+		return "redirect:/login/logout";
 	}
 
 	/* 학생 수정완료 버튼 클릭시 처리 */
-	@RequestMapping(value = "/studentModifyInfo.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/studentModifyInfo", method = RequestMethod.POST)
 	public ModelAndView studentModifyInfo(@ModelAttribute("StudentVO") StudentVO svo, HttpSession session) {
 
 		logger.info("학생 정보 수정");
@@ -277,7 +277,7 @@ public class MypageController {
 		svo.setUserId(login.getUserId());
 		StudentVO vo = studentJoinService.studentSelect(svo.getUserId());
 		if (studentJoinService.studentUpdate(svo)) {
-			mav.setViewName("redirect:/login/logout.do");
+			mav.setViewName("redirect:/login/logout");
 			return mav;
 		} else {
 			mav.addObject("Login", vo);
@@ -288,7 +288,7 @@ public class MypageController {
 	}
 
 	/* 학부모 mypage 수강 신청 취소 버튼 클릭시 처리 */
-	@RequestMapping(value = "/applyCancel.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/applyCancel", method = RequestMethod.POST)
 	public String applyCancel(@ModelAttribute RequestCourseVO rcvo) {
 
 		logger.info("수강 신청 취소!");
@@ -297,12 +297,12 @@ public class MypageController {
 
 		result = rcService.requestCourseDelete(rcvo.getRequestcourse_no());
 
-		return "redirect:/mypage/parentMypage.do";
+		return "redirect:/mypage/parentMypage";
 
 	}
 
 	/* 학부모 mypage 수강취소, 수강포기 버튼 클릭시 처리 */
-	@RequestMapping(value = "/courseCancel.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/courseCancel", method = RequestMethod.POST)
 	public ModelAndView courseCancel(@ModelAttribute RequestCourseVO rcvo) {
 
 		logger.info("환불페이지로!");
@@ -394,14 +394,14 @@ public class MypageController {
 	}
 
 	/* 환불신청버튼 클릭시 처리 */
-	@RequestMapping(value = "/refundApply.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/refundApply", method = RequestMethod.POST)
 	public String refundApply(@ModelAttribute RequestCourseVO rcvo) {
 
 		logger.info("환불신청!");
 
 		rcService.refundApply(rcvo);
 
-		return "redirect:/mypage/parentMypage.do";
+		return "redirect:/mypage/parentMypage";
 	}
 
 	/** 파일 다운로드**/
@@ -421,14 +421,14 @@ public class MypageController {
 			if (download.isFile()) {
 				return new ModelAndView("download", "downloadFile", download);
 			} else {
-				mav.setViewName("redirect:/mypage/parentMypage.do");
+				mav.setViewName("redirect:/mypage/parentMypage");
 				return mav;
 			}
 		} else {
 			if (download.isFile()) {
 				return new ModelAndView("download", "downloadFile", download);
 			} else {
-				mav.setViewName("redirect:/mypage/studentMypage.do");
+				mav.setViewName("redirect:/mypage/studentMypage");
 				return mav;
 			}
 		}
@@ -452,7 +452,7 @@ public class MypageController {
 	}
 
 	// 환불 리스트
-	@RequestMapping(value = "/refund.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/refund", method = RequestMethod.GET)
 	public String refundList(@ModelAttribute RequestCourseVO rvo, HttpSession session, Model model) {
 		logger.info("환불리스트");
 
@@ -468,7 +468,7 @@ public class MypageController {
 			model.addAttribute("refundList", refundList);
 			return "client/refundList/refundList";
 		} else {
-			return "redirect:/login/login.do";
+			return "redirect:/login/login";
 		}
 
 	}

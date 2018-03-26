@@ -12,7 +12,7 @@ $(function() {
 					return;
 				} else {
 					$.ajax({
-						url : "/member/studentIdConfirm.do",
+						url : "/member/studentIdConfirm",
 						type : "post",
 						data : "userId=" + $("#userId").val(),
 						error : function() {
@@ -119,7 +119,7 @@ $(function() {
 
 						$("#studentForm").attr({
 							"method" : "post",
-							"action" : "/member/studentjoin.do"
+							"action" : "/member/studentjoin"
 						});
 
 						$("#studentForm").submit();
@@ -132,7 +132,7 @@ $(function() {
 	$("#cancelBtn").click(function() {
 		console.log("자녀등록 취소!");
 
-		location.href = "/mypage/parentMypage.do";
+		location.href = "/mypage/parentMypage";
 	});
 
 });

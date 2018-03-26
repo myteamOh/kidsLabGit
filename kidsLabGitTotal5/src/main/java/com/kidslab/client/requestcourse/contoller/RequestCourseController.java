@@ -34,7 +34,7 @@ public class RequestCourseController {
 	private RequestCourseService requestCourseService;
 
 	/* 강의신청 목록조회 페이지 호출 */
-	@RequestMapping(value = "/apply.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/apply", method = RequestMethod.GET)
 	public String requestCourseList(@ModelAttribute("CourseVO") CourseVO cvo, Model model) {
 
 		logger.info("강의신청 목록 호출");
@@ -50,7 +50,7 @@ public class RequestCourseController {
 	}
 
 	/* 강의신청 상세보기 페이지 호출 */
-	@RequestMapping(value = "/applyDetail.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/applyDetail", method = RequestMethod.GET)
 	public String requestCourseDetail(@ModelAttribute("CourseVO") CourseVO cvo, Model model) {
 
 		logger.info("강의신청 상세보기 페이지 호출!");
@@ -70,7 +70,7 @@ public class RequestCourseController {
 	}
 
 	/* 강의신청 신청 및 결제 페이지 호출 */
-	@RequestMapping(value = "/applyNPayment.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/applyNPayment", method = RequestMethod.POST)
 	public ModelAndView requestCoursePayment(@ModelAttribute("ParentVO") ParentVO pvo,
 			@ModelAttribute("CourseVO") CourseVO cvo, HttpSession session) {
 
@@ -120,7 +120,7 @@ public class RequestCourseController {
 	}
 
 	/* 강의신청 후 결제 확인 페이지 */
-	@RequestMapping(value = "/applyConfirm.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/applyConfirm", method = RequestMethod.POST)
 	public ModelAndView requestCourseConfirm(@ModelAttribute("RequestCourseVO") RequestCourseVO rcvo) {
 
 		logger.info("강의신청 결제 확인페이지");
@@ -154,7 +154,7 @@ public class RequestCourseController {
 	}
 
 	/* 강의신청 완료후 메인페이지로 */
-	@RequestMapping(value = "/applyComplete.do")
+	@RequestMapping(value = "/applyComplete")
 	public String applyComplete(Model model) {
 
 		logger.info("강의신청 완료!");

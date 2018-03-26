@@ -27,7 +27,7 @@ public class ClientLoginController {
 	/*
 	 * 로그인 Form
 	 */
-	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginForm() {
 
 		logger.info("로그인폼 출력!");
@@ -36,7 +36,7 @@ public class ClientLoginController {
 	}
 
 	/* 로그인 처리 */
-	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView loginCheck(@ModelAttribute("ParentVO") ParentVO pvo, @ModelAttribute("StudentVO") StudentVO svo,
 			HttpSession session, HttpServletRequest request) {
 
@@ -75,7 +75,7 @@ public class ClientLoginController {
 	}
 
 	/* 로그아웃 처리 */
-	@RequestMapping(value = "/logout.do")
+	@RequestMapping(value = "/logout")
 	public String logout(HttpSession session, HttpServletRequest request) {
 
 		session.invalidate();

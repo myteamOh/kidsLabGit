@@ -7,7 +7,7 @@ $(function() {
 
 		$("#pwCheckForm").attr({
 			"method" : "POST",
-			"action" : "/mypage/modifyCheckPw.do"
+			"action" : "/mypage/modifyCheckPw"
 		});
 
 		$("#pwCheckForm").submit();
@@ -19,7 +19,7 @@ $(function() {
 
 		alert("자녀추가하기");
 
-		location.href = "/member/studentjoin.do";
+		location.href = "/member/studentjoin";
 
 	});
 
@@ -39,7 +39,7 @@ $(function() {
 
 			$("#modifyForm").attr({
 				"method" : "post",
-				"action" : "/mypage/modifyinfo.do"
+				"action" : "/mypage/modifyinfo"
 			});
 
 			$("#modifyForm").submit();
@@ -69,7 +69,7 @@ $(function() {
 
 			$("#courseForm").attr({
 				"method" : "POST",
-				"action" : "/mypage/applyCancel.do"
+				"action" : "/mypage/applyCancel"
 			});
 
 			$("#courseForm").submit();
@@ -93,7 +93,7 @@ $(function() {
 
 		$("#courseForm").attr({
 			"method" : "POST",
-			"action" : "/mypage/courseCancel.do"
+			"action" : "/mypage/courseCancel"
 		});
 
 		$("#courseForm").submit();
@@ -139,7 +139,7 @@ $(function() {
 
 			$("#refundForm").attr({
 				"method" : "POST",
-				"action" : "/mypage/refundApply.do"
+				"action" : "/mypage/refundApply"
 			});
 
 			$("#refundForm").submit();
@@ -151,7 +151,7 @@ $(function() {
 
 	/* 환불취소버튼 클릭시 이벤트 */
 	$(".refundCancel").click(function() {
-		location.href = "/mypage/parentMypage.do";
+		location.href = "/mypage/parentMypage";
 	});
 
 	/*강의 페이지 클릭시 이벤트*/
@@ -220,11 +220,11 @@ $(function() {
 			success : function(result) {
 				if (result) {
 					var parent_no = $("#parentNum").val();
-					window.open("/mypage/refund.do?parent_no=" + parent_no, "list", "width=1000, height=700");
+					window.open("/mypage/refund?parent_no=" + parent_no, "list", "width=1000, height=700");
 					return;
 				} else {
 					alert("로그 아웃 되었습니다.");
-					location.href = "/login/login.do";
+					location.href = "/login/login";
 					return;
 				}
 			}
