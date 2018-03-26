@@ -63,8 +63,21 @@
 <!-- Custom styles for this template -->
 <link href="/resources/include/css/carousel.css" rel="stylesheet">
 </head>
-
-</head>
+<script type="text/javascript">
+	$(function() {
+		/* 제목 클릭시 상세 페이지 이동을 위한 처리 이벤트 */
+		$(".goNoticeDetail").click(function() {
+			var notice_no = $(this).parents("tr").attr("data-num");
+			$("#notice_no").val(notice_no);
+			// 상세 페이지로 이동하기 위해 form 추가(id : detailForm)
+			$("#detailForm").attr({
+				"method" : "get",
+				"action" : "/notice/noticeDetail"
+			});
+			$("#detailForm").submit();
+		});
+	});
+</script>
 <body>
 	<!-- Fixed navbar -->
 	<nav class="navbar navbar-default navbar-fixed-top">
@@ -107,7 +120,7 @@
 								<h1></h1>
 								<p>회원 가입을 통하여 더 많은 기능을 활용하실 수 있습니다.</p>
 								<p>
-									<a class="btn btn-lg btn-primary" href="/login/logout.do"
+									<a class="btn btn-lg btn-primary" href="/member/agree.do"
 										role="button">회원가입</a>
 								</p>
 							</div>
@@ -164,7 +177,7 @@
 									varStatus="status">
 									<tr class="tac" data-num="${notice.notice_no}">
 										<td>${notice.notice_no }</td>
-										<td class="goDetail tal">${notice.notice_title}</td>
+										<td class="goNoticeDetail tal">${notice.notice_title}</td>
 										<td>${notice.notice_registerdate}</td>
 									</tr>
 								</c:forEach>
@@ -216,8 +229,8 @@
 				<h2>강의소개</h2>
 				<p>KidsLab에서 진행되고 있는 강의들.</p>
 				<p>
-					<a class="btn btn-default" href="/client/introduce/" role="button">View
-						details &raquo;</a>
+					<a class="btn btn-default" href="/client/introduce/cource"
+						role="button">View details &raquo;</a>
 				</p>
 			</div>
 			<!-- /.col-lg-4 -->

@@ -33,7 +33,7 @@ public class TeacherLoginController {
 	public String login(HttpSession session) {
 		logger.info("teacher/login.do get 호출 성공");
 		TeacherLoginVO tvo = (TeacherLoginVO) session.getAttribute("teacherLogin");
-		if(tvo != null) {
+		if (tvo != null) {
 			return "teacher/mypage/teacherMypage";
 		}
 		return "teacher/login/login";
@@ -103,7 +103,7 @@ public class TeacherLoginController {
 				teacherLoginService.loginHistoryUpdate(vo);
 
 				session.setAttribute("teacherLogin", loginCheckResult);
-				mav.setViewName("teacher/course/registForm");
+				mav.setViewName("redirect:/");
 				return mav;
 			}
 		}
@@ -116,6 +116,6 @@ public class TeacherLoginController {
 	public String logout(HttpSession session, HttpServletRequest request) {
 		session.invalidate();
 		session = request.getSession(true);
-		return "redirect:/teacher/login.do";
+		return "redirect:/";
 	}
 }
