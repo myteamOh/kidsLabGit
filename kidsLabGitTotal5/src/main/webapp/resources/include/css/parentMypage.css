@@ -1,0 +1,98 @@
+@charset "UTF-8";
+
+body > .container {
+	background-color: #F9F9F9;
+}
+
+#hello {
+	margin: 10px;
+	text-align: center;
+	font-size: 15pt;
+	text-align: center;
+}
+
+input[type="button"] {
+	font-size: 15px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	background-color: #AAD34A;
+}
+
+#modifyBtnPart {
+	width: 220px;
+    margin: auto;
+}
+
+#studentJoinBtnPart {
+    width: 220px;
+    margin: auto;
+}
+
+#studentJoin {
+	display: inline-block;
+}
+
+.mypageBtn {
+	width: 200px;
+	height: 35px;
+	margin: 10px;
+}
+
+#childListPart {
+	margin-top: 30px;
+	min-width: 780px;
+	border: solid 1px;
+	border-color: gray;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	padding: 5px;
+}
+
+.studentInfo {
+	font-size: 15pt;
+	background-color: #ECFFC2;
+}
+
+.container table {
+	width: 780px;
+}
+
+caption {
+	font-size: 13pt;
+	width: 300px;
+	text-align: center;
+	padding: 0;
+	padding-left: 10px;
+	margin-top: 10px;
+	margin-bottom: 15px;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	background-color: #FAF4C0;
+}
+
+tr {
+	display: block;
+	margin: 10px;
+	margin-left: 30px;
+	background-color: #FFFFD2;
+}
+
+td:first-child {
+	width: 700px;
+}
+
+.listBtn {
+	width: 120px;
+	float: left;
+}
+
+#noneCourse {
+	text-align: center;
+	margin: 150px;
+}

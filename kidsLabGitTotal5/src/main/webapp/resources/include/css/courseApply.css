@@ -1,0 +1,68 @@
+@charset "UTF-8";
+
+body > .container {
+	background-color: #F9F9F9;
+}
+
+.container td>div {
+	display: block;
+	margin: 10px;
+	width: 850px;
+	min-height: 200px;
+	border: solid 1px;
+	border-color: gray;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
+.courseLevel {
+	width: 150px;
+	margin: 10px;
+}
+
+.courseList>div {
+	float: left;
+	display: block;
+	font-size: 12pt;
+}
+
+input[type="image"] {
+	display: block;
+	clear: left;
+	margin: 10px;
+	width: 120px;
+	height: 120px;
+}
+
+.left {
+	width: 430px;
+}
+
+.right {
+	margin-top: 15px;
+}
+
+#courseDate {
+	float: right;
+	clear: right;
+	margin: 5px;
+}
+
+#courseBtn {
+	float: right;
+	clear: both;
+	margin: 5px;
+	margin-top: 10px;
+}
+
+.detailBtn {
+	font-size: 15px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	background-color: #AAD34A;
+}

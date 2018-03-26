@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+body>.container {
+	background-color: #F9F9F9;
+}
+
+table {
+	margin: 0 auto;
+}
+
+.container td:first-child {
+	text-align: right;
+	padding-right: 50px;
+	width: 250px;
+}
+
+.necessary {
+	color: red;
+}
+
+h5.necessary {
+	font-size: 13pt;
+	text-align: center;
+}
+
+.container td:nth-child(2) {
+	width: 400px;
+}
+
+td {
+	padding: 5px;
+	font-size: 15pt;
+}
+
+.btnPart {
+	width: 290px;
+	margin: 20px auto;
+}
+
+input[type=button] {
+	height: 35px;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+#okBtn {
+	min-width: 140px;
+	background-color: #AAD34A;
+}
+
+#cancelBtn {
+	min-width: 140px;
+	background-color: #FBFBFB;
+}

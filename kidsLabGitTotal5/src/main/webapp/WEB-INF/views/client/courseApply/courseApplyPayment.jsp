@@ -12,6 +12,9 @@
 <script type="text/javascript"
 	src="/resources/include/js/courseApply.js"></script>
 
+<link type="text/css" rel="stylesheet"
+	href="/resources/include/css/courseApplyPayment.css">
+
 </head>
 <body>
 	<section>
@@ -68,9 +71,11 @@
 
 				<br>
 
-				<div>
+				<div class="refundPart">
 					<label>환불규정 안내</label>
-					<div>환불규정</div>
+					<div class="refundRule">
+						<pre>교습 시작 전 또는 당일: 이미 납부한 교습비 등의 전액을 반환합니다.<br>총 교습시간의 1/3 경과 전: 이미 납부한 교습비 등의 2/3해당액을 반환합니다.<br>총 교습시간의 1/2 경과 전: 이미 납부한 교습비 등의 1/2해당액을 반환합니다.<br>총 교습시간의 1/2 경과 후: 반환하지 않습니다.<br><br> ※ '교습 비 등'이란 학습자가 수강료, 이용료 또는 교습료 등과<br>    그 외에 추가로 납부하는 일체의 경비를 말합니다.</pre>
+					</div>
 				</div>
 
 				<br>
@@ -88,18 +93,19 @@
 								name="requestcourse_paymethod" value="bankbookDeposit"
 								checked="checked"><label for="bankbookDeposit">무통장입금</label></td>
 						</tr>
+						<tr>
+							<td>결제은행 및 계좌번호</td>
+							<td><select name="bank_and_account">
+									<option value="신한은행 110-000-000000">신한은행
+										110-000-000000</option>
+							</select></td>
+						</tr>
 					</table>
 				</div>
 
-				<div>
-					<select name="bank_and_account">
-						<option value="신한은행 110-000-000000">신한은행 110-000-000000</option>
-					</select>
-				</div>
+				<h4>현재는 무통장입금만 가능합니다.</h4>
 
-				<h5>현재는 무통장입금만 가능합니다.</h5>
-
-				<div>
+				<div class="btnPart">
 					<input type="button" class="payBtn" value="결제"> <input
 						type="button" class="toListBtn" value="취소">
 				</div>

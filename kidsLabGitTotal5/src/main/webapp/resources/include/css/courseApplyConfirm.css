@@ -1,0 +1,46 @@
+@charset "UTF-8";
+
+body>.container {
+	background-color: #F9F9F9;
+}
+
+table {
+	margin: 0 auto;
+}
+
+caption {
+	font-size: 19pt;
+}
+
+.container td:first-child {
+	text-align: right;
+    padding-right: 50px;
+    width: 250px;
+}
+
+.container td:nth-child(2) {
+	width: 400px;
+}
+
+td {
+	padding: 5px;
+	font-size: 15pt;
+}
+
+.btnPart {
+    width: 140px;
+	margin: 0px auto;
+}
+
+.toMainBtn {
+	min-width: 130px;
+    height: 35px;
+    margin-top: 50px; 
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	font-size: 20px;
+	font-weight: bold;
+	background-color: #FBFBFB;
+}

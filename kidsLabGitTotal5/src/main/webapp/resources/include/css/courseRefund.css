@@ -1,0 +1,83 @@
+@charset "UTF-8";
+
+body>.container {
+	background-color: #F9F9F9;
+}
+
+.refundPart {
+	width: 600px;
+	margin: auto;
+}
+
+.refundPart>label {
+	font-size: 20pt;
+}
+
+.refundRule>pre {
+	padding: 50px;
+}
+
+table {
+	margin: 0 auto;
+}
+
+caption {
+	font-size: 19pt;
+}
+
+.container td:first-child {
+	text-align: right;
+	padding-right: 50px;
+	width: 250px;
+}
+
+td>label:first-child {
+	color: red;
+}
+
+.container td:nth-child(2) {
+	width: 400px;
+}
+
+td {
+	padding: 5px;
+	font-size: 15pt;
+}
+
+#refundBank {
+	width: 200px;
+	height: 30px;
+}
+
+.refund_account {
+	width: 400px;
+}
+
+h4 {
+	text-align: center;
+}
+
+.btnPart {
+	width: 290px;
+	margin: 20px auto;
+}
+
+input[type=button] {
+	height: 35px;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.refundOk {
+	min-width: 140px;
+	background-color: #AAD34A;
+}
+
+.refundCancel {
+	min-width: 140px;
+	background-color: #FBFBFB;
+}

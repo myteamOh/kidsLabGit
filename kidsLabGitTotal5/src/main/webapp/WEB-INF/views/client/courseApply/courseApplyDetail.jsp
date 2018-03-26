@@ -12,6 +12,8 @@
 <script type="text/javascript"
 	src="/resources/include/js/courseApply.js"></script>
 
+<link type="text/css" rel="stylesheet" href="/resources/include/css/courseApplyDetail.css">
+
 </head>
 <body>
 
@@ -20,37 +22,48 @@
 			<input type="hidden" id="courseNum" name="course_no"
 				value="${courseDetail.course_no}">
 		</form>
-		<input type="hidden" id="limitCount" value="${courseCount}">
-		<input type="hidden" id="idCheck" value="${Login.userId}">
+		<input type="hidden" id="limitCount" value="${courseCount}"> <input
+			type="hidden" id="idCheck" value="${Login.userId}">
 
-		<div>
-			<h4>${courseDetail.course_name}</h4>
-		</div>
+		<table>
+			<caption>${courseDetail.course_name}</caption>
+			<tr>
+				<td>강사명 </td>
+				<td>${courseDetail.teacher_name}</td>
+			</tr>
+			<tr>
+				<td>대상학년 </td>
+				<td>${courseDetail.course_level}</td>
+			</tr>
+			<tr>
+				<td>강의 기간 </td>
+				<td>${courseDetail.course_startdate}~
+					${courseDetail.course_enddate}</td>
+			</tr>
+			<tr>
+				<td>강의 요일 및 시간 </td>
+				<td>${courseDetail.course_time}</td>
+			</tr>
+			<tr>
+				<td>강의 과목 </td>
+				<td>${courseDetail.course_subject}</td>
+			</tr>
+			<tr>
+				<td>강의실 </td>
+				<td>${courseDetail.course_room}</td>
+			</tr>
+			<tr>
+				<td>강의료 </td>
+				<td>${courseDetail.course_pay}</td>
+				<td><a href="#bottom">수강신청 하러가기</a></td>
+			</tr>
+		</table>
 
-		<div>강사명 : ${courseDetail.teacher_name}</div>
-
-		<div>대상학년 : ${courseDetail.course_level}</div>
-
-		<div>강의 기간 : ${courseDetail.course_startdate}~
-			${courseDetail.course_enddate}</div>
-
-		<div>강의 요일 및 시간 : ${courseDetail.course_time}</div>
-
-		<div>강의 과목 : ${courseDetail.course_subject}</div>
-		
-		<div>강의실 : ${courseDetail.course_room}</div>
-		
-		<div>강의료 : ${courseDetail.course_pay}</div>
-
-		<div>
-			<a href="#okBtn">수강신청 하러가기</a>
-		</div>
-
-		<div>${courseDetail.course_summary}과정소개</div>
+		<div class="summaryPart">${courseDetail.course_summary}</div>
 
 		<form>
-			<div>
-				<input type="button" class="applyBtn"
+			<div class="btnPart">
+				<input type="button"  class="applyBtn" id="bottom"
 					value="수강신청(정원 : ${courseDetail.course_totalperson} / 신청가능 인원 : ${courseCount})">
 				<input type="button" class="toListBtn" value="목록으로">
 			</div>

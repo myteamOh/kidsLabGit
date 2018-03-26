@@ -12,6 +12,9 @@
 <script type="text/javascript"
 	src="/resources/include/js/studentJoin.js"></script>
 
+<link type="text/css" rel="stylesheet"
+	href="/resources/include/css/studentJoin.css">
+
 </head>
 <body>
 	<div>
@@ -33,8 +36,8 @@
 						required="required" placeholder="ID(6~15자리 영문+숫자조합)"
 						maxlength="15" onkeyup="spaceDelete(this);"
 						onchange="spaceDelete(this);"> <!-- <input type="button"
-						id="userIdCheck" value="아이디 중복확인"> -->
-						<br> <label class="check">중복확인라벨</label></td>
+						id="userIdCheck" value="아이디 중복확인"> --> <br> <label
+						class="check"></label></td>
 				</tr>
 
 				<tr>
@@ -43,8 +46,8 @@
 					<td><input type="password" id="userPw" name="userPw"
 						required="required" placeholder="Password" maxlength="13"
 						onkeyup="spaceDelete(this);" onchange="spaceDelete(this);">
-						<label class="check">사용가능여부라벨</label><br> <label>*
-							비밀번호는 문자, 숫자, 특수문자를 사용하여<br>8 ~ 13자리로 만들어 주세요.
+						<label class="check"></label><br> <label>*
+							비밀번호는 문자, 숫자, 특수문자를 <br> 사용하여 8 ~ 13자리로 만들어 주세요.
 					</label></td>
 				</tr>
 
@@ -53,7 +56,7 @@
 					<td><input type="password" id="pwCheck" name="pwCheck"
 						required="required" placeholder="Password Check"
 						onkeyup="spaceDelete(this);" onchange="spaceDelete(this);">
-						<label class="check">비밀번호체크라벨</label></td>
+						<label class="check"></label></td>
 				</tr>
 
 				<tr>
@@ -61,7 +64,7 @@
 					<td><input type="text" id="student_name" name="student_name"
 						required="required" placeholder="2~5자리 한글이름" maxlength="5"
 						onkeyup="spaceDelete(this);" onchange="spaceDelete(this);"><label
-						class="check">이름체크라벨</label></td>
+						class="check"></label></td>
 				</tr>
 
 				<tr>
@@ -78,7 +81,7 @@
 						name="student_school" required="required"
 						placeholder="학교 최대 20자 한글이름" maxlength="20"
 						onkeyup="spaceDelete(this);" onchange="spaceDelete(this);"><label
-						class="check">학교체크라벨</label></td>
+						class="check"></label></td>
 				</tr>
 
 				<tr>
@@ -94,7 +97,7 @@
 				</tr>
 
 			</table>
-			<div>
+			<div class="btnPart">
 				<input type="button" id="okBtn" value="자녀추가"> <input
 					type="button" id="cancelBtn" value="취소">
 			</div>
