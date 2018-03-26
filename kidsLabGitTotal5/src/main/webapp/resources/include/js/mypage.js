@@ -57,7 +57,7 @@ $(function() {
 	/* 수강신청 취소 버튼 이벤트(결제대기상태) */
 	$(".applyCancel").click(function() {
 
-		var result = confirm('정말정말 진심으로 수강을 취소하시겠습니까?');
+		var result = confirm('수강취소 신청. 수강을 취소하시겠습니까?');
 
 		if (result) {
 
