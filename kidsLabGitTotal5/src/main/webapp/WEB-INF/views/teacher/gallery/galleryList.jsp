@@ -11,8 +11,6 @@
 <title>갤러리 목록</title>
 <link rel="stylesheet" type="text/css"
 	href="/resources/include/css/common.css" />
-<link rel="stylesheet" type="text/css"
-	href="/resources/include/css/board.css" />
 <script type="text/javascript"
 	src="/resources/include/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="/resources/include/js/common.js"></script>
@@ -25,56 +23,8 @@
 
 <style type="text/css">
 /* 리스트 부분 */
-#galleryList {
-	margin-top: 10px; /* height:110px; */
-}
-
-#galleryList table {
-	width: 96%;
-	padding: 0px;
-	border: 1px solid #000066;
-	border-bottom: 0px;
-}
-
-#galleryList tr {
-	padding: 0px;
-}
-
-#galleryList th, #galleryList td {
-	padding: 8px;
-	border-bottom: 1px solid #000066;
-}
-
-#galleryList th {
-	border-right: 1px solid #000066;
-	background-color: #e7e7e7;
-}
-
-#galleryList .borcle {
-	border-right: 0px;
-}
-
-#galleryList .rCount {
-	font-size: 10px;
-	color: red;
-}
-
-/*********** 게시판 입력 및 수정 화면 **********/
-#galllery_title, #file {
-	width: 480px
-}
-
-#gallery_content {
-	width: 87%;
-	height: 200px;
-}
-
-.selector img {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
+#boardPage {
+	clear: both;
 }
 </style>
 <script type="text/javascript">
@@ -183,6 +133,19 @@
 			$("#detailForm").submit();
 		});
 
+		/* 수정 클릭시 상세 페이지 이동을 위한 처리 이벤트 */
+		$(".goEdit").click(function() {
+			var gallery_no = $(this).parents("tr").attr("data-num");
+			$("#gallery_no").val(gallery_no);
+			console.log("글번호 : " + gallery_no);
+			//상세 페이지로 이동하기 위해 form추가 (id : detailForm)
+			$("#detailForm").attr({
+				"method" : "get",
+				"action" : "/teacher/gallery/galleryUpdateForm"
+			});
+			$("#detailForm").submit();
+		});
+
 		/* 검색과 한 페이지에 보여줄 레코드 수 처리 및 페이징을 위한 실질적인 처리 함수 */
 		function goPage(page) {
 			if ($("#search").val() == "all") {
@@ -227,7 +190,7 @@
 
 
 		<input type="hidden" id="teacher_no" name="teacher_no"
-			value="${Login.teacher_no}"> <input type="hidden"
+			value="${teacherLogin.teacher_no}"> <input type="hidden"
 			id="gallery_file" name="gallery_file"
 			value="${gallery.gallery_file }"><input type="hidden"
 			id="gallery_thumb" name="gallery_thumb"
@@ -256,54 +219,54 @@
 								<input type="text" id="start_date" name="start_date"> <input
 									type="text" id="end_date" name="end_date">
 							</div> <input type="button" value="검색" id="searchData" /></td>
-						<td id="btd2">한페이지에 <select id="pageSize" name="pageSize">
-								<option value="1">1줄</option>
-								<option value="2">2줄</option>
-								<option value="3">3줄</option>
-								<option value="5">5줄</option>
-								<option value="7">7줄</option>
-								<option value="10">10줄</option>
-						</select>
-						</td>
+
 					</tr>
 				</table>
 			</form>
+			<%-- ============== 글쓰기 버튼 출력 시작============ --%>
+			<div class="contentBtn" align="right">
+				<input type="button" value="글쓰기" id="insertFormBtn">
+			</div>
+			<%-- ============== 글쓰기 버튼 출력 종료============ --%>
 		</div>
 
 
 
 
 		<%-- ================= 리스트 시작 =============== --%>
-		<div id="galleryList">
+		<div id="galleryList" align="center" style="background-color: #A9F5A9">
 
 			<!--  데이터  출력 -->
 			<c:choose>
 				<c:when test="${not empty galleryList}">
 					<c:forEach var="gallery" items="${galleryList}" varStatus="status">
-						<div class="col-md-4">
+						<div class="col-md-4" style="margin-top: 10px;">
 							<div class="card mb-4 box-shadow">
-								<div class="col-md-4" id="selector">
-									<img class="card-img-top" id="img"
-										src="/uploadStorage/gallery/thumbnail/${gallery.gallery_thumb}"
-										alt="Card image cap">
-								</div>
+
+								<img class="card-img-top" id="img"
+									src="/uploadStorage/gallery/thumbnail/${gallery.gallery_thumb}"
+									alt="Card image cap">
+
 								<div class="card-body">
-									<table>
-										<tr data-num="${gallery.gallery_no}">
-											<td>${gallery.gallery_no}</td>
-											<td class="goDetail tal">${gallery.gallery_title}</td>
-											<td>${gallery.gallery_registerdate}</td>
-											<td class="name">${gallery.teacher_no}</td>
-										</tr>
-									</table>
+									<div>
+										<div>${gallery.gallery_title}<br>${gallery.gallery_registerdate}<br>
+										</div>
+									</div>
 									<div class="d-flex justify-content-between align-items-center">
 										<div class="btn-group">
-											<button type="button"
-												class="btn btn-sm btn-outline-secondary">View</button>
-											<button type="button"
-												class="btn btn-sm btn-outline-secondary">Edit</button>
+											<table>
+												<tr data-num="${gallery.gallery_no}">
+													<td style="display: none;">${gallery.gallery_no}</td>
+													<td><button type="button"
+															class="btn btn-sm btn-outline-secondary goDetail">View</button></td>
+													<td><c:if
+															test="${teacherLogin.teacher_no == gallery.teacher_no}">
+															<button type="button"
+																class="btn btn-sm btn-outline-secondary goEdit">Edit</button>
+														</c:if></td>
+												</tr>
+											</table>
 										</div>
-
 									</div>
 								</div>
 							</div>
@@ -312,6 +275,7 @@
 						</div>
 					</c:forEach>
 				</c:when>
+
 				<c:otherwise>
 
 					<div class="tac">
@@ -324,13 +288,10 @@
 		</div>
 		<%-- ================= 리스트 종료 ================ --%>
 
-		<%-- ============== 글쓰기 버튼 출력 시작============ --%>
-		<div class="contentBtn">
-			<input type="button" value="글쓰기" id="insertFormBtn">
-		</div>
-		<%-- ============== 글쓰기 버튼 출력 종료============ --%>
+
+
 		<%-- ============ 페이지 네비게이션 시작 =========== --%>
-		<div id="boardPage">
+		<div id="boardPage" align="center">
 			<tag:paging page="${param.page }" total="${total }"
 				list_size="${galleryData.pageSize }">
 			</tag:paging>
@@ -343,7 +304,7 @@
 	<script>
 		window.jQuery
 				|| document
-						.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')
+						.write('<script src="/resources/include/js/jquery-3.3.1.slim.js"><\/script>')
 	</script>
 	<script src="/resources/include/dist/js/popper.min.js"></script>
 	<script src="/resources/include/dist/js/bootstrap.min.js"></script>

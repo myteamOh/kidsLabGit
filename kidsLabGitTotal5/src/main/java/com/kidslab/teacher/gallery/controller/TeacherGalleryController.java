@@ -89,10 +89,10 @@ public class TeacherGalleryController {
 		if (tgvo.getFile() != null) {
 			String gallery_file = FileUploadUtil.fileUpload(tgvo.getFile(), request, "gallery");
 			tgvo.setGallery_file(gallery_file);
-			
+
 			String gallery_thumb = FileUploadUtil.makeThumbnail(gallery_file, request);
 			tgvo.setGallery_thumb(gallery_thumb);
-			
+
 		}
 		result = teacherGalleryService.galleryInsert(tgvo);
 
@@ -115,7 +115,7 @@ public class TeacherGalleryController {
 
 		TeacherGalleryVO detail = new TeacherGalleryVO();
 		detail = teacherGalleryService.galleryDetail(tgvo);
-		
+
 		if (detail != null && (!detail.equals(""))) {
 			detail.setGallery_content(detail.getGallery_content().toString().replaceAll("\n", "<br>"));
 
@@ -145,15 +145,20 @@ public class TeacherGalleryController {
 
 	/*******************************
 	 * 갤러리 수정 구현
+	 * 
+	 * @throws Exception
 	 *******************************/
 	@RequestMapping(value = "/gallery/galleryUpdate", method = RequestMethod.POST)
-	public String galleryUpdate(@ModelAttribute TeacherGalleryVO tgvo, HttpServletRequest request)
-			throws IllegalStateException, IOException {
+	public String galleryUpdate(@ModelAttribute TeacherGalleryVO tgvo, HttpServletRequest request) throws Exception {
 		logger.info("galleryUpdate 호출 성공");
 
 		int result = 0;
 		String url = "";
 		String g_file = "";
+		logger.info("번호 : " + tgvo.getGallery_no());
+		logger.info("파일 : " + tgvo.getGallery_title());
+		logger.info("파일 : " + tgvo.getGallery_content());
+		logger.info("파일 : " + tgvo.getFile());
 
 		if (!tgvo.getFile().isEmpty()) {
 			logger.info("======= file = " + tgvo.getFile().getOriginalFilename());
@@ -162,7 +167,8 @@ public class TeacherGalleryController {
 			}
 			g_file = FileUploadUtil.fileUpload(tgvo.getFile(), request, "gallery");
 
-			tgvo.setGallery_file(g_file);
+			String thumbName = FileUploadUtil.makeThumbnail(g_file, request);
+			tgvo.setGallery_thumb(thumbName);
 
 		} else {
 			logger.info("첨부파일 없음");

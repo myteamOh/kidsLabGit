@@ -56,28 +56,6 @@
 
 		 } */
 
-		/* 수정 버튼 클릭 시 처리 이벤트 */
-		$("#updateFormBtn").click(function() {
-			$("#f_data").attr({
-				"method" : "get",
-				"action" : "/teacher/gallery/galleryUpdateForm"
-			});
-			$("#f_data").submit();
-		});
-
-		/* 삭제 버튼 클릭 시 처리 이벤트 */
-		$("#boardDeleteBtn").click(function() {
-			if (confirm("정말로 삭제 하시겠습니까?") == true) {
-				$("#f_data").attr({
-					"method" : "post",
-					"action" : "/teacher/gallery/galleryDelete"
-				});
-				$("#f_data").submit();
-			} else {
-				return;
-			}
-		});
-
 		/* 목록 버튼 클릭 시 처리 이벤트 */
 		$("#boardListBtn").click(function() {
 			location.href = "/teacher/gallery/galleryList";
@@ -125,18 +103,22 @@
 					<c:if test="${detail.gallery_file !=''}">
 						<tr>
 							<td class="ac vm">첨부파일</td>
-							<td colspan="3"><div class="img_wrap"><img id="img" src="/uploadStorage/gallery/${detail.gallery_file}" /></div></td>
+							<td colspan="3"><div class="img_wrap">
+									<img id="img"
+										src="/uploadStorage/gallery/${detail.gallery_file}" />
+								</div></td>
 						</tr>
 					</c:if>
 				</tbody>
 			</table>
 		</div>
 		<%-- =============== 상세 정보 보여주기 종료 ============ --%>
+		<br>
 		<div>
-			<input type="button" value="수정" id="updateFormBtn"> <input
-				type="button" value="삭제" id="boardDeleteBtn"> <input
-				type="button" value="목록" id="boardListBtn">
+			<input type="button" value="목록보기" id="boardListBtn"
+				class="btn btn-xs btn-outline-secondary">
 		</div>
 	</div>
+	<br>
 </body>
 </html>
