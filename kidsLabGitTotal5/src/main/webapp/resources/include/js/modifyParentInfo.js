@@ -104,7 +104,7 @@ $(function() {
 
 				$("#parentModifying").attr({
 					"method" : "POST",
-					"action" : "/mypage/parentModifyInfo.do"
+					"action" : "/mypage/parentModifyInfo"
 				});
 
 				$("#parentModifying").submit();
@@ -115,7 +115,7 @@ $(function() {
 
 	/* 취소버튼 클릭시 이벤트 */
 	$("#modifyCancelBtn").click(function() {
-		location.href = "/mypage/parentMypage.do";
+		location.href = "/mypage/parentMypage";
 	});
 
 	/* 탈퇴버튼 클릭시 이벤트 */

@@ -13,6 +13,9 @@
 <script type="text/javascript"
 	src="/resources/include/js/modifyParentInfo.js"></script>
 
+<link type="text/css" rel="stylesheet"
+	href="/resources/include/css/modifyParentInfo.css">
+
 </head>
 <body>
 
@@ -22,6 +25,7 @@
 				<input type="hidden" id="parentNum" value="${parent.parent_no}">
 
 				<table>
+					<caption>학부모 정보 수정</caption>
 					<tr>
 						<td><label>이름</label></td>
 						<td><input type="text" readonly="readonly" name="parent_name"
@@ -37,7 +41,7 @@
 					<tr>
 						<td><label>새 비밀번호</label></td>
 						<td><input type="password" id="userPw" name="userPw"
-							maxlength="13"><label class="check">확인 라벨</label></td>
+							maxlength="13"><label class="check"></label></td>
 					</tr>
 
 					<tr>
@@ -50,14 +54,14 @@
 					<tr>
 						<td><label>새 비밀번호 확인</label></td>
 						<td><input type="password" id="userPwCheck" maxlength="13">
-							<label class="check">확인 라벨</label></td>
+							<label class="check"></label></td>
 					</tr>
 
 					<tr>
-						<td><label>*</label> <label>연락처</label></td>
+						<td><label class="necessary">*</label> <label>연락처</label></td>
 						<td><input type="text" id="parentPhone" name="parent_phone"
 							value="${parent.parent_phone}" maxlength="11"> <label
-							class="check">확인 라벨</label></td>
+							class="check"></label></td>
 					</tr>
 
 					<tr>
@@ -95,15 +99,14 @@
 					</tr>
 
 					<tr>
-						<td><label>*</label> <label>주소</label></td>
+						<td><label class="necessary">*</label> <label>주소</label></td>
 						<td><input type="text" id="parentAddress"
 							name="parent_address" value="${parent.parent_address}"
-							maxlength="50"><br> <label class="check">확인
-								라벨</label></td>
+							maxlength="50"><br> <label class="check"> </label></td>
 					</tr>
 				</table>
 
-				<div>
+				<div class="btnPart">
 					<input type="button" id="parentModifyBtn" value="수정 완료"> <input
 						type="button" id="modifyCancelBtn" value="취소"> <input
 						type="button" id="withdrawBtn" value="탈퇴">

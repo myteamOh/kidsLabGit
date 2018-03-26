@@ -15,7 +15,7 @@ $(function() {
 			}
 
 			$.ajax({
-				url : "/member/findparentid.do",
+				url : "/member/findparentid",
 				type : "POST",
 				data : "parent_name=" + $("#findParentIdName").val()
 					+ "&parent_phone=" + $("#findParentIdPhone").val(),
@@ -27,7 +27,7 @@ $(function() {
 
 					$("#parentIdSearch").attr({
 						"method" : "post",
-						"action" : "/member/findparentid.do"
+						"action" : "/member/findparentid"
 					});
 
 					$("#parentIdSearch").submit();
@@ -53,7 +53,7 @@ $(function() {
 			}
 
 			$.ajax({
-				url : "/member/findparentpw.do",
+				url : "/member/findparentpw",
 				type : "POST",
 				data : "userId=" + $("#findParentPwId").val()
 					+ "&parent_name=" + $("#findParentPwName").val(),
@@ -64,7 +64,7 @@ $(function() {
 
 					if (result == 1) {
 						alert("임시비밀번호 발급");
-						location.href = "/login/login.do";
+						location.href = "/login/login";
 						return;
 					} else if (result == 2) {
 						alert("데이터가 없거나 실패");
@@ -89,7 +89,7 @@ $(function() {
 			}
 
 			$.ajax({
-				url : "/member/findstudentid.do",
+				url : "/member/findstudentid",
 				type : "POST",
 				data : "student_name=" + $("#studentIdName").val()
 					+ "&student_birthday=" + $("#studentIdBirth").val(),
@@ -101,7 +101,7 @@ $(function() {
 
 					$("#studentIdSearch").attr({
 						"method" : "post",
-						"action" : "/member/findstudentid.do"
+						"action" : "/member/findstudentid"
 					});
 
 					$("#studentIdSearch").submit();
@@ -124,7 +124,7 @@ $(function() {
 			}
 
 			$.ajax({
-				url : "/member/checkstudentinfo.do",
+				url : "/member/checkstudentinfo",
 				type : "POST",
 				data : "userId=" + $("#studentPwId").val() + "&student_name=" + $("#studentPwName").val(),
 				error : function() {
@@ -133,7 +133,7 @@ $(function() {
 				success : function(result) {
 					if (result == 1) {
 						alert("정보있음");
-						location.href = "/member/newstudentpw.do";
+						location.href = "/member/newstudentpw";
 						return;
 					} else {
 						alert("입력한 정보에 해당하는 계정이 없습니다.");

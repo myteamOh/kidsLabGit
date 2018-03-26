@@ -24,7 +24,7 @@ public class StudentJoinController {
 	private StudentJoinService studentJoinService;
 
 	/* 자녀 추가 page */
-	@RequestMapping(value = "/studentjoin.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/studentjoin", method = RequestMethod.GET)
 	public String studentJoin(Model model) {
 
 		logger.info("자녀추가 form");
@@ -35,7 +35,7 @@ public class StudentJoinController {
 
 	/* 중복체크 */
 	@ResponseBody
-	@RequestMapping(value = "studentIdConfirm.do", method = RequestMethod.POST)
+	@RequestMapping(value = "studentIdConfirm", method = RequestMethod.POST)
 	public int sutdentIdConfirm(@RequestParam("userId") String userId) {
 		logger.info("학생 아이디 중복확인!");
 		int result = studentJoinService.studentIdConfirm(userId);
@@ -43,7 +43,7 @@ public class StudentJoinController {
 	}
 
 	/* 자녀 추가 처리 */
-	@RequestMapping(value = "/studentjoin.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/studentjoin", method = RequestMethod.POST)
 	public ModelAndView studentInsert(@ModelAttribute StudentVO svo) {
 
 		logger.info("자녀 추가 처리");
@@ -58,7 +58,7 @@ public class StudentJoinController {
 
 		if (result == 1) {
 			mav.addObject("resultCode", 1);
-			mav.setViewName("redirect:/mypage/parentMypage.do"); // 회원가입 성공시 학부모 마이 페이지로
+			mav.setViewName("redirect:/mypage/parentMypage"); // 회원가입 성공시 학부모 마이 페이지로
 		} else if (result == 2) {
 			mav.addObject("resultCode", 2);
 			mav.setViewName("client/member/studentJoin"); // 실패시

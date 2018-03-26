@@ -12,14 +12,15 @@
 <script type="text/javascript"
 	src="/resources/include/js/courseApply.js"></script>
 
+<link type="text/css" rel="stylesheet" href="/resources/include/css/courseApplyConfirm.css">
+
 </head>
 <body>
 
 	<section>
 
-		<h4>수강정보 및 결제 확인</h4>
-
 		<table>
+			<caption>수강정보 및 결제 확인</caption>
 			<tr>
 				<td>강의명</td>
 				<td>${requestcoursedata.course_name}</td>
@@ -57,7 +58,9 @@
 			</tr>
 		</table>
 
-		<input type="button" class="toMainBtn" value="확인">
+		<div class="btnPart">
+			<input type="button" class="toMainBtn" value="확인">
+		</div>
 
 	</section>
 

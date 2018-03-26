@@ -28,7 +28,7 @@ public class ParentJoinController {
 	/*
 	 * 약관동의 폼
 	 */
-	@RequestMapping(value = "/agree.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/agree", method = RequestMethod.GET)
 	public String agreeForm(Model model) {
 		logger.info("약관동의 페이지 호출!");
 		return "client/member/agree";
@@ -37,7 +37,7 @@ public class ParentJoinController {
 	/*
 	 * 학부모 회원가입 폼
 	 */
-	@RequestMapping(value = "/parentjoin.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/parentjoin", method = RequestMethod.GET)
 	public String paretJoinForm(Model model) {
 		logger.info("회원가입폼 오픈!");
 		return "client/member/parentJoin";
@@ -45,7 +45,7 @@ public class ParentJoinController {
 
 	/* 학부모 아이디 중복체크 메소드 */
 	@ResponseBody
-	@RequestMapping(value = "/parentIdConfirm.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/parentIdConfirm", method = RequestMethod.POST)
 	public int parentIdConfirm(@RequestParam("userId") String userId) {
 		logger.info("아이디 중복확인!");
 		int result = parentJoinService.parentIdConfirm(userId);
@@ -54,7 +54,7 @@ public class ParentJoinController {
 
 	/* 이메일 발송 */
 	@ResponseBody
-	@RequestMapping(value = "/sendMail.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/sendMail", method = RequestMethod.POST)
 	public String sendMail(HttpSession session, @RequestParam("userId") String email) {
 		logger.info("인증번호 발송!");
 		String ranNum;
@@ -64,7 +64,7 @@ public class ParentJoinController {
 
 	/* 인증번호 체크 */
 	@ResponseBody
-	@RequestMapping(value = "/confirmCheck.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/confirmCheck", method = RequestMethod.POST)
 	public int numberCheck(HttpSession session, @RequestParam("userId") String email,
 			@RequestParam("certification") String certifNum) {
 		logger.info("인증번호 체크!");
@@ -75,7 +75,7 @@ public class ParentJoinController {
 	}
 
 	/* 회원가입 처리 */
-	@RequestMapping(value = "/parentjoin.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/parentjoin", method = RequestMethod.POST)
 	public ModelAndView parentInsert(@ModelAttribute ParentVO pvo) {
 
 		logger.info("회원가입 처리 시도!");
@@ -104,7 +104,7 @@ public class ParentJoinController {
 
 	/* 회원 수정 form */
 	/*
-	 * @RequestMapping(value = "/modifyparentinfo.do", method = RequestMethod.GET)
+	 * @RequestMapping(value = "/modifyparentinfo", method = RequestMethod.GET)
 	 * public String parentModify(Model model) {
 	 * 
 	 * logger.info("modifyparent get 방식 폼 호출");

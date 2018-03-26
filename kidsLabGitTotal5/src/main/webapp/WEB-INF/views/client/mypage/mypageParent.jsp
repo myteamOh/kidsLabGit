@@ -95,6 +95,9 @@ table {
 }
 </style>
 
+<link type="text/css" rel="stylesheet"
+	href="/resources/include/css/parentMypage.css">
+
 </head>
 <body>
 
@@ -113,35 +116,35 @@ table {
 			</form>
 
 			<form id="parentMypage">
-				<div>
-					<label>안녕하세요 ${Login.userName}님. 반갑습니다. <br>
-						${Login.userId}
-					</label>
+				<div id="hello">
+					<label>안녕하세요 ${Login.userName}(${Login.userId})님. 반갑습니다. </label>
 				</div>
 				<br>
 
-				<div>
-					<input type="button" class="modifyInfo" value="회원 정보 수정">
+				<div id="modifyBtnPart">
+					<input type="button" class="modifyInfo mypageBtn" value="회원 정보 수정">
+					<c:if test="${not empty rcListMap}">
+						<input type="button" class="refundListBtn mypageBtn"
+							value="환불신청 및 환불내역 조회">
+					</c:if>
 				</div>
-				<br>
 
 				<!-- 자녀리스트 -->
 				<!-- 기본 -->
 				<c:choose>
 					<c:when test="${not empty rcListMap}">
-						<input type="button" class="refundListBtn" value="환불신청 및 환불내역 조회">
+						<hr>
 						<br>
-						자녀있을때
-						<div>
-							<input type="button" id="studentJoin" value="자녀 추가"
-								src="/resources/include/img/plus.png">
+						<div id="studentJoinBtnPart">
+							<input type="button" id="studentJoin" class="mypageBtn"
+								value="자녀 추가" src="/resources/include/img/plus.png">
 						</div>
-						자녀리스트
-						
-						<ul>
-							<c:forEach var="child" items="${rcListMap}">na
-								<li>${child.key.student_name}(${child.key.userId})
-									<div>
+						<div>
+
+							<c:forEach var="child" items="${rcListMap}">
+								<div id="childListPart">
+									<p class="studentInfo">${child.key.student_name}(${child.key.userId})</p>
+									<div class="courseTotalList">
 										<c:choose>
 											<c:when test="${not empty child.value}">
 												<table>
@@ -152,9 +155,9 @@ table {
 																test="${waitingCourse.course_status eq '모집중' && waitingCourse.requestcourse_paymentstatus eq '결제대기'}">
 
 																<tr data-num="${waitingCourse.requestcourse_no}">
-																	<td>${waitingCourse.course_name}</td>
-																	<td colspan="2"><input type="button"
-																		class="applyCancel" value="신청 취소"></td>
+																	<td colspan="2">${waitingCourse.course_name}</td>
+																	<td><input type="button"
+																		class="applyCancel listBtn" value="신청 취소"></td>
 																</tr>
 
 															</c:when>
@@ -174,9 +177,10 @@ table {
 																	<td>${readyCourse.course_name}</td>
 																	<td><a
 																		href="/mypage/download?course_plan=${readyCourse.course_plan }"><input
-																			type="button" class="coursePlan" value="강의계획서"></a></td>
-																	<td><input type="button" class="courseCancel"
-																		value="수강 취소"></td>
+																			type="button" class="coursePlan listBtn"
+																			value="강의계획서"></a></td>
+																	<td><input type="button"
+																		class="courseCancel listBtn" value="수강 취소"></td>
 																</tr>
 															</c:when>
 														</c:choose>
@@ -193,9 +197,9 @@ table {
 																test="${studying.course_status eq '진행중' && studying.requestcourse_paymentstatus eq '결제완료'}">
 
 																<tr data-num="${studying.requestcourse_no}">
-																	<td>${studying.course_name}</td>
-																	<td colspan="2"><input type="button"
-																		class="courseCancel" value="수강 포기"></td>
+																	<td colspan="2">${studying.course_name}</td>
+																	<td><input type="button"
+																		class="courseCancel listBtn" value="수강 포기"></td>
 																</tr>
 															</c:when>
 														</c:choose>
@@ -204,20 +208,23 @@ table {
 												<br>
 											</c:when>
 											<c:otherwise>
-												<p>신청한 강의가 없습니다.</p>
+												<p id="noneCourse">신청한 강의가 없습니다.</p>
 											</c:otherwise>
 										</c:choose>
 									</div>
-								</li>
+								</div>
 							</c:forEach>
-						</ul>
+
+						</div>
 						<br>
 					</c:when>
 
 					<c:otherwise>
-						자녀 없을떄
-						<div>
-							<input type="button" id="studentJoin" value="자녀 추가"
+						<br>
+						<hr>
+						<div id="studentJoinBtnPart">
+							<input type="button" id="studentJoin"
+								class="mypageBtn studentJoinNone" value="자녀 추가"
 								src="/resources/include/img/plus.png">
 						</div>
 						<br>

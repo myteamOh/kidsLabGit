@@ -42,7 +42,7 @@ $(function() {
 				}
 
 				$.ajax({
-					url : "/member/newstudentpw.do",
+					url : "/member/newstudentpw",
 					type : "POST",
 					data : "userPw=" + $("#newPassword").val(),
 					error : function() {
@@ -52,7 +52,7 @@ $(function() {
 
 						if (result == 1) {
 							alert("새비밀번호 설정 성공!");
-							location.href = "/login/login.do";
+							location.href = "/login/login";
 							return;
 						} else if (result == 2) {
 							alert("실패!");
@@ -68,7 +68,7 @@ $(function() {
 	$("#cancelBtn").click(function() {
 		alert("새비밀번호 설정 취소!");
 
-		location.href = "/member/finduser.do";
+		location.href = "/member/finduser";
 	});
 
 });

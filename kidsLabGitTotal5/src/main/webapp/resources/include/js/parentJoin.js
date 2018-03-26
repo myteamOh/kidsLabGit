@@ -19,7 +19,7 @@ $(function() {
 				return;
 			} else {
 				$.ajax({
-					url : "/member/parentIdConfirm.do",
+					url : "/member/parentIdConfirm",
 					type : "post",
 					data : "userId=" + $("#userId").val(),
 					error : function() {
@@ -51,7 +51,7 @@ $(function() {
 		}
 
 		$.ajax({
-			url : "/member/sendMail.do",
+			url : "/member/sendMail",
 			type : "post",
 			data : "userId=" + $("#userId").val(),
 			error : function() {
@@ -78,7 +78,7 @@ $(function() {
 
 				$
 					.ajax({
-						url : "/member/confirmCheck.do",
+						url : "/member/confirmCheck",
 						type : "post",
 						data : "userId=" + $("#userId").val()
 							+ "&certification="
@@ -224,7 +224,7 @@ $(function() {
 
 				$("#parentForm").attr({
 					"method" : "post",
-					"action" : "/member/parentjoin.do"
+					"action" : "/member/parentjoin"
 				});
 
 				$("#parentForm").submit();
@@ -237,7 +237,7 @@ $(function() {
 	$("#cancelBtn").click(function() {
 		console.log("회원가입 취소!");
 
-		location.href = "/login/login.do";
+		location.href = "/login/login";
 	});
 
 });

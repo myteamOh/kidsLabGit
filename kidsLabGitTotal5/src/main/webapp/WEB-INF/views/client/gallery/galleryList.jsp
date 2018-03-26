@@ -228,7 +228,7 @@
 											<td style="display: none;">${gallery.gallery_no}</td>
 											<td class="goDetail tal">${gallery.gallery_title}</td>
 											<td>${gallery.gallery_registerdate}</td>
-											<td class="name" style="display: none;">ggg${gallery.teacher_name}</td>
+											<td class="name">${gallery.teacher_name}</td>
 										</tr>
 									</table>
 									<div class="d-flex justify-content-between align-items-center">

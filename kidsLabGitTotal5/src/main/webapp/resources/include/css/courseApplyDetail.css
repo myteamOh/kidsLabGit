@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+body>.container {
+	background-color: #F9F9F9;
+}
+
+table {
+	margin: 0 auto;
+}
+
+caption {
+	font-size: 19pt;
+}
+
+.container td:first-child {
+	text-align: right;
+}
+
+.container td:nth-child(2) {
+	width: 500px;
+}
+
+td {
+	padding: 5px;
+	font-size: 15pt;
+}
+
+.summaryPart {
+	height: 1000px;
+}
+
+input[type=button] {
+	height: 40px;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.btnPart {
+	width: 500px;
+	margin: 5px auto;
+}
+
+.applyBtn {
+	min-width: 300px;
+	background-color: #AAD34A;
+}
+
+.toListBtn {
+	min-width: 120px;
+	background-color: #FBFBFB;
+}

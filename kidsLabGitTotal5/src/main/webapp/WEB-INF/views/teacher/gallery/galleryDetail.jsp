@@ -56,9 +56,31 @@
 
 		 } */
 
+		/* 수정 버튼 클릭 시 처리 이벤트 */
+		$("#updateBtn").click(function() {
+			$("#f_data").attr({
+				"method" : "post",
+				"action" : "/teacher/gallery/galleryUpdateForm"
+			});
+			$("#f_data").submit();
+		});
+
 		/* 목록 버튼 클릭 시 처리 이벤트 */
 		$("#boardListBtn").click(function() {
 			location.href = "/teacher/gallery/galleryList";
+		});
+
+		/* 삭제 버튼 클릭 시 처리 이벤트 */
+		$("#deleteBtn").click(function() {
+			if (confirm("정말로 삭제 하시겠습니까?") == true) {
+				$("#f_data").attr({
+					"method" : "post",
+					"action" : "/teacher/gallery/galleryDelete"
+				});
+				$("#f_data").submit();
+			} else {
+				return;
+			}
 		});
 
 	});
@@ -114,7 +136,9 @@
 		</div>
 		<%-- =============== 상세 정보 보여주기 종료 ============ --%>
 		<div>
-			<input type="button" value="목록" id="boardListBtn">
+			<input type="button" value="목록" id="boardListBtn"><input
+				type="button" value="수정" id="updateBtn"><input type="button"
+				value="삭제" id="deleteBtn">
 		</div>
 	</div>
 </body>

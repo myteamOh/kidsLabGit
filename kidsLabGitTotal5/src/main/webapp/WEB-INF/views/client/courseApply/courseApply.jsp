@@ -25,11 +25,13 @@
 <script type="text/javascript"
 	src="/resources/include/js/courseApply.js"></script>
 
+<link type="text/css" rel="stylesheet"
+	href="/resources/include/css/courseApply.css">
+
 </head>
 <body>
 	<section>
 		<div>
-			<h4>수강신청</h4>
 
 			<form class="detailForm">
 				<input type="hidden" id="courseNum" name="course_no">
@@ -55,24 +57,35 @@
 							<c:forEach var="requestCourse" items="${requestCourseList}">
 								<tr>
 									<td>
-										<div data-num="${requestCourse.course_no}">
+										<div class="courseList">
 											<div id="courseImg">
 												<input type="image" src="/resources/include/img/gear.jpg"
 													width="100" height="100">
 											</div>
-											<div id="courseName">
-												<span>강의명 : ${requestCourse.course_name}</span>
+											<br>
+											<div class="left">
+												<div id="courseName">
+													<span>강의명 : ${requestCourse.course_name}</span>
+												</div>
+												<br>
+												<div id="courseLevel">
+													<span>강의 대상학년 : ${requestCourse.course_level}</span>
+												</div>
+												<br>
+												<div id="courseSummary">
+													<span>강의 개요 : ${requestCourse.course_summary}</span>
+												</div>
 											</div>
-											<div id="courseLevel">
-												<span>강의 대상학년 : ${requestCourse.course_level}</span>
+											<br>
+											<div class="right">
+												<div id="courseDate">
+													<span>강의 기간 : ${requestCourse.course_startdate}</span> ~ <span>${requestCourse.course_enddate}</span>
+												</div>
+												<br>
+												<div id="courseBtn" data-num="${requestCourse.course_no}">
+													<input type="button" class="detailBtn" value="상세보기 및 수강신청">
+												</div>
 											</div>
-											<div id="courseSummary">
-												<span>강의 개요 : ${requestCourse.course_summary}</span>
-											</div>
-											<div id="courseDate">
-												<span>강의 기간 : ${requestCourse.course_startdate}</span> ~ <span>${requestCourse.course_enddate}</span>
-											</div>
-											<input type="button" class="detailBtn" value="상세보기 및 수강신청">
 										</div>
 									</td>
 								</tr>

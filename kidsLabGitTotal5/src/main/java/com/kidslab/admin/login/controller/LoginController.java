@@ -50,7 +50,7 @@ public class LoginController {
 			return mav;
 		} else {
 			session.setAttribute("adminLogin", loginCheckResult);
-			mav.setViewName("admin/teacher/joinTeacher");
+			mav.setViewName("redirect:/admin/payment/paymentList");
 			return mav;
 		}
 

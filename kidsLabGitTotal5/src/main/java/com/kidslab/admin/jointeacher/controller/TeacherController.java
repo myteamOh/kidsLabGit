@@ -76,7 +76,7 @@ public class TeacherController {
 			break;
 		case 3:
 			mav.addObject("errCode", 3);
-			mav.setViewName("teacher/login/login");
+			mav.setViewName("admin/member/teacherList");
 			// success to add new member; move to page
 			break;
 		default:

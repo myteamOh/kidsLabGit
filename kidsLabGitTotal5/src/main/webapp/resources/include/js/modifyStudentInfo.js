@@ -86,7 +86,7 @@ $(function() {
 
 				$("#studentModifying").attr({
 					"method" : "POST",
-					"action" : "/mypage/studentModifyInfo.do"
+					"action" : "/mypage/studentModifyInfo"
 				});
 
 				$("#studentModifying").submit();

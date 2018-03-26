@@ -52,7 +52,6 @@
 <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 <script
 	src="/resources/include/dist/assets/js/ie-emulation-modes-warning.js"></script>
-<script src=""></script>
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -63,8 +62,21 @@
 <!-- Custom styles for this template -->
 <link href="/resources/include/css/carousel.css" rel="stylesheet">
 </head>
-
-</head>
+<script type="text/javascript">
+	/* 제목 클릭시 상세 페이지 이동을 위한 처리 이벤트 */
+	$(function() {
+		$(".goNoticeDetail").click(function() {
+			var notice_no = $(this).attr("data-num");
+			$("#notice_no").val(notice_no);
+			// 상세 페이지로 이동하기 위해 form 추가(id : detailForm)
+			$("#detailForm").attr({
+				"method" : "get",
+				"action" : "/notice/noticeDetail"
+			});
+			$("#detailForm").submit();
+		});
+	});
+</script>
 <body>
 	<!-- Fixed navbar -->
 	<nav class="navbar navbar-default navbar-fixed-top">
@@ -107,7 +119,7 @@
 								<h1></h1>
 								<p>회원 가입을 통하여 더 많은 기능을 활용하실 수 있습니다.</p>
 								<p>
-									<a class="btn btn-lg btn-primary" href="/login/logout.do"
+									<a class="btn btn-lg btn-primary" href="/member/agree.do"
 										role="button">회원가입</a>
 								</p>
 							</div>
@@ -142,6 +154,12 @@
 			<!-- /.carousel -->
 		</div>
 
+
+		<div>
+			<form id="detailForm">
+				<input type="hidden" id="notice_no" name="notice_no">
+			</form>
+		</div>
 		<!-- /.row -->
 		<div class="row">
 			<div class="col-xs-6 col-lg-4">
@@ -162,9 +180,9 @@
 							<c:when test="${not empty mainNoticeList}">
 								<c:forEach var="notice" items="${mainNoticeList}"
 									varStatus="status">
-									<tr class="tac" data-num="${notice.notice_no}">
+									<tr class="tac goNoticeDetail" data-num="${notice.notice_no}">
 										<td>${notice.notice_no }</td>
-										<td class="goDetail tal">${notice.notice_title}</td>
+										<td>${notice.notice_title}</td>
 										<td>${notice.notice_registerdate}</td>
 									</tr>
 								</c:forEach>
@@ -216,8 +234,8 @@
 				<h2>강의소개</h2>
 				<p>KidsLab에서 진행되고 있는 강의들.</p>
 				<p>
-					<a class="btn btn-default" href="/client/introduce/" role="button">View
-						details &raquo;</a>
+					<a class="btn btn-default" href="/client/introduce/cource"
+						role="button">View details &raquo;</a>
 				</p>
 			</div>
 			<!-- /.col-lg-4 -->
@@ -227,8 +245,8 @@
 				<h2>오시는 길</h2>
 				<p>KidsLab에 오시는 길</p>
 				<p>
-					<a class="btn btn-default" href="#" role="button">View details
-						&raquo;</a>
+					<a class="btn btn-default" href="/client/introduce/waytocome"
+						role="button">View details &raquo;</a>
 				</p>
 			</div>
 			<!-- /.col-lg-4 -->

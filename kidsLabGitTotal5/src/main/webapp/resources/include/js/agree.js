@@ -12,7 +12,7 @@ $(function() {
 
 		} else {
 
-			location.href = "/member/parentjoin.do";
+			location.href = "/member/parentjoin";
 
 		}
 
@@ -21,7 +21,7 @@ $(function() {
 	/* 약관동의 페이지 취소버튼 클릭 이벤트 */
 	$("#cancelBtn").click(function() {
 
-		location.href = "/login/login.do";
+		location.href = "/login/login";
 
 	});
 

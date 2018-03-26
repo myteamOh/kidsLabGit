@@ -36,7 +36,7 @@ public class FindUserController {
 	private JavaMailSender javaMailSender;
 
 	/* 아이디 비밀번호찾기 Form */
-	@RequestMapping(value = "/finduser.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/finduser", method = RequestMethod.GET)
 	public String findUser(Model model) {
 
 		logger.info("아이디비번찾기Form!");
@@ -46,7 +46,7 @@ public class FindUserController {
 
 	/* 학부모 아이디 찾기 처리 */
 	@ResponseBody
-	@RequestMapping(value = "/findparentid.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/findparentid", method = RequestMethod.POST)
 	public ModelAndView findParentId(@ModelAttribute("ParentVO") ParentVO pvo, Model model) {
 
 		logger.info("학부모 아이디 찾기 처리!");
@@ -76,7 +76,7 @@ public class FindUserController {
 
 	/* 학부모 비밀번호 재발급 처리 */
 	@ResponseBody
-	@RequestMapping(value = "/findparentpw.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/findparentpw", method = RequestMethod.POST)
 	public int findParentPw(@ModelAttribute("ParentVO") ParentVO pvo, Model model) {
 
 		logger.info("학부모 비밀번호 재발급 처리!");
@@ -144,7 +144,7 @@ public class FindUserController {
 
 	/* 학생 아이디 찾기 처리 */
 	@ResponseBody
-	@RequestMapping(value = "/findstudentid.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/findstudentid", method = RequestMethod.POST)
 	public ModelAndView findStudentId(@ModelAttribute("StudentVO") StudentVO svo, Model model) {
 
 		logger.info("학생 아이디 찾기 처리!");
@@ -170,7 +170,7 @@ public class FindUserController {
 
 	/* 학생 정보 check 메소드 */
 	@ResponseBody
-	@RequestMapping(value = "/checkstudentinfo.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/checkstudentinfo", method = RequestMethod.POST)
 	public int checkStudentInfo(@ModelAttribute("StudentVO") StudentVO svo, HttpSession session) {
 
 		logger.info("학생정보 체크!");
@@ -192,7 +192,7 @@ public class FindUserController {
 	}
 
 	/* 학생 새 비밀번호 설정 Form */
-	@RequestMapping(value = "/newstudentpw.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/newstudentpw", method = RequestMethod.GET)
 	public String newStudentPw(Model model) {
 
 		logger.info("학생 새 비밀번호설정 폼 출력!");
@@ -202,7 +202,7 @@ public class FindUserController {
 
 	/* 학생 새 비밀번호 설정 처리 */
 	@ResponseBody
-	@RequestMapping(value = "/newstudentpw.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/newstudentpw", method = RequestMethod.POST)
 	public int newStudentPwInsert(@ModelAttribute("StudentVO") StudentVO svo, HttpSession session) {
 
 		logger.info("학생 새 비밀번호 설정 처리!");

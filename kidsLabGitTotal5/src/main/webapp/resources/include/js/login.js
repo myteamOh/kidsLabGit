@@ -17,7 +17,7 @@ $(function() {
 
 			$("#loginForm").attr({
 				"method" : "POST",
-				"action" : "/login/login.do"
+				"action" : "/login/login"
 			});
 
 			$("#loginForm").submit();
@@ -30,14 +30,14 @@ $(function() {
 	$("#parentJoinBtn").click(function() {
 		console.log("회원가입폼 출력!");
 
-		location.href = "/member/agree.do";
+		location.href = "/member/agree";
 	});
 
 	/* 아이디 / 비밀번호 찾기 버튼 클릭시 이벤트 */
 	$("#findBtn").click(function() {
 		console.log("서치폼 출력!");
 
-		location.href = "/member/finduser.do";
+		location.href = "/member/finduser";
 	});
 
 	/* 강사로그인 버튼 클릭시 이벤트 */

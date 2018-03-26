@@ -60,6 +60,13 @@
 </script>
 </head>
 <body>
+
+	<%-- ======== 버튼 나타내기 비교 FORM ============ --%>
+	<form name ="">
+	
+	</form>
+	
+	
 	<div class="contentContainer">
 		<div class="contentTit">
 			<h3>갤러리 수정</h3>
