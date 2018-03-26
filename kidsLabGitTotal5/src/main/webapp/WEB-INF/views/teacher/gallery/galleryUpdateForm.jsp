@@ -62,18 +62,17 @@
 <body>
 
 	<%-- ======== 버튼 나타내기 비교 FORM ============ --%>
-	<form name ="">
-	
-	</form>
-	
-	
+	<form name=""></form>
+
+
 	<div class="contentContainer">
 		<div class="contentTit">
 			<h3>갤러리 수정</h3>
 		</div>
 
 		<div class="contentTB">
-			<form id="f_writeForm" name="f_writeForm">
+			<form id="f_writeForm" name="f_writeForm"
+				enctype="multipart/form-data">
 				<input type="hidden" id="gallery_no" name="gallery_no"
 					value="${updateData.gallery_no}" />
 				<table>
@@ -109,7 +108,9 @@
 							<td class="ac">첨부파일</td>
 							<td colspan="3"><input type="file" name="file" id="file">
 								<span id="imgView">기존 이미지파일명: ${updateData.gallery_file}<span
-									id="imgArea"> </span></span></td>
+									id="imgArea"> </span></span> <input type="hidden" id="gallery_file"
+								name="gallery_file" value="${updateData.gallery_file }">
+							</td>
 						</tr>
 
 
