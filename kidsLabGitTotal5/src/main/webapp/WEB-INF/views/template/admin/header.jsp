@@ -12,7 +12,7 @@
 			<span class="icon-bar"></span> <span class="icon-bar"></span>
 		</button>
 		<c:if test="${sessionScope.adminLogin != null }">
-			<a class="navbar-brand" href="/admin/course/courseList">My
+			<a class="navbar-brand" href="/admin/payment/paymentList">My
 				Project[ 관리자 페이지 ]</a>
 		</c:if>
 		<c:if test="${sessionScope.adminLogin == null }">

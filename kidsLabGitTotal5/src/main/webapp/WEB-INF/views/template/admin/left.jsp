@@ -197,7 +197,7 @@ body {
 				href="#"><i class="fa fa-gift fa-lg"></i> 게시판 관리 <span
 					class="arrow"></span></a></li>
 			<ul class="sub-menu collapse" id="products">
-				<li class="active"><a href="/admin/notice/noticeList">공지사항</a></li>
+				<li class=""><a href="/admin/notice/noticeList">공지사항</a></li>
 				<li><a href="/admin/faq/faqList">FAQ</a></li>
 				<li><a href="/admin/inquiry/inquiryList">1:1 문의</a></li>
 			</ul>
@@ -222,14 +222,9 @@ body {
 			<li><a href="/admin/course/courseList"> <i
 					class="fa fa-user fa-lg"></i> 강의관리
 			</a></li>
-			<li data-toggle="collapse" data-target="#graph" class="collapsed">
-				<a href="#"><i class="fa fa-car fa-lg"></i> 통계관리 <span
-					class="arrow"></span></a>
-			</li>
-			<ul class="sub-menu collapse" id="graph">
-				<li><a href="/admin/member/joinRootList">파이차트</a></li>
-				<li><a href="#">두번째통계</a></li>
-			</ul>
+			<li><a href="/admin/member/joinRootList"> <i
+					class="fa fa-user fa-lg"></i> 통계차트
+			</a></li>
 		</ul>
 	</div>
 </div>

@@ -55,14 +55,7 @@
 					</c:otherwise>
 				</c:choose>
 
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown" role="button" aria-expanded="false">게시판
-						<span class="caret"></span>
-				</a>
-					<ul class="dropdown-menu" role="menu">
-						<li><a href="/notice/noticeList">공지사항</a></li>
-						<li><a href="#">강의 평가</a></li>
-					</ul></li>
+				<li><a href="/notice/noticeList">공지사항</a></li>
 				<li><a href="/client/faq/faqList">FAQ</a></li>
 				<c:if
 					test="${sessionScope.Login == null and sessionScope.teacherLogin == null}">

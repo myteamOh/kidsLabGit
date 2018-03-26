@@ -290,7 +290,7 @@
 		</div>
 
 		<div>
-			<div id="line_chart"></div>
+			<div id="line_chart" hidden=""></div>
 		</div>
 
 		<div id="graph-images" hidden=""></div>
