@@ -25,8 +25,6 @@
 <script
 	src="/resources/include/dist/assets/js/ie-emulation-modes-warning.js"></script>
 <link rel="stylesheet" type="text/css"
-	href="/resources/include/css/common.css">
-<link rel="stylesheet" type="text/css"
 	href="/resources/include/css/board.css" />
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -106,9 +104,6 @@
 </head>
 <body>
 	<div class="contentContainer">
-		<div class="contentTit">
-			<h3>게시판 리스트</h3>
-		</div>
 		<%-- ======= 상세 페이지 이동을 위한 FORM ======== --%>
 		<form name="detailForm" id="detailForm">
 			<input type="hidden" name="faq_no" id="faq_no"> <input
