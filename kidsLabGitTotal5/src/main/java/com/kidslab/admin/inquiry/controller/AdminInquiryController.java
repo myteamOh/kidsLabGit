@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kidslab.admin.login.vo.AdminLoginVO;
 import com.kidslab.client.inquiry.controller.InquiryController;
 import com.kidslab.client.inquiry.service.InquiryService;
 import com.kidslab.client.inquiry.vo.InquiryVO;
@@ -30,13 +31,21 @@ public class AdminInquiryController {
 	 * 1:1 문의 목록 구현하기
 	 **************************************************************/
 	@RequestMapping(value = "/inquiry/inquiryList")
-	public ModelAndView inquiryList(@ModelAttribute InquiryVO inquiryVO, Model model) throws Exception {
+	public ModelAndView inquiryList(@ModelAttribute InquiryVO inquiryVO, Model model, HttpSession session)
+			throws Exception {
+		
 		logger.info("inquiryList 호출 성공");
 
 		List<InquiryVO> inquiryList = inquiryService.adminInquiryList(inquiryVO);
 
 		// ModelAndView - 모델과 뷰
 		ModelAndView mav = new ModelAndView();
+		AdminLoginVO vo = new AdminLoginVO();
+		vo = (AdminLoginVO) session.getAttribute("adminLogin");
+		if (vo == null) {
+			mav.setViewName("redirect:/admin/login");
+			return mav;
+		}
 
 		mav.addObject("inquiryList", inquiryList); // 저장된 데이터를 mav에 저장
 		mav.setViewName("admin/inquiry/inquiryList"); // 뷰를 inquiryList.jsp로 설정

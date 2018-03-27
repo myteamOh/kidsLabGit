@@ -31,7 +31,12 @@ public class TeacherController {
 	 * 회원 가입 폼
 	 ****************************/
 	@RequestMapping(value = "/teacher/join.do", method = RequestMethod.GET)
-	public String joinForm(Model model) {
+	public String joinForm(Model model, HttpSession session) {
+		AdminLoginVO vo = new AdminLoginVO();
+		vo = (AdminLoginVO) session.getAttribute("adminLogin");
+		if (vo == null) {
+			return "redirect:/admin/login";
+		}
 		logger.info("join.do get 방식에 의한 메소드 호출 성공");
 		return "admin/teacher/joinTeacher";
 	}

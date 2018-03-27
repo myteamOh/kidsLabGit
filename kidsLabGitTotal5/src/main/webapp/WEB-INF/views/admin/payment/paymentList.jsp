@@ -196,7 +196,8 @@
 		<%-- =============== 리스트 시작 ================= --%>
 		<c:if test="${adminLogin.userId != null and adminLogin.userId != '' }">
 			<div id="paymentList" class="container-fluid">
-				<table summary="결제 리스트" class="table-striped table-hover">
+				<table summary="결제 리스트"
+					class="table-striped table-hover table-bordered mg-top-sm table">
 					<colgroup>
 						<%-- <col width="10%" />
 					<col width="62%" />
