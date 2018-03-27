@@ -80,6 +80,24 @@ CREATE TABLE SECURITY(
 	CONSTRAINT SECURITY_PK PRIMARY KEY(USERID)
 );
 
+-- 로그인 정보 저장 테이블
+CREATE TABLE LOGIN_HISTORY(
+	idx NUMBER, userid VARCHAR2(70),
+	retry NUMBER DEFAULT 0,
+	lastFailedLogin NUMBER DEFAULT 0,
+	lastSuccessedLogin NUMBER DEFAULT 0,
+	clientIp VARCHAR2(15),
+	CONSTRAINT login_history_pk PRIMARY KEY(idx) 
+);
+
+COMMENT ON TABLE login_history is '로그인 정보 저장 테이블'; 
+COMMENT ON COLUMN login_history.idx is '순번';
+COMMENT ON COLUMN login_history.userid is '로그인 아이디';
+COMMENT ON COLUMN login_history.retry is '로그인 시도 횟수'; 
+COMMENT ON COLUMN login_history.lastfailedlogin is '마지막으로 실패한 로그인 시간'; 
+COMMENT ON COLUMN login_history.lastsuccessedlogin is '마지막으로 성공한 로그인 시간'; 
+COMMENT ON COLUMN login_history.clientip is '로그인한 사용자의 ip 주소'; 
+
 -- 강의 테이블
 CREATE TABLE COURSE(
 	COURSE_NO NUMBER NOT NULL,
@@ -263,11 +281,6 @@ START WITH 1
 INCREMENT BY 1
 NOCYCLE;
 
-select *
-from gallery;
-
-delete from gallery;
-
 CREATE SEQUENCE BOARD_INQUIRY_REPLY_SEQ
 START WITH 1
 INCREMENT BY 1
@@ -283,546 +296,38 @@ START WITH 1
 INCREMENT BY 1
 NOCYCLE;
 
--- 해시함수 솔트값을 저장하기 위한 테이블(비밀번호 암호화)
-CREATE TABLE SECURITY(
-	USERID VARCHAR2(70),
-	SALT VARCHAR2(70),
-	CONSTRAINT SECURITY_PK PRIMARY KEY(USERID)
-);
-select *
-from SECURITY;
-
-delete from security;
-
-select *
-from teacher;
--- 로그인 정보 저장 테이블
-CREATE TABLE LOGIN_HISTORY(
-	idx NUMBER, userid VARCHAR2(70),
-	retry NUMBER DEFAULT 0,
-	lastFailedLogin NUMBER DEFAULT 0,
-	lastSuccessedLogin NUMBER DEFAULT 0,
-	clientIp VARCHAR2(15),
-	CONSTRAINT login_history_pk PRIMARY KEY(idx) 
-);
-
-COMMENT ON TABLE login_history is '로그인 정보 저장 테이블'; 
-COMMENT ON COLUMN login_history.idx is '순번';
-COMMENT ON COLUMN login_history.userid is '로그인 아이디';
-COMMENT ON COLUMN login_history.retry is '로그인 시도 횟수'; 
-COMMENT ON COLUMN login_history.lastfailedlogin is '마지막으로 실패한 로그인 시간'; 
-COMMENT ON COLUMN login_history.lastsuccessedlogin is '마지막으로 성공한 로그인 시간'; 
-COMMENT ON COLUMN login_history.clientip is '로그인한 사용자의 ip 주소'; 
-
 -- 로그인 정보 저장시 사용할 순번(시퀀스)
 CREATE SEQUENCE LOGIN_HISTORY_SEQ;
 
 insert into ADMIN
 values(1, 'admin', 'test1234');
 
-
-
-alter table
-
-SELECT *
-FROM TEACHER;
-
-select *
-from admin;
-
-select teacher_id, teacher_password, teacher_name
-from
-teacher
-where
-teacher_id = 'ohgeehun90@naver.com'
-
-select *
-from security;
-
-delete from security where userid = 'geehun90@naver.com'
-
-select *
-from login_history;
-
-select *
-from spring_member;
-
-select teacher_id as userId, teacher_password, teacher_name
-		from
-		teacher
-		where
-		teacher_id =
-		'ohgeehun90@naver.com';
-
-select *
-from course;
-
-select course_no,
-		course_summary, course_name, course_subject, course_level,
-		course_time, course_totalperson, course_room, course_plan, course_pay,
-		to_char(course_registerdate, 'yyyy-mm-dd') as course_registerdate,
-		course_status, to_char(course_startdate,'yyyy-mm-dd') as
-		course_startdate, to_char(course_enddate, 'yyyy-mm-dd') as
-		course_enddate,
-		teacher_no
-		FROM course order by course_no asc;
-
-select a.course_no, a.teacher_no, b.teacher_name
-from  course a, teacher b
-where a.teacher_no = b.teacher_no
-order by course_no asc;
-
-select course_no,
-course_summary, course_name, course_subject, course_level,
-course_time, course_totalperson, course_room, course_plan, course_pay,
-to_char(course_registerdate, 'yyyy-mm-dd') as course_registerdate,
-course_status, to_char(course_startdate,'yyyy-mm-dd') as
-course_startdate, to_char(course_enddate, 'yyyy-mm-dd') as
-course_enddate,
-teacher_no, teacher_name, rownum
-FROM(select list.*, rownum as rnum from(
-	select a.*, b.teacher_name
-	from course a, teacher b
-	where a.teacher_no = b.teacher_no
-	order by a.course_no asc
-) list)
-where rnum between 1 and 3;
+-- 테이블 초기화 --
+delete from board_coursedata;
+delete from gallery;
+delete from board_inquiry_reply;
+delete from board_inquiry;
+delete from board_faq;
+delete from board_notice;
+delete from requestcourse;
+delete from course;
+delete from login_history;
+delete from security;
+delete from teacher;
+delete from user_security;
+delete from student;
+delete from parent;
 
 
 
-where a.teacher_no = b.teacher_no
-order by course_no asc;
-
-select course_no,
-		course_summary, course_name, course_subject,
-		course_level,
-		course_time, course_totalperson, course_room,
-		course_plan, course_pay,
-		to_char(course_registerdate, 'yyyy-mm-dd') as
-		course_registerdate,
-		course_status,
-		to_char(course_startdate,'yyyy-mm-dd') as
-		course_startdate,
-		to_char(course_enddate, 'yyyy-mm-dd') as
-		course_enddate,
-		a.teacher_no,
-		b.teacher_name
-		FROM (select list.*, teacher_name, rownum as rnum
-		
-select course_no,
-		course_summary, course_name, course_subject,
-		course_level,
-		course_time, course_totalperson, course_room,
-		course_plan, course_pay,
-		to_char(course_registerdate, 'yyyy-mm-dd') as
-		course_registerdate,
-		course_status,
-		to_char(course_startdate,'yyyy-mm-dd') as
-		course_startdate,
-		to_char(course_enddate, 'yyyy-mm-dd') as
-		course_enddate, a.teacher_no, b.teacher_name
-		from course a inner join teacher b on a.teacher_no = b.teacher_no;
-
-		select course_no,
-		course_summary, course_name, course_subject,
-		course_level,
-		course_time, course_totalperson, course_room,
-		course_plan, course_pay,
-		to_char(course_registerdate, 'yyyy-mm-dd') as
-		course_registerdate,
-		course_status,
-		to_char(course_startdate,'yyyy-mm-dd') as
-		course_startdate,
-		to_char(course_enddate, 'yyyy-mm-dd') as
-		course_enddate, a.teacher_no,
-		b.teacher_name
-		from course a inner join teacher b on a.teacher_no =
-		b.teacher_no
-		
-select course_no,
-		course_summary, course_name, course_subject,
-		course_level,
-		course_time, course_totalperson, course_room,
-		course_plan, course_pay,
-		to_char(course_registerdate, 'yyyy-mm-dd') as
-		course_registerdate,
-		course_status,
-		to_char(course_startdate,'yyyy-mm-dd') as
-		course_startdate,
-		to_char(course_enddate, 'yyyy-mm-dd') as
-		course_enddate, teacher_no,
-		teacher_name
-		FROM( select list.*, rownum as rnum
-		from(select a.*, teacher_name
-		from course a inner join teacher b on a.teacher_no =
-		b.teacher_no
-		order by course_no asc)
-		list
-		)
-		
-		select course_no,
-		course_summary, course_name, course_subject,
-		course_level,
-		course_time, course_totalperson, course_room,
-		course_plan, course_pay,
-		to_char(course_registerdate, 'yyyy-mm-dd') as
-		course_registerdate,
-		course_status,
-		to_char(course_startdate,'yyyy-mm-dd') as
-		course_startdate,
-		to_char(course_enddate, 'yyyy-mm-dd') as
-		course_enddate, teacher_no,
-		teacher_name
-		FROM( select list.*, rownum as rnum
-		from( select a.*,
-		b.teacher_name from course a inner join teacher b on a.teacher_no =
-		b.teacher_no
-		order by a.course_no asc) list
-		)
-		where rnum between 1 and 3;
-		
-		select course_no,
-		course_summary, course_name, course_subject,
-		course_level,
-		course_time, course_totalperson, course_room,
-		course_plan, course_pay,
-		to_char(course_registerdate, 'yyyy-mm-dd') as
-		course_registerdate,
-		course_status,
-		to_char(course_startdate,'yyyy-mm-dd') as
-		course_startdate,
-		to_char(course_enddate, 'yyyy-mm-dd') as
-		course_enddate, a.teacher_no,
-		b.teacher_name
-		from course a inner join teacher b on a.teacher_no =
-		b.teacher_no
-		
-select nvl(count(1), 0)
-		from(
-		select list.*, rownum as rnum
-		from(select course_no,
-		course_summary, course_name, course_subject,
-		course_level,
-		course_time, course_totalperson, course_room,
-		course_plan, course_pay,
-		to_char(course_registerdate, 'yyyy-mm-dd') as
-		course_registerdate,
-		course_status,
-		to_char(course_startdate,'yyyy-mm-dd') as
-		course_startdate,
-		to_char(course_enddate, 'yyyy-mm-dd') as
-		course_enddate, a.teacher_no,
-		b.teacher_name
-		from course a inner join teacher b on a.teacher_no =
-		b.teacher_no) list)
-		
-		
-		select nvl(count(1), 0)
-		from(
-		select list.*, rownum as rnum
-		from(
-		<include refid="courseCommon"></include>
-		order by course_no desc
-		) list
-		)
-		
-select course_no,
-		course_summary, course_name, course_subject,
-		course_level,
-		course_time, course_totalperson, course_room,
-		course_plan, course_pay,
-		to_char(course_registerdate, 'yyyy-mm-dd') as
-		course_registerdate,
-		course_status,
-		to_char(course_startdate,'yyyy-mm-dd') as
-		course_startdate,
-		to_char(course_enddate, 'yyyy-mm-dd') as
-		course_enddate, a.teacher_no,
-		b.teacher_name
-		from course a inner join teacher b on a.teacher_no =
-		b.teacher_no
-		where course_status = '승인대기';
-	
-		
-select nvl(count(1), 0)   
-from(   select list.*, rownum as rnum   from(
-select course_no,   course_summary, course_name, course_subject,   course_level,   course_time, course_totalperson, course_room,   course_plan, course_pay,   to_char(course_registerdate, 'yyyy-mm-dd') as   course_registerdate,   course_status,   to_char(course_startdate,'yyyy-mm-dd') as   course_startdate,   to_char(course_enddate, 'yyyy-mm-dd') as   course_enddate, a.teacher_no,   b.teacher_name  
-from course a inner join teacher b on a.teacher_no =   b.teacher_no    WHERE teacher_name like '%오%'      and      course_status like '등록대기'       order by course_no desc   ) list   );
-select nvl(count(1), 0)   
-from(   
-select list.*, rownum as rnum   
-from(       
-select course_no,   course_summary, course_name, course_subject,   course_level,   course_time, course_totalperson, course_room,   course_plan, course_pay,   to_char(course_registerdate, 'yyyy-mm-dd') as   course_registerdate,   course_status,   to_char(course_startdate,'yyyy-mm-dd') as   course_startdate,   to_char(course_enddate, 'yyyy-mm-dd') as   course_enddate, a.teacher_no,   b.teacher_name   from course a inner join teacher b on a.teacher_no =   b.teacher_no    
-WHERE teacher_name like '%오%'      and    course_status like '승인대기'       
-) list)
-
-select nvl(count(1), 0)   
-from(   
-select list.*, rownum as rnum   from
-(       
-select course_no,   course_summary, course_name, course_subject,   course_level,   course_time, course_totalperson, course_room,   course_plan, course_pay,   to_char(course_registerdate, 'yyyy-mm-dd') as   course_registerdate,   course_status,   to_char(course_startdate,'yyyy-mm-dd') as   course_startdate,   to_char(course_enddate, 'yyyy-mm-dd') as   course_enddate, a.teacher_no,   b.teacher_name   
-from course a inner join teacher b on a.teacher_no =   b.teacher_no    
-WHERE teacher_name like '%오%' and course_status like '등록대기' course_status like '등록대기'       
-) list
-)
-
-select course_no,   course_summary, course_name, course_subject,   course_level,   course_time, course_totalperson, course_room,   course_plan, course_pay,   to_char(course_registerdate, 'yyyy-mm-dd') as   course_registerdate,   course_status,   to_char(course_startdate,'yyyy-mm-dd') as   course_startdate,   to_char(course_enddate, 'yyyy-mm-dd') as   course_enddate, teacher_no 
-FROM(   
-select list.*, rownum as rnum   
-from(      
-select course_no,   course_summary, course_name, course_subject,   course_level,   course_time, course_totalperson, course_room,   course_plan, course_pay,   to_char(course_registerdate, 'yyyy-mm-dd') as   course_registerdate,   course_status,   to_char(course_startdate,'yyyy-mm-dd') as   course_startdate,   to_char(course_enddate, 'yyyy-mm-dd') as   course_enddate, a.teacher_no,   b.teacher_name   
-from course a inner join teacher b on a.teacher_no =   b.teacher_no) list )    WHERE rnum between 1 and 3
-
-select course_no, course_summary, course_name, course_subject,   course_level, course_time, course_totalperson, course_room,
-		course_plan, course_pay,
-		to_char(course_registerdate, 'yyyy-mm-dd') as course_registerdate,
-		course_status,
-		course_startdate,
-		course_enddate, teacher_no,
-		teacher_name
-from(
-select list.*, rownum as rnum   
-from(      
-select course_no,   course_summary, course_name, course_subject,   course_level,   course_time, course_totalperson, course_room,   course_plan, course_pay,    course_registerdate,   course_status,  course_startdate,  course_enddate, a.teacher_no,   b.teacher_name   
-from course a inner join teacher b on a.teacher_no =   b.teacher_no where teacher_name like '오기%' and course_status like '등록대기') list)
-where rnum between 1 and 3
-
-select nvl(count(1), 0)   
-from(   
-select list.*, rownum as rnum 
-from(   
-select course_no,   course_summary, course_name, course_subject,   course_level,   course_time, course_totalperson, course_room,   course_plan, course_pay,   course_registerdate,   course_status,   course_startdate,   course_enddate, a.teacher_no,   b.teacher_name  
-from course a inner join teacher b on a.teacher_no =   b.teacher_no    
-WHERE teacher_name like '%오%'                and course_status like '승인대기'    
-  order by course_no desc   ) list   )
-
-  
-  
-
-select nvl(count(1), 0)  
-from(  
-select list.*, rownum as rnum 
-from(     
-select course_no,   course_summary, course_name, course_subject,   course_level,   course_time, course_totalperson, course_room,   course_plan, course_pay,   course_registerdate,   course_status,   course_startdate,   course_enddate, a.teacher_no,   b.teacher_name  
-from   course a inner join teacher b on a.teacher_no =   b.teacher_no   
-WHERE 1=1    and       1=1      order by course_no desc   ) list   )
-
-update course
-set course_status = '승인대기'
-where course_no = 4;
-
-select *
-from course
-where 1=1;
-
-select course_no,
-		course_summary, course_name, course_subject,
-		course_level,
-		course_time, course_totalperson, course_room,
-		course_plan, course_pay,
-		to_char(course_registerdate, 'yyyy-mm-dd') as course_registerdate,
-		course_status,
-		to_char(course_startdate,'yyyy-mm-dd') as course_startdate,
-		to_char(course_enddate,'yyyy-mm-dd') as course_enddate,
-		a.teacher_no,
-		b.teacher_name
-		from
-		course a inner join teacher b on a.teacher_no =
-		b.teacher_no
-		where
-		course_no = 4;
-
-select *
-from course;
-
-update course
-		set course_time =
-		'1시', course_room = 8,
-		course_pay = 220000,
-		course_status = '등록대기'
-		, 
-		course_summary = '테스트',
-		course_registerdate = sysdate
-		where
-		course_no = 4;
-
-select *
-from course;
 
 
 
-select *
-from user_security;
-
-delete user_security;
-
-select *
-from parent;
-
-select requestcourse_no, p.parent_name, s.student_name, c.course_name, requestcourse_payamount
-from requestcourse r, parent p, student s, course c
-where r.parent_no = p.parent_no and r.student_no = s.student_no and r.course_no = c.course_no;
-
-select requestcourse_no, parent_name, student_name,
-		course_name,
-		requestcourse_paymethod,
-		requestcourse_payamount,
-		to_char(requestcourse_paymentdate, 'yyyy-mm-dd') as
-		requestcourse_paymentdate,
-		requestcourse_paymentstatus,
-		requestcourse_accountholder,
-		requestcourse_accountnumber,
-		requestcourse_refundcharge,
-		requestcourse_refundbank
-		from(
-		select list.*,
-		rownum as rnum
-		from(
-			select requestcourse_no, p.parent_name, s.student_name,
-		c.course_name,
-		requestcourse_paymethod,
-		requestcourse_payamount,
-		requestcourse_paymentdate,
-		requestcourse_paymentstatus,
-		requestcourse_accountholder,
-		requestcourse_accountnumber,
-		requestcourse_refundcharge,
-		requestcourse_refundbank
-		from requestcourse
-		r, parent p,
-		student s,
-		course c
-		where r.parent_no = p.parent_no and r.student_no =
-			s.student_no and
-			r.course_no = c.course_no
-		order by requestcourse_no asc
-		) list
-		)
-		where rnum between 1 and 3;
-
-select nvl(count(1), 0)
-from(
-select list.*, rownum as rnum
-from(
-select requestcourse_no, p.parent_name, s.student_name,
-c.course_name,
-requestcourse_paymethod,
-requestcourse_payamount,
-requestcourse_paymentdate,
-requestcourse_paymentstatus,
-requestcourse_accountholder,
-requestcourse_accountnumber,
-requestcourse_refundcharge,
-requestcourse_refundbank
-from requestcourse
-r, parent p,
-student s,
-course c
-where r.parent_no = p.parent_no and r.student_no =
-	s.student_no and
-	r.course_no = c.course_no
-	order by requestcourse_no desc
-) list
-)
-
-select *
-from requestcourse;
-
-select *
-from course;
-
-select course_plan
-from course c inner join requestcourse r on c.course_no = r.course_no
-where r.requestcourse_no =  24
-
-select *
-from requestcourse;
-
-update requestcourse
-set requestcourse_paycompletedate = sysdate, requestcourse_paymentstatus = '환불대기' 
-where requestcourse_no = 25;
-
-select requestcourse_paymentstatus, s.student_name, c.course_name, p.parent_no
-from requestcourse r inner join student s on r.student_no=s.student_no inner join course c on r.course_no = c.course_no
-inner join parent p on r.parent_no = p.parent_no
-where (r.parent_no = 41 and r.requestcourse_paymentstatus = '환불완료') or (r.parent_no = 41 and r.requestcourse_paymentstatus = '환불대기')
-
-select requestcourse_paymentstatus, s.student_name, c.course_name, p.parent_no,
-requestcourse_payamount, requestcourse_paymentdate, requestcourse_accountholder,
-requestcourse_accountnumber, requestcourse_refundcharge, requestcourse_refundbank, requestcourse_paycompletedate
-from requestcourse r inner join student s on r.student_no=s.student_no inner join course c on r.course_no = c.course_no
-inner join parent p on r.parent_no = p.parent_no
-where (r.requestcourse_paymentstatus = '환불완료' or r.requestcourse_paymentstatus = '환불대기') and
-r.parent_no = 41
-
-select *
-from requestcourse;
-
-alter table requestcourse
-add(requestcourse_refunddate date);
-alter table requestcourse
-add(requestcourse_refundcomplete date);
-
-select
-		requestcourse_paycompletedate, requestcourse_payamount,
-		requestcourse_refundcharge,(requestcourse_payamount-requestcourse_refundcharge)
-		as margin ,rnum
-		from(
-		select list.*, rownum as rnum
-		from(
-		select
-		to_char(requestcourse_paycompletedate, 'yy-mm') as
-		requestcourse_paycompletedate,
-		sum(requestcourse_payamount) as
-		requestcourse_payamount, sum(requestcourse_refundcharge) as
-		requestcourse_refundcharge
-		from requestcourse
-		where
-		to_char(requestcourse_paycompletedate, 'yy-mm') <=
-		to_char(sysdate,
-		'yy-mm')
-		and requestcourse_paymentstatus = '결제완료' or
-		to_char(requestcourse_refundcomplete, 'yy-mm') <=
-		to_char(sysdate,
-		'yy-mm') and requestcourse_paymentstatus = '환불완료'
-		group by
-		to_char(requestcourse_paycompletedate, 'yy-mm')
-		order by
-		requestcourse_paycompletedate desc
-		) list
-		)
-		where rnum between 1 and 6
-		order by requestcourse_paycompletedate asc
-
-		
-		
-select s.student_no,s.student_name
-from student s left join requestcourse r on r.student_no = s.student_no;
 
 
-select p.parent_no, s.student_no
-from parent p left outer join student s on p.parent_no = s.parent_no;
 
-SELECT coursedata_no, coursedata_title, coursedata_writer,   coursedata_content,   coursedata_registerdate,   coursedata_file,  
-coursedata_status   
-FROM( 
-SELECT list.*, rownum as rnum   FROM
-(       
-SELECT coursedata_no, coursedata_title, coursedata_writer,   coursedata_content, to_char(coursedata_registerdate, 'yyyy-mm-dd')
-as   coursedata_registerdate,   coursedata_file, coursedata_status, course_no
-FROM board_coursedata               
-course_no = 44
-ORDER BY coursedata_no DESC   
-) list
-)    
-WHERE rnum between 1 and 10
-			
-SELECT coursedata_no, coursedata_title, coursedata_writer,   coursedata_content,   coursedata_registerdate,   coursedata_file,   
-coursedata_status   FROM(   
-SELECT list.*, rownum as rnum  
-FROM (  
-SELECT coursedata_no, coursedata_title, coursedata_writer,   coursedata_content, to_char(coursedata_registerdate, 'yyyy-mm-dd') 
-as   coursedata_registerdate,   coursedata_file, coursedata_status, course_no 
-FROM board_coursedata                 and        course_no = 44   ORDER BY coursedata_no DESC   ) list   )    WHERE rnum between ? and ?
 
-		
+
+
+
+
