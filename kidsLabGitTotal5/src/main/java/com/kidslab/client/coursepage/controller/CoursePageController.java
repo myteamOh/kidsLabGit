@@ -24,6 +24,7 @@ import com.kidslab.client.login.vo.UserLoginVO;
 import com.kidslab.client.student.vo.StudentVO;
 import com.kidslab.common.file.FileUploadUtil;
 import com.kidslab.common.page.Paging;
+import com.kidslab.common.util.Util;
 import com.kidslab.teacher.login.vo.TeacherLoginVO;
 
 @Controller
@@ -90,16 +91,16 @@ public class CoursePageController {
 
 		// 페이지 세팅
 		Paging.setPage(cdvo);
-
 		// 전체 레코드 수
 		int total = coursePageService.coursePageListCnt(cdvo);
-		logger.info("total = " + total);
+
+		int count = total - (Util.nvl(cdvo.getPage()) - 1) * Util.nvl(cdvo.getPageSize());
 
 		List<CourseDataVO> cdvoList = coursePageService.courseDataList(cdvo);
 
 		mav.addObject("total", total);
+		mav.addObject("count", count);
 		mav.addObject("courseboardList", cdvoList);
-
 		mav.addObject("courseboardData", cdvo);
 
 		mav.setViewName("client/coursePage/coursePageBoardList");
