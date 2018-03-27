@@ -11,6 +11,8 @@
 	src="/resources/include/js/jquery-1.12.4.min.js"></script>
 <!-- <script type="text/javascript" src="/resources/include/js/coursePage.js"></script> -->
 
+<link type="text/css" rel="stylesheet" href="/resources/include/css/coursePageBoardDetail.css">
+
 </head>
 <body>
 
@@ -57,7 +59,7 @@
 					</c:if>
 
 					<tr>
-						<td>내용</td>
+						<td colspan="1">내용</td>
 						<td colspan="3">${detail.coursedata_content}</td>
 					</tr>
 				</tbody>
@@ -66,7 +68,7 @@
 
 		<!-- 작성자와 로그인정보(이름,아이디)가 일치시 수정, 삭제 버튼 활성화 -->
 		<c:if test="${detail.coursedata_writer eq loginInfo}">
-			<div>
+			<div class="btnPart">
 				<input type="button" class="updateBtn" value="수정"> <input
 					type="button" class="deleteBtn" value="삭제">
 			</div>

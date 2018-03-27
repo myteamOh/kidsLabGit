@@ -2,6 +2,7 @@
 
 body {
     margin-bottom: 80px;
+    min-width: 1800px;
 }
 
 body>.container {
@@ -9,42 +10,32 @@ body>.container {
 }
 
 table {
-	margin: 0 auto;
+	margin: auto;
 }
 
-.container td:first-child {
-	text-align: right;
-	padding-right: 50px;
-	width: 200px;
+th {
+	text-align: center;
+	font-size: 13pt;
+	background-color: #FFFED7;
 }
 
 td {
 	padding: 5px;
-	font-size: 15pt;
-}
-
-.btnPart {
-	width: 320px;
-	margin: 20px auto;
+	font-size: 13pt;
+	text-align: center;
 }
 
 input[type=button] {
-	margin: 5px;
+	float: right;
+	margin: 20px;
+	margin-right: 40px;
 	height: 35px;
 	border-bottom-left-radius: 15px;
 	border-bottom-right-radius: 15px;
 	border-top-left-radius: 15px;
 	border-top-right-radius: 15px;
-	font-size: 20px;
+	font-size: 14pt;
 	font-weight: bold;
-}
-
-.okBtnPwCheck {
-	min-width: 160px;
+	min-width: 100px;
 	background-color: #AAD34A;
-}
-
-.cancelBtn {
-	min-width: 140px;
-	background-color: #FBFBFB;
 }

@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+body {
+    margin-bottom: 80px;
+}
+
 body>.container {
 	background-color: #F9F9F9;
 }
