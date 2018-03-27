@@ -12,6 +12,9 @@
 <script type="text/javascript" src="/resources/include/js/common.js"></script>
 <script type="text/javascript" src="/resources/include/js/findUser.js"></script>
 
+<link type="text/css" rel="stylesheet"
+	href="/resources/include/css/findUser.css">
+
 </head>
 <body>
 	<section>
@@ -19,16 +22,14 @@
 
 			<h5>아이디 / 비밀번호를 찾기 위한 해당항목을 모두 입력해 주셔야 조회가 가능합니다.</h5>
 
-			<div>
+			<div class="parentPart">
 
 				<h4>학부모 아이디 찾기 / 임시 비밀번호 받기</h4>
 
 				<form id="parentIdSearch">
 					<table>
 
-						<tr>
-							<td colspan="2"><label>아이디 찾기</label></td>
-						</tr>
+						<caption>아이디 찾기</caption>
 						<tr>
 							<td><label>이름</label></td>
 							<td><input type="text" id="findParentIdName"
@@ -39,44 +40,42 @@
 							<td><input type="text" id="findParentIdPhone"
 								name="parent_phone" maxlength="11"></td>
 						</tr>
-						<tr>
+						<tr class="btnTr">
 							<td colspan="2"><input type="button" id="findParentId"
 								value="아이디 찾기"></td>
 						</tr>
-
-						<c:choose>
-							<c:when test="${list == 'success'}">
-								<tr>
-									<td>아이디</td>
-									<td>가입일(년-월-일)</td>
-								</tr>
-								<c:forEach var="parent" items="${parentIdList}">
+						<tfoot>
+							<c:choose>
+								<c:when test="${list == 'success'}">
 									<tr>
-										<td>${parent.userId}</td>
-										<td>${parent.parent_registerdate}</td>
+										<td>아이디</td>
+										<td>가입일(년-월-일)</td>
 									</tr>
-								</c:forEach>
-							</c:when>
+									<c:forEach var="parent" items="${parentIdList}">
+										<tr>
+											<td>${parent.userId}</td>
+											<td>${parent.parent_registerdate}</td>
+										</tr>
+									</c:forEach>
+								</c:when>
 
-							<c:when test="${list == 'fail'}">
-								<tr>
-									<td colspan="2" style="color: red;">입력한 정보와 일치하는 아이디가
-										없습니다.</td>
-								</tr>
-							</c:when>
+								<c:when test="${list == 'fail'}">
+									<tr>
+										<td colspan="2" style="color: red;">입력한 정보와 일치하는 아이디가
+											없습니다.</td>
+									</tr>
+								</c:when>
 
-							<c:otherwise>
-							</c:otherwise>
-						</c:choose>
-
+								<c:otherwise>
+								</c:otherwise>
+							</c:choose>
+						</tfoot>
 					</table>
 				</form>
 
 				<form id="parentPwSearch">
 					<table>
-						<tr>
-							<td colspan="2"><label>임시 비밀번호 받기</label></td>
-						</tr>
+						<caption>임시 비밀번호 받기</caption>
 						<tr>
 							<td><label>아이디</label></td>
 							<td><input type="email" id="findParentPwId" name="userId"></td>
@@ -86,7 +85,7 @@
 							<td><input type="text" id="findParentPwName"
 								name="parent_name" maxlength="5"></td>
 						</tr>
-						<tr>
+						<tr class="btnTr">
 							<td colspan="2"><input type="button" id="findParentPw"
 								value="임시 비밀번호 발급"></td>
 						</tr>
@@ -94,15 +93,14 @@
 				</form>
 			</div>
 
-			<div>
+
+			<div class="studentPart">
 
 				<h4>학생 아이디 찾기 / 비밀번호 재설정</h4>
 
 				<form id="studentIdSearch">
 					<table>
-						<tr>
-							<td colspan="2"><label>아이디 찾기</label></td>
-						</tr>
+						<caption>아이디 찾기</caption>
 						<tr>
 							<td><label>이름</label></td>
 							<td><input type="text" id="studentIdName"
@@ -113,43 +111,42 @@
 							<td><input type="text" id="studentIdBirth"
 								name="student_birthday" maxlength="6"></td>
 						</tr>
-						<tr>
+						<tr class="btnTr">
 							<td colspan="2"><input type="button" id="findStudentId"
 								value="아이디 찾기"></td>
 						</tr>
 
-						<c:choose>
-							<c:when test="${studnetList == 'success'}">
-								<tr>
-									<td>아이디</td>
-									<td>가입일(년-월-일)</td>
-								</tr>
-								<c:forEach var="student" items="${studentIdList}">
+						<tfoot>
+							<c:choose>
+								<c:when test="${studnetList == 'success'}">
 									<tr>
-										<td>${student.userId}</td>
-										<td>${student.student_registerdate}</td>
+										<td>아이디</td>
+										<td>가입일(년-월-일)</td>
 									</tr>
-								</c:forEach>
-							</c:when>
+									<c:forEach var="student" items="${studentIdList}">
+										<tr>
+											<td>${student.userId}</td>
+											<td>${student.student_registerdate}</td>
+										</tr>
+									</c:forEach>
+								</c:when>
 
-							<c:when test="${studentList == 'fail'}">
-								<tr>
-									<td colspan="2" style="color: red;">입력한 정보와 일치하는 아이디가
-										없습니다.</td>
-								</tr>
-							</c:when>
+								<c:when test="${studentList == 'fail'}">
+									<tr>
+										<td colspan="2" style="color: red;">입력한 정보와 일치하는 아이디가
+											없습니다.</td>
+									</tr>
+								</c:when>
 
-							<c:otherwise>
-							</c:otherwise>
-						</c:choose>
-
+								<c:otherwise>
+								</c:otherwise>
+							</c:choose>
+						</tfoot>
 					</table>
 				</form>
 
 				<table>
-					<tr>
-						<td colspan="2"><label>비밀번호 재설정</label></td>
-					</tr>
+					<caption>비밀번호 재설정</caption>
 					<tr>
 						<td><label>아이디</label></td>
 						<td><input type="text" id="studentPwId" name="userId"></td>
@@ -159,7 +156,7 @@
 						<td><input type="text" id="studentPwName" name="student_name"
 							maxlength="5"></td>
 					</tr>
-					<tr>
+					<tr class="btnTr">
 						<td colspan="2"><input type="button" id="newStudentPw"
 							value="새 비밀번호 설정"></td>
 					</tr>

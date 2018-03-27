@@ -52,15 +52,15 @@ tfoot tr {
 }
 
 input[type=button] {
-    width: 190px;
-	height: 40px;
+    width: 180px;
+	height: 35px;
     margin: 20px;
     margin-left: 140px;
 	border-bottom-left-radius: 15px;
 	border-bottom-right-radius: 15px;
 	border-top-left-radius: 15px;
 	border-top-right-radius: 15px;
-	font-size: 20px;
+	font-size: 17px;
 	font-weight: bold;
     background-color: #AAD34A;
 }
