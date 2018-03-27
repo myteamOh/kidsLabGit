@@ -209,7 +209,7 @@
 
 
 		<%-- ================= 리스트 시작 =============== --%>
-		<div id="galleryList" align="center" style="background-color: #A9F5A9 ">
+		<div id="galleryList" align="center" style="background-color: #A9F5A9">
 
 			<!--  데이터  출력 -->
 			<c:choose>
@@ -223,20 +223,24 @@
 									alt="Card image cap">
 
 								<div class="card-body">
-									<table>
-										<tr data-num="${gallery.gallery_no}">
-											<td style="display: none;">${gallery.gallery_no}</td>
-											<td class="goDetail tal">${gallery.gallery_title}</td>
-											<td>${gallery.gallery_registerdate}</td>
-											<td class="name">${gallery.teacher_name}</td>
-										</tr>
-									</table>
+									<div>
+										<div>${gallery.gallery_title}<br>${gallery.gallery_registerdate}<br></div>
+									</div>
 									<div class="d-flex justify-content-between align-items-center">
 										<div class="btn-group">
-											<button type="button"
-												class="btn btn-sm btn-outline-secondary">View</button>
+											<table>
+												<tr data-num="${gallery.gallery_no}">
+													<td style="display: none;">${gallery.gallery_no}</td>
+													<td><button type="button"
+															class="btn btn-sm btn-outline-secondary goDetail">View</button></td>
+													<td><c:if
+															test="${teacherLogin.teacher_no == gallery.teacher_no}">
+															<button type="button"
+																class="btn btn-sm btn-outline-secondary goEdit">Edit</button>
+														</c:if></td>
+												</tr>
+											</table>
 										</div>
-
 									</div>
 								</div>
 							</div>
