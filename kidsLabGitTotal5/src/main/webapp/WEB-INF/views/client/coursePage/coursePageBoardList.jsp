@@ -11,15 +11,25 @@
 	src="/resources/include/js/jquery-1.12.4.min.js"></script>
 <!-- <script type="text/javascript" src="/resources/include/js/coursePage.js"></script> -->
 
+<link type="text/css" rel="stylesheet"
+	href="/resources/include/css/coursePageBoardList.css">
+
 </head>
 <body>
 
 	<form id="detailForm">
-		<input type="hidden" name="coursedata_no" id="coursedataNo" >
+		<input type="hidden" name="coursedata_no" id="coursedataNo">
 	</form>
 
 	<div>
 		<table border="1">
+			<colgroup>
+				<col width="5%">
+				<col width="5%">
+				<col width="50%">
+				<col width="15%">
+				<col width="20%">
+			</colgroup>
 			<tr>
 				<th>글번호</th>
 				<th>글종류</th>

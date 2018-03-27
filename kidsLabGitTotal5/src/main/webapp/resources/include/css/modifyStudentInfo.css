@@ -9,40 +9,38 @@ body>.container {
 }
 
 table {
+    width: 530px;
 	margin: 0 auto;
+}
+
+caption {
+	font-size: 19pt;
 }
 
 .container td:first-child {
 	text-align: right;
 	padding-right: 50px;
-	width: 250px;
+	width: 210px;
 }
 
 .necessary {
 	color: red;
 }
 
-h5.necessary {
-	font-size: 13pt;
-	text-align: center;
-}
-
-.container td:nth-child(2) {
-	width: 400px;
-}
-
 td {
 	padding: 5px;
-	font-size: 15pt;
+	font-size: 13pt;
 }
 
 .btnPart {
-	width: 290px;
+	width: 310px;
 	margin: 20px auto;
 }
 
 input[type=button] {
+	margin: 5px;
 	height: 35px;
+    min-width: 140px;
 	border-bottom-left-radius: 15px;
 	border-bottom-right-radius: 15px;
 	border-top-left-radius: 15px;
@@ -51,12 +49,15 @@ input[type=button] {
 	font-weight: bold;
 }
 
-#okBtn {
-	min-width: 140px;
+#studentModifyBtn {
 	background-color: #AAD34A;
 }
 
-#cancelBtn {
-	min-width: 140px;
+#modifyCancelBtn {
 	background-color: #FBFBFB;
+}
+
+#withdrawBtn {
+	min-width: 140px;
+	background-color: #EBF7FF;
 }

@@ -8,52 +8,40 @@ body>.container {
 	background-color: #F9F9F9;
 }
 
-table {
-	margin: 0 auto;
+section>div {
+	width: 450px;
+	height: 300px;
+	margin: auto;
 }
 
 caption {
-	font-size: 19pt;
+	font-size: 15pt;
 }
 
-.container td:first-child {
-	text-align: right;
-}
-
-.container td:nth-child(2) {
+table {
 	width: 500px;
+	margin: 0 auto;
+	float: left;
 }
 
 td {
 	padding: 5px;
-	font-size: 15pt;
 }
 
-.summaryPart {
-	height: 1000px;
+tr td:first-child {
+	width: 150px;
+	font-size: 11pt;
 }
 
 input[type=button] {
+	width: 190px;
 	height: 40px;
+	margin: 10px;
 	border-bottom-left-radius: 15px;
 	border-bottom-right-radius: 15px;
 	border-top-left-radius: 15px;
 	border-top-right-radius: 15px;
 	font-size: 20px;
 	font-weight: bold;
-}
-
-.btnPart {
-	width: 500px;
-	margin: 5px auto;
-}
-
-.applyBtn {
-	min-width: 300px;
 	background-color: #AAD34A;
-}
-
-.toListBtn {
-	min-width: 120px;
-	background-color: #FBFBFB;
 }

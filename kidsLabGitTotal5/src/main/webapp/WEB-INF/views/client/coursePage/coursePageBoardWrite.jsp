@@ -11,6 +11,8 @@
 	src="/resources/include/js/jquery-1.12.4.min.js"></script>
 <!-- <script type="text/javascript" src="/resources/include/js/coursePage.js"></script> -->
 
+<link type="text/css" rel="stylesheet" href="/resources/include/css/coursePageBoardWrite.css">
+
 </head>
 <body>
 	<form id="writeForm" enctype="multipart/form-data">
@@ -79,7 +81,7 @@
 				</table>
 			</div>
 
-			<div>
+			<div class="btnPart">
 				<input type="button" class="insertBtn" value="확인">
 			</div>
 		</section>

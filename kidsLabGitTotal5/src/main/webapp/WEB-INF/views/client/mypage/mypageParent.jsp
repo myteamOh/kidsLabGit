@@ -96,7 +96,7 @@ table {
 </style>
 
 <link type="text/css" rel="stylesheet"
-	href="/resources/include/css/parentMypage.css">
+	href="/resources/include/css/mypageParent.css">
 
 </head>
 <body>

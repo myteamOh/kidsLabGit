@@ -10,20 +10,56 @@
 <script type="text/javascript"
 	src="/resources/include/js/jquery-1.12.4.min.js"></script>
 
+<link type="text/css" rel="stylesheet"
+	href="/resources/include/css/coursePageHome.css">
+
 </head>
 <body>
 
 	<div>
-		<label>${course.course_name}</label><br> <label>${course.teacher_name}(${course.teacher_id})</label><br>
-		<label>${course.teacher_phone}</label><br> <label>${course.course_subject}</label><br>
-		<label>${course.course_time}</label><br> <label>${course.course_room}강의실</label><br>
-		<label>${course.course_startdate} ~ ${course.course_enddate}</label><br>
-		<label>${course.course_summary}</label><br>
+		<table class="courseData">
+			<tr>
+				<td>강의명</td>
+				<td>${course.course_name}</td>
+			</tr>
+			<tr>
+				<td>강사</td>
+				<td>${course.teacher_name}(${course.teacher_id})</td>
+				<td>강사 연락처</td>
+				<td>${course.teacher_phone}</td>
+			</tr>
+			<tr>
+				<td>강의 과목</td>
+				<td>${course.course_subject}</td>
+			</tr>
+			<tr>
+				<td>강의 요일 및 시간</td>
+				<td>${course.course_time}</td>
+			</tr>
+			<tr>
+				<td>강의실</td>
+				<td>${course.course_room}</td>
+			</tr>
+			<tr>
+				<td>강의 기간</td>
+				<td>${course.course_startdate}~${course.course_enddate}</td>
+			</tr>
+			<tr>
+				<td>강의개요</td>
+				<td>${course.course_summary}</td>
+			</tr>
+		</table>
 	</div>
 
 	<div class="noticeDiv">
-		<label>공지사항</label>
-		<table border="1">
+		<table class="mainList" border="1">
+			<caption>공지사항</caption>
+			<colgroup>
+				<col width="10%">
+				<col width="50%">
+				<col width="15%">
+				<col width="30%">
+			</colgroup>
 			<tr>
 				<th>글번호</th>
 				<th>제목</th>
@@ -52,8 +88,14 @@
 	</div>
 
 	<div class="dataDiv">
-		<label>자료실</label>
-		<table border="1">
+		<table class="mainList" border="1">
+			<caption>자료실</caption>
+			<colgroup>
+				<col width="10%">
+				<col width="50%">
+				<col width="15%">
+				<col width="30%">
+			</colgroup>
 			<tr>
 				<th>글번호</th>
 				<th>제목</th>
