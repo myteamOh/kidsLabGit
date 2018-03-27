@@ -20,6 +20,8 @@
 	});
 </script>
 
+<link type="text/css" rel="stylesheet" href="/resources/include/css/modifyStudentInfo.css">
+
 </head>
 <body>
 
@@ -28,6 +30,7 @@
 		<div>
 			<form id="studentModifying">
 				<table>
+				<caption>학생정보 수정</caption>
 					<tr>
 						<td><label>이름</label></td>
 						<td><input type="text" name="student_name"
@@ -43,7 +46,7 @@
 					<tr>
 						<td><label>새 비밀번호</label></td>
 						<td><input type="password" id="userPw" name="userPw"
-							maxlength="13"><label class="check">여부 라벨</label></td>
+							maxlength="13"><label class="check"></label></td>
 					</tr>
 
 					<tr>
@@ -56,18 +59,18 @@
 					<tr>
 						<td><label>새 비밀번호 확인</label></td>
 						<td><input type="password" id="userPwCheck" maxlength="13">
-							<label class="check">여부 라벨</label></td>
+							<label class="check"></label></td>
 					</tr>
 
 					<tr>
-						<td><label>*</label> <label>학교</label></td>
+						<td><label class="necessary">*</label> <label>학교</label></td>
 						<td><input type="text" id="student_school"
 							name="student_school" value="${student.student_school}"><label
-							class="check">여부 라벨</label></td>
+							class="check"></label></td>
 					</tr>
 				</table>
 
-				<div>
+				<div class="btnPart">
 					<input type="button" id="studentModifyBtn" value="수정 완료"> <input
 						type="button" id="modifyCancelBtn" value="취소">
 				</div>

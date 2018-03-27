@@ -11,6 +11,8 @@
 	src="/resources/include/js/jquery-1.12.4.min.js"></script>
 <!-- <script type="text/javascript" src="/resources/include/js/coursePage.js"></script> -->
 
+<link type="text/css" rel="stylesheet" href="/resources/include/css/coursePageBoardUpdate.css">
+
 </head>
 <body>
 
@@ -68,7 +70,7 @@
 				</table>
 			</div>
 
-			<div>
+			<div class="btnPart">
 				<input type="button" class="updateCompleteBtn" value="수정완료"> <input
 					type="button" class="updateCancelBtn" value="취소">
 			</div>

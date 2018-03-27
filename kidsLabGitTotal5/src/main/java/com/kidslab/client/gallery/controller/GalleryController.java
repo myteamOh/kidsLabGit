@@ -15,6 +15,7 @@ import com.kidslab.common.util.Util;
 import com.kidslab.teacher.gallery.service.TeacherGalleryService;
 import com.kidslab.teacher.gallery.vo.TeacherGalleryVO;
 
+
 @Controller
 @RequestMapping(value = "/client")
 public class GalleryController {
@@ -46,15 +47,17 @@ public class GalleryController {
 		logger.info("count = " + count);
 		logger.info("page : " + tgvo.getPage());
 		logger.info("search : " + tgvo.getPage());
-
+		
+		
 		List<TeacherGalleryVO> galleryList = teacherGalleryService.galleryList(tgvo);
-
+		
+		// addAttribute(name, value) -> value 객체를 name 이름으로 추가
 		model.addAttribute("galleryList", galleryList);
 		model.addAttribute("count", count);
 		model.addAttribute("total", total);
-
 		model.addAttribute("galleryData", tgvo);
-
+		
+		// 해당 주소로 리턴
 		return "client/gallery/galleryList";
 	}
 
@@ -65,15 +68,18 @@ public class GalleryController {
 	public String galleryDetail(@ModelAttribute TeacherGalleryVO tgvo, Model model) {
 		logger.info("galleryDetail 호출 성공");
 		logger.info("gallery_no = " + tgvo.getGallery_no());
-
+		
+		// 
 		TeacherGalleryVO detail = new TeacherGalleryVO();
 		detail = teacherGalleryService.galleryDetail(tgvo);
-
+		
+		// 
 		if (detail != null && (!detail.equals(""))) {
 			detail.setGallery_content(detail.getGallery_content().toString().replaceAll("\n", "<br>"));
 
 		}
-
+		
+		// detail 값을 "detail"이름으로 추가
 		model.addAttribute("detail", detail);
 
 		return "client/gallery/galleryDetail";

@@ -37,21 +37,11 @@ public class InquiryController {
 	 * 1:1 문의 목록 구현하기
 	 **************************************************************/
 	@RequestMapping(value = "/inquiryList")
-	/*
-	 * public ModelAndView inquiryList(@ModelAttribute InquiryVO inquiryVO) throws
-	 * Exception { logger.info("inquiryList 호출 성공");
-	 * 
-	 * List<InquiryVO> inquiryList = inquiryService.inquiryList(inquiryVO);
-	 * 
-	 * ModelAndView mav = new ModelAndView();
-	 * mav.setViewName("inquiry/inquiryList"); // 뷰를 inquiryList.jsp로 설정
-	 * mav.addObject("inquiryList", inquiryList);
-	 * 
-	 * return mav; }
-	 */
 	public ModelAndView inquiryList(@ModelAttribute InquiryVO inquiryVO, Model model, HttpSession session)
 			throws Exception {
 		logger.info("inquiryList 호출 성공");
+		
+		
 		ParentVO pvo = (ParentVO) session.getAttribute("Login");
 		logger.info("parent_no : " + pvo.getParent_no());
 

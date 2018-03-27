@@ -136,9 +136,11 @@
 		</div>
 		<%-- =============== 상세 정보 보여주기 종료 ============ --%>
 		<div>
-			<input type="button" value="목록" id="boardListBtn"><c:if test="${teacherLogin.teacher_no == detail.teacher_no}"><input
-				type="button" value="수정" id="updateBtn"><input type="button"
-				value="삭제" id="deleteBtn"></c:if>
+			<input type="button" value="목록" id="boardListBtn">
+			<c:if test="${teacherLogin.teacher_no == detail.teacher_no}">
+				<input type="button" value="수정" id="updateBtn">
+				<input type="button" value="삭제" id="deleteBtn">
+			</c:if>
 		</div>
 	</div>
 </body>

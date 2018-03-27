@@ -24,6 +24,7 @@ import com.kidslab.client.login.vo.UserLoginVO;
 import com.kidslab.client.student.vo.StudentVO;
 import com.kidslab.common.file.FileUploadUtil;
 import com.kidslab.common.page.Paging;
+import com.kidslab.common.util.Util;
 import com.kidslab.teacher.login.vo.TeacherLoginVO;
 
 @Controller
@@ -53,8 +54,9 @@ public class CoursePageController {
 
 		cdvo.setCoursedata_status("자료실");
 		List<CourseDataVO> courseDataDataList = coursePageService.homeCourseDataList(cdvo);
-
-		session.setAttribute("cNum", cvo.getCourse_no());
+		if (session.getAttribute("cNum") == null) {
+			session.setAttribute("cNum", cvo.getCourse_no());
+		}
 		mav.addObject("course", vo);
 		mav.addObject("cdNoticeList", courseDataNoticeList);
 		mav.addObject("cdDataList", courseDataDataList);
@@ -62,19 +64,6 @@ public class CoursePageController {
 		mav.setViewName("client/coursePage/coursePageHome");
 
 		return mav;
-	}
-
-	/* mainpage 호출 */
-	@RequestMapping(value = "/courseboardhome", method = RequestMethod.POST)
-	public String coursePageHome(@ModelAttribute("CourseVO") CourseVO cvo, Model model) {
-
-		logger.info("강의페이지 홈!");
-
-		CourseVO vo = coursePageService.selectCourse(cvo);
-
-		model.addAttribute("course", vo);
-
-		return "client/coursePage/coursePageHome";
 	}
 
 	/* 게시판처리(글목록) */
@@ -90,16 +79,16 @@ public class CoursePageController {
 
 		// 페이지 세팅
 		Paging.setPage(cdvo);
-
 		// 전체 레코드 수
 		int total = coursePageService.coursePageListCnt(cdvo);
-		logger.info("total = " + total);
+
+		int count = total - (Util.nvl(cdvo.getPage()) - 1) * Util.nvl(cdvo.getPageSize());
 
 		List<CourseDataVO> cdvoList = coursePageService.courseDataList(cdvo);
 
 		mav.addObject("total", total);
+		mav.addObject("count", count);
 		mav.addObject("courseboardList", cdvoList);
-
 		mav.addObject("courseboardData", cdvo);
 
 		mav.setViewName("client/coursePage/coursePageBoardList");
@@ -244,8 +233,7 @@ public class CoursePageController {
 		deleteData = coursePageService.coursePageDetail(cdvo);
 		logger.info("파일 : " + deleteData.getCoursedata_file());
 		int result = 0;
-
-		if (!deleteData.getCoursedata_file().isEmpty()) {
+		if (deleteData.getCoursedata_file() != null) {
 			FileUploadUtil.fileDelete(deleteData.getCoursedata_file(), request);
 		}
 		result = coursePageService.coursePageDelete(cdvo.getCoursedata_no());

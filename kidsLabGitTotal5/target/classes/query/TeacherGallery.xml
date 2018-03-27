@@ -114,7 +114,6 @@
 		<if test="gallery_file != null and gallery_file != ''">
 			, gallery_file, gallery_thumb
 		</if>
-
 		)
 		values(
 		#{gallery_no}, #{teacher_no}, #{gallery_title},

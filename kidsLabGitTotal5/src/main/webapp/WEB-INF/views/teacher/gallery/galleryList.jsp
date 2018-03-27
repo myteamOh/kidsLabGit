@@ -29,48 +29,7 @@
 </style>
 <script type="text/javascript">
 	$(function() {
-		/* 검색 후 검색 대상과 검색 단어 출력 */
-		var word = "<c:out value='${galleryData.keyword}'/>"
-		var start_date = "<c:out value='${noticeData.start_date}' />";
-		var end_date = "<c:out value='${noticeData.end_date}' />";
-		var value = "";
-		if (word != "") {
-			$("#keyword").val("<c:out value='${galleryData.keyword}'/>");
-			$("#search").val("<c:out value='${galleryData.search}'/>");
 
-			if ($("#search").val() != 'gallery_content') {
-				// :contains()는 특정 텍스트를 포함한 요소 반환
-				if ($("#search").val() == 'gallery_title')
-					value = "#galleryList tr td.goDetail";
-				$(value + ":contains('" + word + "')").each(
-						function() {
-							var regex = new RegExp(word, 'gi');
-							$(this).html(
-									$(this).text().replace(
-											regex,
-											"<span class='required'>" + word
-													+ "</span>"));
-
-						});
-			}
-
-		}
-
-		if (start_date != "") {
-			$("#start_date").val("<c:out value='${galleryData.start_date}' />");
-			$("#search").val("<c:out value='${galleryData.search}' />");
-		}
-
-		/* 날짜 선택 후 date 박스 유지*/
-		if ($("#search").val() == "gallery_registerdate") {
-			// 기간 선택창 보이기
-			document.getElementById("typely").style.display = "inline";
-			document.getElementById("keyword").style.display = "none";
-		} else {
-			// 기간창 안보이기
-			document.getElementById("typely").style.display = "none";
-			document.getElementById("keyword").style.display = "inline";
-		}
 
 		/* 한페이지에 보여줄 레코드 수 조회 후 선택한 값 그대로 유지하기 위한
 		설정 */
@@ -78,37 +37,6 @@
 			$("#pageSize").val("<c:out value='${galleryData.pageSize}' />");
 		}
 
-		/* 검색 대상이 변경될 때마다 처리 이벤트 */
-		$("#search").change(function() {
-			if ($("#search").val() == "all") {
-				$("#keyword").val("전체 데이터 조회합니다.");
-			} else if ($("#search").val() != "all") {
-				$("#keyword").val("");
-				$("#keyword").focus();
-			}
-		});
-
-		/* 검색 버튼 클릭 시 처리 이벤트 */
-		$("#searchData").click(function() {
-			if ($("#search").val() != "all") {
-				if (!chkSubmit($('#keyword'), "검색어를"))
-					return;
-			}
-			goPage(1);
-		});
-
-		$(".order").click(function() {
-			var order_by = $(this).attr("data-value");
-			console.log("선택값 : " + order_by);
-
-			$("#order_by").val(order_by);
-			if ($("#order_sc").val() == 'DESC') {
-				$("#order_sc").val('ASC');
-			} else {
-				$("#order_sc").val('DESC');
-			}
-			goPage(1);
-		});
 
 		/* 한 페이지에 보여줄 레코드 수 변경될 때마다 처리 이벤트 */
 		$("#pageSize").change(function() {
@@ -158,20 +86,6 @@
 			});
 			$("#f_search").submit();
 		}
-
-		function jsChselect(value) {
-			if (value == "gallery_registerdate") {
-				// 기간 선택창 보이기
-				document.getElementById("typely").style.display = "inline";
-				document.getElementById("keyword").style.display = "none";
-			} else {
-				// 기간창 안보이기
-				document.getElementById("typely").style.display = "none";
-				document.getElementById("keyword").style.display = "inline";
-			}
-
-		}
-
 	});
 </script>
 
@@ -196,39 +110,11 @@
 			id="gallery_thumb" name="gallery_thumb"
 			value="${gallery.gallery_thumb }">
 
-		<%-- ================ 검색기능 시작 =============== --%>
-		<div id="boardSearch">
-			<form id="f_search" name="f_search">
-				<input type="hidden" id="page" name="page"
-					value="${galleryData.page }"> <input type="hidden"
-					name="pageSize" value="${galleryData.pageSize }">
-				<table summary="검색">
-					<colgroup>
-						<col width="70%"></col>
-						<col width="30%"></col>
-					</colgroup>
-					<tr>
-						<td id="btd1"><label>검색조건</label> <select id="search"
-							name="search">
-								<option value="all">전체</option>
-								<option value="gallery_title">제목</option>
-								<option value="gallery_content">내용</option>
-								<option value="gallery_registerdate">작성날짜</option>
-						</select> <input type="text" name="keyword" id="keyword" value="검색어를입력하세요" />
-							<div id="typely" style="display: none">
-								<input type="text" id="start_date" name="start_date"> <input
-									type="text" id="end_date" name="end_date">
-							</div> <input type="button" value="검색" id="searchData" /></td>
-
-					</tr>
-				</table>
-			</form>
-			<%-- ============== 글쓰기 버튼 출력 시작============ --%>
-			<div class="contentBtn" align="right">
-				<input type="button" value="글쓰기" id="insertFormBtn">
-			</div>
-			<%-- ============== 글쓰기 버튼 출력 종료============ --%>
+		<%-- ============== 글쓰기 버튼 출력 시작============ --%>
+		<div class="contentBtn" align="right">
+			<input type="button" value="글쓰기" id="insertFormBtn">
 		</div>
+		<%-- ============== 글쓰기 버튼 출력 종료============ --%>
 
 
 
@@ -245,7 +131,7 @@
 
 								<img class="card-img-top" id="img"
 									src="/uploadStorage/gallery/thumbnail/${gallery.gallery_thumb}"
-									alt="Card image cap">
+									alt="Card image cap" width="150" height="200">
 
 								<div class="card-body">
 									<div>
@@ -303,35 +189,13 @@
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script>
 		window.jQuery
-				|| document
-						.write('<script src="/resources/include/js/jquery-3.3.1.slim.js"><\/script>')
+		|| document
+			.write('<script src="/resources/include/js/jquery-3.3.1.slim.js"><\/script>')
 	</script>
-	<script src="/resources/include/dist/js/popper.min.js"></script>
+	<!-- <script src="/resources/include/dist/js/popper.min.js"></script>
 	<script src="/resources/include/dist/js/bootstrap.min.js"></script>
-	<script src="/resources/include/dist/js/holder.min.js"></script>
+	<script src="/resources/include/dist/js/holder.min.js"></script> -->
 
 
-	<script type="text/javascript">
-		$("#start_date").datepicker({
-			changeMonth : true,
-			changeYear : true,
-			dateFormat : "yy-mm-dd",
-			altFormat : "yy-mm-dd",
-		});
-		$("#start_date").attr({
-			"readonly" : "readonly"
-		});
-		$("#end_date").datepicker({
-			changeMonth : true,
-			changeYear : true,
-			dateFormat : "yy-mm-dd",
-			altFormat : "yy-mm-dd",
-		});
-		$("#end_date").attr({
-			"readonly" : "readonly"
-		});
-		$("#start_date").val($.datepicker.formatDate('yy-mm-dd', new Date()));
-		$("#end_date").val($.datepicker.formatDate('yy-mm-dd', new Date()));
-	</script>
 </body>
 </html>
