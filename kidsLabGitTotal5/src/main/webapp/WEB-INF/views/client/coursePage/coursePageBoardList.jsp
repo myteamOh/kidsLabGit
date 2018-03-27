@@ -12,21 +12,38 @@
 	src="/resources/include/js/jquery-1.12.4.min.js"></script>
 <!-- <script type="text/javascript" src="/resources/include/js/coursePage.js"></script> -->
 <style type="text/css">
-#search {
+#searchPage {
 	position: relative;
-	left: 495px;
+	left: 445px;
+}
+
+#searchStatus {
+	position: relative;
+	right: 445px;
+}
+
+#coursepageTable {
+	width: 100%;
 }
 </style>
 <link type="text/css" rel="stylesheet"
 	href="/resources/include/css/coursePageBoardList.css">
 <script type="text/javascript">
 	$(function() {
-
+		var coursedata_status = "<c:out value='${courseboardData.coursedata_status}' />";
+		// 검색 후 상태 출력
+		if (coursedata_status != "") {
+			$("#coursedata_status").val("<c:out value='${courseboardData.coursedata_status}' />");
+		}
 		if ("<c:out value='${courseboardData.pageSize}' />" != "") {
 			$("#pageSize").val("<c:out value='${courseboardData.pageSize}' />");
 		}
-
+		// 페이지 사이즈 변경 될 때마다 처리 이벤트
 		$("#pageSize").change(function() {
+			goPage(1);
+		});
+		// 상태 변경 될 때마다 처리 이벤트
+		$("#coursedata_status").change(function() {
 			goPage(1);
 		});
 	})
@@ -58,7 +75,15 @@
 				value="${courseboardData.page }">
 			<table>
 				<tr>
-					<td><div id="search">
+					<td><div id="searchStatus">
+							<select id="coursedata_status" name="coursedata_status">
+								<option value="all">전체</option>
+								<option value="notice">공지사항</option>
+								<option value="dataroom">자료실</option>
+								<option value="task">과제</option>
+							</select>
+						</div></td>
+					<td><div id="searchPage">
 							한페이지에<select id="pageSize" name="pageSize">
 								<option value="5">5줄</option>
 								<option value="10">10줄</option>
@@ -70,12 +95,12 @@
 	</div>
 
 	<div>
-		<table border="1">
+		<table border="1" id="coursepageTable">
 			<colgroup>
 				<col width="5%">
 				<col width="5%">
-				<col width="50%">
-				<col width="15%">
+				<col width="45%">
+				<col width="20%">
 				<col width="20%">
 			</colgroup>
 			<tr>
@@ -92,7 +117,7 @@
 							<td>${postList.coursedata_no}</td>
 							<td>${postList.coursedata_status}</td>
 							<td class="postsDetail">${postList.coursedata_title}</td>
-							<td>${postList.coursedata_writer}</td>
+							<td class="writer">${postList.coursedata_writer}</td>
 							<td>${postList.coursedata_registerdate}</td>
 						</tr>
 					</c:forEach>

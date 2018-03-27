@@ -11,7 +11,8 @@
 	src="/resources/include/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="/resources/include/js/coursePage.js"></script>
 
-<link type="text/css" rel="stylesheet" href="/resources/include/css/courseSide.css">
+<link type="text/css" rel="stylesheet"
+	href="/resources/include/css/courseSide.css">
 
 <style type="text/css">
 #cl-dashboard {
@@ -24,13 +25,14 @@
 
 	<div>
 		<ul id="sidebar">
-			<li><a class="coursePageHome">Home</a></li>
-			<li><a class="coursePageBoardList">강의 게시판</a></li>
+			<li><a class="coursePageHome"><label><i>Home</i></label></a></li>
+			<li><a class="coursePageBoardList"><label><i>강의
+							게시판</i></label></a></li>
 		</ul>
 
 		<form id="courseNo">
-			<input type="hidden" id="courseNo" name="course_no"
-				value="${cNum}" readonly="readonly">
+			<input type="hidden" id="courseNo" name="course_no" value="${cNum}"
+				readonly="readonly">
 		</form>
 	</div>
 

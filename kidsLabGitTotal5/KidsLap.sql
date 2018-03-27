@@ -803,31 +803,26 @@ from student s left join requestcourse r on r.student_no = s.student_no;
 select p.parent_no, s.student_no
 from parent p left outer join student s on p.parent_no = s.parent_no;
 
-SELECT coursedata_no, coursedata_title, coursedata_writer, coursedata_content, 
-		coursedata_registerdate,
-		coursedata_file, coursedata_status, rnum
-		FROM(
-			SELECT list.*, rownum as rnum
-			FROM (
-				SELECT coursedata_no, coursedata_title, coursedata_writer, coursedata_content, to_char(coursedata_registerdate, 'yyyy-mm-dd') as coursedata_registerdate,
-		coursedata_file, coursedata_status, course_no
-		FROM board_coursedata
-				WHERE course_no = 44
-				ORDER BY coursedata_no DESC
-				) list
-				
-			) 
-		where
-					rnum between 1 and 10
+SELECT coursedata_no, coursedata_title, coursedata_writer,   coursedata_content,   coursedata_registerdate,   coursedata_file,  
+coursedata_status   
+FROM( 
+SELECT list.*, rownum as rnum   FROM
+(       
+SELECT coursedata_no, coursedata_title, coursedata_writer,   coursedata_content, to_char(coursedata_registerdate, 'yyyy-mm-dd')
+as   coursedata_registerdate,   coursedata_file, coursedata_status, course_no
+FROM board_coursedata               
+course_no = 44
+ORDER BY coursedata_no DESC   
+) list
+)    
+WHERE rnum between 1 and 10
 			
+SELECT coursedata_no, coursedata_title, coursedata_writer,   coursedata_content,   coursedata_registerdate,   coursedata_file,   
+coursedata_status   FROM(   
+SELECT list.*, rownum as rnum  
+FROM (  
+SELECT coursedata_no, coursedata_title, coursedata_writer,   coursedata_content, to_char(coursedata_registerdate, 'yyyy-mm-dd') 
+as   coursedata_registerdate,   coursedata_file, coursedata_status, course_no 
+FROM board_coursedata                 and        course_no = 44   ORDER BY coursedata_no DESC   ) list   )    WHERE rnum between ? and ?
 
-select *
-from board_coursedata
-where course_no= 44;
-		
-		
-		
-		
-		
-		
 		

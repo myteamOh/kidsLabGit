@@ -4,7 +4,7 @@ $(function() {
 	$(".coursePageHome").click(function() {
 		$("#courseNo").attr({
 			"method" : "POST",
-			"action" : "/coursepage/courseboardhome"
+			"action" : "/coursepage/coursemain"
 		});
 
 		$("#courseNo").submit();

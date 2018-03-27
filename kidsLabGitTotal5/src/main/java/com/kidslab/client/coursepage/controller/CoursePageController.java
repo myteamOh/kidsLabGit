@@ -54,8 +54,9 @@ public class CoursePageController {
 
 		cdvo.setCoursedata_status("자료실");
 		List<CourseDataVO> courseDataDataList = coursePageService.homeCourseDataList(cdvo);
-
-		session.setAttribute("cNum", cvo.getCourse_no());
+		if (session.getAttribute("cNum") == null) {
+			session.setAttribute("cNum", cvo.getCourse_no());
+		}
 		mav.addObject("course", vo);
 		mav.addObject("cdNoticeList", courseDataNoticeList);
 		mav.addObject("cdDataList", courseDataDataList);
@@ -63,19 +64,6 @@ public class CoursePageController {
 		mav.setViewName("client/coursePage/coursePageHome");
 
 		return mav;
-	}
-
-	/* mainpage 호출 */
-	@RequestMapping(value = "/courseboardhome", method = RequestMethod.POST)
-	public String coursePageHome(@ModelAttribute("CourseVO") CourseVO cvo, Model model) {
-
-		logger.info("강의페이지 홈!");
-
-		CourseVO vo = coursePageService.selectCourse(cvo);
-
-		model.addAttribute("course", vo);
-
-		return "client/coursePage/coursePageHome";
 	}
 
 	/* 게시판처리(글목록) */
@@ -245,8 +233,7 @@ public class CoursePageController {
 		deleteData = coursePageService.coursePageDetail(cdvo);
 		logger.info("파일 : " + deleteData.getCoursedata_file());
 		int result = 0;
-
-		if (!deleteData.getCoursedata_file().isEmpty()) {
+		if (deleteData.getCoursedata_file() != null) {
 			FileUploadUtil.fileDelete(deleteData.getCoursedata_file(), request);
 		}
 		result = coursePageService.coursePageDelete(cdvo.getCoursedata_no());
