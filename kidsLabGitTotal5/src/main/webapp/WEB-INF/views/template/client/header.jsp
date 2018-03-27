@@ -23,7 +23,9 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="/">KidsLab</a>
+			<a href="#"><img class="navbar-brand"
+				src="/resources/images/image/kidslablogo3.png" onclick="clickBtn();"
+				border="0" /></a>
 		</div>
 		<div id="navbar" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
