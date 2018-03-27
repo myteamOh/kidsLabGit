@@ -118,7 +118,6 @@ public class TeacherGalleryController {
 
 		if (detail != null && (!detail.equals(""))) {
 			detail.setGallery_content(detail.getGallery_content().toString().replaceAll("\n", "<br>"));
-
 		}
 
 		model.addAttribute("detail", detail);
@@ -165,9 +164,11 @@ public class TeacherGalleryController {
 			if (!tgvo.getGallery_file().isEmpty()) {
 				FileUploadUtil.fileDelete(tgvo.getGallery_file(), request);
 			}
+
 			g_file = FileUploadUtil.fileUpload(tgvo.getFile(), request, "gallery");
 
 			String thumbName = FileUploadUtil.makeThumbnail(g_file, request);
+			tgvo.setGallery_file(g_file);
 			tgvo.setGallery_thumb(thumbName);
 
 		} else {
