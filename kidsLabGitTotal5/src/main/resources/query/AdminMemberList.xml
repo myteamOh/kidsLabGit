@@ -308,23 +308,28 @@
 		where
 		to_char(requestcourse_paycompletedate,
 		'yy-mm') =
-		to_char(add_months(sysdate, -#{num}), 'yy-mm')
-
+		to_char(add_months(sysdate, -#{num}), 'yy-mm') and
+		(REQUESTCOURSE_paymentstatus = '결제완료'
+		or requestcourse_paymentstatus =
+		'환불완료')
 	</select>
+
 	<select id="refundStatsList" parameterType="requestCourse"
 		resultType="requestCourse">
 		select
 		sum(requestcourse_refundcharge) as
 		requestcourse_refundcharge,
 		to_char(add_months(sysdate, -#{num}),
-		'yy-mm') as
+		'yy-mm')
+		as
 		requestcourse_refundcomplete
 		from
 		requestcourse, dual
 		where
 		to_char(requestcourse_refundcomplete,
 		'yy-mm') =
-		to_char(add_months(sysdate, -#{num}), 'yy-mm')
+		to_char(add_months(sysdate, -#{num}), 'yy-mm') and
+		REQUESTCOURSE_paymentstatus = '환불완료'
 	</select>
 
 

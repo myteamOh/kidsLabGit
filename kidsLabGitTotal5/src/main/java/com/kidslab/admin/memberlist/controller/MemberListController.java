@@ -182,12 +182,16 @@ public class MemberListController {
 		}
 		// [1, 37.8, 80.8, 41.8]
 		String strLineChart = "";
+		RequestCourseVO payment = new RequestCourseVO();
+		RequestCourseVO refund = new RequestCourseVO();
 		for (int k = 0; k < 12; k++) {
-			RequestCourseVO payment = new RequestCourseVO();
-			RequestCourseVO refund = new RequestCourseVO();
+
 			payment.setNum(k);
+			refund.setNum(k);
+			logger.info(payment.toString());
+			logger.info(refund.toString());
 			payment = memberListService.paymentStatsList(payment);
-			refund = memberListService.refundStatsList(payment);
+			refund = memberListService.refundStatsList(refund);
 			int margin = payment.getRequestcourse_payamount() - refund.getRequestcourse_refundcharge();
 			payment.setMargin(margin);
 			logger.info("확인");

@@ -100,7 +100,7 @@ public class MemberListServiceImpl implements MemberListService {
 	public RequestCourseVO refundStatsList(RequestCourseVO rvo) {
 		// TODO Auto-generated method stub
 		RequestCourseVO refund = null;
-		refund = memberListDao.paymentStatsList(rvo);
+		refund = memberListDao.refundStatsList(rvo);
 		logger.info(refund.getRequestcourse_refundcharge());
 		return refund;
 	}
