@@ -52,7 +52,7 @@
   </class>  
   <class id="6" language="java" name="com.kidslab.admin.faq.vo.FaqVO" project="kidsLabGitTotal5" 
     file="/kidsLabGitTotal5/src/main/java/com/kidslab/admin/faq/vo/FaqVO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1120" y="239"/>    
+    <position height="-1" width="-1" x="1100" y="404"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -88,7 +88,7 @@
   </class>  
   <class id="10" language="java" name="com.kidslab.common.vo.CommonVO" project="kidsLabGitTotal5" 
     file="/kidsLabGitTotal5/src/main/java/com/kidslab/common/vo/CommonVO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1573" y="402"/>    
+    <position height="-1" width="-1" x="1519" y="405"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -107,22 +107,22 @@
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="14">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="4"/>  
-  </realization>  
-  <association id="15">    
+  <association id="14">    
     <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="16" name="faqDao">        
+      <attribute id="15" name="faqDao">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="17" minimum="0" maximum="1">        
+      <multiplicity id="16" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <realization id="17">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
   <realization id="18">    
     <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="1"/>  
