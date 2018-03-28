@@ -4,7 +4,7 @@
   <class id="1" language="java" name="com.kidslab.admin.reply.dao.ReplyDaoImpl" project="kidsLabGitTotal5" 
     file="/kidsLabGitTotal5/src/main/java/com/kidslab/admin/reply/dao/ReplyDaoImpl.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1028" y="763"/>    
+    <position height="-1" width="-1" x="984" y="803"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -14,7 +14,7 @@
   <class id="2" language="java" name="com.kidslab.admin.reply.controller.ReplyController" project="kidsLabGitTotal5" 
     file="/kidsLabGitTotal5/src/main/java/com/kidslab/admin/reply/controller/ReplyController.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="243" y="412"/>    
+    <position height="-1" width="-1" x="233" y="408"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -23,7 +23,7 @@
   </class>  
   <class id="3" language="java" name="com.kidslab.admin.reply.vo.ReplyVO" project="kidsLabGitTotal5" 
     file="/kidsLabGitTotal5/src/main/java/com/kidslab/admin/reply/vo/ReplyVO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1345" y="654"/>    
+    <position height="-1" width="-1" x="1253" y="707"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -33,7 +33,7 @@
   <interface id="4" language="java" name="com.kidslab.client.inquiry.dao.InquiryDAO" project="kidsLabGitTotal5" 
     file="/kidsLabGitTotal5/src/main/java/com/kidslab/client/inquiry/dao/InquiryDAO.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1046" y="137"/>    
+    <position height="-1" width="-1" x="986" y="149"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -53,7 +53,7 @@
   <class id="6" language="java" name="com.kidslab.client.inquiry.dao.InquiryDAOImpl" project="kidsLabGitTotal5" 
     file="/kidsLabGitTotal5/src/main/java/com/kidslab/client/inquiry/dao/InquiryDAOImpl.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1047" y="396"/>    
+    <position height="-1" width="-1" x="992" y="390"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -63,7 +63,7 @@
   <class id="7" language="java" name="com.kidslab.client.inquiry.vo.InquiryVO" project="kidsLabGitTotal5" 
     file="/kidsLabGitTotal5/src/main/java/com/kidslab/client/inquiry/vo/InquiryVO.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1336" y="247"/>    
+    <position height="-1" width="-1" x="1256" y="257"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -73,7 +73,7 @@
   <class id="8" language="java" name="com.kidslab.admin.reply.service.ReplyServiceImpl" project="kidsLabGitTotal5" 
     file="/kidsLabGitTotal5/src/main/java/com/kidslab/admin/reply/service/ReplyServiceImpl.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="662" y="760"/>    
+    <position height="-1" width="-1" x="651" y="802"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -94,7 +94,7 @@
   <interface id="10" language="java" name="com.kidslab.admin.reply.service.ReplyService" project="kidsLabGitTotal5" 
     file="/kidsLabGitTotal5/src/main/java/com/kidslab/admin/reply/service/ReplyService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="667" y="589"/>    
+    <position height="-1" width="-1" x="646" y="605"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -104,7 +104,7 @@
   <interface id="11" language="java" name="com.kidslab.admin.reply.dao.ReplyDao" project="kidsLabGitTotal5" 
     file="/kidsLabGitTotal5/src/main/java/com/kidslab/admin/reply/dao/ReplyDao.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1025" y="592"/>    
+    <position height="-1" width="-1" x="982" y="592"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -114,7 +114,7 @@
   <interface id="12" language="java" name="com.kidslab.client.inquiry.service.InquiryService" project="kidsLabGitTotal5" 
     file="/kidsLabGitTotal5/src/main/java/com/kidslab/client/inquiry/service/InquiryService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="687" y="152"/>    
+    <position height="-1" width="-1" x="669" y="150"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -123,93 +123,93 @@
   </interface>  
   <class id="13" language="java" name="com.kidslab.common.vo.CommonVO" project="kidsLabGitTotal5" 
     file="/kidsLabGitTotal5/src/main/java/com/kidslab/common/vo/CommonVO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1827" y="443"/>    
+    <position height="-1" width="-1" x="1677" y="459"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <realization id="14">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="4"/>  
-  </realization>  
-  <association id="15">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="16" name="inquiryDAO">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="17" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="18">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="11"/>  
-  </realization>  
-  <realization id="19">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="12"/>  
-  </realization>  
-  <generalization id="20">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="13"/>  
-  </generalization>  
-  <association id="21">    
+  <association id="14">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="22" name="replyService">        
-        <position height="0" width="0" x="0" y="0"/>      
+      <attribute id="15" name="replyService">        
+        <position height="0" width="0" x="-21" y="16"/>      
       </attribute>      
-      <multiplicity id="23" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
+      <multiplicity id="16" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-21" y="16"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="24">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="25" name="replyDao">        
-        <position height="0" width="0" x="0" y="0"/>      
+  <association id="17">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="18" name="inquiryService">        
+        <position height="0" width="0" x="-18" y="-2"/>      
       </attribute>      
-      <multiplicity id="26" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
+      <multiplicity id="19" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-18" y="-2"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="20">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="10"/>  
+  </realization>  
+  <realization id="21">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <association id="22">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="23" name="inquiryDAO">        
+        <position height="0" width="0" x="-60" y="12"/>      
+      </attribute>      
+      <multiplicity id="24" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-60" y="12"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="25">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="13"/>  
+  </generalization>  
+  <association id="26">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="27" name="inquiryService">        
+        <position height="0" width="0" x="-18" y="-2"/>      
+      </attribute>      
+      <multiplicity id="28" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-18" y="-2"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="29">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="30" name="replyDao">        
+        <position height="0" width="0" x="-43" y="0"/>      
+      </attribute>      
+      <multiplicity id="31" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-43" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="11" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="27">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="10"/>  
+  <realization id="32">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="11"/>  
   </realization>  
-  <association id="28">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="29" name="inquiryService">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="30" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="31">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="32" name="inquiryService">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="33" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
+  <realization id="33">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="12"/>  
+  </realization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    

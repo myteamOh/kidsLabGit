@@ -4,7 +4,7 @@
   <class id="1" language="java" name="com.kidslab.admin.course.controller.CourseController" project="kidsLabGitTotal5" 
     file="/kidsLabGitTotal5/src/main/java/com/kidslab/admin/course/controller/CourseController.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="89" y="-24"/>    
+    <position height="-1" width="-1" x="127" y="2"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -14,7 +14,7 @@
   <class id="2" language="java" name="com.kidslab.admin.course.dao.CourseDaoImpl" project="kidsLabGitTotal5" 
     file="/kidsLabGitTotal5/src/main/java/com/kidslab/admin/course/dao/CourseDaoImpl.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="916" y="245"/>    
+    <position height="-1" width="-1" x="954" y="271"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -24,7 +24,7 @@
   <interface id="3" language="java" name="com.kidslab.admin.course.service.CourseService" project="kidsLabGitTotal5" 
     file="/kidsLabGitTotal5/src/main/java/com/kidslab/admin/course/service/CourseService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="522" y="-16"/>    
+    <position height="-1" width="-1" x="560" y="10"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -34,7 +34,7 @@
   <class id="4" language="java" name="com.kidslab.admin.course.service.CourseServiceImpl" project="kidsLabGitTotal5" 
     file="/kidsLabGitTotal5/src/main/java/com/kidslab/admin/course/service/CourseServiceImpl.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="511" y="244"/>    
+    <position height="-1" width="-1" x="549" y="270"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -54,7 +54,7 @@
   <interface id="6" language="java" name="com.kidslab.admin.course.dao.CourseDao" project="kidsLabGitTotal5" 
     file="/kidsLabGitTotal5/src/main/java/com/kidslab/admin/course/dao/CourseDao.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="917" y="-22"/>    
+    <position height="-1" width="-1" x="955" y="4"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -63,7 +63,7 @@
   </interface>  
   <class id="7" language="java" name="com.kidslab.common.page.PagingTag" project="kidsLabGitTotal5" 
     file="/kidsLabGitTotal5/src/main/java/com/kidslab/common/page/PagingTag.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="21" y="245"/>    
+    <position height="-1" width="-1" x="59" y="271"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -72,7 +72,7 @@
   </class>  
   <class id="8" language="java" name="com.kidslab.common.page.Paging" project="kidsLabGitTotal5" 
     file="/kidsLabGitTotal5/src/main/java/com/kidslab/common/page/Paging.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="218" y="153"/>    
+    <position height="-1" width="-1" x="256" y="179"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -81,45 +81,45 @@
   </class>  
   <class id="9" language="java" name="com.kidslab.common.util.Util" project="kidsLabGitTotal5" 
     file="/kidsLabGitTotal5/src/main/java/com/kidslab/common/util/Util.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="218" y="326"/>    
+    <position height="-1" width="-1" x="256" y="352"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <realization id="10">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="3"/>  
-  </realization>  
-  <realization id="11">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="6"/>  
-  </realization>  
-  <association id="12">    
+  <association id="10">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="13" name="courseService">        
-        <position height="0" width="0" x="0" y="0"/>      
+      <attribute id="11" name="courseService">        
+        <position height="0" width="0" x="38" y="26"/>      
       </attribute>      
-      <multiplicity id="14" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
+      <multiplicity id="12" minimum="0" maximum="1">        
+        <position height="0" width="0" x="38" y="26"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="15">    
+  <association id="13">    
     <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="16" name="courseDao">        
-        <position height="0" width="0" x="0" y="0"/>      
+      <attribute id="14" name="courseDao">        
+        <position height="0" width="0" x="38" y="26"/>      
       </attribute>      
-      <multiplicity id="17" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
+      <multiplicity id="15" minimum="0" maximum="1">        
+        <position height="0" width="0" x="38" y="26"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <realization id="16">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="6"/>  
+  </realization>  
+  <realization id="17">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    
