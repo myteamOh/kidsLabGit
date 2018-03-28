@@ -147,6 +147,9 @@ $(function() {
 				if (!chkFile($('#file'))) {
 					return;
 				}
+			} else {
+				alert("사진을 등록해주세요.");
+				return;
 			}
 			$("#teacherForm").attr({
 				"method" : "POST",

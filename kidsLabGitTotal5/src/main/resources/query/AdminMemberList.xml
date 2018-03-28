@@ -312,11 +312,11 @@
 		where
 		to_char(requestcourse_paycompletedate, 'yy-mm') <![CDATA[<=]]>
 		to_char(sysdate,
-		'yy-mm')
-		and requestcourse_paymentstatus = '결제완료' or
-		to_char(requestcourse_refundcomplete, 'yy-mm') <![CDATA[<=]]>
+		'yy-mm') or
+		to_char(requestcourse_refundcomplete,
+		'yy-mm') <![CDATA[<=]]>
 		to_char(sysdate,
-		'yy-mm') and requestcourse_paymentstatus = '환불완료'
+		'yy-mm')
 		group by
 		to_char(requestcourse_paycompletedate, 'yy-mm')
 		order by

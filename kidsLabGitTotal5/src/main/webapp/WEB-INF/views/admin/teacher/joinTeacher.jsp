@@ -148,7 +148,7 @@
 						<div class="col-sm-3">
 							<input type="file" id="file" name="file">
 							<div class="img_wrap">
-								<img id="img">
+								<img id="img" src="/resources/images/image/default.png">
 							</div>
 						</div>
 						<div class="col-sm-5">

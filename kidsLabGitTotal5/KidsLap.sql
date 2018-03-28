@@ -339,14 +339,29 @@ drop sequence board_faq_seq;
 drop sequence board_notice_seq;
 drop sequence login_history_seq;
 
+select *
+from teacher;
 
+select *
+from security;
 
-
-
-
-
-
-
+select   requestcourse_paycompletedate,   requestcourse_payamount,   requestcourse_refundcomplete,  
+requestcourse_refundcharge,(requestcourse_payamount-requestcourse_refundcharge)   
+as margin ,rnum   from(   select list.*, rownum as rnum  
+from(
+select   to_char(requestcourse_paycompletedate, 'yy-mm') as   requestcourse_paycompletedate,  
+to_char(requestcourse_refundcomplete,   'yy-mm') as   requestcourse_refundcomplete, 
+sum(requestcourse_payamount)   as   requestcourse_payamount,
+sum(requestcourse_refundcharge) as   requestcourse_refundcharge 
+from   requestcourse  
+where  to_char(requestcourse_paycompletedate, 'yy-mm')  <=    to_char(sysdate,   'yy-mm') 
+or   to_char(requestcourse_refundcomplete, 'yy-mm')  <=    to_char(sysdate,   'yy-mm')
+and to_char(requestcourse_paycompletedate,'yy-mm') = to_char(requestcourse_refundcomplete, 'yy-mm')
+group by to_char(requestcourse_paycompletedate, 'yy-mm'), to_char(requestcourse_refundcomplete,'yy-mm')
+order by   requestcourse_paycompletedate desc  
+) list  
+)   
+where rnum between 1 and 6   order by requestcourse_paycompletedate asc
 
 
 

@@ -182,16 +182,19 @@ public class MemberListController {
 		}
 		// [1, 37.8, 80.8, 41.8]
 		String strLineChart = "";
-		logger.info(lineChart.get(0).getRequestcourse_paycompletedate());
-		logger.info(lineChart.get(1).getRequestcourse_paycompletedate().substring(0, 2));
-		logger.info(lineChart.get(1).getRequestcourse_paycompletedate().substring(3, 5));
-		logger.info(lineChart.size());
 		for (int k = 0; k < lineChart.size(); k++) {
 			logger.info("확인");
-			strLineChart += "[new Date('20" + lineChart.get(k).getRequestcourse_paycompletedate().substring(0, 2)
-					+ "','"
-					+ (Integer.parseInt(lineChart.get(k).getRequestcourse_paycompletedate().substring(3, 5)) - 1)
-					+ "'),";
+			if (lineChart.get(i).getRequestcourse_refundcomplete() == null) {
+				strLineChart += "[new Date('20" + lineChart.get(k).getRequestcourse_paycompletedate().substring(0, 2)
+						+ "','"
+						+ (Integer.parseInt(lineChart.get(k).getRequestcourse_paycompletedate().substring(3, 5)) - 1)
+						+ "'),";
+			} else {
+				strLineChart += "[new Date('20" + lineChart.get(k).getRequestcourse_refundcomplete().substring(0, 2)
+						+ "','"
+						+ (Integer.parseInt(lineChart.get(k).getRequestcourse_refundcomplete().substring(3, 5)) - 1)
+						+ "'),";
+			}
 			strLineChart += lineChart.get(k).getRequestcourse_payamount() + ","
 					+ lineChart.get(k).getRequestcourse_refundcharge() + ",";
 			strLineChart += lineChart.get(k).getMargin() + "]";
