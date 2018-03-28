@@ -188,16 +188,12 @@ public class MemberListController {
 			payment.setNum(k);
 			payment = memberListService.paymentStatsList(payment);
 			refund = memberListService.refundStatsList(payment);
-
 			int margin = payment.getRequestcourse_payamount() - refund.getRequestcourse_refundcharge();
 			payment.setMargin(margin);
 			logger.info("확인");
-			strLineChart += "[new Date('20" + payment.getRequestcourse_paycompletedate().substring(0, 2)
-					+ "','"
-					+ (Integer.parseInt(payment.getRequestcourse_paycompletedate().substring(3, 5)) - 1)
-					+ "'),";
-			strLineChart += payment.getRequestcourse_payamount() + ","
-					+ refund.getRequestcourse_refundcharge() + ",";
+			strLineChart += "[new Date('20" + payment.getRequestcourse_paycompletedate().substring(0, 2) + "','"
+					+ (Integer.parseInt(payment.getRequestcourse_paycompletedate().substring(3, 5)) - 1) + "'),";
+			strLineChart += payment.getRequestcourse_payamount() + "," + refund.getRequestcourse_refundcharge() + ",";
 			strLineChart += margin + "]";
 			if (k < 11) {
 				strLineChart += ",";

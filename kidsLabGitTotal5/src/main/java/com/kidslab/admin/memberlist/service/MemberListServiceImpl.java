@@ -92,6 +92,7 @@ public class MemberListServiceImpl implements MemberListService {
 		// TODO Auto-generated method stub
 		RequestCourseVO payment = null;
 		payment = memberListDao.paymentStatsList(rvo);
+		logger.info(payment.getRequestcourse_payamount());
 		return payment;
 	}
 
@@ -100,6 +101,7 @@ public class MemberListServiceImpl implements MemberListService {
 		// TODO Auto-generated method stub
 		RequestCourseVO refund = null;
 		refund = memberListDao.paymentStatsList(rvo);
+		logger.info(refund.getRequestcourse_refundcharge());
 		return refund;
 	}
 

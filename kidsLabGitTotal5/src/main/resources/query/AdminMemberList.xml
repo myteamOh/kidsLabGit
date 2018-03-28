@@ -297,8 +297,7 @@
 	<select id="paymentStatsList" parameterType="requestCourse"
 		resultType="requestCourse">
 		select
-		NVL2(sum(requestcourse_payamount),
-		sum(requestcourse_payamount), 0) as
+		sum(requestcourse_payamount) as
 		requestcourse_payamount,
 		to_char(add_months(sysdate, -#{num}),
 		'yy-mm')
@@ -315,12 +314,11 @@
 	<select id="refundStatsList" parameterType="requestCourse"
 		resultType="requestCourse">
 		select
-		NVL2(sum(requestcourse_refundcharge),
-		sum(requestcourse_refundcharge), 0) as
+		sum(requestcourse_refundcharge) as
 		requestcourse_refundcharge,
 		to_char(add_months(sysdate, -#{num}),
 		'yy-mm') as
-		requestcourse_paycompletedate
+		requestcourse_refundcomplete
 		from
 		requestcourse, dual
 		where
