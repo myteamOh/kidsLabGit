@@ -67,15 +67,15 @@ public class MemberListDaoImpl implements MemberListDao {
 	}
 
 	@Override
-	public List<RequestCourseVO> paymentStatsList() {
+	public RequestCourseVO paymentStatsList(RequestCourseVO rvo) {
 		// TODO Auto-generated method stub
-		return session.selectList("paymentStatsList");
+		return session.selectOne("paymentStatsList", rvo);
 	}
 
 	@Override
-	public List<RequestCourseVO> refundStatsList() {
+	public RequestCourseVO refundStatsList(RequestCourseVO rvo) {
 		// TODO Auto-generated method stub
-		return session.selectList("refundStatsList");
+		return session.selectOne("refundStatsList", rvo);
 	}
 
 }

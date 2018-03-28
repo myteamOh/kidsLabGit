@@ -294,59 +294,39 @@
 		)
 	</select>
 
-	<select id="paymentStatsList" resultType="requestCourse">
+	<select id="paymentStatsList" parameterType="requestCourse"
+		resultType="requestCourse">
 		select
-		requestcourse_paycompletedate,
-		requestcourse_payamount, rnum
-		from(
-		select list.*, rownum as rnum
-		from(
-		select
-		to_char(requestcourse_paycompletedate, 'yy-mm') as
-		requestcourse_paycompletedate,
-		sum(requestcourse_payamount) as
-		requestcourse_payamount
-		from requestcourse
-		where
-		to_char(requestcourse_paycompletedate, 'yy-mm') <![CDATA[<=]]>
-		to_char(sysdate,
+		NVL2(sum(requestcourse_payamount),
+		sum(requestcourse_payamount), 0) as
+		requestcourse_payamount,
+		to_char(add_months(sysdate, -#{num}),
 		'yy-mm')
-		group by
-		to_char(requestcourse_paycompletedate, 'yy-mm')
-		order by
-		requestcourse_paycompletedate desc
-		) list
-		)
-		where rnum between 1 and 6
-		order by requestcourse_paycompletedate asc
+		as
+		requestcourse_paycompletedate
+		from
+		requestcourse, dual
+		where
+		to_char(requestcourse_paycompletedate,
+		'yy-mm') =
+		to_char(add_months(sysdate, -#{num}), 'yy-mm')
+
 	</select>
-	<select id="refundStatsList" resultType="requestCourse">
+	<select id="refundStatsList" parameterType="requestCourse"
+		resultType="requestCourse">
 		select
-		requestcourse_refundcomplete,
-		requestcourse_refundcharge, rnum
-		from(
-		select list.*, rownum as rnum
-		from(
-		select
-		to_char(requestcourse_refundcomplete, 'yy-mm') as
-		requestcourse_refundcomplete,
-		sum(requestcourse_refundcharge) as
-		requestcourse_refundcharge
-		from requestcourse
+		NVL2(sum(requestcourse_refundcharge),
+		sum(requestcourse_refundcharge), 0) as
+		requestcourse_refundcharge,
+		to_char(add_months(sysdate, -#{num}),
+		'yy-mm') as
+		requestcourse_paycompletedate
+		from
+		requestcourse, dual
 		where
-		to_char(requestcourse_refundcomplete, 'yy-mm') <![CDATA[<=]]>
-		to_char(sysdate,
-		'yy-mm')
-		group by
 		to_char(requestcourse_refundcomplete,
-		'yy-mm')
-		order by
-		requestcourse_refundcomplete desc
-		) list
-		)
-		where rnum
-		between 1 and 6
-		order by requestcourse_refundcomplete asc
+		'yy-mm') =
+		to_char(add_months(sysdate, -#{num}), 'yy-mm')
 	</select>
 
 

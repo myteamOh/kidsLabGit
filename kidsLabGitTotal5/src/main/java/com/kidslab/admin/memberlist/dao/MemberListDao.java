@@ -34,7 +34,8 @@ public interface MemberListDao {
 	public Map<String, Integer> studentAgeList();
 
 	// 매출 통계
-	public List<RequestCourseVO> paymentStatsList();
+	public RequestCourseVO paymentStatsList(RequestCourseVO rvo);
+
 	// 환불 통계
-	public List<RequestCourseVO> refundStatsList();
+	public RequestCourseVO refundStatsList(RequestCourseVO rvo);
 }

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kidslab.admin.course.vo.CourseVO;
 import com.kidslab.admin.jointeacher.vo.TeacherVO;
 import com.kidslab.admin.login.vo.AdminLoginVO;
 import com.kidslab.admin.memberlist.service.MemberListService;
@@ -154,9 +155,6 @@ public class MemberListController {
 		Map<String, Integer> joinRootList = new HashMap<>();
 		// Bar 차트
 		Map<String, Integer> columnChart = new HashMap<>();
-		List<RequestCourseVO> lineChart = memberListService.paymentStatsList();
-		List<RequestCourseVO> refundStatsList = memberListService.refundStatsList();
-
 		// db에서 column name = key, value = value
 		joinRootList = memberListService.joinRootList();
 		columnChart = memberListService.studentAgeList();
@@ -184,43 +182,24 @@ public class MemberListController {
 		}
 		// [1, 37.8, 80.8, 41.8]
 		String strLineChart = "";
-		for (int k = 0; k < lineChart.size(); k++) {
-			if (!refundStatsList.get(k).getRequestcourse_refundcomplete().isEmpty()) {
-				if (lineChart.get(k).getRequestcourse_paycompletedate().substring(0, 2) == refundStatsList.get(k)
-						.getRequestcourse_refundcomplete().substring(0, 2)
-						&& lineChart.get(k).getRequestcourse_paycompletedate().substring(3, 5) == refundStatsList.get(k)
-								.getRequestcourse_refundcomplete().substring(3, 5)) {
-					int margin = lineChart.get(k).getRequestcourse_payamount()
-							- refundStatsList.get(k).getRequestcourse_refundcharge();
-					strLineChart += "[new Date('20"
-							+ lineChart.get(k).getRequestcourse_paycompletedate().substring(0, 2) + "','"
-							+ (Integer.parseInt(lineChart.get(k).getRequestcourse_paycompletedate().substring(3, 5))
-									- 1)
-							+ "'),";
-					strLineChart += lineChart.get(k).getRequestcourse_payamount() + ","
-							+ lineChart.get(k).getRequestcourse_refundcharge() + ",";
-					strLineChart += margin + "]";
-				}
-			} else {
-				strLineChart += "[new Date('20" + lineChart.get(k).getRequestcourse_paycompletedate().substring(0, 2)
-						+ "','"
-						+ (Integer.parseInt(lineChart.get(k).getRequestcourse_paycompletedate().substring(3, 5)) - 1)
-						+ "'),";
-				strLineChart += lineChart.get(k).getRequestcourse_payamount() + ","
-						+ lineChart.get(k).getRequestcourse_refundcharge() + ",";
-				strLineChart += lineChart.get(k).getRequestcourse_payamount() + "]";
-			}
+		for (int k = 0; k < 12; k++) {
+			RequestCourseVO payment = new RequestCourseVO();
+			RequestCourseVO refund = new RequestCourseVO();
+			payment.setNum(k);
+			payment = memberListService.paymentStatsList(payment);
+			refund = memberListService.refundStatsList(payment);
+
+			int margin = payment.getRequestcourse_payamount() - refund.getRequestcourse_refundcharge();
+			payment.setMargin(margin);
 			logger.info("확인");
-			/*
-			 * strLineChart += "[new Date('20" +
-			 * lineChart.get(k).getRequestcourse_paycompletedate().substring(0, 2) + "','" +
-			 * (Integer.parseInt(lineChart.get(k).getRequestcourse_paycompletedate().
-			 * substring(3, 5)) - 1) + "'),"; strLineChart +=
-			 * lineChart.get(k).getRequestcourse_payamount() + "," +
-			 * lineChart.get(k).getRequestcourse_refundcharge() + ","; strLineChart +=
-			 * lineChart.get(k).getMargin() + "]";
-			 */
-			if (k < lineChart.size() - 1) {
+			strLineChart += "[new Date('20" + payment.getRequestcourse_paycompletedate().substring(0, 2)
+					+ "','"
+					+ (Integer.parseInt(payment.getRequestcourse_paycompletedate().substring(3, 5)) - 1)
+					+ "'),";
+			strLineChart += payment.getRequestcourse_payamount() + ","
+					+ refund.getRequestcourse_refundcharge() + ",";
+			strLineChart += margin + "]";
+			if (k < 11) {
 				strLineChart += ",";
 			}
 			logger.info("확인밑에");

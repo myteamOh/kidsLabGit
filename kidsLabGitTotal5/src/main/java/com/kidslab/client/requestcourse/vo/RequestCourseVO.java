@@ -30,6 +30,8 @@ public class RequestCourseVO extends CourseVO {
 	// 추가
 	private int margin; // 차액
 
+	private int num = 0;
+
 	public RequestCourseVO() {
 		super();
 	}
@@ -212,6 +214,14 @@ public class RequestCourseVO extends CourseVO {
 
 	public void setMargin(int margin) {
 		this.margin = margin;
+	}
+
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
 	}
 
 	@Override
