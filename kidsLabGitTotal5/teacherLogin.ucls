@@ -4,7 +4,7 @@
   <class id="1" language="java" name="com.kidslab.teacher.login.vo.TeacherLoginVO" project="kidsLabGitTotal5" 
     file="/kidsLabGitTotal5/src/main/java/com/kidslab/teacher/login/vo/TeacherLoginVO.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1353" y="190"/>    
+    <position height="-1" width="-1" x="1019" y="648"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -15,7 +15,7 @@
     project="kidsLabGitTotal5" 
     file="/kidsLabGitTotal5/src/main/java/com/kidslab/teacher/login/service/TeacherLoginService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="722" y="90"/>    
+    <position height="-1" width="-1" x="684" y="94"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -46,7 +46,7 @@
   <class id="5" language="java" name="com.kidslab.teacher.login.dao.TeacherLoginDaoImpl" project="kidsLabGitTotal5" 
     file="/kidsLabGitTotal5/src/main/java/com/kidslab/teacher/login/dao/TeacherLoginDaoImpl.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1072" y="393"/>    
+    <position height="-1" width="-1" x="999" y="371"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -56,7 +56,7 @@
   <interface id="6" language="java" name="com.kidslab.teacher.login.dao.TeacherLoginDao" project="kidsLabGitTotal5" 
     file="/kidsLabGitTotal5/src/main/java/com/kidslab/teacher/login/dao/TeacherLoginDao.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1072" y="98"/>    
+    <position height="-1" width="-1" x="999" y="97"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -67,7 +67,7 @@
     project="kidsLabGitTotal5" 
     file="/kidsLabGitTotal5/src/main/java/com/kidslab/teacher/login/service/TeacherLoginServiceImpl.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="722" y="389"/>    
+    <position height="-1" width="-1" x="684" y="367"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -86,37 +86,45 @@
   <class id="9" language="java" name="com.kidslab.admin.jointeacher.vo.TeacherVO" project="kidsLabGitTotal5" 
     file="/kidsLabGitTotal5/src/main/java/com/kidslab/admin/jointeacher/vo/TeacherVO.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1681" y="262"/>    
+    <position height="-1" width="-1" x="1375" y="579"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <generalization id="10">    
+  <realization id="10">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="6"/>  
+  </realization>  
+  <realization id="11">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <generalization id="12">    
     <end type="SOURCE" refId="9"/>    
     <end type="TARGET" refId="1"/>  
   </generalization>  
-  <association id="11">    
+  <association id="13">    
     <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="12" name="teacherLoginService"/>      
-      <multiplicity id="13" minimum="0" maximum="1"/>    
+      <attribute id="14" name="teacherLoginService">        
+        <position height="0" width="0" x="-38" y="4"/>      
+      </attribute>      
+      <multiplicity id="15" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-38" y="4"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="14">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="6"/>  
-  </realization>  
-  <realization id="15">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="2"/>  
-  </realization>  
   <association id="16">    
     <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="17" name="teacherLoginDao"/>      
-      <multiplicity id="18" minimum="0" maximum="1"/>    
+      <attribute id="17" name="teacherLoginDao">        
+        <position height="0" width="0" x="-73" y="-1"/>      
+      </attribute>      
+      <multiplicity id="18" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-73" y="-1"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  

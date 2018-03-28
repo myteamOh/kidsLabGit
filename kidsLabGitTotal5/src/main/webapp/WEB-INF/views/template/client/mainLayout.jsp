@@ -10,6 +10,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="/resources/images/common/icon.png">
+<script defer
+	src="https://use.fontawesome.com/releases/v5.0.9/js/all.js"
+	integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl"
+	crossorigin="anonymous"></script>
+
+
 
 <title><tiles:getAsString name="title"></tiles:getAsString></title>
 <style type="text/css">
@@ -98,8 +104,8 @@
 				</ol>
 				<div class="carousel-inner" role="listbox">
 					<div class="item active">
-						<img class="first-slide"
-							src="/resources/images/image/kidslabmain1.jpg" alt="First slide">
+						<img class="first-slide" src="/resources/images/image/main1.jpg"
+							alt="First slide">
 						<div class="container">
 							<div class="carousel-caption">
 								<h1>KidsLab 강의신청</h1>
@@ -112,8 +118,8 @@
 						</div>
 					</div>
 					<div class="item">
-						<img class="second-slide"
-							src="/resources/images/image/kidslabmain2.jpg" alt="Second slide">
+						<img class="second-slide" src="/resources/images/image/main2.jpg"
+							alt="Second slide">
 						<div class="container">
 							<div class="carousel-caption">
 								<h1></h1>
@@ -126,8 +132,8 @@
 						</div>
 					</div>
 					<div class="item">
-						<img class="third-slide"
-							src="/resources/images/image/kidslabmain3.jpg" alt="Third slide">
+						<img class="third-slide" src="/resources/images/image/main3.jpg"
+							alt="Third slide">
 						<div class="container">
 							<div class="carousel-caption">
 								<h1>프로젝트 갤러리</h1>

@@ -99,7 +99,7 @@
 				</thead>
 				<tbody id="list">
 					<!--  데이터  출력 -->
-
+					<!-- 게시물이 없다면 입력된 문장 출력하게 함 -->
 					<c:choose>
 						<c:when test="${not empty inquiryList}">
 							<c:forEach var="inquiry" items="${inquiryList}"

@@ -27,12 +27,16 @@
 		<!-- START THE FEATURETTES -->
 
 		<div id="map" style="width: 500px; height: 500px;">
+			<!-- 다음지도 api를 인증키를 받아 불러옵니다. -->
 			<script type="text/javascript"
 				src="//dapi.kakao.com/v2/maps/sdk.js?appkey=409aef9c43bc3326d76893ba72d2d957"></script>
 			<script>
+				//'map'이라는 id를 가진 요소에 접근합니다.
 				var container = document.getElementById('map');
 				var options = {
+					// 보여주고자하는 지도 중심점의 좌표
 					center : new daum.maps.LatLng(37.562275, 127.03514),
+					// 확대 단계
 					level : 3
 				};
 
@@ -59,7 +63,7 @@
 				// 마커가 지도 위에 표시되도록 설정합니다
 				marker.setMap(map);
 
-				// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+				// 지도 확대 축소를 제어할 수 있는 줌 컨트롤을 생성합니다
 				var zoomControl = new daum.maps.ZoomControl();
 				map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
 			</script>
@@ -67,6 +71,7 @@
 		</div>
 
 		<div align="left">
+			<!-- 좌표ID를 목적지로하는 길찾기 버튼 생성 -->
 			<button type="button"
 				onclick="location.href='http://map.daum.net/link/to/27477251'"
 				>길찾기</button>
