@@ -231,42 +231,35 @@ START WITH 1
 INCREMENT BY 1
 NOCYCLE;
 
-drop sequence parent_seq;
+
 
 CREATE SEQUENCE STUDENT_SEQ
 START WITH 1
 INCREMENT BY 1
 NOCYCLE;
 
-drop sequence student_seq;
 
 CREATE SEQUENCE ADMIN_SEQ
 START WITH 1
 INCREMENT BY 1
 NOCYCLE;
 
-drop sequence admin_seq;
-
 CREATE SEQUENCE TEACHER_SEQ
 START WITH 1
 INCREMENT BY 1
 NOCYCLE;
-
-drop sequence teacher_seq;
 
 CREATE SEQUENCE COURSE_SEQ
 START WITH 1
 INCREMENT BY 1
 NOCYCLE;
 
-drop sequence course_seq;
 
 CREATE SEQUENCE REQUESTCOURSE_SEQ
 START WITH 1
 INCREMENT BY 1
 NOCYCLE;
 
-drop sequence requestcourse_seq;
 
 CREATE SEQUENCE BOARD_REVIEW_SEQ
 START WITH 1
@@ -278,47 +271,39 @@ START WITH 1
 INCREMENT BY 1
 NOCYCLE;
 
-drop sequence board_coursedata_seq;
 
 CREATE SEQUENCE GALLERY_SEQ
 START WITH 1
 INCREMENT BY 1
 NOCYCLE;
 
-drop sequence gallery_seq;
 
 CREATE SEQUENCE BOARD_INQUIRY_SEQ
 START WITH 1
 INCREMENT BY 1
 NOCYCLE;
 
-drop sequence board_inquiry_seq;
 
 CREATE SEQUENCE BOARD_INQUIRY_REPLY_SEQ
 START WITH 1
 INCREMENT BY 1
 NOCYCLE;
 
-drop sequence board_inquiry_reply_seq;
 
 CREATE SEQUENCE BOARD_FAQ_SEQ
 START WITH 1
 INCREMENT BY 1
 NOCYCLE;
 
-drop sequence board_faq_seq;
 
 CREATE SEQUENCE BOARD_NOTICE_SEQ
 START WITH 1
 INCREMENT BY 1
 NOCYCLE;
 
-drop sequence board_notice_seq;
 
 -- 로그인 정보 저장시 사용할 순번(시퀀스)
 CREATE SEQUENCE LOGIN_HISTORY_SEQ;
-
-drop sequence login_history_seq;
 
 insert into ADMIN
 values(1, 'admin', 'test1234');
@@ -339,7 +324,20 @@ delete from user_security;
 delete from student;
 delete from parent;
 
-
+-- 시퀀스 초기화--
+drop sequence parent_seq;
+drop sequence student_seq;
+drop sequence admin_seq;
+drop sequence teacher_seq;
+drop sequence course_seq;
+drop sequence requestcourse_seq;
+drop sequence board_coursedata_seq;
+drop sequence gallery_seq;
+drop sequence board_inquiry_seq;
+drop sequence board_inquiry_reply_seq;
+drop sequence board_faq_seq;
+drop sequence board_notice_seq;
+drop sequence login_history_seq;
 
 
 
