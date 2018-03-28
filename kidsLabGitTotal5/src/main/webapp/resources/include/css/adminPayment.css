@@ -1,14 +1,37 @@
 @CHARSET "UTF-8";
 
-caption{display:none;}
-img{border:0px;}
-input[type="text"],input[type="password"],select{font-size:85%; padding:3px;}
-input[type="text"],input[type="password"]{width:250px; }	
-#serarchData input[type="button"]{padding:3px; font-size:80%;}
-table{border-collapse:collapse;}
-ul {list-style: none;}
+caption {
+	display: none;
+}
+
+img {
+	border: 0px;
+}
+
+input[type="text"], input[type="password"], select {
+	font-size: 85%;
+	padding: 3px;
+}
+
+input[type="text"], input[type="password"] {
+	width: 250px;
+}
+
+#serarchData input[type="button"] {
+	padding: 3px;
+	font-size: 80%;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+ul {
+	list-style: none;
+}
+
 .btn input[type="button"] {
-	padding:20px;
+	padding: 20px;
 	width: 150px;
 	height: 40px;
 	font-size: 15px;
@@ -18,30 +41,166 @@ ul {list-style: none;}
 /********** 게시판 리스트 화면 **********/
 
 /* 검색 부분 */
-#paymentSearch table{width:96%; margin-top:10px;}
-#paymentSearch #search{height:26px;}
-#paymentSearch #btd1{width:50%; text-align:left;}
-#paymentSearch #btd2{width:40%; text-align:right;}
-#paymentSearch #btd3{width:35%; text-align:right;}
+#paymentSearch table {
+	width: 96%;
+	margin-top: 10px;
+}
+
+#paymentSearch #search {
+	height: 26px;
+}
+
+#paymentSearch #btd1 {
+	width: 50%;
+	text-align: left;
+	position: relative;
+	left: 20px;
+}
+
+#paymentSearch #btd2 {
+	width: 40%;
+	text-align: right;
+	position: relative;
+	right: 18px;
+}
+
+#paymentSearch #btd3 {
+	width: 35%;
+	text-align: right;
+}
+/* 버튼 */
+#searchData {
+	width: 50px;
+	height: 28px;
+	background-color: rgb(6, 119, 242);
+	color: white;
+	border-bottom-left-radius: 9px;
+	border-bottom-right-radius: 9px;
+	border-top-left-radius: 9px;
+	border-top-right-radius: 9px;
+	margin-left: 3px;
+}
 
 /* 리스트 부분 */
-#paymentList{margin-top:10px; /* height:110px; */}
-#paymentList table{width:96%; padding:0px; }	
-#paymentList tr{padding:0px;}	
-#paymentList th, #boardList td{padding:8px; }	
-#paymentList th{ background-color:#e7e7e7;}
+#paymentList {
+	margin-top: 10px; /* height:110px; */
+}
 
-#paymentList .borcle{border-right:0px; }	
-#paymentList .rCount{font-size:10px; color:red;}
+#paymentList table {
+	width: 96%;
+	padding: 0px;
+}
+
+#paymentList tr {
+	padding: 0px;
+}
+
+#paymentList th, #boardList td {
+	padding: 8px;
+}
+
+#paymentList th {
+	background-color: #e7e7e7;
+}
+
+#paymentList .borcle {
+	border-right: 0px;
+}
+
+#paymentList .rCount {
+	font-size: 10px;
+	color: red;
+}
 
 /* 페이징 출력 div 부분 */
-#contentContainer #paymentPage{width:96%; margin-top:10px;}
+#contentContainer #paymentPage {
+	width: 96%;
+	margin-top: 10px;
+}
 
 /* 페이징 버튼 부분 */
-.paginate{width:100%; height:20px; text-align:center; vertical-align:top; /* font-size:14px; */}
-.paginate span .textAn{vertical-align:bottom;}
-.paginate a.on{color:#FF3300;}
+.paginate {
+	width: 100%;
+	height: 20px;
+	text-align: center;
+	vertical-align: top;
+	font-size: 14px;
+}
 
-#file{display:inline;}
-#imgView{position:absolute;}
-.imgViewData{position:relative; top:-2px; left:0px; z-index:100}
+/* .paginate span .textAn {
+	vertical-align: bottom;
+}
+
+.paginate a.on {
+	color: #FF3300;
+} */
+/* 페이지 부분*/
+.paginate .textAn, .paginate .on {
+	display: inline-block;
+	width: 20px;
+	height: 18px;
+	margin: 0 1px;
+	border: 1px solid #b3c1b2;
+	color: rgb(255, 255, 255);
+	font-size: 13px;
+	font-weight: bold;
+	line-height: 20px;
+	vertical-align: middle;
+	text-decoration: none;
+	background-color: rgb(153, 214, 151);
+}
+
+.paginate a.on {
+	color: rgb(0, 21, 255);
+}
+
+.paginate a:hover, .paginate a:active, .paginate a:focus {
+	border: 1px solid #4c8500;
+}
+
+#file {
+	display: inline;
+}
+
+#imgView {
+	position: absolute;
+}
+
+.imgViewData {
+	position: relative;
+	top: -2px;
+	left: 0px;
+	z-index: 100
+}
+
+/* 셀렉트 박스*/
+select {
+	padding-left: 10px;
+	font-size: 12px;
+	color: #000000;
+	border: 1px solid #026cf6;
+	border-radius: 5px;
+	-moz-appearance: none;
+	appearance: none;
+	/* 화살표 아이콘 추가 */
+}
+
+select option:checked, select option:hover {
+	background: #057af2;
+	color: #fff;
+}
+/* check, hover 스타일 설정 FireFox */
+select option:checked, select option:hover {
+	box-shadow: 0 0 10px 100px #071df7 inset;
+	color: #fff;
+}
+
+#paymentList th {
+	text-align: center;
+	background-color: rgb(118, 191, 155);
+}
+
+.table-bordered td {
+	height: 40px;
+	background-color: rgb(246, 245, 223);
+}

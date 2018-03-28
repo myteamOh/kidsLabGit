@@ -46,6 +46,7 @@ public class LoginController {
 		AdminLoginVO loginCheckResult = adminLoginService.loginSelect(vo.getUserId(), vo.getUserPw());
 
 		if (loginCheckResult == null) {
+			mav.addObject("msg", "fail");
 			mav.setViewName("admin/login/login");
 			return mav;
 		} else {

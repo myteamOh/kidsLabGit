@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kidslab.admin.jointeacher.vo.TeacherVO;
+import com.kidslab.admin.login.vo.AdminLoginVO;
 import com.kidslab.admin.memberlist.service.MemberListService;
 import com.kidslab.client.requestcourse.vo.RequestCourseVO;
 import com.kidslab.client.student.vo.StudentVO;
@@ -36,8 +37,12 @@ public class MemberListController {
 	 * 학생 리스트
 	 ***********************************/
 	@RequestMapping(value = "/member/studentList")
-	public String studentList(@ModelAttribute StudentVO svo, Model model) {
-
+	public String studentList(@ModelAttribute StudentVO svo, Model model, HttpSession session) {
+		AdminLoginVO vo = new AdminLoginVO();
+		vo = (AdminLoginVO) session.getAttribute("adminLogin");
+		if (vo == null) {
+			return "redirect:/admin/login";
+		}
 		logger.info("studentList 호출");
 
 		Paging.setPage(svo);
@@ -66,7 +71,12 @@ public class MemberListController {
 	 * 학부모 리스트
 	 ***********************************/
 	@RequestMapping(value = "/member/parentList")
-	public String parentList(@ModelAttribute StudentVO svo, Model model) {
+	public String parentList(@ModelAttribute StudentVO svo, Model model, HttpSession session) {
+		AdminLoginVO vo = new AdminLoginVO();
+		vo = (AdminLoginVO) session.getAttribute("adminLogin");
+		if (vo == null) {
+			return "redirect:/admin/login";
+		}
 		logger.info("parentList 호출");
 
 		Paging.setPage(svo);
@@ -95,7 +105,12 @@ public class MemberListController {
 	 * 강사 리스트
 	 ***********************************/
 	@RequestMapping(value = "/member/teacherList")
-	public String teacherList(@ModelAttribute TeacherVO tvo, Model model) {
+	public String teacherList(@ModelAttribute TeacherVO tvo, Model model, HttpSession session) {
+		AdminLoginVO vo = new AdminLoginVO();
+		vo = (AdminLoginVO) session.getAttribute("adminLogin");
+		if (vo == null) {
+			return "redirect:/admin/login";
+		}
 		logger.info("teacherList 호출");
 
 		Paging.setPage(tvo);
@@ -119,9 +134,9 @@ public class MemberListController {
 
 	}
 
-	/***********************************
-	 * 학부모 가입 경로별 파이차트
-	 ***********************************/
+	/*****************************************************************
+	 * 학부모 가입 경로별 파이차트, 학년 별 인원 컬럼 바차트, 총 매출 라인차트
+	 ******************************************************************/
 	@ResponseBody
 	@RequestMapping(value = "/member/joinRootList")
 	public ModelAndView rootList(@ModelAttribute TeacherVO tvo, Model model, HttpSession session) {
@@ -129,6 +144,12 @@ public class MemberListController {
 		logger.info("joinRootList 호출");
 
 		ModelAndView mav = new ModelAndView();
+		AdminLoginVO vo = new AdminLoginVO();
+		vo = (AdminLoginVO) session.getAttribute("adminLogin");
+		if (vo == null) {
+			mav.setViewName("redirect:/admin/login");
+			return mav;
+		}
 		// Pie 차트
 		Map<String, Integer> joinRootList = new HashMap<>();
 		// Bar 차트
@@ -176,7 +197,7 @@ public class MemberListController {
 			strLineChart += lineChart.get(k).getMargin() + "]";
 			if (k < lineChart.size() - 1) {
 				strLineChart += ",";
-			} 
+			}
 			logger.info("확인밑에");
 			logger.info(strLineChart);
 		}

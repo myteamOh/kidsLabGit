@@ -3,6 +3,7 @@ package com.kidslab.admin.faq.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kidslab.admin.faq.service.FaqService;
 import com.kidslab.admin.faq.vo.FaqVO;
+import com.kidslab.admin.login.vo.AdminLoginVO;
 import com.kidslab.admin.notice.vo.NoticeVO;
 import com.kidslab.common.page.Paging;
 import com.kidslab.common.util.Util;
@@ -29,9 +31,14 @@ public class FaqController {
 
 	// Faq 목록
 	@RequestMapping(value = "/faq/faqList")
-	public String faqList(@ModelAttribute FaqVO fvo, Model model) {
-		logger.info("faqList 호출~~");
+	public String faqList(@ModelAttribute FaqVO fvo, Model model, HttpSession session) {
 
+		AdminLoginVO vo = new AdminLoginVO();
+		vo = (AdminLoginVO) session.getAttribute("adminLogin");
+		if (vo == null) {
+			return "redirect:/admin/login";
+		}
+		logger.info("faqList 호출~~");
 		// 페이지 세팅 (추가)
 		Paging.setPage(fvo);
 

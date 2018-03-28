@@ -45,6 +45,9 @@
 			}
 			// 폼 내부의 데이터를 전송할 주소
 			console.log(userId);
+			$.ajax({
+
+			})
 			$("#loginForm").attr({
 				"method" : "POST",
 				"action" : "/admin/loginCheck.do"
@@ -52,7 +55,6 @@
 
 			$("#loginForm").submit();
 
-			alert("로그인 시도!");
 		});
 	});
 </script>
@@ -77,8 +79,10 @@
 				<label for="userId">Username</label> <br /> <input type="text"
 					id="userId" name="userId"> <br /> <label for="userPw">Password</label>
 				<br /> <input type="password" id="userPw" name="userPw"> <br />
+				<label id="loginAlert"> <c:if test="${msg == 'fail'}">아이디 또는 비밀번호가 일치하지 않습니다.</c:if>
+				</label><br />
 				<button type="button" id="loginBtn">Sign In</button>
-				<br /> <a href="#"><p class="small">Forgot your password?</p></a>
+				<br />
 			</div>
 		</div>
 	</form>

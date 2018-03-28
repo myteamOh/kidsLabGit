@@ -23,7 +23,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a href="#"><img class="navbar-brand"
+			<a href="/"><img class="navbar-brand"
 				src="/resources/images/image/kidslablogo3.png" onclick="clickBtn();"
 				border="0" /></a>
 		</div>

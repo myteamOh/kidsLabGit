@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kidslab.admin.course.service.CourseService;
 import com.kidslab.admin.course.vo.CourseVO;
+import com.kidslab.admin.login.vo.AdminLoginVO;
 import com.kidslab.common.file.FileUploadUtil;
 import com.kidslab.common.page.Paging;
 import com.kidslab.common.util.Util;
@@ -33,8 +35,12 @@ public class CourseController {
 	 * 강의목록 구현하기
 	 ********************************/
 	@RequestMapping(value = "/course/courseList", method = RequestMethod.GET)
-	public String courseList(@ModelAttribute CourseVO cvo, Model model) {
-
+	public String courseList(@ModelAttribute CourseVO cvo, Model model, HttpSession session) {
+		AdminLoginVO vo = new AdminLoginVO();
+		vo = (AdminLoginVO) session.getAttribute("adminLogin");
+		if(vo == null) {
+			return "redirect:/admin/login";
+		}
 		logger.info("courseList 호출 성공");
 
 		// 페이지 세팅
