@@ -17,6 +17,10 @@
 	rel="stylesheet">
 <!-- Custom styles for this template -->
 <link href="/resources/include/dist/css/dashboard.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="/resources/include/css/common.css">
+<link rel="stylesheet" type="text/css"
+	href="/resources/include/css/adminPayment.css" />
 <style type="text/css">
 #cl-dashboard {
 	display: none;
@@ -142,7 +146,7 @@
 </script>
 </head>
 <body>
-	<div class="contentContainer">
+	<div class="contentContainer container-fluid" id="payment">
 		<div class="contentTit">
 			<h3>게시판 리스트</h3>
 		</div>
@@ -153,7 +157,7 @@
 				type="hidden" name="pageSize" value="${noticeData.pageSize }">
 		</form>
 		<%-- =============== 검색기능 시작 =============== --%>
-		<div id="boardSearch">
+		<div id="paymentSearch">
 			<form id="n_search" name="n_search">
 				<input type="hidden" id="page" name="page"
 					value="${noticeData.page }">
@@ -170,7 +174,7 @@
 								<option value="notice_content">내용</option>
 								<option value="notice_registerdate">작성날짜</option>
 						</select> <input type="text" name="keyword" id="keyword"
-							value="검색어를 입력하세요.">
+							value="전체 목록을 조회합니다.">
 							<div id="typely" style="display: none">
 								<input type="text" id="start_date" name="start_date"> <input
 									type="text" id="end_date" name="end_date">
@@ -191,8 +195,9 @@
 		<%-- =============== 검색기능 종료 =============== --%>
 
 		<%-- =============== 리스트 시작 ================= --%>
-		<div id="boardList">
-			<table summary="공지사항 리스트">
+		<div id="paymentList" class="container-fluid">
+			<table summary="공지사항 리스트"
+				class="table-striped table-hover table-bordered mg-top-sm table">
 				<colgroup>
 					<col width="10%" />
 					<col width="62%" />
@@ -237,7 +242,7 @@
 		</div>
 		<%-- ============ 글쓰기 버튼 출력 종료 =========== --%>
 		<%-- ============ 페이지 네비게이션 시작 =========== --%>
-		<div id="boardPage">
+		<div id="paymentPage">
 			<tag:paging page="${param.page }" total="${total }"
 				list_size="${noticeData.pageSize }">
 			</tag:paging>

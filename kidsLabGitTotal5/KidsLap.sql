@@ -377,6 +377,7 @@ select
 	set REQUESTCOURSE_paymentstatus = '환불완료'
 	where requestcourse_no=2;
 		
-		
+select substr(course_summary, 1, 10) as course_summary
+from course;
 	
 		

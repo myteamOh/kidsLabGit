@@ -25,7 +25,7 @@
 <link rel="stylesheet" type="text/css"
 	href="/resources/include/css/common.css">
 <link rel="stylesheet" type="text/css"
-	href="/resources/include/css/board.css" />
+	href="/resources/include/css/adminPayment.css" />
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script type="text/javascript"
@@ -104,18 +104,18 @@
 			goPage(1);
 		});
 
-		/* 제목 클릭시 상세 페이지 이동을 위한 처리 이벤트 */
-		/* $(".detail").click(function() {
-			var student_no = $(this).parents("tr").attr("data-num");
-			$("#student_no").val(student_no);
-			console.log("학생번호 : " + student_no);
-			// 상세 페이지로 이동하기 위해 form 추가(id : detailForm)
-			$("#detailForm").attr({
-				"method" : "get",
-				"action" : "/admin/student/paymentList"
-			});
-			$("#detailForm").submit();
-		}); */
+	/* 제목 클릭시 상세 페이지 이동을 위한 처리 이벤트 */
+	/* $(".detail").click(function() {
+		var student_no = $(this).parents("tr").attr("data-num");
+		$("#student_no").val(student_no);
+		console.log("학생번호 : " + student_no);
+		// 상세 페이지로 이동하기 위해 form 추가(id : detailForm)
+		$("#detailForm").attr({
+			"method" : "get",
+			"action" : "/admin/student/paymentList"
+		});
+		$("#detailForm").submit();
+	}); */
 	});
 
 	/* 검색과 한 페이지에 보여줄 레코드 수 처리 및 페이징을 위한 실질적인 처리 함수 */
@@ -144,7 +144,7 @@
 </script>
 </head>
 <body>
-	<div class="contentContainer">
+	<div class="contentContainer container-fluid" id="payment">
 		<div class="contentTit">
 			<h3>학생 리스트</h3>
 		</div>
@@ -155,15 +155,11 @@
 				type="hidden" name="pageSize" value="${studentData.pageSize }">
 		</form>
 		<%-- =============== 검색기능 시작 =============== --%>
-		<div id="boardSearch">
+		<div id="paymentSearch">
 			<form id="s_search" name="s_search">
 				<input type="hidden" id="page" name="page"
 					value="${studentData.page }">
 				<table summary="검색">
-					<colgroup>
-						<col width="70%">
-						<col width="30%">
-					</colgroup>
 					<tr>
 						<td id="btd1"><label>검색조건</label> <select id="search"
 							name="search" onchange="jsChselect(this.value)">
@@ -199,8 +195,9 @@
 		<%-- =============== 검색기능 종료 =============== --%>
 
 		<%-- =============== 리스트 시작 ================= --%>
-		<div id="boardList">
-			<table summary="강사 리스트">
+		<div id="paymentList" class="container-fluid">
+			<table summary="학생 리스트"
+				class="table-striped table-hover table-bordered mg-top-sm table">
 				<thead>
 					<tr>
 						<th class="order" data-value="student_no">회원번호</th>
@@ -247,7 +244,7 @@
 		<%-- =============== 리스트 종료 ===============--%>
 
 		<%-- ============ 페이지 네비게이션 시작 =========== --%>
-		<div id="boardPage">
+		<div id="paymentPage">
 			<tag:paging page="${param.page }" total="${total }"
 				list_size="${studentData.pageSize }">
 			</tag:paging>

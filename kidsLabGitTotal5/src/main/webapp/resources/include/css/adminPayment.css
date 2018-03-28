@@ -51,23 +51,26 @@ ul {
 }
 
 #paymentSearch #btd1 {
-	width: 50%;
 	text-align: left;
 	position: relative;
 	left: 20px;
 }
 
+#paymentSearch #btd3 {
+	position: relative;
+	right: 20px;
+	text-align: right;
+}
+
 #paymentSearch #btd2 {
-	width: 40%;
+	width: 15%;
+	position: relative;
+	right: 10px;
 	text-align: right;
 	position: relative;
 	right: 18px;
 }
 
-#paymentSearch #btd3 {
-	width: 35%;
-	text-align: right;
-}
 /* 버튼 */
 #searchData {
 	width: 50px;
@@ -100,7 +103,8 @@ ul {
 }
 
 #paymentList th {
-	background-color: #e7e7e7;
+	background-color: rgb(213, 229, 221);;
+	text-align: center;
 }
 
 #paymentList .borcle {
@@ -195,12 +199,14 @@ select option:checked, select option:hover {
 	color: #fff;
 }
 
-#paymentList th {
-	text-align: center;
-	background-color: rgb(118, 191, 155);
-}
-
 .table-bordered td {
 	height: 40px;
 	background-color: rgb(246, 245, 223);
+}
+
+/* 글쓰기 버튼 */
+#insertFormBtn {
+	position: relative;
+	top: -15px;
+	right: 17px;
 }
