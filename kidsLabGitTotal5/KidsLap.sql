@@ -354,14 +354,84 @@ to_char(requestcourse_refundcomplete,   'yy-mm') as   requestcourse_refundcomple
 sum(requestcourse_payamount)   as   requestcourse_payamount,
 sum(requestcourse_refundcharge) as   requestcourse_refundcharge 
 from   requestcourse  
-where  to_char(requestcourse_paycompletedate, 'yy-mm')  <=    to_char(sysdate,   'yy-mm') 
-or   to_char(requestcourse_refundcomplete, 'yy-mm')  <=    to_char(sysdate,   'yy-mm')
-and to_char(requestcourse_paycompletedate,'yy-mm') = to_char(requestcourse_refundcomplete, 'yy-mm')
-group by to_char(requestcourse_paycompletedate, 'yy-mm'), to_char(requestcourse_refundcomplete,'yy-mm')
+group by (to_char(requestcourse_paycompletedate, 'yy-mm'), to_char(requestcourse_refundcomplete,'yy-mm'))
 order by   requestcourse_paycompletedate desc  
 ) list  
 )   
 where rnum between 1 and 6   order by requestcourse_paycompletedate asc
 
+select
+		requestcourse_paycompletedate,
+		requestcourse_payamount, rnum
+		from(
+		select list.*, rownum as rnum
+		from(
+		select
+		to_char(requestcourse_paycompletedate, 'yy-mm') as
+		requestcourse_paycompletedate,
+		sum(requestcourse_payamount) as
+		requestcourse_payamount
+		from requestcourse
+		where
+		to_char(requestcourse_paycompletedate, 'yy-mm') <=
+		to_char(sysdate,
+		'yy-mm')
+		group by
+		to_char(requestcourse_paycompletedate, 'yy-mm')
+		order by
+		requestcourse_paycompletedate desc
+		) list
+		)
+		where rnum between 1 and 6
+		order by requestcourse_paycompletedate asc
+select
+		requestcourse_refundcomplete,
+		requestcourse_refundcharge, rnum
+		from(
+		select list.*, rownum as rnum
+		from(
+		select
+		to_char(requestcourse_refundcomplete, 'yy-mm') as
+		requestcourse_refundcomplete,
+		sum(requestcourse_refundcharge) as
+		requestcourse_refundcharge
+		from requestcourse
+		where
+		to_char(requestcourse_refundcomplete, 'yy-mm') <=
+		to_char(sysdate,
+		'yy-mm')
+		group by
+		to_char(requestcourse_refundcomplete, 'yy-mm')
+		order by
+		requestcourse_refundcomplete desc
+		) list
+		)
+		where rnum between 1 and 6
+		order by requestcourse_refundcomplete asc
 
-
+		select
+		requestcourse_refundcomplete, requestcourse_refundcharge,
+		,rnum
+		from(
+		select list.*, rownum as rnum
+		from(
+		select
+		to_char(requestcourse_refundcomplete,'yy-mm') as requestcourse_refundcomplete,
+		sum(requestcourse_refundcharge) as
+		requestcourse_refundcharge
+		from
+		requestcourse
+		where 
+		to_char(requestcourse_refundcomplete, 'yy-mm') <= to_char(sysdate,
+		'yy-mm')
+		group by
+		to_char(requestcourse_refundcomplete, 'yy-mm')
+		order by
+		requestcourse_refundcomplete desc
+		) list
+		)
+		where rnum
+		between 1 and 6
+		order by requestcourse_refundcomplete asc
+		
+		

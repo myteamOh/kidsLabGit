@@ -95,4 +95,12 @@ public class MemberListServiceImpl implements MemberListService {
 		return paymentList;
 	}
 
+	@Override
+	public List<RequestCourseVO> refundStatsList() {
+		// TODO Auto-generated method stub
+		List<RequestCourseVO> refundStatsList = null;
+		refundStatsList = memberListDao.refundStatsList();
+		return refundStatsList;
+	}
+
 }

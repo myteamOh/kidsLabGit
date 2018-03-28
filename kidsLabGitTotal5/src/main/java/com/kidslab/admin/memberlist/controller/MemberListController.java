@@ -155,6 +155,8 @@ public class MemberListController {
 		// Bar 차트
 		Map<String, Integer> columnChart = new HashMap<>();
 		List<RequestCourseVO> lineChart = memberListService.paymentStatsList();
+		List<RequestCourseVO> refundStatsList = memberListService.refundStatsList();
+
 		// db에서 column name = key, value = value
 		joinRootList = memberListService.joinRootList();
 		columnChart = memberListService.studentAgeList();
@@ -183,21 +185,41 @@ public class MemberListController {
 		// [1, 37.8, 80.8, 41.8]
 		String strLineChart = "";
 		for (int k = 0; k < lineChart.size(); k++) {
-			logger.info("확인");
-			if (lineChart.get(i).getRequestcourse_refundcomplete() == null) {
+			if (!refundStatsList.get(k).getRequestcourse_refundcomplete().isEmpty()) {
+				if (lineChart.get(k).getRequestcourse_paycompletedate().substring(0, 2) == refundStatsList.get(k)
+						.getRequestcourse_refundcomplete().substring(0, 2)
+						&& lineChart.get(k).getRequestcourse_paycompletedate().substring(3, 5) == refundStatsList.get(k)
+								.getRequestcourse_refundcomplete().substring(3, 5)) {
+					int margin = lineChart.get(k).getRequestcourse_payamount()
+							- refundStatsList.get(k).getRequestcourse_refundcharge();
+					strLineChart += "[new Date('20"
+							+ lineChart.get(k).getRequestcourse_paycompletedate().substring(0, 2) + "','"
+							+ (Integer.parseInt(lineChart.get(k).getRequestcourse_paycompletedate().substring(3, 5))
+									- 1)
+							+ "'),";
+					strLineChart += lineChart.get(k).getRequestcourse_payamount() + ","
+							+ lineChart.get(k).getRequestcourse_refundcharge() + ",";
+					strLineChart += margin + "]";
+				}
+			} else {
 				strLineChart += "[new Date('20" + lineChart.get(k).getRequestcourse_paycompletedate().substring(0, 2)
 						+ "','"
 						+ (Integer.parseInt(lineChart.get(k).getRequestcourse_paycompletedate().substring(3, 5)) - 1)
 						+ "'),";
-			} else {
-				strLineChart += "[new Date('20" + lineChart.get(k).getRequestcourse_refundcomplete().substring(0, 2)
-						+ "','"
-						+ (Integer.parseInt(lineChart.get(k).getRequestcourse_refundcomplete().substring(3, 5)) - 1)
-						+ "'),";
+				strLineChart += lineChart.get(k).getRequestcourse_payamount() + ","
+						+ lineChart.get(k).getRequestcourse_refundcharge() + ",";
+				strLineChart += lineChart.get(k).getRequestcourse_payamount() + "]";
 			}
-			strLineChart += lineChart.get(k).getRequestcourse_payamount() + ","
-					+ lineChart.get(k).getRequestcourse_refundcharge() + ",";
-			strLineChart += lineChart.get(k).getMargin() + "]";
+			logger.info("확인");
+			/*
+			 * strLineChart += "[new Date('20" +
+			 * lineChart.get(k).getRequestcourse_paycompletedate().substring(0, 2) + "','" +
+			 * (Integer.parseInt(lineChart.get(k).getRequestcourse_paycompletedate().
+			 * substring(3, 5)) - 1) + "'),"; strLineChart +=
+			 * lineChart.get(k).getRequestcourse_payamount() + "," +
+			 * lineChart.get(k).getRequestcourse_refundcharge() + ","; strLineChart +=
+			 * lineChart.get(k).getMargin() + "]";
+			 */
 			if (k < lineChart.size() - 1) {
 				strLineChart += ",";
 			}

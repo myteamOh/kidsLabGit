@@ -35,4 +35,7 @@ public interface MemberListService {
 
 	// 매출 통계
 	public List<RequestCourseVO> paymentStatsList();
+
+	// 환불
+	public List<RequestCourseVO> refundStatsList();
 }
