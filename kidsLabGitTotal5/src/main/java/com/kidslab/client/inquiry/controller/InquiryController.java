@@ -41,14 +41,15 @@ public class InquiryController {
 			throws Exception {
 		logger.info("inquiryList 호출 성공");
 		
-		
+		// Login한 parent회원 정보를 저장 
 		ParentVO pvo = (ParentVO) session.getAttribute("Login");
 		logger.info("parent_no : " + pvo.getParent_no());
-
+		
+		// list 등록할 때 인터페이스에 정보를 내보냄
 		inquiryVO.setParent_no(pvo.getParent_no());
 		List<InquiryVO> inquiryList = inquiryService.inquiryList(inquiryVO);
 
-		// ModelAndView - 모델과 뷰
+		// mav 생성
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("inquiryList", inquiryList); // 저장된 데이터를 mav에 저장

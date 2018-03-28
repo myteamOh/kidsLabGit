@@ -10,6 +10,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="/resources/images/common/icon.png">
+<script defer
+	src="https://use.fontawesome.com/releases/v5.0.9/js/all.js"
+	integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl"
+	crossorigin="anonymous"></script>
+
+
 
 <title><tiles:getAsString name="title"></tiles:getAsString></title>
 <style type="text/css">
@@ -98,8 +104,8 @@
 				</ol>
 				<div class="carousel-inner" role="listbox">
 					<div class="item active">
-						<img class="first-slide"
-							src="/resources/images/image/kidslabmain1.jpg" alt="First slide">
+						<img class="first-slide" src="/resources/images/image/main1.jpg"
+							alt="First slide" style="opacity: 80%">
 						<div class="container">
 							<div class="carousel-caption">
 								<h1>KidsLab 강의신청</h1>
@@ -112,8 +118,8 @@
 						</div>
 					</div>
 					<div class="item">
-						<img class="second-slide"
-							src="/resources/images/image/kidslabmain2.jpg" alt="Second slide">
+						<img class="second-slide" src="/resources/images/image/main2.jpg"
+							alt="Second slide" style="opacity: 80%">
 						<div class="container">
 							<div class="carousel-caption">
 								<h1></h1>
@@ -126,8 +132,8 @@
 						</div>
 					</div>
 					<div class="item">
-						<img class="third-slide"
-							src="/resources/images/image/kidslabmain3.jpg" alt="Third slide">
+						<img class="third-slide" src="/resources/images/image/main3.jpg"
+							alt="Third slide">
 						<div class="container">
 							<div class="carousel-caption">
 								<h1>프로젝트 갤러리</h1>
@@ -200,9 +206,9 @@
 
 			</div>
 			<!-- /.col-xs-6.col-lg-4 -->
-			<div class="col-xs-6 col-lg-4">
-				<img src="/resources/images/image/kidslabpromotion.jpg"
-					class="img-responsive" alt="Responsive image" />
+			<div class="col-xs-6 col-lg-8">
+				<img src="/resources/images/image/promotion.jpg" class="img-responsive"
+					alt="Responsive image" />
 
 			</div>
 			<!-- /.col-xs-6.col-lg-4 -->
@@ -216,11 +222,11 @@
 		<hr>
 
 		<!-- Three columns of text below the carousel -->
-		<div class="row">
+		<div class="row" align="center">
 			<div class="col-lg-4">
-				<img class="img-circle" src="/resources/images/image/row1.gif"
+				<img class="img-circle" src="/resources/images/image/kidslab-logo.jpg"
 					alt="Generic placeholder image" width="140" height="140">
-				<h2>회사소개</h2>
+				<h2>학원 소개</h2>
 				<p>KidsLab에 대하여 궁금하신 분께 알려드립니다.</p>
 				<p>
 					<a class="btn btn-default" href="/client/introduce/lab"
@@ -229,9 +235,9 @@
 			</div>
 			<!-- /.col-lg-4 -->
 			<div class="col-lg-4">
-				<img class="img-circle" src="/resources/images/image/row2.gif"
+				<img class="img-circle" src="/resources/images/image/title_teacher.jpg"
 					alt="Generic placeholder image" width="140" height="140">
-				<h2>강의소개</h2>
+				<h2>강의 소개</h2>
 				<p>KidsLab에서 진행되고 있는 강의들.</p>
 				<p>
 					<a class="btn btn-default" href="/client/introduce/cource"
@@ -240,7 +246,7 @@
 			</div>
 			<!-- /.col-lg-4 -->
 			<div class="col-lg-4">
-				<img class="img-circle" src="/resources/images/image/row3.gif"
+				<img class="img-circle" src="/resources/images/image/title_way.png"
 					alt="Generic placeholder image" width="140" height="140">
 				<h2>오시는 길</h2>
 				<p>KidsLab에 오시는 길</p>

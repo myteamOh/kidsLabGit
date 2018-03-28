@@ -36,7 +36,7 @@
 				function() {
 					// 입력값 체크
 					$("#inquiry_content").val(
-							CKEDITOR.instances.inquiry_content.getData());
+							CKEDITOR.instances.inquiry_content.getData()); // 글 쓰는 부분에 Ckeditor 적용
 					if (!chkSubmit($('#inquiry_content'), "작성할 내용을")) {
 						return;
 					} else if (!chkSubmit($('#inquiry_title'), "제목을")) {
