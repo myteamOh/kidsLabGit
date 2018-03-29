@@ -353,7 +353,7 @@ where teacher_name = '이하나';
 select *
 from requestcourse
 where course_no = 13;
-
+ 
 select *
 from COURSE
 where course_no = 1;
