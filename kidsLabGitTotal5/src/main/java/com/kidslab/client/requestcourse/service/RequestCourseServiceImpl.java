@@ -55,12 +55,14 @@ public class RequestCourseServiceImpl implements RequestCourseService {
 
 		List<RequestCourseVO> courseList = requestCourseDao.requestCourseCount(cvo);
 
-		for (int i = 0; i < courseList.size(); i++) {
-			if (courseList.get(i).getRequestcourse_paymentstatus().equals("결제대기")
-					|| courseList.get(i).getRequestcourse_paymentstatus().equals("결제완료")) {
-				count--;
-			} else {
-				break;
+		if (courseList.size() > 0) {
+			for (int i = 0; i < courseList.size(); i++) {
+				if (courseList.get(i).getRequestcourse_paymentstatus().equals("결제대기")
+						|| courseList.get(i).getRequestcourse_paymentstatus().equals("결제완료")) {
+					count--;
+				} else {
+					break;
+				}
 			}
 		}
 
@@ -157,7 +159,7 @@ public class RequestCourseServiceImpl implements RequestCourseService {
 	public List<RequestCourseVO> refundList(ParentVO pvo) {
 		// TODO Auto-generated method stub
 		List<RequestCourseVO> refundList = requestCourseDao.refundList(pvo);
-		
+
 		return refundList;
 	}
 
