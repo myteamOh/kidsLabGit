@@ -53,7 +53,7 @@
 <body>
 	<div class="contentContainer">
 		<div class="contentTit">
-			<h3>게시판 글작성</h3>
+			<h3>FAQ</h3>
 		</div>
 		<div class="contentTB">
 			<form id="f_writeForm" name="f_writeForm"
@@ -75,7 +75,12 @@
 					</tr>
 					<tr>
 						<td class="ac">글종류</td>
-						<td><input type="text" name="faq_type" id="faq_type"></td>
+						<td><select name="faq_type" id="faq_type">
+								<option>회원/로그인</option>
+								<option>강의신청</option>
+								<option>가입 및 탈퇴</option>
+								<option>결제 및 환불</option>
+						</select></td>
 					</tr>
 					<tr>
 						<td class="ac vm">내용</td>

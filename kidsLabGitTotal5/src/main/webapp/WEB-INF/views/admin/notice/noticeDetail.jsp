@@ -50,7 +50,7 @@
 <body>
 	<div class="contentContainer">
 		<div class="contentTit">
-			<h3>게시판 상세보기</h3>
+			<h3>공지사항</h3>
 		</div>
 		<form name="f_data" id="f_data" method="post">
 			<input type="hidden" name="notice_no" value="${detail.notice_no}">

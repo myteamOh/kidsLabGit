@@ -36,7 +36,7 @@
 					and requestCourse_paymentStatus like '결제완료'
 				</if>
 				<if test="requestCourse_paymentStatus=='refundwaiting'">
-					and requestCourse_paymentStatus like '환불신청'
+					and requestCourse_paymentStatus like '환불대기'
 				</if>
 				<if test="requestCourse_paymentStatus=='refundcomplete'">
 					and requestCourse_paymentStatus like '환불완료'
@@ -54,7 +54,7 @@
 					and requestCourse_paymentStatus like '결제완료'
 				</if>
 				<if test="requestCourse_paymentStatus=='refundwaiting'">
-					and requestCourse_paymentStatus like '환불신청'
+					and requestCourse_paymentStatus like '환불대기'
 				</if>
 				<if test="requestCourse_paymentStatus=='refundcomplete'">
 					and requestCourse_paymentStatus like '환불완료'
@@ -72,7 +72,7 @@
 					and requestCourse_paymentStatus like '결제완료'
 				</if>
 				<if test="requestCourse_paymentStatus=='refundwaiting'">
-					and requestCourse_paymentStatus like '환불신청'
+					and requestCourse_paymentStatus like '환불대기'
 				</if>
 				<if test="requestCourse_paymentStatus=='refundcomplete'">
 					and requestCourse_paymentStatus like '환불완료'
@@ -90,7 +90,7 @@
 					and requestCourse_paymentStatus like '결제완료'
 				</if>
 				<if test="requestCourse_paymentStatus=='refundwaiting'">
-					and requestCourse_paymentStatus like '환불신청'
+					and requestCourse_paymentStatus like '환불대기'
 				</if>
 				<if test="requestCourse_paymentStatus=='refundcomplete'">
 					and requestCourse_paymentStatus like '환불완료'
@@ -190,7 +190,7 @@
 			'결제완료', requestcourse_paycompletedate = sysdate
 		</if>
 		<if test="requestCourse_paymentStatus=='refundwaiting'">
-			'환불신청',
+			'환불대기',
 		</if>
 		<if test="requestCourse_paymentStatus=='refundcomplete'">
 			'환불완료', requestcourse_refundcomplete = sysdate

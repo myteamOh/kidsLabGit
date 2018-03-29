@@ -117,9 +117,6 @@ public class MypageController {
 
 		List<RequestCourseVO> requestCourseList = rcService.reCourseSelectByNo(rcvo);
 
-		logger.info(requestCourseList.size());
-		logger.info(requestCourseList.get(0).getCourse_status());
-
 		model.addAttribute("rcList", requestCourseList);
 
 		return "client/mypage/mypageStudent";
@@ -404,7 +401,7 @@ public class MypageController {
 		return "redirect:/mypage/parentMypage";
 	}
 
-	/** 파일 다운로드**/
+	/** 파일 다운로드 **/
 	@RequestMapping(value = "/download")
 	public ModelAndView download(String course_plan, HttpSession session) {
 		// 파일 객체 생성

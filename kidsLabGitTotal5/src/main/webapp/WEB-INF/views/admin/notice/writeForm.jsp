@@ -51,7 +51,7 @@
 <body>
 	<div class="contentContainer">
 		<div class="contentTit">
-			<h3>게시판 글작성</h3>
+			<h3>공지사항</h3>
 		</div>
 		<div class="contentTB">
 			<form id="n_writeForm" name="n_writeForm"

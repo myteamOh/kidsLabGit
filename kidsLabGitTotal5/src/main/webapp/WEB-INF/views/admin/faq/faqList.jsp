@@ -113,7 +113,7 @@
 <body>
 	<div class="contentContainer container-fluid" id="payment">
 		<div class="contentTit">
-			<h3>게시판 리스트</h3>
+			<h3>FAQ</h3>
 		</div>
 		<%-- ======= 상세 페이지 이동을 위한 FORM ======== --%>
 		<form name="detailForm" id="detailForm">

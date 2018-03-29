@@ -45,7 +45,7 @@
 <body>
 	<div class="contentContainer">
 		<div class="contentTit">
-			<h3>공지사항 글 수정</h3>
+			<h3>공지사항</h3>
 		</div>
 		<form name="n_writeForm" id="n_writeForm"
 			enctype="multipart/form-data">

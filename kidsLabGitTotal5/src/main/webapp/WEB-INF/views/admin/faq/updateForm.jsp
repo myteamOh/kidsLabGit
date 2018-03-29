@@ -45,7 +45,7 @@
 <body>
 	<div class="contentContainer">
 		<div class="contentTit">
-			<h3>공지사항 글 수정</h3>
+			<h3>FAQ</h3>
 		</div>
 		<form name="f_writeForm" id="f_writeForm"
 			enctype="multipart/form-data">
@@ -71,7 +71,7 @@
 							<td>${updateData.faq_no }</td>
 							<td class="ac">글종류</td>
 							<td><input type="text" id="faq_type" name="faq_type"
-								value="${updateData.faq_type }"></td>
+								value="${updateData.faq_type }" readonly="readonly"></td>
 						</tr>
 						<tr>
 							<td class="ac">글제목</td>

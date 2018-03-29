@@ -25,6 +25,7 @@
 		where
 		a.parent_no =
 		b.parent_no
+		order by inquiry_no desc
 	</select>
 
 	<!-- 1:1 문의 조회 -->
@@ -41,7 +42,7 @@
 		<where>
 			parent_no = #{parent_no}
 		</where>
-
+		order by inquiry_no desc
 
 	</select>
 

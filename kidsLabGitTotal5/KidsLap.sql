@@ -343,6 +343,9 @@ select *
 from parent;
 	
 select *
+from teacher;
+
+select *
 from student
 where student_no = 62;
 

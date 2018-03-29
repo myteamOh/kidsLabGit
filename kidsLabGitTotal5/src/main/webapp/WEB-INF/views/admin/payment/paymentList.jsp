@@ -176,7 +176,7 @@
 									<option value="all" class="paymentClass">전체</option>
 									<option value="paymentwaiting">결제대기</option>
 									<option value="paymentcomplete">결제완료</option>
-									<option value="refundwaiting">환불신청</option>
+									<option value="refundwaiting">환불대기</option>
 									<option value="refundcomplete">환불완료</option>
 							</select></td>
 							<td id="btd2">한페이지에 <select id="pageSize" name="pageSize">
@@ -243,7 +243,7 @@
 												</td>
 											</c:when>
 											<c:when
-												test="${payment.requestCourse_paymentStatus == '환불신청'}">
+												test="${payment.requestCourse_paymentStatus == '환불대기'}">
 												<td>${payment.requestCourse_paymentStatus}<br> <input
 													type="button" id="registBtn" name="registBtn"
 													class="registBtn" value="수정"> <input type="button"
