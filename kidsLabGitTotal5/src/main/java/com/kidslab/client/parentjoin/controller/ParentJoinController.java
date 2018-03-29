@@ -127,33 +127,16 @@ public class ParentJoinController {
 
 		result = parentJoinService.parentInsert(pvo);
 
-		System.out.println(result);
-
 		if (result == 1) {
 			mav.setViewName("client/member/login"); // 회원가입 성공시 로그인 페이지로
 			mav.addObject("resultCode", result);
 		} else if (result == 2) {
 			mav.setViewName("client/member/parentJoin"); // 실패시
 			mav.addObject("resultCode", result);
-		} else {
-			mav.setViewName("home"); // 그밖
-			mav.addObject("resultCode", result);
-		}
+		} 
 
 		return mav;
 
 	}
-
-	/* 회원 수정 form */
-	/*
-	 * @RequestMapping(value = "/modifyparentinfo", method = RequestMethod.GET)
-	 * public String parentModify(Model model) {
-	 * 
-	 * logger.info("modifyparent get 방식 폼 호출");
-	 * 
-	 * return "client/member/modifyParentInfo";
-	 * 
-	 * }
-	 */
 
 }

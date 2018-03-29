@@ -129,11 +129,7 @@ public class ParentJoinServiceImpl implements ParentJoinService {
 
 		int securityCode = 2;
 
-		System.out.println(pvo.getParent_smsagree());
-		System.out.println(pvo.getParent_emailagree());
-		System.out.println(pvo.getParent_kakaoagree());
-
-		// checkbox value null - N
+		// checkbox value null - N 으로 데이터 변환
 		if (pvo.getParent_smsagree() == null) {
 			pvo.setParent_smsagree("N");
 		}
@@ -149,15 +145,17 @@ public class ParentJoinServiceImpl implements ParentJoinService {
 
 			security.setUserId(pvo.getUserId());
 
-			security.setSalt(Util.getRandomString());
+			security.setSalt(Util.getRandomString()); // 난수발생
 
-			securityCode = parentJoinDao.securityInsert(security);
+			securityCode = parentJoinDao.securityInsert(security); // 아이디와 난수 입력
 
 			if (securityCode == 1) {
+				// 가입처리 성공
 				pvo.setUserPw(new String(OpenCrypt.getSHA256(pvo.getUserPw(), security.getSalt())));
 				parentJoinDao.parentInsert(pvo);
 				return 1;
 			} else {
+				// 가입처리 실패
 				return 2;
 			}
 
