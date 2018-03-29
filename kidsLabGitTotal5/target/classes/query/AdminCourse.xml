@@ -40,6 +40,9 @@
 				<if test="course_status=='cancel'">
 					and course_status like '폐강'
 				</if>
+				<if test="course_status=='end'">
+					and course_status like '강의종료'
+				</if>
 			</if>
 			<if test="search=='all'">
 				<![CDATA[1=1]]>
@@ -60,6 +63,9 @@
 				</if>
 				<if test="course_status=='cancel'">
 					and course_status like '폐강'
+				</if>
+				<if test="course_status=='end'">
+					and course_status like '강의종료'
 				</if>
 			</if>
 		</where>
@@ -127,7 +133,7 @@
 		rnum
 		from(
 		<include refid="courseCommon"></include>
-		order by course_no asc
+		order by course_status desc
 		) list
 		)
 		<where>
@@ -203,6 +209,9 @@
 		</if>
 		<if test="course_status=='cancel'">
 			'폐강'
+		</if>
+		<if test="course_status=='end'">
+			'강의종료'
 		</if>
 		, course_startdate = #{course_startdate},
 		course_enddate =

@@ -49,6 +49,12 @@
 				"selected" : "selected"
 			});
 		} else if (course_status == "진행중") {
+			$("#course_name").attr("readonly", true);
+			$("#course_subject").attr("readonly", true);
+			$("#course_pay").attr("readonly", true);
+			$("#course_summary").attr("readonly", true);
+			$("#course_startdate").attr("disabled", true);
+			$("#course_enddate").attr("disabled", true);
 			$("#progressing").attr({
 				"selected" : "selected"
 			});
@@ -231,6 +237,16 @@
 								<input type="hidden" id="hour" name="hour" value="${hour }">
 							</div>
 						</c:when>
+						<c:when test="${updateData.course_status == '진행중' }">
+							<div class="col-sm-3">
+								<select id="course_day" name="course_day">
+									<option value="${day}">${day}</option>
+								</select> <select id="course_hour" name="course_hour">
+									<option value="${hour }">${hour }</option>
+								</select> <input type="hidden" id="day" name="day" value="${day }">
+								<input type="hidden" id="hour" name="hour" value="${hour }">
+							</div>
+						</c:when>
 						<c:otherwise>
 							<div class="col-sm-3">
 								<select id="course_day" name="course_day" onchange="chgTime()">
@@ -256,6 +272,14 @@
 					<label for="course_room" class="col-sm-2 control-label">강의실</label>
 					<c:choose>
 						<c:when test="${updateData.course_status == '모집중' }">
+							<div class="col-sm-3">
+								<select id="course_room" name="course_room">
+									<option value="${updateData.course_room }">${updateData.course_room }
+										강의실</option>
+								</select>
+							</div>
+						</c:when>
+						<c:when test="${updateData.course_status == '진행중' }">
 							<div class="col-sm-3">
 								<select id="course_room" name="course_room">
 									<option value="${updateData.course_room }">${updateData.course_room }

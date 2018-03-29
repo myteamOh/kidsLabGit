@@ -178,6 +178,7 @@
 									<option value="recruiting">모집중</option>
 									<option value="progressing">진행중</option>
 									<option value="cancel">폐강</option>
+									<option value="end">강의종료</option>
 							</select></td>
 							<td id="btd2">한페이지에 <select id="pageSize" name="pageSize">
 									<option value="1">1줄</option>
@@ -258,6 +259,10 @@
 												</td>
 											</c:when>
 											<c:when test="${course.course_status == '모집중' }">
+												<td>${course.course_status }<br> <input
+													type="button" class="registBtn" value="수정">
+											</c:when>
+											<c:when test="${course.course_status == '진행중' }">
 												<td>${course.course_status }<br> <input
 													type="button" class="registBtn" value="수정">
 											</c:when>

@@ -44,7 +44,7 @@ $(function() {
 	/* 상세보기 페이지에서 수강신청버튼 클릭시 이벤트 */
 	$(".applyBtn").click(function() {
 
-		if ($("#limitCount").val() == 0) {
+		if ($("#limitCount").val() <= 0) {
 			alert("정원이 초과되어 신청할 수 없습니다.");
 			return;
 		} else if($("#idCheck").val() == ""){
