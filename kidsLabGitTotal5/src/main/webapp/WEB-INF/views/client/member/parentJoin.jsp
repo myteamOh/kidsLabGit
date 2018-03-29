@@ -58,7 +58,7 @@
 						onkeyup="spaceDelete(this);" onchange="spaceDelete(this);">
 						<!-- <input type="button"
 						id="idOverlapCheck" value="아이디 중복확인"> --> <br> <label
-						class="check">id</label></td>
+						class="check"></label></td>
 				</tr>
 
 				<tr>
@@ -68,7 +68,7 @@
 						onchange="spaceDelete(this);"> <input type="button"
 						id="CertifiBtn" value="인증" disabled="disabled"> <input
 						type="button" id="CertifiNumBtn" value="인증번호 받기"> <br>
-						<label class="check">confirmNum</label></td>
+						<label class="check"></label></td>
 				</tr>
 
 				<tr>
@@ -77,7 +77,7 @@
 					<td><input type="password" id="userPw" name="userPw"
 						maxlength="13" required="required" placeholder="P.W"
 						onkeyup="spaceDelete(this);" onchange="spaceDelete(this);">
-						<label class="check">pw</label> <br> <label>* 비밀번호는
+						<label class="check"></label> <br> <label>* 비밀번호는
 							문자, 숫자, 특수문자를 사용하여 <br> 8 ~ 13자리로 만들어 주세요.
 					</label></td>
 				</tr>
@@ -91,7 +91,7 @@
 					<td><label class="necessary">*</label> <label>비밀번호 확인</label></td>
 					<td><input type="password" id="parentPwCheck"
 						required="required" maxlength="13" placeholder="P.W Check">
-						<label class="check">pwcheck</label></td>
+						<label class="check"></label></td>
 				</tr>
 
 				<tr>

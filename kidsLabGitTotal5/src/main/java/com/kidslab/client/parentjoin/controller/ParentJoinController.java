@@ -1,9 +1,15 @@
 package com.kidslab.client.parentjoin.controller;
 
+import java.util.Random;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -25,6 +31,9 @@ public class ParentJoinController {
 	@Autowired
 	private ParentJoinService parentJoinService;
 
+	@Autowired
+	private JavaMailSender javaMailSender;
+	
 	/*
 	 * 약관동의 폼
 	 */
@@ -56,9 +65,42 @@ public class ParentJoinController {
 	@ResponseBody
 	@RequestMapping(value = "/sendMail", method = RequestMethod.POST)
 	public String sendMail(HttpSession session, @RequestParam("userId") String email) {
-		logger.info("인증번호 발송!");
-		String ranNum;
-		ranNum = parentJoinService.sendMail(session, "kidslab", email);
+		
+		/* 6자리 랜덤 번호 발생 */
+		Random num = new Random();
+		StringBuffer buf = new StringBuffer();
+		for (int i = 0; i < 6; i++) {
+			buf.append((num.nextInt(10)));
+		}
+		
+		String ranNum = buf + "";
+
+		// 입력했던 아이디로 받은 인증번호인지 체크하기위해 번호와 입력한 이메일을 모두 session으로 남김.
+		session.setAttribute("parentId", email);
+		session.setAttribute("ranNum", ranNum);
+
+		/* 메일에 보낼 메세지 */
+		String subject = "회원가입 인증 코드 발급 안내 입니다.";
+		StringBuilder content = new StringBuilder();
+		content.append("귀하의 인증 코드는 " + ranNum + " 입니다.");
+
+		MimeMessage message = javaMailSender.createMimeMessage();
+
+		try {
+			MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+			helper.setSubject(subject); // 메일 제목
+			helper.setText(content.toString()); // 보낼 내용
+			helper.setFrom("kidslab"); // 보내는사람
+			helper.setTo(email); // 받는사람
+
+			// 메일보내기
+			javaMailSender.send(message);
+
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+		
+		// 난수를 반환
 		return ranNum;
 	}
 
@@ -85,33 +127,16 @@ public class ParentJoinController {
 
 		result = parentJoinService.parentInsert(pvo);
 
-		System.out.println(result);
-
 		if (result == 1) {
 			mav.setViewName("client/member/login"); // 회원가입 성공시 로그인 페이지로
 			mav.addObject("resultCode", result);
 		} else if (result == 2) {
 			mav.setViewName("client/member/parentJoin"); // 실패시
 			mav.addObject("resultCode", result);
-		} else {
-			mav.setViewName("home"); // 그밖
-			mav.addObject("resultCode", result);
-		}
+		} 
 
 		return mav;
 
 	}
-
-	/* 회원 수정 form */
-	/*
-	 * @RequestMapping(value = "/modifyparentinfo", method = RequestMethod.GET)
-	 * public String parentModify(Model model) {
-	 * 
-	 * logger.info("modifyparent get 방식 폼 호출");
-	 * 
-	 * return "client/member/modifyParentInfo";
-	 * 
-	 * }
-	 */
 
 }

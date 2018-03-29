@@ -10,8 +10,6 @@ public interface ParentJoinService {
 
 	public int parentIdConfirm(String userId);
 
-	public String sendMail(HttpSession session, String from, String email);
-
 	public int numberCheck(HttpSession session, String email, String certifNum);
 
 	public int parentInsert(ParentVO pvo);
