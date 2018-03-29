@@ -359,7 +359,7 @@ where course_no = 13;
  
 select *
 from COURSE
-where course_no = 1;
+where course_no = 3;
 
 update course set course_status = '모집중' where course_no=1;
 
