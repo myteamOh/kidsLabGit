@@ -242,7 +242,7 @@
 										<td>${course.course_subject}</td>
 										<td>${course.course_level}</td>
 										<td>${course.course_summary}...</td>
-										<td>${course.course_plan}</td>
+										<td>${course.course_plan}...</td>
 										<td>${course.course_registerdate}</td>
 										<c:choose>
 											<c:when test="${course.course_status == '등록대기'}">
