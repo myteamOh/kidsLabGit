@@ -84,7 +84,7 @@ public class FindUserController {
 		System.out.println(pvo.getUserId());
 		System.out.println(pvo.getParent_name());
 
-		int result = 0;
+		int result = 2;
 
 		ParentVO findPwCheck = findUserService.findParentPw(pvo.getUserId(), pvo.getParent_name());
 

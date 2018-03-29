@@ -67,7 +67,7 @@ $(function() {
 						location.href = "/login/login";
 						return;
 					} else if (result == 2) {
-						alert("데이터가 없거나 실패");
+						alert("입력하신 아이디, 이름과 일치하는 정보가 없습니다.");
 						return;
 					}
 
