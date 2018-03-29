@@ -178,8 +178,8 @@ $(function() {
 
 		}
 	});
-	$("#joinCancle").click(function() {
-		location.href = "";
+	$("#joinCancel").click(function() {
+		location.href = "/admin/member/teacherList";
 	});
 
 	$("#joinReset").click(function() {
