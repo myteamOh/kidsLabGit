@@ -53,6 +53,8 @@ public class CoursePageController {
 		cdvo.setCoursedata_status("공지사항");
 		List<CourseDataVO> courseDataNoticeList = coursePageService.homeCourseDataList(cdvo);
 
+		cdvodata.setCourse_no(cvo.getCourse_no());
+		
 		cdvodata.setCoursedata_status("자료실");
 		List<CourseDataVO> courseDataDataList = coursePageService.homeCourseDataList(cdvodata);
 		if (session.getAttribute("cNum") == null) {
