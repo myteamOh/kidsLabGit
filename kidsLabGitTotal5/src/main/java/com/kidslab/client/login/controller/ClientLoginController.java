@@ -47,7 +47,7 @@ public class ClientLoginController {
 
 			// 학부모일때 로그인
 			ParentVO parentLogin = loginService.loginSelect(pvo.getUserId(), pvo.getUserPw());
-
+			
 			// 입력한 정보가 존재하고 계정상태가 가입중일때 로그인.
 			if (parentLogin != null && parentLogin.getParent_status().equals("가입")) {
 

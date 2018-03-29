@@ -340,44 +340,24 @@ drop sequence board_notice_seq;
 drop sequence login_history_seq;
 
 select *
-from teacher;
+from parent;
+	
+select *
+from student
+where student_no = 62;
 
 select *
-from security;
+from teacher
+where teacher_name = '이하나';
 
-select
-		sum(requestcourse_refundcharge) as
-		requestcourse_refundcharge,
-		to_char(add_months(sysdate, -0),
-		'yy-mm') as
-		requestcourse_refundcomplete
-		from
-		requestcourse, dual
-		where
-		to_char(requestcourse_refundcomplete,
-		'yy-mm') =
-		to_char(add_months(sysdate, -0), 'yy-mm') and REQUESTCOURSE_paymentstatus = '환불완료'
-		
-	select
-		sum(requestcourse_payamount) as
-		requestcourse_payamount,
-		to_char(add_months(sysdate, -0),
-		'yy-mm')
-		as
-		requestcourse_paycompletedate
-		from
-		requestcourse, dual
-		where
-		to_char(requestcourse_paycompletedate,
-		'yy-mm') =
-		to_char(add_months(sysdate, -0), 'yy-mm') and (REQUESTCOURSE_paymentstatus = '결제완료' 
-		or requestcourse_paymentstatus = '환불완료')
-		
-	update requestcourse
-	set REQUESTCOURSE_paymentstatus = '환불완료'
-	where requestcourse_no=2;
-		
-select substr(course_summary, 1, 10) as course_summary
-from course;
-	
-		
+select *
+from requestcourse
+where course_no = 13;
+
+select *
+from COURSE
+where course_no = 1;
+
+update course set course_status = '모집중' where course_no=1;
+
+

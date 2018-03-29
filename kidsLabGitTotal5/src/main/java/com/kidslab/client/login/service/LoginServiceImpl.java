@@ -39,9 +39,13 @@ public class LoginServiceImpl implements LoginService {
 			pvo.setUserPw(userPw);
 
 			vo = loginDao.loginSelect(pvo);
-
-			selectParent = pDao.parentSelect(vo.getUserId());
-
+			if (vo != null) {
+				selectParent = pDao.parentSelect(vo.getUserId());
+			} else {
+				return vo;
+			}
+		} else {
+			return vo;
 		}
 
 		return selectParent;
