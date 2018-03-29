@@ -42,10 +42,10 @@ public class ClientLoginController {
 
 		ModelAndView mav = new ModelAndView();
 
-		/* 입력한 아이디가 이메일인지 아닌지를 @로 구분. 학부모 - 이메일, 학생 - 영문숫자조합*/
-		// 학부모일때 로그인
+		/* 입력한 아이디가 이메일인지 아닌지를 @로 구분. 학부모 - 이메일, 학생 - 영문숫자조합 */
 		if (pvo.getUserId().contains("@")) {
 
+			// 학부모일때 로그인
 			ParentVO parentLogin = loginService.loginSelect(pvo.getUserId(), pvo.getUserPw());
 
 			// 입력한 정보가 존재하고 계정상태가 가입중일때 로그인.
@@ -70,7 +70,7 @@ public class ClientLoginController {
 			}
 		}
 
-		// 
+		//
 		mav.setViewName("client/member/login");
 		mav.addObject("msg", "fail");
 		return mav;
