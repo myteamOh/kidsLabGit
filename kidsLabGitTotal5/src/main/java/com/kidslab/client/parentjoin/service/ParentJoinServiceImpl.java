@@ -51,20 +51,20 @@ public class ParentJoinServiceImpl implements ParentJoinService {
 		return result;
 	}
 
-	/* 메일 발송 */
+	/* 메일 발송 
 	@Override
 	public String sendMail(HttpSession session, String from, String email) {
 
-		/* 6자리 랜덤 번호 발생 */
+		 6자리 랜덤 번호 발생 
 		Random num = new Random();
 		StringBuffer buf = new StringBuffer();
 		for (int i = 0; i < 6; i++) {
 			buf.append((num.nextInt(10)));
 		}
 		String ranNum = buf + "";
-		/*
+		
 		 * int num = new Random().nextInt(1000000); String ranNum = String.valueOf(num);
-		 */
+		 
 
 		System.out.println(email);
 		System.out.println(ranNum);
@@ -75,7 +75,7 @@ public class ParentJoinServiceImpl implements ParentJoinService {
 		System.out.println(session.getAttribute("parentId"));
 		System.out.println(session.getAttribute("ranNum"));
 
-		/* 메일에 보낼 메세지 */
+		 메일에 보낼 메세지 
 		String subject = "회원가입 인증 코드 발급 안내 입니다.";
 		StringBuilder content = new StringBuilder();
 		content.append("귀하의 인증 코드는 " + ranNum + " 입니다.");
@@ -100,7 +100,7 @@ public class ParentJoinServiceImpl implements ParentJoinService {
 
 		return null;
 
-	}
+	}*/
 
 	/* 인증번호 확인 */
 	@Override
