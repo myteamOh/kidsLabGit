@@ -309,9 +309,7 @@
 		to_char(requestcourse_paycompletedate,
 		'yy-mm') =
 		to_char(add_months(sysdate, -#{num}), 'yy-mm') and
-		(REQUESTCOURSE_paymentstatus = '결제완료'
-		or requestcourse_paymentstatus =
-		'환불완료')
+		requestcourse_paymentstatus != '결제대기'
 	</select>
 
 	<select id="refundStatsList" parameterType="requestCourse"
