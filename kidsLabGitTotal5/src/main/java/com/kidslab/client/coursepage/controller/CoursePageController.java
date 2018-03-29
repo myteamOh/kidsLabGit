@@ -44,6 +44,7 @@ public class CoursePageController {
 
 		ModelAndView mav = new ModelAndView();
 		CourseDataVO cdvo = new CourseDataVO();
+		CourseDataVO cdvodata = new CourseDataVO();
 
 		CourseVO vo = coursePageService.selectCourse(cvo);
 
@@ -52,8 +53,8 @@ public class CoursePageController {
 		cdvo.setCoursedata_status("공지사항");
 		List<CourseDataVO> courseDataNoticeList = coursePageService.homeCourseDataList(cdvo);
 
-		cdvo.setCoursedata_status("자료실");
-		List<CourseDataVO> courseDataDataList = coursePageService.homeCourseDataList(cdvo);
+		cdvodata.setCoursedata_status("자료실");
+		List<CourseDataVO> courseDataDataList = coursePageService.homeCourseDataList(cdvodata);
 		if (session.getAttribute("cNum") == null) {
 			session.setAttribute("cNum", cvo.getCourse_no());
 		}
