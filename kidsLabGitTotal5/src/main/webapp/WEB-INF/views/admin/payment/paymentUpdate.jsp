@@ -67,7 +67,7 @@
 <body>
 	<div class="contentContainer">
 		<div class="contentTit">
-			<h3>강의 등록 및 수정</h3>
+			<h3>결제</h3>
 		</div>
 		<div class="well">
 			<form id="updateForm" class="form-horizontal" name="updateForm"

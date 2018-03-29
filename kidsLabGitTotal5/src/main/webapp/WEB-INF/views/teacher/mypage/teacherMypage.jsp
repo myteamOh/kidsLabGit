@@ -142,7 +142,8 @@ input[type=button] {
 								<td colspan="2">강의가 없습니다.</td>
 							</tr>
 							<tr>
-								<td colspan="2" align="center"><a href="#">강의 등록하러 가기</a></td>
+								<td colspan="2" align="center"><a
+									href="/teacher/course/registForm">강의 등록하러 가기</a></td>
 							</tr>
 						</c:otherwise>
 					</c:choose>

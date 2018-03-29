@@ -52,7 +52,7 @@ $(function() {
 				}
 			});
 
-	// 학부모 수정 완료 버튼 클릭시 이벤트
+	// 강사 수정 완료 버튼 클릭시 이벤트
 	$("#teacherModifyBtn").click(
 		function() {
 

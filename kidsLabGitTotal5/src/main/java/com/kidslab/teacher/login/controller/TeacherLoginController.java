@@ -116,6 +116,6 @@ public class TeacherLoginController {
 	public String logout(HttpSession session, HttpServletRequest request) {
 		session.invalidate();
 		session = request.getSession(true);
-		return "redirect:/";
+		return "redirect:/teacher/login";
 	}
 }

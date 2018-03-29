@@ -78,10 +78,7 @@ public class FindTeacherController {
 
 			String ranNum = buf + "";
 
-			logger.info("임시 비밀번호 : " + ranNum);
-
 			result = findTeacherService.insertTeacherTemporaryPw(tvo, ranNum);
-			logger.info("result : " + result);
 
 			/* 이메일 전송 */
 			String subject = "임시비밀번호 발급 안내 입니다.";

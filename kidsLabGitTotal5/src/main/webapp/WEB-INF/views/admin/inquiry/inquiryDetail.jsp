@@ -81,7 +81,7 @@
 <body>
 	<div class="contentContainer">
 		<div class="contentTit">
-			<h3>게시판 상세보기</h3>
+			<h3>1:1 문의</h3>
 		</div>
 		<form name="i_data" id="i_data" method="post">
 			<input type="hidden" name="inquiry_no" value="${detail.inquiry_no}">
