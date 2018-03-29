@@ -112,6 +112,7 @@
 		course_level,
 		course_time,
 		course_totalperson, course_room,
+		substr(course_plan,1,14) as
 		course_plan, course_pay,
 		to_char(course_registerdate, 'yyyy-mm-dd') as
 		course_registerdate,
