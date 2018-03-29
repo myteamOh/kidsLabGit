@@ -249,6 +249,7 @@
 													class="registBtn" value="수정"> <input type="button"
 													id="registdeleteBtn" name="deleteBtn" class="deleteBtn"
 													value="삭제">
+
 												</td>
 											</c:when>
 											<c:otherwise>
@@ -261,6 +262,7 @@
 							<c:otherwise>
 								<tr>
 									<td colspan="9" class="tac">등록된 게시 물이 존재하지 않습니다.</td>
+
 								</tr>
 							</c:otherwise>
 						</c:choose>

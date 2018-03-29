@@ -179,6 +179,7 @@ $(function() {
 		}
 	});
 	$("#joinCancel").click(function() {
+
 		location.href = "/admin/member/teacherList";
 	});
 
