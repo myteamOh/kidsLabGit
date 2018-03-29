@@ -158,6 +158,11 @@
 #course_pay {
 	text-align: right;
 }
+
+#course_summary {
+	height: 250px;
+	width: 630px;
+}
 </style>
 </head>
 <body>
@@ -342,9 +347,8 @@
 				<div class="form-group form-group-sm">
 					<label for="course_summary" class="col-sm-2 control-label">강의
 						개요</label>
-					<div class="col-sm-3">
-						<textarea id="course_summary" name="course_summary"
-							class="form-control" rows="15" cols="50">${updateData.course_summary }</textarea>
+					<div class="col-sm-3 textarea">
+						<textarea id="course_summary" name="course_summary">${updateData.course_summary }</textarea>
 					</div>
 					<div class="col-sm-5">
 						<p class="form-control-static error"></p>

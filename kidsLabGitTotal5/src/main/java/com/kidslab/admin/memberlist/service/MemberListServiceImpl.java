@@ -88,11 +88,21 @@ public class MemberListServiceImpl implements MemberListService {
 	}
 
 	@Override
-	public List<RequestCourseVO> paymentStatsList() {
+	public RequestCourseVO paymentStatsList(RequestCourseVO rvo) {
 		// TODO Auto-generated method stub
-		List<RequestCourseVO> paymentList = null;
-		paymentList = memberListDao.paymentStatsList();
-		return paymentList;
+		RequestCourseVO payment = null;
+		payment = memberListDao.paymentStatsList(rvo);
+		logger.info(payment.getRequestcourse_payamount());
+		return payment;
+	}
+
+	@Override
+	public RequestCourseVO refundStatsList(RequestCourseVO rvo) {
+		// TODO Auto-generated method stub
+		RequestCourseVO refund = null;
+		refund = memberListDao.refundStatsList(rvo);
+		logger.info(refund.getRequestcourse_refundcharge());
+		return refund;
 	}
 
 }

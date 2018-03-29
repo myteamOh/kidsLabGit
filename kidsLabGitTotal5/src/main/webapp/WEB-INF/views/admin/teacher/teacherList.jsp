@@ -25,7 +25,7 @@
 <link rel="stylesheet" type="text/css"
 	href="/resources/include/css/common.css">
 <link rel="stylesheet" type="text/css"
-	href="/resources/include/css/board.css" />
+	href="/resources/include/css/adminPayment.css" />
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script type="text/javascript"
@@ -144,7 +144,7 @@
 </script>
 </head>
 <body>
-	<div class="contentContainer">
+	<div class="contentContainer container-fluid" id="payment">
 		<div class="contentTit">
 			<h3>강사 리스트</h3>
 		</div>
@@ -155,15 +155,11 @@
 				type="hidden" name="pageSize" value="${teacherData.pageSize }">
 		</form>
 		<%-- =============== 검색기능 시작 =============== --%>
-		<div id="boardSearch">
+		<div id="paymentSearch">
 			<form id="t_search" name="t_search">
 				<input type="hidden" id="page" name="page"
 					value="${teacherData.page }">
 				<table summary="검색">
-					<colgroup>
-						<col width="70%">
-						<col width="30%">
-					</colgroup>
 					<tr>
 						<td id="btd1"><label>검색조건</label> <select id="search"
 							name="search" onchange="jsChselect(this.value)">
@@ -198,8 +194,9 @@
 		<%-- =============== 검색기능 종료 =============== --%>
 
 		<%-- =============== 리스트 시작 ================= --%>
-		<div id="boardList">
-			<table summary="강사 리스트">
+		<div id="paymentList" class="container-fluid">
+			<table summary="강사 리스트"
+				class="table-striped table-hover table-bordered mg-top-sm table">
 				<thead>
 					<tr>
 						<th class="order" data-value="teacher_no">회원번호</th>
@@ -238,7 +235,7 @@
 		<%-- =============== 리스트 종료 ===============--%>
 
 		<%-- ============ 페이지 네비게이션 시작 =========== --%>
-		<div id="boardPage">
+		<div id="paymentPage">
 			<tag:paging page="${param.page }" total="${total }"
 				list_size="${teacherData.pageSize }">
 			</tag:paging>

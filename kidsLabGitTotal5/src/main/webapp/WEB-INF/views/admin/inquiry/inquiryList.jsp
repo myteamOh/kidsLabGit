@@ -28,6 +28,10 @@
 </style>
 <link rel="stylesheet" type="text/css"
 	href="/resources/include/css/common.css">
+<link rel="stylesheet" type="text/css"
+	href="/resources/include/css/adminPayment.css" />
+<link rel="stylesheet" type="text/css"
+	href="/resources/include/css/board.css" />
 <script type="text/javascript"
 	src="/resources/include/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="/resources/include/js/common.js"></script>
@@ -51,7 +55,7 @@
 
 </head>
 <body>
-	<div class="contentContainer">
+	<div class="contentContainer container-fluid" id="payment">
 
 		<div class="contentTit">
 			<h3>1:1 문의글 리스트</h3>
@@ -66,20 +70,17 @@
 			<label>※1:1문의는 회원만 이용하실 수 있습니다.</label>
 		</div>
 		<%-- ================= 리스트 시작 =============== --%>
-		<div id="inquiryList">
-			<table summary="게시판 리스트">
+		<div id="paymentList" class="container-fluid">
+			<table summary="게시판 리스트"
+				class="table-striped table-hover table-bordered mg-top-sm table">
 
 
 				<colgroup>
-					<col width="10%" />
-					<col width="72%" />
-					<col width="15%" />
-					<col width="3" />
 				</colgroup>
 				<thead>
 					<tr>
 						<th class="order">번호</th>
-						<th>제목</th>
+						<th>글제목</th>
 						<th data-value="inquiry_registerdate" class="order">등록일</th>
 					</tr>
 				</thead>

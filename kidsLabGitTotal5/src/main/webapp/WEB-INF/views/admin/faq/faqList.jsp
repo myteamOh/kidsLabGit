@@ -27,6 +27,8 @@
 <link rel="stylesheet" type="text/css"
 	href="/resources/include/css/common.css">
 <link rel="stylesheet" type="text/css"
+	href="/resources/include/css/adminPayment.css" />
+<link rel="stylesheet" type="text/css"
 	href="/resources/include/css/board.css" />
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -109,7 +111,7 @@
 </script>
 </head>
 <body>
-	<div class="contentContainer">
+	<div class="contentContainer container-fluid" id="payment">
 		<div class="contentTit">
 			<h3>게시판 리스트</h3>
 		</div>
@@ -120,7 +122,7 @@
 				type="hidden" name="pageSize" value="${faqData.pageSize }">
 		</form>
 		<%-- =============== 검색기능 시작 =============== --%>
-		<div id="boardSearch">
+		<div id="paymentSearch">
 			<form id="f_search" name="f_search">
 				<input type="hidden" id="page" name="page" value="${faqData.page }">
 				<table summary="검색">
@@ -154,8 +156,9 @@
 		<%-- =============== 검색기능 종료 =============== --%>
 
 		<%-- =============== 리스트 시작 ================= --%>
-		<div id="boardList">
-			<table summary="공지사항 리스트">
+		<div id="paymentList" class="container-fluid">
+			<table summary="FAQ 리스트"
+				class="table-striped table-hover table-bordered mg-top-sm table">
 				<colgroup>
 					<col width="10%" />
 					<col width="62%" />
@@ -197,7 +200,7 @@
 		</div>
 		<%-- ============ 글쓰기 버튼 출력 종료 =========== --%>
 		<%-- ============ 페이지 네비게이션 시작 =========== --%>
-		<div id="boardPage">
+		<div id="paymentPage">
 			<tag:paging page="${param.page }" total="${total }"
 				list_size="${faqData.pageSize }">
 			</tag:paging>

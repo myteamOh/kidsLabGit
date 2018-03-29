@@ -18,6 +18,7 @@ import com.kidslab.admin.login.vo.AdminLoginVO;
 import com.kidslab.client.inquiry.controller.InquiryController;
 import com.kidslab.client.inquiry.service.InquiryService;
 import com.kidslab.client.inquiry.vo.InquiryVO;
+import com.kidslab.common.page.Paging;
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -33,11 +34,16 @@ public class AdminInquiryController {
 	@RequestMapping(value = "/inquiry/inquiryList")
 	public ModelAndView inquiryList(@ModelAttribute InquiryVO inquiryVO, Model model, HttpSession session)
 			throws Exception {
-		
+
 		logger.info("inquiryList 호출 성공");
 
 		List<InquiryVO> inquiryList = inquiryService.adminInquiryList(inquiryVO);
 
+		// 페이지 세팅
+		Paging.setPage(inquiryVO);
+		logger.info("start : " + inquiryVO.getStart_row());
+		logger.info("end : " + inquiryVO.getEnd_row());
+		
 		// ModelAndView - 모델과 뷰
 		ModelAndView mav = new ModelAndView();
 		AdminLoginVO vo = new AdminLoginVO();

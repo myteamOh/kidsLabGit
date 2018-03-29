@@ -64,14 +64,13 @@ public class TeacherController {
 		logger.info("file name : " + tvo.getFile().getOriginalFilename());
 		int result = 0;
 
-		if (tvo.getFile() != null) {
+		if (!tvo.getFile().isEmpty()) {
 			String fileName = FileUploadUtil.fileUpload(tvo.getFile(), request, "teacher");
 			tvo.setTeacher_photo(fileName);
 
 			String thumbName = FileUploadUtil.makeThumbnail(fileName, request);
 			tvo.setTeacher_thumb(thumbName);
 		}
-
 		result = teacherService.teacherInsert(tvo);
 
 		switch (result) {

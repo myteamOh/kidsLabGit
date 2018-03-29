@@ -40,12 +40,19 @@
 			teacher_seq.nextval from dual
 		</selectKey>
 		insert into teacher(teacher_no, teacher_id, teacher_password,
-		teacher_name, teacher_phone, teacher_photo, teacher_thumb, admin_no)
+		teacher_name, teacher_phone,
+		<if test="teacher_photo != null and teacher_photo != ''">
+			teacher_photo, teacher_thumb,
+		</if>
+		admin_no)
 		values(#{teacher_no}, #{teacher_id}, #{teacher_password},
 		#{teacher_name},
 		#{teacher_phone},
-		#{teacher_photo},
-		#{teacher_thumb}, 1)
+		<if test="teacher_photo != null and teacher_photo != ''">
+			#{teacher_photo},
+			#{teacher_thumb},
+		</if>
+		1)
 	</insert>
 
 	<update id="teacherUpdate" parameterType="teacher">

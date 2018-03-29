@@ -30,6 +30,8 @@ public class RequestCourseVO extends CourseVO {
 	// 추가
 	private int margin; // 차액
 
+	private int num = 0;
+
 	public RequestCourseVO() {
 		super();
 	}
@@ -39,7 +41,7 @@ public class RequestCourseVO extends CourseVO {
 			String requestcourse_refundcomplete, String requestcourse_paymentstatus, String requestcourse_accountholder,
 			String requestcourse_accountnumber, int requestcourse_refundcharge, String requestcourse_refundbank,
 			int parent_no, int student_no, int course_no, String student_name, String bank_and_account, String pass_day,
-			int margin) {
+			int margin, int num) {
 		super();
 		this.requestcourse_no = requestcourse_no;
 		this.requestcourse_paymethod = requestcourse_paymethod;
@@ -60,6 +62,7 @@ public class RequestCourseVO extends CourseVO {
 		this.bank_and_account = bank_and_account;
 		this.pass_day = pass_day;
 		this.margin = margin;
+		this.num = num;
 	}
 
 	public int getRequestcourse_no() {
@@ -214,17 +217,27 @@ public class RequestCourseVO extends CourseVO {
 		this.margin = margin;
 	}
 
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
+	}
+
 	@Override
 	public String toString() {
 		return "RequestCourseVO [requestcourse_no=" + requestcourse_no + ", requestcourse_paymethod="
 				+ requestcourse_paymethod + ", requestcourse_payamount=" + requestcourse_payamount
 				+ ", requestcourse_paymentdate=" + requestcourse_paymentdate + ", requestcourse_paycompletedate="
-				+ requestcourse_paycompletedate + ", requestcourse_paymentstatus=" + requestcourse_paymentstatus
-				+ ", requestcourse_accountholder=" + requestcourse_accountholder + ", requestcourse_accountnumber="
-				+ requestcourse_accountnumber + ", requestcourse_refundcharge=" + requestcourse_refundcharge
-				+ ", requestcourse_refundbank=" + requestcourse_refundbank + ", parent_no=" + parent_no
-				+ ", student_no=" + student_no + ", course_no=" + course_no + ", student_name=" + student_name
-				+ ", bank_and_account=" + bank_and_account + "]";
+				+ requestcourse_paycompletedate + ", requestcourse_refunddate=" + requestcourse_refunddate
+				+ ", requestcourse_refundcomplete=" + requestcourse_refundcomplete + ", requestcourse_paymentstatus="
+				+ requestcourse_paymentstatus + ", requestcourse_accountholder=" + requestcourse_accountholder
+				+ ", requestcourse_accountnumber=" + requestcourse_accountnumber + ", requestcourse_refundcharge="
+				+ requestcourse_refundcharge + ", requestcourse_refundbank=" + requestcourse_refundbank + ", parent_no="
+				+ parent_no + ", student_no=" + student_no + ", course_no=" + course_no + ", student_name="
+				+ student_name + ", bank_and_account=" + bank_and_account + ", pass_day=" + pass_day + ", margin="
+				+ margin + ", num=" + num + "]";
 	}
 
 }

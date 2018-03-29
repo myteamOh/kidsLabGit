@@ -29,7 +29,7 @@
 <link rel="stylesheet" type="text/css"
 	href="/resources/include/css/common.css">
 <link rel="stylesheet" type="text/css"
-	href="/resources/include/css/adminCourse.css" />
+	href="/resources/include/css/adminPayment.css" />
 <script type="text/javascript"
 	src="/resources/include/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="/resources/include/js/common.js"></script>
@@ -143,7 +143,7 @@
 </head>
 <body>
 
-	<div class="contentContainer container-fluid">
+	<div class="contentContainer container-fluid" id="payment">
 		<c:if test="${adminLogin.userId != null and adminLogin.userId != '' }">
 			<div class="contentTit">
 				<h3>강의 리스트</h3>
@@ -157,7 +157,7 @@
 			</form>
 			<%-- ==============검색 기능 시작 ====================== --%>
 
-			<div id="courseSearch">
+			<div id="paymentSearch">
 				<form id="c_search" name="c_search">
 					<input type="hidden" id="page" name="page"
 						value="${courseData.page }">
@@ -194,8 +194,9 @@
 
 			<%-- =============== 리스트 시작 ================= --%>
 
-			<div id="courseList" class="container-fluid">
-				<table summary="강의 리스트" class="table-striped table-hover">
+			<div id="paymentList" class="container-fluid">
+				<table summary="강의 리스트"
+					class="table-striped table-hover table-bordered mg-top-sm table">
 					<colgroup>
 						<%-- <col width="10%" />
 					<col width="62%" />
@@ -240,7 +241,7 @@
 										<td>${course.course_name}</td>
 										<td>${course.course_subject}</td>
 										<td>${course.course_level}</td>
-										<td>${course.course_summary}</td>
+										<td>${course.course_summary}...</td>
 										<td>${course.course_plan}</td>
 										<td>${course.course_registerdate}</td>
 										<c:choose>
@@ -285,16 +286,11 @@
 		</c:if>
 		<%-- =============== 페이지 네비게이션 시작 ============== --%>
 		<c:if test="${adminLogin.userId != null and adminLogin.userId != '' }">
-			<div id="coursePage">
+			<div id="paymentPage">
 				<tag:paging page="${param.page }" total="${total }"
 					list_size="${courseData.pageSize }"></tag:paging>
 			</div>
 		</c:if>
-		<div class="well">
-			<c:if test="${adminLogin.userId == null or adminLogin.userId == '' }">
-				로그인을 해주세요.
-		</c:if>
-		</div>
 		<!-- ================ 페이지 네비게이션 종료 ============== -->
 	</div>
 </body>

@@ -294,37 +294,40 @@
 		)
 	</select>
 
-	<select id="paymentStatsList" resultType="requestCourse">
+	<select id="paymentStatsList" parameterType="requestCourse"
+		resultType="requestCourse">
 		select
-		requestcourse_paycompletedate, requestcourse_payamount,
-		requestcourse_refundcharge,(requestcourse_payamount-requestcourse_refundcharge)
-		as margin ,rnum
-		from(
-		select list.*, rownum as rnum
-		from(
-		select
-		to_char(requestcourse_paycompletedate, 'yy-mm') as
-		requestcourse_paycompletedate,
 		sum(requestcourse_payamount) as
-		requestcourse_payamount, sum(requestcourse_refundcharge) as
-		requestcourse_refundcharge
-		from requestcourse
-		where
-		to_char(requestcourse_paycompletedate, 'yy-mm') <![CDATA[<=]]>
-		to_char(sysdate,
+		requestcourse_payamount,
+		to_char(add_months(sysdate, -#{num}),
 		'yy-mm')
-		and requestcourse_paymentstatus = '결제완료' or
-		to_char(requestcourse_refundcomplete, 'yy-mm') <![CDATA[<=]]>
-		to_char(sysdate,
-		'yy-mm') and requestcourse_paymentstatus = '환불완료'
-		group by
-		to_char(requestcourse_paycompletedate, 'yy-mm')
-		order by
-		requestcourse_paycompletedate desc
-		) list
-		)
-		where rnum between 1 and 6
-		order by requestcourse_paycompletedate asc
+		as
+		requestcourse_paycompletedate
+		from
+		requestcourse, dual
+		where
+		to_char(requestcourse_paycompletedate,
+		'yy-mm') =
+		to_char(add_months(sysdate, -#{num}), 'yy-mm') and
+		requestcourse_paymentstatus != '결제대기'
+	</select>
+
+	<select id="refundStatsList" parameterType="requestCourse"
+		resultType="requestCourse">
+		select
+		sum(requestcourse_refundcharge) as
+		requestcourse_refundcharge,
+		to_char(add_months(sysdate, -#{num}),
+		'yy-mm')
+		as
+		requestcourse_refundcomplete
+		from
+		requestcourse, dual
+		where
+		to_char(requestcourse_refundcomplete,
+		'yy-mm') =
+		to_char(add_months(sysdate, -#{num}), 'yy-mm') and
+		REQUESTCOURSE_paymentstatus = '환불완료'
 	</select>
 
 
