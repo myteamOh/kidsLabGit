@@ -29,7 +29,7 @@
 					<tr>
 						<td><label>이름</label></td>
 						<td><input type="text" readonly="readonly" name="parent_name"
-							value="${parent.parent_name}"></td>
+							value="${parent.userName}"></td>
 					</tr>
 
 					<tr>

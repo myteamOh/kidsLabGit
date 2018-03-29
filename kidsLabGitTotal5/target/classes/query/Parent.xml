@@ -5,8 +5,8 @@
 <mapper namespace="com.kidslab.client.parentjoin.dao.ParentJoinDao">
 
 	<select id="parentSelect" parameterType="String" resultType="parent">
-		SELECT parent_no, parent_id as userId, parent_password as userPw,
-		parent_name,
+		SELECT parent_no, parent_id as userId,
+		parent_name as userName,
 		parent_phone, parent_smsagree, parent_emailagree,
 		parent_kakaoagree,
 		parent_knowroute, parent_address, parent_termsagree,

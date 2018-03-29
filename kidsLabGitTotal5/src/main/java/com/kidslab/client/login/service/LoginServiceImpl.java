@@ -26,6 +26,7 @@ public class LoginServiceImpl implements LoginService {
 	public ParentVO loginSelect(String userId, String userPw) {
 
 		ParentVO vo = null;
+		ParentVO selectParent = new ParentVO();
 
 		UserSecurity parentSecurity = pDao.securitySelect(userId);
 
@@ -39,9 +40,11 @@ public class LoginServiceImpl implements LoginService {
 
 			vo = loginDao.loginSelect(pvo);
 
+			selectParent = pDao.parentSelect(vo.getUserId());
+
 		}
 
-		return vo;
+		return selectParent;
 	}
 
 	/* 학생 로그인 */
