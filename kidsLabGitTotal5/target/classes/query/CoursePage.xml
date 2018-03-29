@@ -69,11 +69,6 @@
 		SELECT *
 		FROM board_coursedata
 		WHERE course_no = #{course_no}
-		ORDER BY coursedata_registerdate DESC
-		)
-		list
-		)
-		WHERE rnum BETWEEN 1 and 5
 		<choose>
 			<when test="coursedata_status == '공지사항'">
 				and coursedata_status = '공지사항'
@@ -82,6 +77,11 @@
 				and coursedata_status = '자료실'
 			</when>
 		</choose>
+		ORDER BY coursedata_registerdate DESC
+		)
+		list
+		)
+		WHERE rnum BETWEEN 1 and 5
 	</select>
 
 	<select id="courseDataList" parameterType="courseData"

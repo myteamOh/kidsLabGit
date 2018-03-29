@@ -15,8 +15,6 @@
 	integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl"
 	crossorigin="anonymous"></script>
 
-
-
 <title><tiles:getAsString name="title"></tiles:getAsString></title>
 <style type="text/css">
 #cl-dashboard {
@@ -36,7 +34,7 @@
 	background-color: red;
 }
 
-.recent_notice table, th, tr, td {
+table, th, tr, td {
 	border: 1px solid #bcbcbc;
 	height: 30px;
 	text-align: center;
@@ -44,6 +42,31 @@
 
 .recent_notice table {
 	width: 700px;
+}
+
+.mainTable .table {
+	position: relative;
+	left: 30px;
+	top: -30px;
+	width: 500px;
+}
+
+.mainTable h1 {
+	position: relative;
+	top: -30px;
+	left: 100px;
+}
+
+.img-responsive {
+	position: relative;
+	left: 150px;
+	top: 40px;
+	width: 600px;
+	height: 300px;
+}
+
+.table>thead>tr>th {
+	text-align: center;
 }
 </style>
 <!-- Bootstrap core CSS -->
@@ -168,11 +191,11 @@
 		</div>
 		<!-- /.row -->
 		<div class="row">
-			<div class="col-xs-6 col-lg-4">
+			<div class="col-xs-6 col-lg-4 mainTable">
 
 				<h1 align="center">공지사항</h1>
 				<table width=100% cellpadding=0 cellspacing=0
-					class="recent_notice table table-hover">
+					class="table table-hover">
 					<thead>
 						<tr>
 							<th class="order" data-value="notice_no">글번호</th>
@@ -201,14 +224,11 @@
 						</c:choose>
 					</tbody>
 				</table>
-
-
-
 			</div>
 			<!-- /.col-xs-6.col-lg-4 -->
 			<div class="col-xs-6 col-lg-8">
-				<img src="/resources/images/image/promotion.jpg" class="img-responsive"
-					alt="Responsive image" />
+				<img src="/resources/images/image/promotion.jpg"
+					class="img-responsive" alt="Responsive image" />
 
 			</div>
 			<!-- /.col-xs-6.col-lg-4 -->
@@ -224,7 +244,8 @@
 		<!-- Three columns of text below the carousel -->
 		<div class="row" align="center">
 			<div class="col-lg-4">
-				<img class="img-circle" src="/resources/images/image/kidslab-logo.jpg"
+				<img class="img-circle"
+					src="/resources/images/image/kidslab-logo.jpg"
 					alt="Generic placeholder image" width="140" height="140">
 				<h2>학원 소개</h2>
 				<p>KidsLab에 대하여 궁금하신 분께 알려드립니다.</p>
@@ -235,7 +256,8 @@
 			</div>
 			<!-- /.col-lg-4 -->
 			<div class="col-lg-4">
-				<img class="img-circle" src="/resources/images/image/title_teacher.jpg"
+				<img class="img-circle"
+					src="/resources/images/image/title_teacher.jpg"
 					alt="Generic placeholder image" width="140" height="140">
 				<h2>강의 소개</h2>
 				<p>KidsLab에서 진행되고 있는 강의들.</p>
