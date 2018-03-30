@@ -349,6 +349,8 @@ select *
 from student
 where student_no = 62;
 
+
+
 select *
 from teacher
 where teacher_name = '이하나';
