@@ -343,7 +343,7 @@ select *
 from parent;
 	
 select *
-from teacher;
+from USER_SECURITY;
 
 select *
 from student
