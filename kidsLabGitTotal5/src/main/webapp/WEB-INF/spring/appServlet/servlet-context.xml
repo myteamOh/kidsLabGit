@@ -70,9 +70,12 @@
 		<beans:property name="defaultEncoding" value="UTF-8"></beans:property>
 		<beans:property name="maxUploadSize" value="52428800"></beans:property>
 	</beans:bean>
-	<!-- download 라는 view로 출력하려고 할 때 사용할 뷰 설정 -->
+	<!-- View 이름에 따라 직접 뷰 클래스를 지정하도록 설정하는 ViewResolver -->
 	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<!-- 우선순위를 0번으로 지정 -->
 		<beans:property name="order" value="0"></beans:property>
 	</beans:bean>
+	<beans:bean id="fileViewAction" class="com.kidslab.common.file.FileViewAction"></beans:bean>
+	<!-- download 라는 view로 출력하려고 할 때 사용할 뷰 설정 -->
 	<beans:bean id="download" class="com.kidslab.common.file.DownloadView"></beans:bean>
 </beans:beans>
