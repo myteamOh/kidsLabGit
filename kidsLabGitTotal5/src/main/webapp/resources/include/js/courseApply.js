@@ -47,10 +47,10 @@ $(function() {
 		if ($("#limitCount").val() <= 0) {
 			alert("정원이 초과되어 신청할 수 없습니다.");
 			return;
-		} else if($("#idCheck").val() == ""){
+		} else if ($("#idCheck").val() == "") {
 			alert("로그인후 이용해 주세요.");
 			return;
-		} else if($("#idCheck").val().indexOf("@") < 0) {
+		} else if ($("#idCheck").val().indexOf("@") < 0) {
 			alert("학부모 회원만 수강신청이 가능합니다.");
 			return;
 		}
@@ -63,15 +63,18 @@ $(function() {
 		$(".applyForm").submit();
 
 	});
-	
-	/*결제버튼 클릭시 이벤트*/
+
+	/* 결제버튼 클릭시 이벤트 */
 	$(".payBtn").click(function() {
-		
-		if($(".selectStudent").val() == "") {
+
+		if ($(".selectStudent").val() == "") {
 			alert("자녀를 추가해 주세요");
 			return;
+		} else if ($("#limitCount").val() <= 0) {
+			alert("정원이 초과되어 신청할 수 없습니다.");
+			return;
 		} else {
-			
+
 			$.ajax({
 				url : "/requestcourse/applyConfirmCheck",
 				type : "POST",
@@ -93,19 +96,19 @@ $(function() {
 						alert("해당학생은 해당강의를 신청하였습니다.");
 						return;
 					}
-					
+
 				}
 			});
-			
+
 		}
-		
+
 	});
 
 	/* 목록으로 돌아가는 버튼 이벤트 */
 	$(".toListBtn").click(function() {
 		location.href = "/requestcourse/apply";
 	});
-	
+
 	$(".toMainBtn").click(function() {
 		location.href = "/requestcourse/applyComplete";
 	});

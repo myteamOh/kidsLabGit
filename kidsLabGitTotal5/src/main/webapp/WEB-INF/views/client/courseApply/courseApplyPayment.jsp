@@ -26,7 +26,8 @@
 					<input type="hidden" name="parent_no" value="${Login.parent_no}">
 					<input type="hidden" name="course_no" value="${cDetail.course_no}">
 					<input type="hidden" name="requestcourse_payamount"
-						value="${cDetail.course_pay}">
+						value="${cDetail.course_pay}"> <input type="hidden"
+						id="limitCount" value="${cCount}">
 
 					<table>
 						<caption>수강정보</caption>

@@ -85,11 +85,16 @@ public class RequestCourseController {
 		System.out.println("parent_no : " + pvo.getParent_no());
 
 		CourseVO detail = new CourseVO();
+		int limit = 0;
 
 		detail = requestCourseService.requestCourseDetail(cvo);
+		limit = requestCourseService.requestCourseCount(cvo);
 		List<StudentVO> studentList = studentJoinService.studentList(pvo.getParent_no());
+		
+		System.out.println(limit);
 
 		mav.addObject("cDetail", detail);
+		mav.addObject("cCount", limit);
 		mav.addObject("studentList", studentList);
 		mav.setViewName("client/courseApply/courseApplyPayment");
 
