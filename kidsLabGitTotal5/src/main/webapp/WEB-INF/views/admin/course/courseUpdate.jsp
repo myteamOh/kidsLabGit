@@ -118,11 +118,6 @@
 			}
 		});
 		// 초기화버튼 클릭시 처리 이벤트
-		$("requestReset").click(function() {
-			$("#updateForm").each(function)(){
-				this.reset();
-			}
-		});
 		//취소버튼 클릭시 처리 이벤트
 		$("#requestCancel").click(function() {
 			location.href = "/admin/course/courseList";

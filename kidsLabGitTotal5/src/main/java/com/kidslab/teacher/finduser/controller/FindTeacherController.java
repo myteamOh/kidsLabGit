@@ -59,7 +59,7 @@ public class FindTeacherController {
 		logger.info("findTeacherPw 처리");
 		logger.info("비번 : " + tvo.getTeacher_password());
 		logger.info("아이디 : " + tvo.getTeacher_id());
-		int result = 0;
+		int result = 2;
 
 		TeacherVO findPwCheck = findTeacherService.findTeacherPw(tvo.getTeacher_id(), tvo.getTeacher_name());
 		logger.info("findPwCheck : " + findPwCheck.getTeacher_password());
