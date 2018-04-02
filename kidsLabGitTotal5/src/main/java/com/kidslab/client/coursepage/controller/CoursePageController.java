@@ -40,8 +40,6 @@ public class CoursePageController {
 	@RequestMapping(value = "/coursemain", method = RequestMethod.POST)
 	public ModelAndView coursePage(@ModelAttribute("CourseVO") CourseVO cvo, HttpSession session) {
 
-		logger.info(cvo.getCourse_no() + "번강의 강의페이지 입장!");
-
 		ModelAndView mav = new ModelAndView();
 		CourseDataVO cdvo = new CourseDataVO();
 		CourseDataVO cdvodata = new CourseDataVO();
@@ -50,16 +48,20 @@ public class CoursePageController {
 
 		cdvo.setCourse_no(cvo.getCourse_no());
 
+		// 강의페이지 메인에 최근 공지사항 5개 리스트 가져오기
 		cdvo.setCoursedata_status("공지사항");
 		List<CourseDataVO> courseDataNoticeList = coursePageService.homeCourseDataList(cdvo);
 
 		cdvodata.setCourse_no(cvo.getCourse_no());
-		
+
+		// 강의 페이지 메인에 최근 자료실 5개 리스트 가져오기
 		cdvodata.setCoursedata_status("자료실");
 		List<CourseDataVO> courseDataDataList = coursePageService.homeCourseDataList(cdvodata);
+
 		if (session.getAttribute("cNum") == null) {
 			session.setAttribute("cNum", cvo.getCourse_no());
 		}
+
 		mav.addObject("course", vo);
 		mav.addObject("cdNoticeList", courseDataNoticeList);
 		mav.addObject("cdDataList", courseDataDataList);
@@ -74,19 +76,19 @@ public class CoursePageController {
 	public ModelAndView coursePageBoard(@ModelAttribute("CourseDataVO") CourseDataVO cdvo, Model model,
 			HttpSession session) {
 
-		logger.info("게시판이다해");
-
 		ModelAndView mav = new ModelAndView();
 
 		cdvo.setCourse_no((int) session.getAttribute("cNum"));
 
 		// 페이지 세팅
 		Paging.setPage(cdvo);
+
 		// 전체 레코드 수
 		int total = coursePageService.coursePageListCnt(cdvo);
 
 		int count = total - (Util.nvl(cdvo.getPage()) - 1) * Util.nvl(cdvo.getPageSize());
 
+		// 해당강의 게시판 글목록 가져오기
 		List<CourseDataVO> cdvoList = coursePageService.courseDataList(cdvo);
 
 		mav.addObject("total", total);
@@ -104,8 +106,6 @@ public class CoursePageController {
 	/* 글쓰기폼 */
 	@RequestMapping(value = "/courseboardWriteForm")
 	public String writeForm() {
-		logger.info("글쓰기폼이다해");
-
 		return "client/coursePage/coursePageBoardWrite";
 	}
 
@@ -114,21 +114,17 @@ public class CoursePageController {
 	public String coursePageInsert(@ModelAttribute("CourseDataVO") CourseDataVO cdvo, HttpServletRequest request)
 			throws IOException {
 
-		logger.info("글입력이다해");
-
 		int result = 0;
 
-		System.out.println(cdvo.getFile());
-		System.out.println(cdvo.getStudent_no());
-
+		// 파일업로드 할 파일이 있다면 다음을 실행
 		if (cdvo.getFile() != null) {
 			String course_plan = FileUploadUtil.fileUpload(cdvo.getFile(), request, "courseBoard");
 			cdvo.setCoursedata_file(course_plan);
 		}
 
 		result = coursePageService.coursePageInsert(cdvo);
-		System.out.println(result);
 
+		// 글쓰기가 성공하면 글목록으로. 실패했다면 글쓰기 폼으로 돌아간다.
 		if (result == 1) {
 			return "redirect:/coursepage/courseboardList";
 		} else {
@@ -142,29 +138,27 @@ public class CoursePageController {
 	public String coursePageDetail(@ModelAttribute("CourseDataVO") CourseDataVO cdvo, Model model,
 			HttpSession session) {
 
-		logger.info("글상세보기다해");
-
 		CourseDataVO vo = new CourseDataVO();
 		vo = coursePageService.coursePageDetail(cdvo);
 
 		StudentVO svo = new StudentVO();
 		TeacherLoginVO tvo = new TeacherLoginVO();
+
 		svo = (StudentVO) session.getAttribute("Login");
 		tvo = (TeacherLoginVO) session.getAttribute("teacherLogin");
 
+		// 학생 로그인 세션이 있다면 다음을 실행한다.
 		if (svo != null) {
-			String nameNid = svo.getUserName() + "(" + svo.getUserId() + ")";
 
-			System.out.println(nameNid);
-			System.out.println(vo.getCoursedata_writer());
+			// 상세보기 한 글의 작성자를 문자열 형식으로 저장
+			String nameNid = svo.getUserName() + "(" + svo.getUserId() + ")";
 
 			model.addAttribute("loginInfo", nameNid);
 		}
+
+		// 강사 로그인 세션이 있다면 다음을 실행한다.
 		if (tvo != null) {
 			String nameNid = tvo.getTeacher_name() + "(" + tvo.getTeacher_id() + ")";
-
-			System.out.println(nameNid);
-			System.out.println(vo.getCoursedata_writer());
 
 			model.addAttribute("loginInfo", nameNid);
 		}
@@ -177,8 +171,6 @@ public class CoursePageController {
 	// 글 수정 폼
 	@RequestMapping(value = "/courseboardUpdateForm", method = RequestMethod.GET)
 	public String updateForm(@ModelAttribute("CourseDataVO") CourseDataVO cdvo, Model model) {
-
-		logger.info("수정폼이다해");
 
 		CourseDataVO vo = new CourseDataVO();
 
@@ -195,12 +187,9 @@ public class CoursePageController {
 	public String coursePageUpdate(@ModelAttribute("CourseDataVO") CourseDataVO cdvo, Model model,
 			HttpServletRequest request) throws IOException {
 
-		logger.info("수정처리다해");
-
-		System.out.println(cdvo.getFile());
-
 		int result = 0;
 
+		// 수정시 새로 등록된 파일이 있다면 교체. 없다면 넘어간다.
 		if (cdvo.getFile() != null) {
 			String course_plan = FileUploadUtil.fileUpload(cdvo.getFile(), request, "courseBoard");
 			cdvo.setCoursedata_file(course_plan);
@@ -208,12 +197,14 @@ public class CoursePageController {
 
 		result = coursePageService.coursePageUpdate(cdvo);
 
+		// 글 수정이 성공했다면 해당 글 상세보기로 이동한다. 이때 데이터는 수정 되있다.
 		if (result == 1) {
 			return "redirect:/coursepage/courseboardDetail?coursedata_no="
 					+ cdvo.getCoursedata_no()/*
 												 * + "&page=" + cdvo.getPage() + "&pageSiez=" + cdvo.getPageSize()
 												 */;
 		} else {
+			// 글 수정이 실패했다면 해당 글 수정 폼으로 돌아간다.
 			return "redirect:/coursepage/courseboardUpdateForm?coursedata_no=" + cdvo.getCoursedata_no();
 		}
 
@@ -231,17 +222,18 @@ public class CoursePageController {
 	public int coursePageDelete(@ModelAttribute("CourseDataVO") CourseDataVO cdvo, HttpServletRequest request)
 			throws IOException {
 
-		logger.info("글삭제다해");
 		CourseDataVO deleteData = new CourseDataVO();
+
 		deleteData = coursePageService.coursePageDetail(cdvo);
-		logger.info("파일 : " + deleteData.getCoursedata_file());
+
 		int result = 0;
+
+		// 글삭제 처리시 해당 글에 업로드 된 파일이 있다면 해당 파일을 삭제한다.
 		if (deleteData.getCoursedata_file() != null) {
 			FileUploadUtil.fileDelete(deleteData.getCoursedata_file(), request);
 		}
-		result = coursePageService.coursePageDelete(cdvo.getCoursedata_no());
 
-		System.out.println(result);
+		result = coursePageService.coursePageDelete(cdvo.getCoursedata_no());
 
 		return result;
 	}
@@ -249,17 +241,22 @@ public class CoursePageController {
 	/** 파일 다운로드 **/
 	@RequestMapping(value = "/download")
 	public ModelAndView download(String coursedata_file, HttpSession session) {
+
 		// 파일 객체 생성
 		File download = new File("C:\\downLoad\\courseBoard\\" + coursedata_file);
 		// 출력 할 뷰 이름과 데이터의 이름을 설정하고
+
 		// 데이터를 설정
 		ModelAndView mav = new ModelAndView();
+
 		UserLoginVO uLogin = (UserLoginVO) session.getAttribute("Login");
 		TeacherLoginVO tLogin = (TeacherLoginVO) session.getAttribute("teacherLogin");
+
 		if (uLogin == null && tLogin == null) {
 			mav.setViewName("client/member/login");
 			return mav;
 		}
+
 		if (download.isFile()) {
 			return new ModelAndView("download", "downloadFile", download);
 		} else {

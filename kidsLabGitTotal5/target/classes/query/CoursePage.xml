@@ -4,6 +4,7 @@
 
 <mapper namespace="com.kidslab.client.coursepage.dao.CoursePageDao">
 
+	<!-- 강의페이지를 위한 기본 강의정보 sql -->
 	<sql id="coursePageCommon">
 		SELECT coursedata_no, coursedata_title, coursedata_writer,
 		coursedata_content, to_char(coursedata_registerdate, 'yyyy-mm-dd') as
@@ -35,6 +36,7 @@
 		</where>
 	</sql>
 
+	<!-- 강의 번호로 해당강의 정보를 가져오는 sql -->
 	<select id="selectCourse" parameterType="course" resultType="course">
 		SELECT c.course_no, course_summary, course_name, course_subject,
 		course_level, course_time, course_totalperson, course_room,
@@ -56,6 +58,7 @@
 		WHERE course_no = #{course_no}
 	</select>
 
+	<!-- 공지사항 또는 자료실의 리스트를 최근 5개씩 가져오는 sql -->
 	<select id="homeCourseDataList" parameterType="courseData"
 		resultType="courseData">
 		SELECT coursedata_no, coursedata_title, coursedata_writer,
@@ -84,6 +87,7 @@
 		WHERE rnum BETWEEN 1 and 5
 	</select>
 
+	<!-- 강의페이지 글 목록 가져오기 sql -->
 	<select id="courseDataList" parameterType="courseData"
 		resultType="courseData">
 		SELECT coursedata_no, coursedata_title, coursedata_writer,
@@ -116,6 +120,7 @@
 		</where>
 	</select>
 
+	<!-- 강의 페이지 게시판 글 목록 세는 sql -->
 	<select id="coursePageListCnt" parameterType="courseData"
 		resultType="int">
 		SELECT nvl(count(1), 0)
@@ -128,6 +133,7 @@
 		)
 	</select>
 
+	<!-- 강의 페이지 게시판 글 등록 sql -->
 	<insert id="coursePageInsert" parameterType="courseData">
 		<selectKey keyProperty="coursedata_no" resultType="int"
 			order="BEFORE">
@@ -150,6 +156,7 @@
 		#{course_no})
 	</insert>
 
+	<!-- 강의 페이지 게시판 글 상세보기 sql -->
 	<select id="coursePageDetail" parameterType="courseData"
 		resultType="courseData">
 		SELECT coursedata_no, coursedata_title, coursedata_writer,
@@ -163,6 +170,7 @@
 		#{coursedata_no}
 	</select>
 
+	<!-- 강의 페이지 게시판 글 수정처리 sql -->
 	<update id="coursePageUpdate" parameterType="courseData">
 		UPDATE board_coursedata
 		SET coursedata_title = #{coursedata_title},
@@ -175,6 +183,7 @@
 		WHERE coursedata_no = #{coursedata_no}
 	</update>
 
+	<!-- 강의 페이지 게시판 글 삭제처리 sql -->
 	<delete id="coursePageDelete" parameterType="courseData">
 		DELETE FROM
 		board_coursedata
