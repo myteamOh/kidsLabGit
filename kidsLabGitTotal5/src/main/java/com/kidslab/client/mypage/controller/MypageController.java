@@ -77,8 +77,6 @@ public class MypageController {
 	@RequestMapping(value = "/parentMypage", method = RequestMethod.GET)
 	public String parentMypage(@ModelAttribute ParentVO pvo, Model model, HttpSession session) {
 
-		logger.info("학부모 mypage 호출");
-
 		pvo = (ParentVO) session.getAttribute("Login");
 
 		RequestCourseVO rcvo = new RequestCourseVO();
@@ -107,11 +105,7 @@ public class MypageController {
 	public String studentMypage(@ModelAttribute("RequestCourseVO") RequestCourseVO rcvo, Model model,
 			HttpSession session) {
 
-		logger.info("학생 mypage 호출");
-
 		StudentVO svo = (StudentVO) session.getAttribute("Login");
-
-		System.out.println(svo.getStudent_no());
 
 		rcvo.setStudent_no(svo.getStudent_no());
 
@@ -132,8 +126,6 @@ public class MypageController {
 	@RequestMapping(value = "/modifyCheckPw", method = RequestMethod.POST)
 	public ModelAndView modifyCheckPw(Model model) {
 
-		logger.info("비밀번호 확인창 호출!");
-
 		ModelAndView mav = new ModelAndView();
 
 		mav.setViewName("client/mypage/modifyCheckPw");
@@ -146,8 +138,6 @@ public class MypageController {
 	public ModelAndView userModify(@ModelAttribute("ParentVO") ParentVO pvo, @ModelAttribute("StudentVO") StudentVO svo,
 			HttpSession session) {
 
-		logger.info("비밀번호 확인!");
-
 		ModelAndView mav = new ModelAndView();
 
 		UserLoginVO uLogin = (UserLoginVO) session.getAttribute("Login");
@@ -158,8 +148,6 @@ public class MypageController {
 		}
 
 		if (uLogin.getUserId().contains("@")) {
-
-			logger.info("학부모 수정창으로 시도!");
 
 			ParentVO parentLogin = loginService.loginSelect(pvo.getUserId(), pvo.getUserPw());
 
@@ -172,8 +160,6 @@ public class MypageController {
 				return mav;
 			}
 		} else {
-
-			logger.info("학생 수정창으로 시도!");
 
 			StudentVO studentLogin = loginService.loginSelectS(svo.getUserId(), svo.getUserPw());
 
@@ -198,13 +184,9 @@ public class MypageController {
 	@RequestMapping(value = "/parentModifyInfo", method = RequestMethod.POST)
 	public ModelAndView parentModifyInfo(@ModelAttribute("ParentVO") ParentVO pvo, HttpSession session) {
 
-		logger.info("학부모 정보 수정");
-
 		ModelAndView mav = new ModelAndView();
 
 		UserLoginVO login = (UserLoginVO) session.getAttribute("Login");
-
-		System.out.println(pvo.getUserPw());
 
 		if (login == null) {
 			mav.setViewName("client/member/login");
@@ -212,7 +194,9 @@ public class MypageController {
 		}
 
 		pvo.setUserId(login.getUserId());
+		
 		ParentVO vo = parentJoinService.parentSelect(pvo.getUserId());
+		
 		if (parentJoinService.parentUpdate(pvo)) {
 			mav.setViewName("redirect:/login/logout");
 			return mav;
@@ -228,13 +212,9 @@ public class MypageController {
 	@RequestMapping(value = "/parentWithdrawCheck", method = RequestMethod.POST)
 	public String parentWithdrawCheck(@ModelAttribute("ParentVO") ParentVO pvo) {
 
-		logger.info("탈퇴 체크!");
-
 		String result = null;
 
 		result = rcService.withdrawCheck(pvo) + "";
-
-		System.out.println("controller result : " + result);
 
 		return result;
 
@@ -243,8 +223,6 @@ public class MypageController {
 	/* 학부모 탈퇴버튼 클릭시 탈퇴 처리 */
 	@RequestMapping(value = "/parentWithdraw", method = RequestMethod.POST)
 	public String parentWithdraw(@ModelAttribute("ParentVO") ParentVO pvo, HttpSession session) {
-
-		logger.info("탈퇴처리!");
 
 		ParentVO vo = (ParentVO) session.getAttribute("Login");
 
@@ -260,8 +238,6 @@ public class MypageController {
 	@RequestMapping(value = "/studentModifyInfo", method = RequestMethod.POST)
 	public ModelAndView studentModifyInfo(@ModelAttribute("StudentVO") StudentVO svo, HttpSession session) {
 
-		logger.info("학생 정보 수정");
-
 		ModelAndView mav = new ModelAndView();
 
 		UserLoginVO login = (UserLoginVO) session.getAttribute("Login");
@@ -273,6 +249,7 @@ public class MypageController {
 
 		svo.setUserId(login.getUserId());
 		StudentVO vo = studentJoinService.studentSelect(svo.getUserId());
+		
 		if (studentJoinService.studentUpdate(svo)) {
 			mav.setViewName("redirect:/login/logout");
 			return mav;
@@ -288,8 +265,6 @@ public class MypageController {
 	@RequestMapping(value = "/applyCancel", method = RequestMethod.POST)
 	public String applyCancel(@ModelAttribute RequestCourseVO rcvo) {
 
-		logger.info("수강 신청 취소!");
-
 		int result = 0;
 
 		result = rcService.requestCourseDelete(rcvo.getRequestcourse_no());
@@ -302,16 +277,10 @@ public class MypageController {
 	@RequestMapping(value = "/courseCancel", method = RequestMethod.POST)
 	public ModelAndView courseCancel(@ModelAttribute RequestCourseVO rcvo) {
 
-		logger.info("환불페이지로!");
-
 		ModelAndView mav = new ModelAndView();
 		RequestCourseVO vo = new RequestCourseVO();
 
 		vo = rcService.reCourseSelectOne(rcvo);
-
-		System.out.println("결제한 금액 : " + vo.getRequestcourse_payamount());
-		System.out.println("시작날짜 : " + vo.getCourse_startdate());
-		System.out.println("끝나는 날짜 : " + vo.getCourse_enddate());
 
 		/*
 		 * 시작전 전액, 1/3전: 2/3반환, 1/2전: 1/2반환, 1/2후: 반환x
@@ -338,38 +307,26 @@ public class MypageController {
 			long day1per3 = (long) Math.floor(coursePeriodDays / 3);
 			long half = (long) Math.floor(coursePeriodDays / 2);
 
-			System.out.println("가격확인 all : " + vo.getRequestcourse_payamount());
+			/*System.out.println("가격확인 all : " + vo.getRequestcourse_payamount());
 			System.out.println("가격확인 2/3 : " + Math.round(vo.getRequestcourse_payamount() * 2 / 3 / 1000) * 1000);
-			System.out.println("가격확인 1/2 : " + Math.round(vo.getRequestcourse_payamount() / 2 / 1000) * 1000);
+			System.out.println("가격확인 1/2 : " + Math.round(vo.getRequestcourse_payamount() / 2 / 1000) * 1000);*/
 
 			if (beginToTodayDays <= 0) {
-				System.out.println("교습 시작 전 또는 당일 : 전액 환불");
+				// System.out.println("교습 시작 전 또는 당일 : 전액 환불");
 				vo.setRequestcourse_refundcharge(vo.getRequestcourse_payamount());
 				beginToTodayDays = 0;
 			} else if (beginToTodayDays < day1per3) {
-				System.out.println("1/3선 전 : 2/3환불");
+				// System.out.println("1/3선 전 : 2/3환불");
 				vo.setRequestcourse_refundcharge(Math.round(vo.getRequestcourse_payamount() * 2 / 3 / 1000) * 1000);
 			} else if (beginToTodayDays < half) {
-				System.out.println("1/2선 전 : 1/2환불");
+				// System.out.println("1/2선 전 : 1/2환불");
 				vo.setRequestcourse_refundcharge(Math.round(vo.getRequestcourse_payamount() / 2 / 1000) * 1000);
 			} else {
-				System.out.println("1/2선 후 : 환불x");
+				// System.out.println("1/2선 후 : 환불x");
 				vo.setRequestcourse_refundcharge(0);
 			}
 			beginToTodayDays = beginToTodayDays + 1;
 			vo.setPass_day(beginToTodayDays + "");
-
-			System.out.println("환불금액 : " + vo.getRequestcourse_refundcharge());
-			System.out.println("경과기간 : " + beginToTodayDays);
-			System.out.println("1/3선 : " + day1per3);
-			System.out.println("1/2선 : " + half);
-			System.out.println("현재날짜 : " + todayDate);
-			System.out.println("현재날짜getTime : " + todayDate.getTime());
-			System.out.println("시작날짜 : " + beginDate);
-			System.out.println("시작날짜getTime : " + beginDate.getTime());
-			System.out.println("종료날짜 : " + endDate);
-			System.out.println("종료날짜getTime : " + endDate.getTime());
-			System.out.println("교습기간 : " + coursePeriodDays);
 
 			/* 계산하기 위해 long값으로 변환한 데이터를 다시 날짜 객체로 변환하기 위한 방법 */
 			/*
@@ -393,8 +350,6 @@ public class MypageController {
 	/* 환불신청버튼 클릭시 처리 */
 	@RequestMapping(value = "/refundApply", method = RequestMethod.POST)
 	public String refundApply(@ModelAttribute RequestCourseVO rcvo) {
-
-		logger.info("환불신청!");
 
 		rcService.refundApply(rcvo);
 
@@ -436,10 +391,13 @@ public class MypageController {
 	@ResponseBody
 	@RequestMapping(value = "/refundCheck", method = RequestMethod.GET)
 	public int check(HttpSession session) {
+		
 		int result = 0;
-		logger.info("체크");
+		
 		ParentVO uvo = new ParentVO();
+		
 		uvo = (ParentVO) session.getAttribute("Login");
+		
 		if (uvo != null) {
 			result = 1;
 			return result;
@@ -451,14 +409,12 @@ public class MypageController {
 	// 환불 리스트
 	@RequestMapping(value = "/refund", method = RequestMethod.GET)
 	public String refundList(@ModelAttribute RequestCourseVO rvo, HttpSession session, Model model) {
-		logger.info("환불리스트");
 
 		ParentVO uvo = new ParentVO();
 
 		uvo = (ParentVO) session.getAttribute("Login");
 
 		if (uvo != null) {
-			logger.info("parent_no : " + uvo.getParent_no());
 
 			List<RequestCourseVO> refundList = rcService.refundList(uvo);
 

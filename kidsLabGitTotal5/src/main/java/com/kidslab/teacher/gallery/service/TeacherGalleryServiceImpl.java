@@ -24,9 +24,9 @@ public class TeacherGalleryServiceImpl implements TeacherGalleryService {
 	// 갤러리 목록 구현
 	@Override
 	public List<TeacherGalleryVO> galleryList(TeacherGalleryVO tgvo) {
-		// TODO Auto-generated method stub
 		
 		List<TeacherGalleryVO> list = null;
+		
 		list = teacherGalleryDAO.galleryList();
 		
 		return list;
@@ -35,8 +35,9 @@ public class TeacherGalleryServiceImpl implements TeacherGalleryService {
 	// 갤러리 입력 구현
 	@Override
 	public int galleryInsert(TeacherGalleryVO tgvo) {
-		// TODO Auto-generated method stub
+
 		int result = 0;
+	
 		try {
 			
 			result = teacherGalleryDAO.galleryInsert(tgvo); 
@@ -52,7 +53,6 @@ public class TeacherGalleryServiceImpl implements TeacherGalleryService {
 	// 갤러리 상세 구현
 	@Override
 	public TeacherGalleryVO galleryDetail(TeacherGalleryVO tgvo) {
-		// TODO Auto-generated method stub
 		
 		TeacherGalleryVO detail = null;
 		
@@ -65,7 +65,6 @@ public class TeacherGalleryServiceImpl implements TeacherGalleryService {
 	// 글 카운터
 	@Override
 	public int galleryListCnt(TeacherGalleryVO tgvo) {
-		// TODO Auto-generated method stub
 		return teacherGalleryDAO.galleryListCnt(tgvo);
 	}
 	
@@ -73,8 +72,9 @@ public class TeacherGalleryServiceImpl implements TeacherGalleryService {
 	// 갤러리 업데이트
 	@Override
 	public int galleryUpdate(TeacherGalleryVO tgvo) {
-		// TODO Auto-generated method stub
+
 		int result = 0;
+
 		try {
 			result = teacherGalleryDAO.galleryUpdate(tgvo);
 		} catch (Exception e) {
@@ -88,7 +88,9 @@ public class TeacherGalleryServiceImpl implements TeacherGalleryService {
 	// 갤러리 삭제
 	@Override
 	public int galleryDelete(int gallery_no) {
+	
 		int result = 0;
+	
 		try {
 			result = teacherGalleryDAO.galleryDelete(gallery_no);
 		} catch (Exception e) {

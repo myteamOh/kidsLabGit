@@ -29,8 +29,7 @@ public class RegistCourseController {
 	 **************************************/
 	@RequestMapping(value = "/course/registForm")
 	public String writeForm() {
-		logger.info("/course/registForm 호출 성공");
-		return "teacher/course/registForm";
+			return "teacher/course/registForm";
 	}
 
 	/**************************************
@@ -40,11 +39,10 @@ public class RegistCourseController {
 	public String registCourseInsert(@ModelAttribute RegistCourseVO rvo, Model model, HttpServletRequest request)
 			throws IllegalStateException, IOException {
 
-		logger.info("registCourse 호출 성공");
-
+	
 		// 확인 후 주석 처리
-		logger.info("fileName : " + rvo.getFile().getOriginalFilename());
-		logger.info("course_name : " + rvo.getCourse_name());
+		// logger.info("fileName : " + rvo.getFile().getOriginalFilename());
+		// logger.info("course_name : " + rvo.getCourse_name());
 
 		int result = 0;
 		String url = "";

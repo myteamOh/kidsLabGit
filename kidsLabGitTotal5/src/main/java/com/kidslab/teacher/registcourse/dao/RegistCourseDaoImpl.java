@@ -14,7 +14,6 @@ public class RegistCourseDaoImpl implements RegistCourseDao {
 
 	@Override
 	public int registCourseInsert(RegistCourseVO rvo) {
-		// TODO Auto-generated method stub
 		return session.insert("registCourseInsert", rvo);
 	}
 

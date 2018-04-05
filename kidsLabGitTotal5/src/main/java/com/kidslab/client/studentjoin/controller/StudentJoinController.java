@@ -27,8 +27,6 @@ public class StudentJoinController {
 	@RequestMapping(value = "/studentjoin", method = RequestMethod.GET)
 	public String studentJoin(Model model) {
 
-		logger.info("자녀추가 form");
-
 		return "client/member/studentJoin";
 
 	}
@@ -37,8 +35,9 @@ public class StudentJoinController {
 	@ResponseBody
 	@RequestMapping(value = "studentIdConfirm", method = RequestMethod.POST)
 	public int sutdentIdConfirm(@RequestParam("userId") String userId) {
-		logger.info("학생 아이디 중복확인!");
+		
 		int result = studentJoinService.studentIdConfirm(userId);
+		
 		return result;
 	}
 
@@ -46,15 +45,11 @@ public class StudentJoinController {
 	@RequestMapping(value = "/studentjoin", method = RequestMethod.POST)
 	public ModelAndView studentInsert(@ModelAttribute StudentVO svo) {
 
-		logger.info("자녀 추가 처리");
-
 		ModelAndView mav = new ModelAndView();
 
 		int result = 0;
 
 		result = studentJoinService.studentInsert(svo);
-
-		System.out.println(result);
 
 		if (result == 1) {
 			mav.addObject("resultCode", 1);

@@ -37,13 +37,10 @@ public class RequestCourseController {
 	@RequestMapping(value = "/apply", method = RequestMethod.GET)
 	public String requestCourseList(@ModelAttribute("CourseVO") CourseVO cvo, Model model) {
 
-		logger.info("강의신청 목록 호출");
-
 		List<CourseVO> requestCourseList = requestCourseService.requestCourseList(cvo);
 
 		model.addAttribute("requestCourseList", requestCourseList);
 		model.addAttribute("courseData", cvo);
-		System.out.println(cvo.getCourse_level());
 
 		return "client/courseApply/courseApply";
 
@@ -52,9 +49,6 @@ public class RequestCourseController {
 	/* 강의신청 상세보기 페이지 호출 */
 	@RequestMapping(value = "/applyDetail", method = RequestMethod.GET)
 	public String requestCourseDetail(@ModelAttribute("CourseVO") CourseVO cvo, Model model) {
-
-		logger.info("강의신청 상세보기 페이지 호출!");
-		logger.info("강의번호 : " + cvo.getCourse_no());
 
 		int limit = 0;
 
@@ -74,24 +68,17 @@ public class RequestCourseController {
 	public ModelAndView requestCoursePayment(@ModelAttribute("ParentVO") ParentVO pvo,
 			@ModelAttribute("CourseVO") CourseVO cvo, HttpSession session) {
 
-		logger.info("강의신청 및 결제 페이지 호출");
-
 		ModelAndView mav = new ModelAndView();
 
-		System.out.println("course_no : " + cvo.getCourse_no());
-		System.out.println("parent_no : " + pvo.getParent_no());
-
 		pvo = (ParentVO) session.getAttribute("Login");
-		System.out.println("parent_no : " + pvo.getParent_no());
 
 		CourseVO detail = new CourseVO();
 		int limit = 0;
 
 		detail = requestCourseService.requestCourseDetail(cvo);
 		limit = requestCourseService.requestCourseCount(cvo);
-		List<StudentVO> studentList = studentJoinService.studentList(pvo.getParent_no());
 		
-		System.out.println(limit);
+		List<StudentVO> studentList = studentJoinService.studentList(pvo.getParent_no());
 
 		mav.addObject("cDetail", detail);
 		mav.addObject("cCount", limit);
@@ -106,8 +93,6 @@ public class RequestCourseController {
 	@ResponseBody
 	@RequestMapping(value = "/applyConfirmCheck", method = RequestMethod.POST)
 	public int requestCourseConfirmCheck(@ModelAttribute("RequestCourseVO") RequestCourseVO rcvo) {
-
-		logger.info("쳌!");
 
 		int result = 0;
 
@@ -128,16 +113,6 @@ public class RequestCourseController {
 	@RequestMapping(value = "/applyConfirm", method = RequestMethod.POST)
 	public ModelAndView requestCourseConfirm(@ModelAttribute("RequestCourseVO") RequestCourseVO rcvo) {
 
-		logger.info("강의신청 결제 확인페이지");
-
-		System.out.println("결제방법 : " + rcvo.getRequestcourse_paymethod());
-		System.out.println("결제금액 : " + rcvo.getRequestcourse_payamount());
-		System.out.println("학부모 번호 : " + rcvo.getParent_no());
-		System.out.println("학생 번호 : " + rcvo.getStudent_no());
-		System.out.println("강의 번호 : " + rcvo.getCourse_no());
-		System.out.println("결제방법 : " + rcvo.getRequestcourse_paymethod());
-		System.out.println("선택 그시기 : " + rcvo.getBank_and_account());
-
 		ModelAndView mav = new ModelAndView();
 
 		RequestCourseVO vo = null;
@@ -148,11 +123,12 @@ public class RequestCourseController {
 		}
 
 		requestCourseService.requestCourseInsert(rcvo);
+		
 		vo = requestCourseService.reCourseSelectByNo(rcvo).get(0);
+		
 		vo.setBank_and_account(rcvo.getBank_and_account());
 
 		mav.addObject("requestcoursedata", vo);
-
 		mav.setViewName("client/courseApply/courseApplyConfirm");
 
 		return mav;
@@ -161,9 +137,6 @@ public class RequestCourseController {
 	/* 강의신청 완료후 메인페이지로 */
 	@RequestMapping(value = "/applyComplete")
 	public String applyComplete(Model model) {
-
-		logger.info("강의신청 완료!");
-
 		return "index";
 	}
 

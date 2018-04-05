@@ -108,11 +108,6 @@ public class ParentJoinServiceImpl implements ParentJoinService {
 
 		int check;
 
-		System.out.println(email);
-		System.out.println(certifNum);
-		System.out.println(session.getAttribute("parentId"));
-		System.out.println(session.getAttribute("ranNum"));
-
 		if (email.equals(session.getAttribute("parentId").toString())
 				&& certifNum.equals(session.getAttribute("ranNum").toString())) {
 			check = 1;
@@ -169,8 +164,6 @@ public class ParentJoinServiceImpl implements ParentJoinService {
 	/* 회원 수정 처리 */
 	@Override
 	public boolean parentUpdate(ParentVO pvo) {
-		
-		logger.info("parentinfo update serviceImpl");
 
 		if (pvo.getParent_smsagree() == null) {
 			pvo.setParent_smsagree("N");
@@ -198,8 +191,6 @@ public class ParentJoinServiceImpl implements ParentJoinService {
 	/*학부모 탈퇴 처리*/
 	@Override
 	public int parentWithdraw(ParentVO pvo) {
-		
-		logger.info("학부모 탈퇴처리!");
 		
 		int result = parentJoinDao.parentWithdraw(pvo);
 		

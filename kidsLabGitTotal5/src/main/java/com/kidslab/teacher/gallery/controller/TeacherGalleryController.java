@@ -34,23 +34,16 @@ public class TeacherGalleryController {
 	@RequestMapping(value = "/gallery/galleryList")
 	public String galleryList(@ModelAttribute TeacherGalleryVO tgvo, Model model) {
 
-		logger.info("galleryList 호출 성공");
-
+	
 		// 페이지 세팅
 		Paging.setPage(tgvo);
-		logger.info("start : " + tgvo.getStart_row());
-		logger.info("end : " + tgvo.getEnd_row());
-
+	
 		// 전체 레코드 수 구현
 		int total = teacherGalleryService.galleryListCnt(tgvo);
 
-		logger.info("total = " + total);
 
 		// 글번호 재설정
 		int count = total - (Util.nvl(tgvo.getPage()) - 1) * Util.nvl(tgvo.getPageSize());
-		logger.info("count = " + count);
-		logger.info("page : " + tgvo.getPage());
-		logger.info("search : " + tgvo.getPage());
 
 		List<TeacherGalleryVO> galleryList = teacherGalleryService.galleryList(tgvo);
 
@@ -68,7 +61,6 @@ public class TeacherGalleryController {
 	 **************************************/
 	@RequestMapping(value = "/gallery/galleryInsertForm")
 	public String galleryRegistForm() {
-		logger.info("/gallery/galleryInsertForm 호출 성공");
 		return "teacher/gallery/galleryInsertForm";
 	}
 
@@ -78,10 +70,6 @@ public class TeacherGalleryController {
 	@RequestMapping(value = "/gallery/galleryInsert", method = RequestMethod.POST)
 	public String galleryInsert(@ModelAttribute TeacherGalleryVO tgvo, Model model, HttpServletRequest request)
 			throws IllegalStateException, IOException, Exception {
-
-		logger.info("galleryInsert 호출 성공");
-		logger.info("fileName : " + tgvo.getFile().getOriginalFilename());
-		logger.info("gallery_title : " + tgvo.getGallery_title());
 
 		int result = 0;
 		String url = "";
@@ -110,8 +98,6 @@ public class TeacherGalleryController {
 	 **************************************/
 	@RequestMapping(value = "/gallery/galleryDetail", method = RequestMethod.GET)
 	public String galleryDetail(@ModelAttribute TeacherGalleryVO tgvo, Model model) {
-		logger.info("galleryDetail 호출 성공");
-		logger.info("gallery_no = " + tgvo.getGallery_no());
 
 		TeacherGalleryVO detail = new TeacherGalleryVO();
 		detail = teacherGalleryService.galleryDetail(tgvo);
@@ -132,9 +118,6 @@ public class TeacherGalleryController {
 	@RequestMapping(value = "/gallery/galleryUpdateForm")
 	public String galleryUpdate(@ModelAttribute TeacherGalleryVO tgvo, Model model) {
 
-		logger.info("galleryUpdate 호출 성공");
-		logger.info("gallery_no = " + tgvo.getGallery_no());
-
 		TeacherGalleryVO updateData = new TeacherGalleryVO();
 		updateData = teacherGalleryService.galleryDetail(tgvo);
 
@@ -154,13 +137,9 @@ public class TeacherGalleryController {
 		int result = 0;
 		String url = "";
 		String g_file = "";
-		logger.info("번호 : " + tgvo.getGallery_no());
-		logger.info("파일 : " + tgvo.getGallery_title());
-		logger.info("파일 : " + tgvo.getGallery_content());
-		logger.info("파일 : " + tgvo.getFile());
 
 		if (!tgvo.getFile().isEmpty()) {
-			logger.info("======= file = " + tgvo.getFile().getOriginalFilename());
+
 			if (!tgvo.getGallery_file().isEmpty()) {
 				FileUploadUtil.fileDelete(tgvo.getGallery_file(), request);
 			}
@@ -172,10 +151,8 @@ public class TeacherGalleryController {
 			tgvo.setGallery_thumb(thumbName);
 
 		} else {
-			logger.info("첨부파일 없음");
 			tgvo.setGallery_file("");
 		}
-		logger.info("=========gallery_file = " + tgvo.getGallery_file());
 
 		result = teacherGalleryService.galleryUpdate(tgvo);
 
@@ -193,7 +170,6 @@ public class TeacherGalleryController {
 	 *******************************/
 	@RequestMapping(value = "/gallery/galleryDelete")
 	public String galleryDelete(@ModelAttribute TeacherGalleryVO tgvo, HttpServletRequest request) throws IOException {
-		logger.info("galleryDelete 호출 성공");
 
 		// 아래 변수에는 입력 성공에 대한 상태 값 담습니다. (1 or 0)
 		int result = 0;

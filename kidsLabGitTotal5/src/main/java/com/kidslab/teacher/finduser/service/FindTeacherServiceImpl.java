@@ -24,9 +24,7 @@ public class FindTeacherServiceImpl implements FindTeacherService {
 	// teacher 아이디 찾기
 	@Override
 	public List<TeacherVO> findTeacherId(String teacher_name, String teacher_phone) {
-		// TODO Auto-generated method stub
-		logger.info("teacher 아이디 찾기");
-
+		
 		TeacherVO tvo = new TeacherVO();
 
 		tvo.setTeacher_name(teacher_name);
@@ -41,9 +39,7 @@ public class FindTeacherServiceImpl implements FindTeacherService {
 	// teacher 비밀번호 발급 전 아이디 이름 체크
 	@Override
 	public TeacherVO findTeacherPw(String teacher_id, String teacher_name) {
-		// TODO Auto-generated method stub
-		logger.info("아이디 비밀번호 체크");
-
+	
 		TeacherVO tvo = new TeacherVO();
 
 		tvo.setTeacher_id(teacher_id);
@@ -57,9 +53,9 @@ public class FindTeacherServiceImpl implements FindTeacherService {
 	// teacher 임시비밀번호 설정
 	@Override
 	public int insertTeacherTemporaryPw(TeacherVO tvo, String ranNum) {
-		// TODO Auto-generated method stub
-		logger.info("임시 비밀번호 설정");
+	
 		int result = 2;
+		
 		try {
 			TeacherSecurity security = findTeacherDao.temporaryTeacherSecuritySelect(tvo.getTeacher_id());
 			tvo.setTeacher_password(new String(OpenCrypt.getSHA256(ranNum, security.getSalt())));
@@ -68,7 +64,6 @@ public class FindTeacherServiceImpl implements FindTeacherService {
 
 			result = 1;
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 			result = 2;
 		}

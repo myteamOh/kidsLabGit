@@ -3,10 +3,10 @@ package com.kidslab.teacher.login.vo;
 import com.kidslab.common.vo.CommonVO;
 
 public class TeacherLoginVO extends CommonVO {
-	private String teacher_id = "";
-	private String teacher_password = "";
-	private String teacher_name = "";
-	private int teacher_no;
+	private String teacher_id = ""; // 강사 ID
+	private String teacher_password = ""; // 강사 PW
+	private String teacher_name = ""; // 강사 이름
+	private int teacher_no; // 강사 번호
 
 	public TeacherLoginVO() {
 		super();

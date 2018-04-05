@@ -51,8 +51,6 @@ public class RequestCourseServiceImpl implements RequestCourseService {
 
 		int count = vo.getCourse_totalperson();
 
-		System.out.println("총 자리 : " + count);
-
 		List<RequestCourseVO> courseList = requestCourseDao.requestCourseCount(cvo);
 
 		if (courseList.size() > 0) {
@@ -66,16 +64,12 @@ public class RequestCourseServiceImpl implements RequestCourseService {
 			}
 		}
 
-		System.out.println("남은 자리 : " + count);
-
 		return count;
 	}
 
 	/* 강의 신청 */
 	@Override
 	public int requestCourseInsert(RequestCourseVO rcvo) {
-
-		logger.info("강의신청!");
 
 		if (rcvo.getRequestcourse_paymethod().equals("bankbookDeposit")) {
 			rcvo.setRequestcourse_paymethod("무통장입금");
@@ -89,8 +83,6 @@ public class RequestCourseServiceImpl implements RequestCourseService {
 	/* 학부모번호, 학생번호, 강의번호로 가져오기 */
 	@Override
 	public List<RequestCourseVO> reCourseSelectByNo(RequestCourseVO rcvo) {
-
-		logger.info("번호로 강의신청 리스트정보 가져오기!");
 
 		List<RequestCourseVO> list = requestCourseDao.reCourseSelectByNo(rcvo);
 
@@ -116,8 +108,6 @@ public class RequestCourseServiceImpl implements RequestCourseService {
 	@Override
 	public RequestCourseVO reCourseSelectOne(RequestCourseVO rcvo) {
 
-		logger.info("하나만 가져오기!");
-
 		RequestCourseVO vo = requestCourseDao.reCourseSelectOne(rcvo);
 
 		return vo;
@@ -126,8 +116,6 @@ public class RequestCourseServiceImpl implements RequestCourseService {
 	/* 환불신청 처리 */
 	@Override
 	public int refundApply(RequestCourseVO rcvo) {
-
-		logger.info("환불신청 처리!");
 
 		int result = requestCourseDao.refundApply(rcvo);
 
@@ -142,22 +130,18 @@ public class RequestCourseServiceImpl implements RequestCourseService {
 
 		List<RequestCourseVO> checkList = requestCourseDao.withdrawCheck(pvo);
 
-		System.out.println("size : " + checkList.size());
-
 		if (checkList.isEmpty()) {
 			result = 1;
 		} else if (!requestCourseDao.withdrawCheck(pvo).isEmpty()) {
 			result = 2;
 		}
 
-		System.out.println("result : " + result);
-
 		return result;
 	}
 
 	@Override
 	public List<RequestCourseVO> refundList(ParentVO pvo) {
-		// TODO Auto-generated method stub
+		
 		List<RequestCourseVO> refundList = requestCourseDao.refundList(pvo);
 
 		return refundList;

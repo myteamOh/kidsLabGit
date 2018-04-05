@@ -36,8 +36,6 @@ public class FindTeacherController {
 	@RequestMapping(value = "/login/findTeacher", method = RequestMethod.GET)
 	public String findTeacher(Model model) {
 
-		logger.info("Teacher 아이디 비밀번호 찾기 form~");
-
 		return "teacher/login/findTeacher";
 	}
 
@@ -45,7 +43,6 @@ public class FindTeacherController {
 	@ResponseBody
 	@RequestMapping(value = "/login/findTeacher", method = RequestMethod.POST)
 	public List<TeacherVO> findTeacherId(@ModelAttribute("TeacherVO") TeacherVO tvo, Model model) {
-		logger.info("teacher 아이디 찾기 처리~");
 
 		List<TeacherVO> findIdCheck = findTeacherService.findTeacherId(tvo.getTeacher_name(), tvo.getTeacher_phone());
 
@@ -56,15 +53,13 @@ public class FindTeacherController {
 	@ResponseBody
 	@RequestMapping(value = "/login/findTeacherPw", method = RequestMethod.POST)
 	public int findTeacherPw(@ModelAttribute("TeacherVO") TeacherVO tvo, Model model) {
-		logger.info("findTeacherPw 처리");
-		logger.info("비번 : " + tvo.getTeacher_password());
-		logger.info("아이디 : " + tvo.getTeacher_id());
+
 		int result = 2;
 
 		TeacherVO findPwCheck = findTeacherService.findTeacherPw(tvo.getTeacher_id(), tvo.getTeacher_name());
-		logger.info("findPwCheck : " + findPwCheck.getTeacher_password());
 
 		if (findPwCheck != null) {
+
 			Random num = new Random();
 			StringBuffer buf = new StringBuffer();
 

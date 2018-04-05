@@ -39,7 +39,6 @@ public class ParentJoinController {
 	 */
 	@RequestMapping(value = "/agree", method = RequestMethod.GET)
 	public String agreeForm(Model model) {
-		logger.info("약관동의 페이지 호출!");
 		return "client/member/agree";
 	}
 
@@ -48,7 +47,6 @@ public class ParentJoinController {
 	 */
 	@RequestMapping(value = "/parentjoin", method = RequestMethod.GET)
 	public String paretJoinForm(Model model) {
-		logger.info("회원가입폼 오픈!");
 		return "client/member/parentJoin";
 	}
 
@@ -56,7 +54,6 @@ public class ParentJoinController {
 	@ResponseBody
 	@RequestMapping(value = "/parentIdConfirm", method = RequestMethod.POST)
 	public int parentIdConfirm(@RequestParam("userId") String userId) {
-		logger.info("아이디 중복확인!");
 		int result = parentJoinService.parentIdConfirm(userId);
 		return result;
 	}
@@ -109,7 +106,6 @@ public class ParentJoinController {
 	@RequestMapping(value = "/confirmCheck", method = RequestMethod.POST)
 	public int numberCheck(HttpSession session, @RequestParam("userId") String email,
 			@RequestParam("certification") String certifNum) {
-		logger.info("인증번호 체크!");
 		int check;
 		check = parentJoinService.numberCheck(session, email, certifNum);
 		return check;
@@ -120,7 +116,6 @@ public class ParentJoinController {
 	@RequestMapping(value = "/parentjoin", method = RequestMethod.POST)
 	public ModelAndView parentInsert(@ModelAttribute ParentVO pvo) {
 
-		logger.info("회원가입 처리 시도!");
 		ModelAndView mav = new ModelAndView();
 
 		int result = 0;

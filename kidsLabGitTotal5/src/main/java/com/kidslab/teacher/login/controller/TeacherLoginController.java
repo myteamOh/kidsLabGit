@@ -31,8 +31,9 @@ public class TeacherLoginController {
 	 ***********************************/
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(HttpSession session) {
-		logger.info("teacher/login.do get 호출 성공");
+
 		TeacherLoginVO tvo = (TeacherLoginVO) session.getAttribute("teacherLogin");
+	
 		if (tvo != null) {
 			return "teacher/mypage/teacherMypage";
 		}
@@ -45,22 +46,19 @@ public class TeacherLoginController {
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
 	public ModelAndView loginProc(@ModelAttribute("TeacherLoginVO") TeacherLoginVO lvo, HttpSession session,
 			HttpServletRequest request) {
-		logger.info("teacher/login.do post 호출 성공");
+
 		ModelAndView mav = new ModelAndView();
 
 		String userId = lvo.getTeacher_id();
 
 		int resultData = teacherLoginService.loginHistoryInsert(lvo);
 
-		logger.info("resultData 확인 : " + resultData);
 		if (resultData == 1) {
 			mav.addObject("errCode", 1);
 			mav.setViewName("teacher/login/login");
 			return mav;
 		} else {
 			TeacherLoginVO vo = teacherLoginService.loginHistorySelect(userId);
-			logger.info("최근 로그인 일시 : " + new SimpleDateFormat("YYYY-MM-dd").format(vo.getLastSuccessedLogin()));
-			logger.info("retry : " + vo.getRetry());
 
 			// 로그인 시도횟수가 5회가 넘으면 30초간 로그인 잠금
 			if (vo.getRetry() >= 5) {
@@ -69,14 +67,14 @@ public class TeacherLoginController {
 					mav.setViewName("teacher/login/login");
 					return mav;
 				} else {
-					logger.info("확인1");
 					vo.setRetry(0);
-					logger.info("확인2");
+	
 					vo.setLastFailedLogin(0);
-					logger.info("확인3");
+					
 					teacherLoginService.loginHistoryUpdate(vo);
 				}
 			}
+		
 			TeacherLoginVO loginCheckResult = teacherLoginService.loginSelect(lvo.getTeacher_id(),
 					lvo.getTeacher_password());
 
@@ -85,6 +83,7 @@ public class TeacherLoginController {
 			if (loginCheckResult == null) {
 				vo.setRetry(vo.getRetry() + 1);
 				vo.setLastFailedLogin(new Date().getTime());
+				
 				teacherLoginService.loginHistoryUpdate(vo);
 
 				mav.addObject("retry", vo.getRetry());

@@ -20,12 +20,12 @@ public class RegistCourseServiceImpl implements RegistCourseService {
 	// 강의 등록 구현
 	@Override
 	public int registCourseInsert(RegistCourseVO rvo) {
-		// TODO Auto-generated method stub
+	
 		int result = 0;
+	
 		try {
 			result = registCourseDao.registCourseInsert(rvo);
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 			result = 0;
 		}

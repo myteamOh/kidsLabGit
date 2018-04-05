@@ -3,7 +3,7 @@ package com.kidslab.teacher.registcourse.vo;
 import org.springframework.web.multipart.MultipartFile;
 
 public class RegistCourseVO {
-	private int course_no;
+	private int course_no; // 
 	private int teacher_no;
 	private String course_summary;
 	private String course_name;

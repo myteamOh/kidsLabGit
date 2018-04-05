@@ -29,8 +29,11 @@ public class StudentJoinServiceImpl implements StudentJoinService {
 
 	@Override
 	public StudentVO studentSelect(String userId) {
+		
 		StudentVO vo = studentJoinDao.studentSelect(userId);
+		
 		return vo;
+		
 	}
 
 	/* 1은 사용가능 2는 사용불가능 */
@@ -82,11 +85,16 @@ public class StudentJoinServiceImpl implements StudentJoinService {
 	public boolean studentUpdate(StudentVO svo) {
 		
 		try {
+			
 			if(!svo.getUserPw().isEmpty()) {
+				
 				UserSecurity security = parentJoinDao.securitySelect(svo.getUserId());
 				svo.setUserPw(new String(OpenCrypt.getSHA256(svo.getUserPw(), security.getSalt())));
+				
 			}
+			
 			studentJoinDao.studentUpdate(svo);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -99,8 +107,6 @@ public class StudentJoinServiceImpl implements StudentJoinService {
 	@Override
 	public List<StudentVO> studentList(int parentNum) {
 		
-		logger.info("학생 리스트 뽑기");
-		
 		List<StudentVO> studentList = null;
 		
 		studentList = studentJoinDao.studentList(parentNum);
@@ -111,9 +117,7 @@ public class StudentJoinServiceImpl implements StudentJoinService {
 	/*학생 탈퇴 처리*/
 	@Override
 	public int studentWithdraw(ParentVO pvo) {
-		
-		logger.info("학생 탈퇴 처리");
-		
+				
 		int result = studentJoinDao.studentWithdraw(pvo);
 		
 		return result;
