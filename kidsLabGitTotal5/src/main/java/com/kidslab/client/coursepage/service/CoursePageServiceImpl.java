@@ -58,7 +58,7 @@ public class CoursePageServiceImpl implements CoursePageService {
 		int result = 0;
 
 		try {
-			result = coursePageDao.coursePageInsert(cdvo);
+			result = coursePageDao.coursePageInsert(cdvo); // 입력 성공시 result = 1
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -86,7 +86,7 @@ public class CoursePageServiceImpl implements CoursePageService {
 		int result = 0;
 
 		try {
-			result = coursePageDao.coursePageUpdate(cdvo);
+			result = coursePageDao.coursePageUpdate(cdvo); // 글 수정 성공시 result = 1
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

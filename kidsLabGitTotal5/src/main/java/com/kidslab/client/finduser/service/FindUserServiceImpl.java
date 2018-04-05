@@ -26,12 +26,7 @@ public class FindUserServiceImpl implements FindUserService {
 	@Override
 	public List<ParentVO> findParentId(String parentName, String parentPhone) {
 
-		logger.info("학부모 아이디 찾기 service!");
-
 		ParentVO pvo = new ParentVO();
-
-		System.out.println(parentName);
-		System.out.println(parentPhone);
 
 		pvo.setParent_name(parentName);
 		pvo.setParent_phone(parentPhone);
@@ -39,7 +34,6 @@ public class FindUserServiceImpl implements FindUserService {
 		List<ParentVO> idList = null;
 
 		idList = findUserDao.findParentId(pvo);
-		System.out.println(idList.size());
 
 		return idList;
 	}
@@ -47,8 +41,6 @@ public class FindUserServiceImpl implements FindUserService {
 	/* 학부모 비밀번호 발급전 아이디 이름 체크 */
 	@Override
 	public ParentVO findParentPw(String parentId, String parentName) {
-
-		logger.info("학부모 비밀번호 설정전 체크!");
 
 		ParentVO pvo = new ParentVO();
 
@@ -64,16 +56,8 @@ public class FindUserServiceImpl implements FindUserService {
 	@Override
 	public int insertTemporaryPw(ParentVO pvo, String ranNum) {
 
-		logger.info("학부모 임시비밀번호 설정");
-
-		System.out.println(pvo.getUserId());
-		System.out.println(pvo.getParent_name());
-		System.out.println(ranNum);
-
 		try {
 			UserSecurity security = findUserDao.temporarySecuritySelect(pvo.getUserId());
-			System.out.println(security.getUserId());
-			System.out.println(security.getSalt());
 
 			pvo.setUserPw(new String(OpenCrypt.getSHA256(ranNum, security.getSalt())));
 
@@ -93,17 +77,14 @@ public class FindUserServiceImpl implements FindUserService {
 	@Override
 	public List<StudentVO> findStudentId(String studentName, String studentBirthday) {
 
-		logger.info("학생 아이디 찾기 service!");
-
 		StudentVO svo = new StudentVO();
+
+		List<StudentVO> studentList = null;
 
 		svo.setStudent_name(studentName);
 		svo.setStudent_birthday(studentBirthday);
 
-		List<StudentVO> studentList = null;
-
 		studentList = findUserDao.findStudentId(svo);
-		System.out.println(studentList.size());
 
 		return studentList;
 	}
@@ -111,8 +92,6 @@ public class FindUserServiceImpl implements FindUserService {
 	/* 학생 정보 체크 */
 	@Override
 	public StudentVO checkStudentInfo(StudentVO svo) {
-
-		logger.info("학생 정보 체크 service!");
 
 		svo = findUserDao.checkStudentInfo(svo);
 
@@ -123,15 +102,14 @@ public class FindUserServiceImpl implements FindUserService {
 	@Override
 	public int newStudentPwInsert(StudentVO svo) {
 
-		logger.info("학생 새 비밀번호 입력 service!");
-
 		try {
+			// 해당 아이디의 salt값 가져오기 
 			UserSecurity security = findUserDao.temporarySecuritySelect(svo.getUserId());
-			System.out.println(security.getUserId());
-			System.out.println(security.getSalt());
 
+			// SHA256 암호화
 			svo.setUserPw(new String(OpenCrypt.getSHA256(svo.getUserPw(), security.getSalt())));
 
+			// 새 정보 입력
 			findUserDao.newStudentPwInsert(svo);
 
 			return 1;

@@ -30,8 +30,6 @@ public class ClientLoginController {
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginForm() {
 
-		logger.info("로그인폼 출력!");
-
 		return "client/member/login";
 	}
 
@@ -70,7 +68,6 @@ public class ClientLoginController {
 			}
 		}
 
-		//
 		mav.setViewName("client/member/login");
 		mav.addObject("msg", "fail");
 		return mav;

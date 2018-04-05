@@ -38,9 +38,6 @@ public class FindUserController {
 	/* 아이디 비밀번호찾기 Form */
 	@RequestMapping(value = "/finduser", method = RequestMethod.GET)
 	public String findUser(Model model) {
-
-		logger.info("아이디비번찾기Form!");
-
 		return "client/member/findUser";
 	}
 
@@ -49,15 +46,12 @@ public class FindUserController {
 	@RequestMapping(value = "/findparentid", method = RequestMethod.POST)
 	public ModelAndView findParentId(@ModelAttribute("ParentVO") ParentVO pvo, Model model) {
 
-		logger.info("학부모 아이디 찾기 처리!");
-
 		ModelAndView mav = new ModelAndView();
 
-		System.out.println(pvo.getParent_name());
-		System.out.println(pvo.getParent_phone());
-
+		// 입력한 학부모 이름과 전화번호로 해당하는 아이디 list로 가져오기
 		List<ParentVO> findIdCheck = findUserService.findParentId(pvo.getParent_name(), pvo.getParent_phone());
 
+		// list 가 있다면 if문 실행
 		if (findIdCheck.size() > 0) {
 
 			model.addAttribute("parentIdList", findIdCheck);
@@ -79,21 +73,19 @@ public class FindUserController {
 	@RequestMapping(value = "/findparentpw", method = RequestMethod.POST)
 	public int findParentPw(@ModelAttribute("ParentVO") ParentVO pvo, Model model) {
 
-		logger.info("학부모 비밀번호 재발급 처리!");
-
-		System.out.println(pvo.getUserId());
-		System.out.println(pvo.getParent_name());
-
 		int result = 2;
 
+		// 아이디와 이름으로 정보 있는지 체크
 		ParentVO findPwCheck = findUserService.findParentPw(pvo.getUserId(), pvo.getParent_name());
 
+		// 해당하는 정보가 있다면 다음 if문 실행
 		if (findPwCheck != null) {
 
 			/* 랜덤변수 임시비밀번호 발생 */
 			Random num = new Random();
 			StringBuffer buf = new StringBuffer();
 
+			// 8자리 랜덤 임시비밀번호 발생
 			for (int i = 0; i < 8; i++) {
 				if (num.nextBoolean()) {
 					buf.append((char) ((int) (num.nextInt(26)) + 97)); // true 일시 랜덤한 소문자를
@@ -102,25 +94,23 @@ public class FindUserController {
 				}
 			}
 
-			String ranNum = buf + "";
+			String ranNum = buf + ""; // 랜덤 숫자, 영문자 저장
 
-			System.out.println("임시비밀번호 : " + ranNum);
-
-			/* 임시비밀번호 설정 */
+			/* 임시비밀번호를 새비밀번호로 설정 */
 			result = findUserService.insertTemporaryPw(pvo, ranNum);
-
-			System.out.println("임시비밀번호 설정 성공여부(1=됨 2=안됨) : " + result);
 
 			/* 이메일 전송 */
 			String subject = "임시비밀번호 발급 안내 입니다.";
 			StringBuilder content = new StringBuilder();
 			content.append("귀하의 임시 비밀번호는 " + ranNum + " 입니다.");
 
+			// JavaMailSender메소드 보낼메세지 설정
 			MimeMessage message = javaMailSender.createMimeMessage();
 
 			String from = "kidslab";
-			String email = pvo.getUserId();
+			String email = pvo.getUserId(); // 받을사람
 
+			// 이메일 전송
 			try {
 				MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 				helper.setSubject(subject);
@@ -147,12 +137,12 @@ public class FindUserController {
 	@RequestMapping(value = "/findstudentid", method = RequestMethod.POST)
 	public ModelAndView findStudentId(@ModelAttribute("StudentVO") StudentVO svo, Model model) {
 
-		logger.info("학생 아이디 찾기 처리!");
-
 		ModelAndView mav = new ModelAndView();
 
+		// 입력한 학생 이름과 생년월일에 해당하는 아이디 가져옴
 		List<StudentVO> findIdCheck = findUserService.findStudentId(svo.getStudent_name(), svo.getStudent_birthday());
 
+		// list가 있다면 다음 if문 실행
 		if (findIdCheck.size() > 0) {
 
 			model.addAttribute("studentIdList", findIdCheck);
@@ -173,12 +163,7 @@ public class FindUserController {
 	@RequestMapping(value = "/checkstudentinfo", method = RequestMethod.POST)
 	public int checkStudentInfo(@ModelAttribute("StudentVO") StudentVO svo, HttpSession session) {
 
-		logger.info("학생정보 체크!");
-
 		int result = 0;
-
-		System.out.println(svo.getUserId());
-		System.out.println(svo.getStudent_name());
 
 		if (findUserService.checkStudentInfo(svo) != null) {
 			session.setAttribute("studentIdCheck", svo.getUserId());
@@ -205,16 +190,10 @@ public class FindUserController {
 	@RequestMapping(value = "/newstudentpw", method = RequestMethod.POST)
 	public int newStudentPwInsert(@ModelAttribute("StudentVO") StudentVO svo, HttpSession session) {
 
-		logger.info("학생 새 비밀번호 설정 처리!");
-
 		int result = 0;
 
 		svo.setUserId(session.getAttribute("studentIdCheck").toString());
 		svo.setStudent_name(session.getAttribute("studentNameCheck").toString());
-
-		System.out.println("아이디 : " + svo.getUserId());
-		System.out.println("비밀번호 : " + svo.getUserPw());
-		System.out.println("이름 : " + svo.getStudent_name());
 
 		result = findUserService.newStudentPwInsert(svo);
 

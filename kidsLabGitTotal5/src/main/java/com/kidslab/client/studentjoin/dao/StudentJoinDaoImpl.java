@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.kidslab.client.parent.vo.ParentVO;
 import com.kidslab.client.student.vo.StudentVO;
 
-@Repository
+@Repository("studentJoinDao")
 public class StudentJoinDaoImpl implements StudentJoinDao {
 
 	@Autowired

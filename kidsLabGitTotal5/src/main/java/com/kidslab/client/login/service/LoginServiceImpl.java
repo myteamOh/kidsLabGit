@@ -9,6 +9,7 @@ import com.kidslab.client.login.dao.LoginDao;
 import com.kidslab.client.parent.vo.ParentVO;
 import com.kidslab.client.parentjoin.dao.ParentJoinDao;
 import com.kidslab.client.student.vo.StudentVO;
+import com.kidslab.client.studentjoin.dao.StudentJoinDao;
 import com.kidslab.common.util.OpenCrypt;
 
 @Service
@@ -17,6 +18,9 @@ public class LoginServiceImpl implements LoginService {
 
 	@Autowired
 	private ParentJoinDao pDao;
+	
+	@Autowired
+	private StudentJoinDao sDao;
 
 	@Autowired
 	private LoginDao loginDao;
@@ -32,6 +36,7 @@ public class LoginServiceImpl implements LoginService {
 
 		if (parentSecurity != null) {
 
+			// 비밀번호 암호화
 			userPw = new String(OpenCrypt.getSHA256(userPw, parentSecurity.getSalt()));
 
 			ParentVO pvo = new ParentVO();
@@ -56,7 +61,8 @@ public class LoginServiceImpl implements LoginService {
 	public StudentVO loginSelectS(String userId, String userPw) {
 
 		StudentVO vo = null;
-
+		StudentVO selectStudent = new StudentVO();
+				
 		UserSecurity studentSecurity = pDao.securitySelect(userId);
 
 		if (studentSecurity != null) {
@@ -67,10 +73,18 @@ public class LoginServiceImpl implements LoginService {
 			svo.setUserPw(userPw);
 
 			vo = loginDao.loginSelectS(svo);
+			
+			if (vo != null) {
+				selectStudent = sDao.studentSelect(vo.getUserId());
+			} else {
+				return vo;
+			}
 
+		} else  {
+			return vo;
 		}
 
-		return vo;
+		return selectStudent;
 	}
 
 }

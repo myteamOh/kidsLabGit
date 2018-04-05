@@ -26,6 +26,8 @@
 	<!-- DAO 등록 -->
 	<beans:bean id="parentJoinDao"
 		class="com.kidslab.client.parentjoin.dao.ParentJoinDaoImpl"></beans:bean>
+	<beans:bean id="studentJoinDao"
+		class="com.kidslab.client.studentjoin.dao.StudentJoinDaoImpl"></beans:bean>
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->

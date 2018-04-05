@@ -5,8 +5,10 @@ import com.kidslab.client.student.vo.StudentVO;
 
 public interface LoginDao {
 
+	// 학부모 로그인
 	public ParentVO loginSelect(ParentVO pvo);
 
+	// 학생 로그인
 	public StudentVO loginSelectS(StudentVO svo);
 
 }
