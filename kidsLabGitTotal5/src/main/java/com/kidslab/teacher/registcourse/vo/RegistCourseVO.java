@@ -3,12 +3,12 @@ package com.kidslab.teacher.registcourse.vo;
 import org.springframework.web.multipart.MultipartFile;
 
 public class RegistCourseVO {
-	private int course_no; // 
-	private int teacher_no;
-	private String course_summary;
-	private String course_name;
-	private String course_subject;
-	private String course_level;
+	private int course_no; // 강의 번호
+	private int teacher_no; // 강사 번호
+	private String course_summary; // 강의 개요
+	private String course_name; // 강의명
+	private String course_subject; // 강의 과목
+	private String course_level; // 강의 대상
 
 	// 파일 업로드를 위한 속성
 	private String course_plan; // 실제서버에 저장한 파일명
