@@ -143,7 +143,9 @@ table {
 
 							<c:forEach var="child" items="${rcListMap}">
 								<div id="childListPart">
+								
 									<p class="studentInfo">${child.key.student_name}(${child.key.userId})</p>
+									
 									<div class="courseTotalList">
 										<c:choose>
 											<c:when test="${not empty child.value}">
