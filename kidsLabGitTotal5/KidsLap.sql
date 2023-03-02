@@ -1,5 +1,8 @@
 --<ScriptOptions statementTerminator=";"/>
 
+select *
+from v$version;
+
 -- 회원 테이블 (학부모)
 CREATE TABLE PARENT(
 	PARENT_NO NUMBER,
@@ -303,7 +306,10 @@ NOCYCLE;
 
 
 -- 로그인 정보 저장시 사용할 순번(시퀀스)
-CREATE SEQUENCE LOGIN_HISTORY_SEQ;
+CREATE SEQUENCE LOGIN_HISTORY_SEQ
+START WITH 1
+INCREMENT BY 1
+NOCYCLE;
 
 insert into ADMIN
 values(1, 'admin', 'test1234');
@@ -344,12 +350,6 @@ from parent;
 	
 select *
 from USER_SECURITY;
-
-select *
-from student
-where student_no = 62;
-
-
 
 select *
 from teacher

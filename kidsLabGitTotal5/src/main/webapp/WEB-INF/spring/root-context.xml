@@ -14,9 +14,8 @@
 	<!-- DB Connection -->
 	<!-- DataSource -->
 	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-		<property name="jndiName" value="java:comp/env/jdbc/Oracle11g" />
+		<property name="jndiName" value="java:comp/env/jdbc/orcl" />
 	</bean>
-
 	<!-- Mybatis Setting -->
 	<!-- - SqlSessionFactory는 데이터베이스와의 연결과 SQL의 실행에 대한 모든 것을 가진 가장 중요한 객체이다. 
 		- SqlSessionFactory를 생성해 주는 객체를 설정해 주어야 하는데 SqlSessionFactoryBean 이라는 클래스이다. -->

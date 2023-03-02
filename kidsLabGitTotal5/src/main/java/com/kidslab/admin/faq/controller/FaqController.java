@@ -1,10 +1,13 @@
 package com.kidslab.admin.faq.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -76,7 +79,18 @@ public class FaqController {
 	public String faqInsert(@ModelAttribute FaqVO fvo, Model model, HttpServletRequest request)
 			throws IllegalStateException {
 		logger.info("faqInsert POST 호출");
-
+		Object[] cookies = request.getCookies();
+		HashMap<String, String> cookiesMap = new HashMap<String, String>();
+		Cookie[] cookies1 = request.getCookies();
+		String cookies_Key_Values = "";
+		if(cookies1 != null) {
+			for(int i =0; i < cookies1.length; i++) {
+				cookies_Key_Values = cookies_Key_Values + cookies1[i].getName() + " : " + cookies1[i].getValue() + "\n"; 
+			}
+			 
+		}
+		
+		
 		int result = 0;
 		String url = "";
 
